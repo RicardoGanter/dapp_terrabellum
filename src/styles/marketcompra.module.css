@@ -1,0 +1,9 @@
+.contain{
+    margin: 13rem 0 0 20rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.contain *{
+    margin: 1rem;
+}

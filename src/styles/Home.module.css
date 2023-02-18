@@ -1,0 +1,13 @@
+.connect {
+    background-color: #c89191;
+    border-style: none;
+    border-radius: 10px;
+    padding: .7rem;
+    color: #ffffff;
+    cursor: pointer;
+    /* box-shadow: 0 5px 5px 0 #000000; */
+  }
+  
+  .connect:hover {
+    background-color: #ce700b;
+  }
