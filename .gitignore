@@ -29,5 +29,7 @@ yarn-error.log*
 .env
 .env*.local
 
+./artifacts/
+./cache/
 # vercel
 .vercel
