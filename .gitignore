@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-.github
+/.github/workflows/
 # dependencies
 /node_modules
 /.pnp
@@ -26,7 +26,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env
+/.env/
 .env*.local
 # vercel
 .vercel
