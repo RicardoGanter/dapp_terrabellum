@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../src/styles/Home.module.css";
 import React, { useEffect } from "react";
-
+import Web3 from "web3";
 export default function Home() {
     useEffect(() => {
       // Web3 Browswer Detection

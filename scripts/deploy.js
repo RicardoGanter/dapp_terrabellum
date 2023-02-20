@@ -9,12 +9,13 @@ async function main() {
   
     console.log("este es tu balance:", (await deployer.getBalance()).toString());
   
-    const Token = await ethers.getContractFactory("NFTMarketplace");
-    const token = await Token.deploy();
+    const Token = await ethers.getContractFactory("DiegoCorpNFT");
+    const token = await Token.deploy('moneafacha','INNO');
   
     await token.deployed();
-
-    console.log("respuesta:", token.updateListingPrice());
+    console.log("respuesta:", token.address)
+    // addres del contract:0x5FbDB2315678afecb367f032d93F642f64180aa3
+    // console.log("respuesta:", token.ownerOf(tokenId=1));
   }
   
   main()

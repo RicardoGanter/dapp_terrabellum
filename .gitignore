@@ -11,7 +11,8 @@
 # next.js
 /.next/
 /out/
-
+/cache/
+/artifacts/
 # production
 /build
 
@@ -28,8 +29,5 @@ yarn-error.log*
 # local env files
 .env
 .env*.local
-
-./artifacts/
-./cache/
 # vercel
 .vercel
