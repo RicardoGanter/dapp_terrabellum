@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../src/styles/Home.module.css";
 import React, { useEffect } from "react";
 import Web3 from "web3";
-export default function Home() {
+export default function Metamasklogin() {
     useEffect(() => {
       // Web3 Browswer Detection
       if (typeof window.ethereum !== "undefined") {
@@ -40,7 +40,7 @@ export default function Home() {
   
     return (
         <button className={styles.connect} id="connect">
-          Connect Wallet
+          Conectar con metamask
         </button>
     );
   }

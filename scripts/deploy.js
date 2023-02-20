@@ -12,10 +12,13 @@ async function main() {
     const Token = await ethers.getContractFactory("DiegoCorpNFT");
     const token = await Token.deploy('moneafacha','INNO');
   
-    await token.deployed();
+    // await token.deployed();
+    await token.methods;
     console.log("respuesta:", token.address)
     // addres del contract:0x5FbDB2315678afecb367f032d93F642f64180aa3
-    // console.log("respuesta:", token.ownerOf(tokenId=1));
+    // console.log("respuesta:", token.ownerOf.call((err, result)=>{console.log(result)}));
+
+
   }
   
   main()

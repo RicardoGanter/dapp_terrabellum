@@ -7,12 +7,13 @@
 }
 
 .contain div{
-    background-color: aliceblue;
+    background-color: rgb(46, 19, 84);
     padding: 1rem;
     margin: 1rem 0;
     border-radius: .6rem;
     transition: .4s;
     cursor: pointer;
+   
 }
 
 .contain div:hover{

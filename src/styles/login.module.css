@@ -1,0 +1,23 @@
+.contain{
+    background-color: rgb(64, 37, 54);
+    padding: 10rem;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 37%;
+    top:200px;
+}
+
+.contain *{
+    margin: 1rem 0;
+    padding: .5rem 1rem;
+    background-color: rgb(58, 20, 93);
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.exit{
+    position: absolute;
+    top: 0;
+    right: 1rem;
+}
