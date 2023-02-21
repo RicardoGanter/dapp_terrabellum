@@ -125,10 +125,21 @@ a {
 }
 
 body{
-  background-color: rgb(44, 36, 55);
+  background-color: #4e4e4e;
   margin: 0;
   font-size: 1.1rem;
   text-align: center;
   align-items: center;
   color: var(--var_texto_color_blanco);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #011234;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2em;
+  /* background: rgb(61, 46, 104); */
+  background: linear-gradient(-45deg, #5052e5, #934be6);
 }

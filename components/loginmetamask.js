@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Web3 from "web3";
 
 
-export default function Metamasklogin() {
+const Metamasklogin = ()=>{
     useEffect(() => {
       // Web3 Browswer Detection
       if (typeof window.ethereum !== "undefined") {
@@ -46,3 +46,6 @@ export default function Metamasklogin() {
         </button>
     );
   }
+
+
+  export default Metamasklogin;

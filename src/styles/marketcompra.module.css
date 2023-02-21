@@ -1,5 +1,5 @@
 .contain{
-    margin: 13rem 0 0 20rem;
+    margin: 15rem 10rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }

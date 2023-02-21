@@ -2,6 +2,10 @@ import { useState } from "react"
 import Metamasklogin from "./loginmetamask"
 import styles from '../src/styles/login.module.css'
 import { useSession } from 'next-auth/react'
+import Link from "next/link"
+import Image from "next/image"
+import imagenperfil from '../public/img/lal.png'
+
 
 const Login = (style)=>{
     const [login, setLogin] = useState(false)
@@ -12,8 +16,8 @@ const Login = (style)=>{
 
     return(
         <>
-        { status==='unauthenticated' ? <button className={{style}} onClick={()=>{ setLogin(!login)}} >Login</button>
-        : <button onClick={()=>{setPerfil(!perfil)}} >perfil</button>  }
+        { status==='authenticated' ? <button className={{style}} onClick={()=>{ setLogin(!login)}} >Login</button>
+        : <Image onClick={()=>{setPerfil(!perfil)}} className={styles.imgheader} src={imagenperfil} alt='img perfil'/>}
         
         { login ? 
         <div className={styles.contain}>
@@ -24,13 +28,16 @@ const Login = (style)=>{
         </div>
         : null}
 
+        {/* perfil autenticado */}
         {   perfil ?
-        <>
-        <button></button>
-        <button></button>
-        <button>Settings</button>
-        <button>Sign Out</button>
-        </>
+        <div className={styles.contain_perfil}>
+            <div style={{margin:'7rem 0 0 0', display:'flex', flexDirection:'column'}}>
+            <Link href={'/user/perfil'}>perfil</Link>
+            <Link href={'/user/perfil'}>Historial</Link>
+            <Link href={'/user/perfil'}>Estadisticas</Link>
+            <Link href={'/user/perfil'}>Inventario</Link>
+            </div>
+        </div>
 
     :null }
 

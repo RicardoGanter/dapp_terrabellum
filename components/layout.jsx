@@ -11,7 +11,9 @@ const Layout = ({title, description,children})=>{
             </Head>
             <main>
                 <Header/>
+                <div style={{margin:'120px 140px 0 140px', textAlign:"center", justifyContent:'center', alignItems:'center'}}>
                     {children}
+                </div>
                 <Opcion/>
             </main>
         </>

@@ -46,13 +46,11 @@ const Header = ()=>{
                 <nav className={styles.navbarcontain}>
                     <button className={styles.btnnavbar} >Download</button>            
                     <Link href={"/"}><Image src={logo} alt="Logo" className={styles.img} /></Link>            
-                    <div style={{alignItems:'center', textAlign:'center'}}>
-
-                    {/* <Image  className={styles.btnnavbar} src={global} alt='icono idioma'/>
-                    <Image  className={styles.btnnavbar} style={{width:'60px', height:'40px'}}  src={toggle} alt='toggle img'/> */}
-                    <button className={styles.btnnavbar}> Login </button>
-                    <button className={styles.btnnavbar}> Login </button>
-                    <Login style= 'styles.btnnavbar' />
+                    
+                    <div className={styles.btnsrigth}>
+                        <div className={styles.btnnavbar}> ES </div>
+                        <div className={styles.btnnavbar}> Color </div>
+                        <Login/>
                     </div>  
                 </nav>
                 </header>
