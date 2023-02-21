@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from '../src/styles/opcion.module.css'
 
 
@@ -5,8 +6,8 @@ const Opcion = ()=>{
     return(
         <>
             <div className={styles.contain}>
-                <div>Home</div>
-                <div>Compra</div>
+                <Link href={'/'}>Home</Link>
+                <Link href={'/market'}>Compras</Link>
                 <div>Becas</div>
             </div>
         </>

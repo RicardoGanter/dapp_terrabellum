@@ -6,16 +6,17 @@
     flex-direction: column;
 }
 
-.contain div{
+.contain *{
     background-color: rgb(46, 19, 84);
     padding: 1rem;
     margin: 1rem 0;
     border-radius: .6rem;
     transition: .4s;
     cursor: pointer;
-   
+    color: aliceblue;
+    text-decoration: none;
 }
 
-.contain div:hover{
+.contain *:hover{
     opacity: 50%;
 }

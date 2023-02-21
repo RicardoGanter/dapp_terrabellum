@@ -17,12 +17,12 @@ const Header = ()=>{
         
                  {/* movil 480px */}
                 <nav className={styles.navbarcontainMovile}>
-                    <Image src={logo} alt='logo TB movil' className={styles.imagentb}/>
+                    <Link href={'/'}> <Image src={logo} alt='logo TB movil' className={styles.imagentb}/></Link>
                     <Image onClick={()=>{setNavbarcontainMovile(!navbarcontainMovile)}} src={bar} alt='barra de navegacion' className={styles.imagenbar}/>
                     {navbarcontainMovile ? 
                     
                     <div className={styles.optionMovile}>
-                    <div>InnomicToken</div>
+                    <div>Download</div>
                     <div>personajes</div>
                     <div>MarketPlace</div>
                     <div>WithePaper</div>
@@ -32,10 +32,10 @@ const Header = ()=>{
 
                 {/* resolucion intermedia 1020px */}
                 <div className={styles.interresolution}>
-                    <Image src={logo} alt='logo tb' className={styles.img}/>
+                <Link href={'/'}> <Image src={logo} alt='logo tb' className={styles.img}/></Link>
                     <Image onClick={()=>{setInterresolution(!interresolution)}} src={bar} alt='logo TB movil' className={styles.imagenbar}/>
                     {interresolution ?  <div className={styles.optionMovile}>
-                    <div>InnomicToken</div>
+                    <div>Download</div>
                     <div>personajes</div>
                     <div>MarketPlace</div>
                     <div>WithePaper</div>
@@ -44,7 +44,7 @@ const Header = ()=>{
                         
                   {/* resolucion 1080px       */}
                 <nav className={styles.navbarcontain}>
-                    <button className={styles.btnnavbar} >InnomicToken</button>            
+                    <button className={styles.btnnavbar} >Download</button>            
                     <Link href={"/"}><Image src={logo} alt="Logo" className={styles.img} /></Link>            
                     <div style={{alignItems:'center', textAlign:'center'}}>
 
@@ -52,7 +52,7 @@ const Header = ()=>{
                     <Image  className={styles.btnnavbar} style={{width:'60px', height:'40px'}}  src={toggle} alt='toggle img'/> */}
                     <button className={styles.btnnavbar}> Login </button>
                     <button className={styles.btnnavbar}> Login </button>
-                    <Login/>
+                    <Login style= 'styles.btnnavbar' />
                     </div>  
                 </nav>
                 </header>

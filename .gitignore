@@ -1,4 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# por si se bugea git = git rm -r --cached .
 
 /.github/workflows/
 # dependencies
@@ -36,4 +37,3 @@ yarn-error.log*
 
 #blockchain
 /cache/
-/artifacts/
