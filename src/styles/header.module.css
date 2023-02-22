@@ -10,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     /* align-items: center; */
-    height: 120px;
+    height: 80px;
     background-color: #461739;
     box-sizing: border-box;
     /* border-bottom: 5px solid rgb(123, 123, 123); */
@@ -25,12 +25,14 @@
   }
 
   .btnnavbar{
+    display: flex;
+    flex-direction: row;
     background-color: #853a7e;
     border-radius: .6rem;
     font-size: 1rem;
     cursor: pointer;
-    margin: auto 3rem;
-    padding: 1.2rem 1rem;
+    margin: auto 1.7rem;
+    padding: .7rem 1rem;
     color: var(--var_texto_color_blanco);
   }
 
@@ -47,6 +49,19 @@
     transform: translateX(-50%);
     height: 120px;
     width: 140px;
+  }
+
+  .iconos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 4rem 0 0;
+  }
+
+  .icon{
+    width: 40px;
+    height: 40px;
+    margin: 0 .7rem;
   }
   
 

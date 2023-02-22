@@ -1,0 +1,16 @@
+.contain{
+    /* background-color: black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.contain *{
+    background-color: black;
+    margin: 1rem;
+    color: aliceblue;
+    padding: .6rem 1rem;
+}
+
+/* .contain select{
+    
+} */
