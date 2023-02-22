@@ -6,24 +6,33 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@next/font": "13.1.6",
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
     "@openzeppelin/contracts": "^4.8.1",
     "alchemy-sdk": "^2.4.3",
-    "eslint": "8.34.0",
-    "eslint-config-next": "13.1.6",
     "next": "13.1.6",
     "next-auth": "^4.19.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "web3": "^1.8.2"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "eslint": "8.34.0",
+    "eslint-config-next": "13.1.6",
+    "eslint-plugin-prettier": "^4.2.1",
     "ethers": "^5.7.2",
-    "hardhat": "^2.12.7"
+    "hardhat": "^2.12.7",
+    "husky": "^8.0.3",
+    "web3": "^1.8.2"
+  },
+  "lint-staged": {
+    "*.(js,jsx)": [
+      "eslint . --fix",
+      "prettier --write"
+    ]
   }
 }

@@ -16,7 +16,7 @@ const Login = (style)=>{
 
     return(
         <>
-        { status==='authenticated' ? <button className={{style}} onClick={()=>{ setLogin(!login)}} >Login</button>
+        { status==='unauthenticated' ? <button className={{style}} onClick={()=>{ setLogin(!login)}} >Login</button>
         : <Image onClick={()=>{setPerfil(!perfil)}} className={styles.imgheader} src={imagenperfil} alt='img perfil'/>}
         
         { login ? 
