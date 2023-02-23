@@ -1,32 +1,35 @@
-import styles from '../../src/styles/props/propsnftcartas.module.css'
+import styles from "../../src/styles/props/propsnftcartas.module.css";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+const PropsNftcartas = ({ texto }) => {
+  const [imageUrl, setImageUrl] = useState("");
 
-const PropsNftcartas = ({texto})=>{
-    return(
-             <div className={styles.cards}>  
-                    <div className={styles.nft}><p className={styles.texto}>{texto}</p></div>
+  async function fetchImage() {
+    const response = await fetch("https://api.thecatapi.com/v1/images/search");
+    const data = await response.json();
+    setImageUrl(data[0].url);
+  }
 
-                    <div className={styles.hability}>
-                        <div style={{display:'flex', justifyContent:'space-between'}}>
-                            <div className={styles.power}/>
-                            <div className={styles.power}></div>
-                            <div className={styles.power}></div>
-                        </div>
-                    </div>
+  useEffect(() => {
+    fetchImage();
+  }, []);
 
+  
+  return (
+    <div className={styles.cards}>
+      <img src={imageUrl} className={styles.nft}></img>
+      <p className={styles.texto}>{texto}</p>
+      <div className={styles.hability}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className={styles.power} />
+          <div className={styles.power}></div>
+          <div className={styles.power}></div>
+        </div>
+      </div>
 
-                    <div className={styles.price}>usdt</div>
-                    
-
-
-                    {/* <div >
-                    <div style={{backgroundColor:colorInit}} className={styles.card_front}>
-                        <p className={styles.texto}>{textinit}</p>
-                        <div className={styles.imagennft}></div>
-                        <div className={styles.contain}></div>
-                    </div>
-                    </div> */}
-                    {/* <div style={{backgroundColor:colorfin}} className={styles.card_back}></div> */}
-            </div>
-)}
+      <div className={styles.price}>usdt</div>
+    </div>
+  );
+};
 
 export default PropsNftcartas;

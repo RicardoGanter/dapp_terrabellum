@@ -8,8 +8,9 @@ const Opcion = ()=>{
             <div className={styles.contain}>
                 <Link href={'/'}>Home</Link>
                 <Link href={'/noticias'}>Noticias</Link>
-                <Link href={'/market'}>Market</Link>
                 <div>Becas</div>
+                <Link href={'/market'}>Market</Link>
+                
             </div>
             <div className={styles.containrigth}>
             </div>

@@ -11,6 +11,7 @@ const Marketcompra = ()=>{
             <PropsNftcartas texto='Red Spectre'/>
             <PropsNftcartas texto='Red Spectre'/>
             <PropsNftcartas texto='Red Spectre'/>
+            <PropsNftcartas texto='Red Spectre'/>
         </div>
     )
 }
