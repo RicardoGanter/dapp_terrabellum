@@ -1,5 +1,5 @@
 import PropsNftcartas from "./props/propsnftcartas"
-import styles from '../src/styles/marketcompra.module.css'
+import styles from '../src/styles/marketcompra.module.scss'
 // import Marketfiltros from "./Marketfiltros"
 const Marketcompra = ()=>{
     return(

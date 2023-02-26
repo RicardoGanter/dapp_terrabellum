@@ -4,7 +4,7 @@
     width: 250px;
     height: 100%;
     left: 0;
-    top: 550px;
+    top: 400px;
     z-index: 1;
     border-radius: 0 1rem;
 }
@@ -14,14 +14,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 1rem;
+    margin: 1rem .7rem;
     color: aliceblue;
     border-radius: 1rem;
     
 }
 
 .containfilt *{
-    margin: .4rem .4rem;
+    margin: .3rem .4rem;
     background-color: rgb(129, 39, 109);
     
     border-radius: .5rem;
@@ -37,6 +37,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 1rem .4rem;
 }
 
 .containlvl{

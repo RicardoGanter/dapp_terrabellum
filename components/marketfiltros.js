@@ -1,4 +1,4 @@
-import styles from '../src/styles/marketfiltros.module.css'
+import styles from '../src/styles/marketfiltros.module.scss'
 
 
 const Marketfiltros = ()=>{

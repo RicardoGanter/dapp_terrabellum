@@ -1,5 +1,7 @@
+@import 'var';
+
 .connect {
-    background-color: var(--var_btn_color_morado);
+    background-color: $var_btn_color_morado;
     border-style: none;
     border-radius: 10px;
     padding: .7rem;

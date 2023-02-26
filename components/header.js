@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../public/img/logo.png";
-import styles from "../src/styles/header.module.css";
+import styles from "../src/styles/header.module.scss";
 import global from "../public/globe.svg";
 import bar from "../public/icon/bar.svg";
 import toggle from "../public/toggle.svg";
@@ -39,7 +39,7 @@ const Header = () => {
           ) : null}
         </nav>
 
-        {/* resolucion intermedia 1020px */}
+        {/* resolucion intermedia 1150px */}
         <div className={styles.interresolution}>
           <Link href={"/"}>
             {" "}
@@ -56,7 +56,6 @@ const Header = () => {
           {interresolution ? (
             <div className={styles.optionMovile}>
               <div>Download</div>
-              <div>personajes</div>
               <div>MarketPlace</div>
               <div>WithePaper</div>
             </div>

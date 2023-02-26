@@ -3,6 +3,7 @@ import Image from "next/image";
 import yoxd from '../../../public/img/lal.png'
 import styles from '../../styles/user/perfil.module.css'
 import Metamasklogin from "@/components/loginmetamask";
+import { getSession } from "next-auth/react";
 const Perfil = ({name})=>{
     return(
         <Layout>
@@ -31,3 +32,19 @@ const Perfil = ({name})=>{
 }
 
 export default Perfil;
+
+
+export const getServerSideProps = async(context)=>{
+    const session = await getSession(context)
+    if (!session) return{
+      redirect:{
+        destination: '/login',
+        permanent: false
+      }
+    }
+    return{
+      props:{
+        session
+      }
+    }
+  }

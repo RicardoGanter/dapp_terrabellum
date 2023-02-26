@@ -1,11 +1,11 @@
 import { useState } from "react"
 import Metamasklogin from "./loginmetamask"
-import styles from '../src/styles/login.module.css'
+import styles from '../src/styles/login.module.scss'
 import { useSession } from 'next-auth/react'
 import Link from "next/link"
 import Image from "next/image"
 import imagenperfil from '../public/img/lal.png'
-
+import { signOut,signIn } from "next-auth/react"
 
 const Login = (style)=>{
     const [login, setLogin] = useState(false)
@@ -25,6 +25,7 @@ const Login = (style)=>{
             <Metamasklogin/>
             <div>conectar con Google</div>
             <div>Registrar</div>
+            <div onClick={signIn}>Conectar con Github</div>
         </div>
         : null}
 
@@ -36,6 +37,7 @@ const Login = (style)=>{
             <Link href={'/user/perfil'}>Historial</Link>
             <Link href={'/user/estadistics'}>Estadisticas</Link>
             <Link href={'/user/perfil'}>Inventario</Link>
+            <Link href={'/'} onClick={signOut}> Signout</Link>
             </div>
         </div>
 

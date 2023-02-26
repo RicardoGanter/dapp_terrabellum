@@ -1,4 +1,4 @@
-import styles from '../src/styles/opcmarket.module.css'
+import styles from '../src/styles/opcmarket.module.scss'
 
 
 const Barrafiltros = ()=>{
@@ -23,9 +23,9 @@ const Barrafiltros = ()=>{
 
                     
                     {/* price */}
-                    <div>personaje</div>
-                    <div>personaje</div>
-                    <div>personaje</div>
+                    <div style={{margin:'1rem .4rem'}}>personaje</div>
+                    <div style={{margin:'1rem .4rem'}}>personaje</div>
+                    <div style={{margin:'1rem .4rem'}}>personaje</div>
                 </div>
             </div>
         </>

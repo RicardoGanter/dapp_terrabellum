@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "../src/styles/Home.module.css";
+import styles from "../src/styles/Home.module.scss";
 import React, { useEffect } from "react";
 import Web3 from "web3";
 

@@ -1,7 +1,8 @@
 .contain{
     margin: 2rem 10rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
 }
 
 .contain *{
