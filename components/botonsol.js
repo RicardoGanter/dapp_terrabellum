@@ -1,5 +1,5 @@
 import Web3 from "web3"
-import Nftmarket from '../artifacts/contracts/NFTMarket.sol/NFTMarketplace.json'
+// import Nftmarket from '../artifacts/contracts/NFTMarket.sol/NFTMarketplace.json'
 import { useState } from 'react';
 
 const Sosol = ()=>{

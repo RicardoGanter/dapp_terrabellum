@@ -6,7 +6,7 @@ import global from "../public/globe.svg";
 import bar from "../public/icon/bar.svg";
 import toggle from "../public/toggle.svg";
 import Login from "./login";
-
+import mint from "@/etherjs/infonft";
 import { useState } from "react";
 const Header = () => {
   const [navbarcontainMovile, setNavbarcontainMovile] = useState(false);
@@ -84,6 +84,7 @@ const Header = () => {
             <div className={styles.iconos}>
               <Image onClick={switchColor}  src={toggle} className={styles.icon}/>
             </div>
+            <div onClick={()=>{mint()}}  style={{color:'white', fontSize:'3rem'}}>lalalaaa</div>
             <Login/>
           </div>
         </nav>

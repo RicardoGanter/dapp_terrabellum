@@ -1,5 +1,3 @@
-
-
 const  {ethers}  = require('ethers');
     // const provider = new ethers.providers.JsonRpcProvider();
     
@@ -10,21 +8,22 @@ const  {ethers}  = require('ethers');
     const abi = require('../web3/abi.js')
 
 const contract = new ethers.Contract(Address, abi, signer);
-contract.tokenURI(1)
-.then((tokenURI)=>{
-  console.log(` Token Uri: ${tokenURI}`)
-})
 
-
-contract._mintTokenAllowedToEarn('0x6749Cd2AfDd2Be6ef0cc4DeF385A6F38D47Adc6c')
-console.log(contract.symbol_)
-
-
-
-contract.balance()
+const mint = ()=>{ 
+  contract._mintTokenAllowedToEarn('0x6749Cd2AfDd2Be6ef0cc4DeF385A6F38D47Adc6c')
+  contract.balance()
 .then((balance)=>{
-  console.log(` balance es: ${balance}`)
+  const lol = console.log(` balance es: ${balance}`)
 })
+}
+export default mint;
+
+// const nosexd = ()=>{  contract.tokenURI(1)
+// .then((tokenURI)=>{
+//   console.log(` Token Uri: ${tokenURI}`)
+// })
+// }
+// export default nosexd;
 
 
 // saas()
