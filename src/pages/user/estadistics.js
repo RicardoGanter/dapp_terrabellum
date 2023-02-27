@@ -62,18 +62,18 @@ const Estadistics = () => {
               <div className={styles.subgroup2_1}>
                 <div>
                   <p>Personaje Top</p>
-                  <Image src={imagen} className={styles.img} />
+                  <Image src={imagen} className={styles.imgfrecuente} />
                 </div>
                 <div>
                   <p>Arma Top</p>
-                  <Image src={imagen} className={styles.img} />
+                  <Image src={imagen} className={styles.imgfrecuente} />
                 </div>
               </div>
             </div>
 
             <div
               style={{
-                backgroundColor: "#421841",
+                backgroundColor: "#461739",
                 padding: "11rem",
                 margin: "2rem .6rem",
                 borderRadius: "0 0 4rem 4rem",

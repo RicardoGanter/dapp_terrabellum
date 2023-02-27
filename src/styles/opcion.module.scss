@@ -6,8 +6,23 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    *{
+        background-color: #853a7e;
+        padding: .9rem .7rem;
+        margin: .7rem 1.3rem;
+        border-radius: .6rem;
+        transition: .4s;
+        cursor: pointer;
+        color: aliceblue;
+        font-size: 1.3rem;
+        text-decoration: none;
+    }
+    *:hover{
+        opacity: 50%;
+    }
     
 }
+
 .containrigth{
     background-color: #402F3E;
     position: fixed;
@@ -17,19 +32,3 @@
     width: 140px;
 }
 
-
-.contain *{
-    background-color: #853a7e;
-    padding: .9rem .7rem;
-    margin: .7rem 1.3rem;
-    border-radius: .6rem;
-    transition: .4s;
-    cursor: pointer;
-    color: aliceblue;
-    font-size: 1.3rem;
-    text-decoration: none;
-}
-
-.contain *:hover{
-    opacity: 50%;
-}

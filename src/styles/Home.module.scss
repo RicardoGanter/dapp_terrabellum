@@ -1,14 +1,13 @@
-@import 'var';
+@import 'var.module';
 
 .connect {
-    background-color: $var_btn_color_morado;
+    background-color: $color_btn_morado_semioscuro;
     border-style: none;
     border-radius: 10px;
     padding: .7rem;
     color: #ffffff;
     cursor: pointer;
     transition: .4s;
-    /* box-shadow: 0 5px 5px 0 #000000; */
   }
   
   .connect:hover {

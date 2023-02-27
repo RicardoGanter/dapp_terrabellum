@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@algolia/autocomplete-js": "^1.8.2",
     "@next/font": "13.1.6",
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
     "@openzeppelin/contracts": "^4.8.1",

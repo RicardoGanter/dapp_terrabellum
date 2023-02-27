@@ -11,7 +11,12 @@ import { useState } from "react";
 const Header = () => {
   const [navbarcontainMovile, setNavbarcontainMovile] = useState(false);
   const [interresolution, setInterresolution] = useState(false);
-
+  
+  //cambio de color
+  const [color, setColor] = useState('#461739')
+  const switchColor = ()=>{
+    setColor( color=== '#461739' ? 'white': '#461739'  )
+  }
   return (
     <>
       <header className={styles.header}>
@@ -63,7 +68,7 @@ const Header = () => {
         </div>
 
         {/* resolucion 1080px       */}
-        <nav className={styles.navbarcontain}>
+        <nav className={styles.navbarcontain} style={{backgroundColor: color}}>
           <button className={styles.btnnavbar}>Download</button>
           <Link href={"/"}>
             <Image src={logo} alt="Logo" className={styles.img} />
@@ -74,10 +79,12 @@ const Header = () => {
               <Image src={global} className={styles.icon}/>
               <p>ES</p>
             </div>
+
+
             <div className={styles.iconos}>
-              <Image src={toggle} className={styles.icon}/>
+              <Image onClick={switchColor}  src={toggle} className={styles.icon}/>
             </div>
-            <Login />
+            <Login/>
           </div>
         </nav>
       </header>

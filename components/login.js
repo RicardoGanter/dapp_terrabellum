@@ -16,7 +16,7 @@ const Login = (style)=>{
 
     return(
         <>
-        { status==='unauthenticated' ? <button className={{style}} onClick={()=>{ setLogin(!login)}} >Login</button>
+        { status==='unauthenticated' ? <button style={{backgroundColor:'#853a7e', padding :'0 1rem', borderRadius:'1rem', color:'aliceblue', margin:'0 2rem 0 0'}} onClick={()=>{ setLogin(!login)}} >Login</button>
         : <Image onClick={()=>{setPerfil(!perfil)}} className={styles.imgheader} src={imagenperfil} alt='img perfil'/>}
         
         { login ? 
@@ -32,7 +32,7 @@ const Login = (style)=>{
         {/* perfil autenticado */}
         {   perfil ?
         <div className={styles.contain_perfil}>
-            <div style={{margin:'7rem 0 0 0', display:'flex', flexDirection:'column'}}>
+            <div style={{margin:'5rem 0 0 0', display:'flex', flexDirection:'column'}}>
             <Link href={'/user/perfil'}>perfil</Link>
             <Link href={'/user/perfil'}>Historial</Link>
             <Link href={'/user/estadistics'}>Estadisticas</Link>

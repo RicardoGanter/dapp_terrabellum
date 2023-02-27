@@ -1,85 +1,86 @@
-.contain{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgb(44, 0, 40);
-    height: 100%;
-    padding: 1rem;
-    margin: 8rem 1rem;
-    
-}
+    @import '../var.module';
 
-.containestruct{
-    max-width: 800px;
-}
+    .contain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgb(44, 0, 40);
+        height: 100%;
+        padding: 1rem;
+        margin: 6.5rem 1rem 0 1rem;
+        
+    }
 
-.group1{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #421841;
-    margin: 2rem 0;
-    border-radius: 6rem;
-}
+    .containestruct{
+        max-width: 800px;
+    }
+
+    .group1{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: $color_bg_morado_oscuro;
+        margin: 2rem 0;
+        border-radius: 6rem;
+    }
 
 
-.group2{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
+    .group2{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
 
-.subgroup2{
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(66, 24, 65);
-    padding: .2rem 2rem;
-    margin: .6rem;
-    align-items: center;
-    border-radius: 1rem 1rem 0 0;
-}
+    .subgroup2{
+        display: flex;
+        flex-direction: column;
+        background-color: $color_bg_morado_oscuro;
+        padding: .2rem 2rem;
+        margin: .6rem;
+        align-items: center;
+        border-radius: 1rem 1rem 0 0;
+        p{
+            margin: .5rem;
+        }
+    }
 
-.subgroup2 *{
-    margin: .5rem;
-}
+    .subgroup2_1{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 1.4rem;
+        div{
+            background-color: $color_bg_morado_oscuro;
+            margin: .4rem;
+            padding: .2rem;
+            border-radius: 1rem 1rem 0 0;
+            align-items: center;
+            p{
+                background-color: $color_btn_morado;
+                border-radius: 1rem 1rem 0 0;
+                padding: .5rem 0;
+                margin:  .3rem .4rem 1rem .4rem;
+            }
+        }
+    }
 
-.subgroup2_1{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: rgb(66, 24, 65);
-    border-radius: 1rem 1rem 0 0;
-    padding: 1.8rem 0;
-    margin: .6rem;
-}
+    .backgrouninfo1{
+        background-color: $color_btn_morado;
+        width: 140%;
+        padding: 1rem 0;
+    }
 
-.subgroup2_1 div{
-    
-    justify-content: center;
-    margin: 0 1.6rem;
-}
+    .img{
+        width: 80px;
+        height: 80px;
+        background-color: $color_text_white;
+        border-radius: 50%;
+        margin: 10px;
+    }
 
-/* .subgroup2_1 div p{
-
-} */
-
-.backgrouninfo1{
-    background-color: rgb(92, 34, 91);
-    width: 140%;
-    padding: 1rem 0;
-}
-
-/* .backgrouninfo2{
-    background-color: rgb(119, 71, 71);
-    width: 130%;
-    padding: .4rem 0;
-} */
-
-.img{
-    width: 80px;
-    height: 80px;
-    background-color: aliceblue;
-    border-radius: 50%;
-    margin: 10px;
-}
+    .imgfrecuente{
+        width: 90%;
+        height: 65%;
+        background-color: beige;
+    }

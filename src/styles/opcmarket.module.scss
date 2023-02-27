@@ -17,14 +17,13 @@
     margin: 1rem .7rem;
     color: aliceblue;
     border-radius: 1rem;
+    *{
+        margin: .3rem .4rem;
+        background-color: rgb(129, 39, 109);
+        
+        border-radius: .5rem;
+    }
     
-}
-
-.containfilt *{
-    margin: .3rem .4rem;
-    background-color: rgb(129, 39, 109);
-    
-    border-radius: .5rem;
 }
 
 /* Selector */
@@ -37,7 +36,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 1rem .4rem;
 }
 
 .containlvl{
@@ -51,4 +49,5 @@
     margin: 0 .2rem;
     background-color: rgb(153, 50, 131);
     padding:  .3rem .8rem;
+    
 }

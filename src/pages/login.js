@@ -9,7 +9,6 @@ return (
     <main>
       <Layout>
 
-        
       </Layout>
     </main>
     {/* <div>

@@ -1,0 +1,16 @@
+export const Habilidades= [
+    'Ana',
+  'Juan',
+  'juanito',
+  'juanito',
+  'juanito',
+  'juanito',
+  'Pedro',
+  'María',
+  'José',
+  'Lucía',
+  'Pablo',
+  'Isabel',
+  'Luis',
+  'Sofía',
+];

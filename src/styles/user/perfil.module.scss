@@ -23,10 +23,9 @@
     background-color: #D9D9D9;
     color: black;
     text-align: start;
-}
-
-.contain_datos p{
-    margin: .7rem 2rem;
+    p{
+        margin: .7rem 2rem;
+    }
 }
 
 .descripcion{
@@ -35,9 +34,10 @@
     color: black;
     height: 150px;
     width: 300px;
-}
-.descripcion p{
-    margin: 1rem;
+
+    .descripcion p{
+        margin: 1rem;
+    }
 }
 
 .wallet{
@@ -45,13 +45,14 @@
     flex-direction: row;
     margin: 3rem 0;
     align-items: center;
-}
-.wallet div{
-    background-color: #D9D9D9;
-    color: black;
-    margin: 0 1rem;
-    padding: .6rem 1rem;
-    border-radius: 1rem 0 0 1rem;
+    
+    div{
+        background-color: #D9D9D9;
+        color: black;
+        margin: 0 1rem;
+        padding: .6rem 1rem;
+        border-radius: 1rem 0 0 1rem;
+    }
 }
 
 .img{

@@ -125,13 +125,22 @@ a {
 //   
 // }
 
+@import 'var.module';
+
+*{
+  border: none;
+}
+
 body{
-  background-color: #4e4e4e;
+  background-color: $color_body_grey;
   margin: 0;
   font-size: 1.1rem;
   text-align: center;
   align-items: center;
-  color: var(--var_texto_color_blanco);
+}
+
+p{
+  color: $color_text_white;
 }
 
 ::-webkit-scrollbar {
