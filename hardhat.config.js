@@ -1,22 +1,27 @@
 /** @type import('hardhat/config').HardhatUserConfig */
 require("@nomicfoundation/hardhat-toolbox");
 require("@nomiclabs/hardhat-ethers");
+const ALCHEMY_API_KEY = "gIYahKEbCs9lj1MRp6mwlzYHxonY3hYL";
+// const GOERLI_PRIVATE_KEY = "af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd";
+const GOERLI_PRIVATE_KEY = "a43171098a3ea626a1e63f45a1ad72adedf9e162efbffdbe065aaaa7a62c4cb4";
+const INFURA_API_KEY = "f8191b77762f407da099f89c34a57514"
+// const GOERLY_PIVATE_KEY = "finger mule virus ugly plug flip unfair scene clog nothing trophy proof"
+
+
 module.exports = {
-  // networks: {
-  //   hardhat: {
-  //     gas: 4000000000000000,
+  // ganache: {
+  //     url: "http://localhost:7545", // Cambia el puerto si ganache está ejecutando en un puerto diferente
+  //     chainId: 1337, // Cambia este valor si ganache está ejecutando en una cadena diferente
   //   },
-  // },
-  
-  ganache: {
-      url: "http://localhost:7545", // Cambia el puerto si ganache está ejecutando en un puerto diferente
-      chainId: 1337, // Cambia este valor si ganache está ejecutando en una cadena diferente
-    },
-    // LocalhostGanache:{
-    //   url: 'HTTP://127.0.0.1:7545' ,
-    //   accounts: ['0x4350302b780c4333a3e18d64780d6d82dea50906494a1d6825e8596e61954a43'],
-    // }
-  solidity: "0.8.6",
+  solidity: {
+    version: "0.8.9",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 1000
+      }
+    }
+  },
   paths:{
     artifacts: "./artifacts",
     sources: "./contracts",
@@ -24,10 +29,28 @@ module.exports = {
     tests :"./tests"
   },
   networks: {
-    ganache:{
-      url: "HTTP://127.0.0.1:7545"
-    }
+    // ganache:{
+    //   url: "HTTP://127.0.0.1:7545"
+    // },
+    goerliAlchemy: {
+      url: `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
+      accounts: [GOERLI_PRIVATE_KEY],
+      gasPrice: 40000000000,
+      gas: 1000000000,
+      chainId: 5,
+  },
+  goerliInfura: {
+    url: `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+    // accounts: [`0x${GOERLI_PRIVATE_KEY}`],
+    // accounts: {
+    //   privateKey: "0xaf28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd"
+    // },
+    // accounts: {
+    //   mnemonic: "finger mule virus ugly plug flip unfair scene clog nothing trophy proof",
+    // },
+    gasPrice: 40000000000,
+    gas: 1000000000,
+    chainId: 5,
+}
   }
-
-
 };

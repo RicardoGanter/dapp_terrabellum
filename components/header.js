@@ -6,12 +6,57 @@ import global from "../public/globe.svg";
 import bar from "../public/icon/bar.svg";
 import toggle from "../public/toggle.svg";
 import Login from "./login";
-import mint from "@/etherjs/infonft";
-import { useState } from "react";
+import {mint, Balance, Tokenuri} from "@/etherjs/infonft";
+import { useState,useEffect } from "react";
+
+// import DataIpfs from "@/ipfs/ipfs";
+
+
+import { create } from 'ipfs-http-client'
+
 const Header = () => {
+  // const sus = Tokenuri()
+  // const sas = Tokenuri.toString();
+
+  // Tokenuri()
+  
+
+  const cid = 'QmUNisJskUs7g6UdymhXdQEY7ULtyL96C5VXWhn5L3F5rg/sas/Axe.png';
+  const projectId = '2HdtR7fw87DXMsYJBlLLeQl27aM';
+  const projectSecret = '41b8ca7bf059eafb70f5305628849b4f';
+  const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+  const ipfs = create({ host: 'ipfs.infura.io', port: '5001', protocol: 'https', headers: {
+    authorization: auth,
+}, });
+  
+  const getImageFromIPFS = async (cid) => {
+    const stream = ipfs.cat(cid);
+    const chunks = [];
+  
+    for await (const chunk of stream) {
+      chunks.push(chunk);
+    }
+  
+    const data = Buffer.concat(chunks);
+    const imageUrl = URL.createObjectURL(new Blob([data]));
+    return imageUrl;
+  };
+
+  const [imageUrl, setImageUrl] = useState('');
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const imageUrl = await getImageFromIPFS(cid);
+      setImageUrl(imageUrl);
+    };
+
+    fetchImage();
+  }, []);
+
   const [navbarcontainMovile, setNavbarcontainMovile] = useState(false);
   const [interresolution, setInterresolution] = useState(false);
   
+ 
   //cambio de color
   const [color, setColor] = useState('#461739')
   const switchColor = ()=>{
@@ -79,13 +124,24 @@ const Header = () => {
               <Image src={global} className={styles.icon}/>
               <p>ES</p>
             </div>
-
+            {imageUrl && <img src={imageUrl} />}
 
             <div className={styles.iconos}>
               <Image onClick={switchColor}  src={toggle} className={styles.icon}/>
             </div>
-            <div onClick={()=>{mint()}}  style={{color:'white', fontSize:'3rem'}}>lalalaaa</div>
-            <Login/>
+            {/* <p>{fileContent}</p> */}
+            {/* {imageUrl && (
+        <Image
+          src={imageUrl}
+          alt="IPFS Image"
+          width={500}
+          height={500}
+        />
+      )} */}
+            {/* <Balance/> */}
+            {/* <div style={{color:'white', fontSize:'3rem'}} onClick={()=>{Balance()}}>{Balance}</div> */}
+            <div onClick={()=>{mint()}}  style={{color:'white', fontSize:'2rem'}}>aaaaa</div>
+            {/* <Login/> */}
           </div>
         </nav>
       </header>
@@ -94,3 +150,4 @@ const Header = () => {
 };
 
 export default Header;
+

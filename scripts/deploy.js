@@ -1,38 +1,32 @@
 // const hre = require('hre')
-
 async function main() {
     // await hre.run('compile')
 
-    const [deployer] = await ethers.getSigners();
-  
-    console.log("este es tu addres:", deployer.address);
-  
-    console.log("este es tu balance:", (await deployer.getBalance()).toString());
-    const uri = 'https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/'
+    // const [deployer] = await ethers.getSigners();
+    // console.log("este es tu addres:", deployer.address);
+    // console.log("este es tu balance:", (await deployer.getBalance()).toString());
+    // const uri = 'https://ipfs.io/ipfs/QmUYeMrzrP37bD9sDDyvyTkiJjpRYC8EQ7taamm1YtrF5e/'
+    const uri =  'https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/'
+
     const Contract = await ethers.getContractFactory("InnomicNFT");
 
-    const contract = await Contract.deploy('moneafacha','INNO', uri, [1,2,3,4,5,6,7,8], ["1","2","3","4","5","6","7","8"],8,0,[],0,[]);
+    const contract = await Contract.deploy('innomictokea','lol', uri, [1,2,3,4,5,6,7,8], ["1","2","3","4","5","6","7","8"],8,0,[],0,[]);
     // const token = await Token.deploy('0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC')
-    // await token.deployed();
-    // await token.methods;
-    const addreses = token.address;
-    console.log(addreses)
-
-    // const lal = await token._mintTokenAllowedToEarn('0x6749Cd2AfDd2Be6ef0cc4DeF385A6F38D47Adc6c')
-    // console.log(lal)
+    
+    const addreses = await contract.address;
+    console.log("contrato: ",addreses)
+    await contract.deployed();
+    console.log("fue deployado :o")
+    // const lal = await contract._mintTokenAllowedToEarn('0x621f47478a55583084e9bD70e535D509f95D9B78')
+    // console.log("lol",lal)
 
     // const lol = await  token.balance()
     // console.log(lol)
 
-
+    // contract._mintTokenAllowedToEarn('0x621f47478a55583084e9bD70e535D509f95D9B78')
 
     // addres del contract:0x5FbDB2315678afecb367f032d93F642f64180aa3
     // console.log("respuesta:", token.ownerOf.call((err, result)=>{console.log(result)}));
   }
   
   main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-      console.error(error);
-      process.exit(1);
-    });

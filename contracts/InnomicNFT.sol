@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 // Habilitar el optimizador
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.0;
 pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -13,6 +13,7 @@ contract InnomicNFT is ERC721 {
     mapping(uint256 => string) private _tokenURIs;
 
     // Actual URL base for the URI
+
     string private baseURI;// https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/
 
     // Module for the calculation of token URI
