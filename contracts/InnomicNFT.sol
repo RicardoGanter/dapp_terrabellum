@@ -422,7 +422,9 @@ contract InnomicNFT is ERC721 {
         _blocked[_parents[tokenId][0]] = false;
         _blocked[_parents[tokenId][1]] = false;
         _blocked[_parents[tokenId][2]] = false;
-        
+        poolNFT.guardar(_parents[tokenId][0], msg.sender);
+        poolNFT.guardar(_parents[tokenId][1], msg.sender);
+        poolNFT.guardar(_parents[tokenId][2], msg.sender);
         poolNFT.sacar(_parents[tokenId][0], msg.sender);
         poolNFT.sacar(_parents[tokenId][1], msg.sender);
         poolNFT.sacar(_parents[tokenId][2], msg.sender);

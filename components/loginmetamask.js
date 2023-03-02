@@ -1,51 +1,31 @@
 import Head from "next/head";
 import styles from "../src/styles/Home.module.scss";
-import React, { useEffect } from "react";
-import Web3 from "web3";
+import { useState, useEffect } from 'react';
 
+export default function ConnectButton() {
+  const [address, setAddress] = useState('');
 
-const Metamasklogin = ()=>{
-    useEffect(() => {
-      // Web3 Browswer Detection
-      if (typeof window.ethereum !== "undefined") {
-        console.log("Injected Web3 Wallet is installed!");
-      }
-  
-      //Button ID
-      const connectButton = document.getElementById("connect");
-  
-      //Click Event
-      connectButton.addEventListener("click", () => {
-        connectAccount();
-      });
-  
-      //Connect Account Function
-      async function connectAccount() {
-        const accounts = await ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        const account = accounts[0];
-        connectButton.innerHTML =
-          account[0] +
-          account[1] +
-          account[2] +
-          account[3] +
-          account[4] +
-          account[5] +
-          "..." +
-          account[38] +
-          account[39] +
-          account[40] +
-          account[41];
-      }
-    }, []);
-  
-    return (
-        <button className={styles.connect} id="connect">
-          Conectar con metamask
-        </button>
-    );
+  useEffect(() => {
+    const storedAddress = localStorage.getItem('address');
+    if (storedAddress) {
+      setAddress(storedAddress);
+    }
+  }, []);
+
+  async function handleClick() {
+    const web3 = await connectToMetaMask();
+    const accounts = await web3.eth.getAccounts();
+    setAddress(accounts[0]);
+    localStorage.setItem('address', accounts[0]);
   }
 
+  if (address) {
+    return <p>Connected with address: {address}</p>;
+  } else {
+    return <button onClick={handleClick}>Connect to MetaMask</button>;
+  }
+}
 
-  export default Metamasklogin;
+export function getStoredAddress() {
+  return localStorage.getItem('address');
+}

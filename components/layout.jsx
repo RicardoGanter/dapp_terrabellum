@@ -8,6 +8,7 @@ const Layout = ({title, description,children})=>{
             <Head>
                 <title>{title}</title>
                 <meta name="description:" content={description} />
+                
             </Head>
             <main>
                 <Header/>

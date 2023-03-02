@@ -42,7 +42,7 @@ const PropsNftcartas = ({ texto }) => {
         </div>
       </div>
 
-      <div className={styles.price}>usdt</div>
+      {/* <div className={styles.price}>usdt</div> */}
     </div>
   );
 };

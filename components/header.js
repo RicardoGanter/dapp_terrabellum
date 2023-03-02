@@ -124,7 +124,7 @@ const Header = () => {
               <Image src={global} className={styles.icon}/>
               <p>ES</p>
             </div>
-            {imageUrl && <img src={imageUrl} />}
+            {/* {imageUrl && <img src={imageUrl} />} */}
 
             <div className={styles.iconos}>
               <Image onClick={switchColor}  src={toggle} className={styles.icon}/>
@@ -140,8 +140,8 @@ const Header = () => {
       )} */}
             {/* <Balance/> */}
             {/* <div style={{color:'white', fontSize:'3rem'}} onClick={()=>{Balance()}}>{Balance}</div> */}
-            <div onClick={()=>{mint()}}  style={{color:'white', fontSize:'2rem'}}>aaaaa</div>
-            {/* <Login/> */}
+            {/* <div onClick={()=>{mint()}}  style={{color:'white', fontSize:'2rem'}}>aaaaa</div> */}
+            <Login/>
           </div>
         </nav>
       </header>

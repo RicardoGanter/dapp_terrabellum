@@ -1,15 +1,14 @@
 @import 'var.module';
 
-.connect {
-    background-color: $color_btn_morado_semioscuro;
-    border-style: none;
-    border-radius: 10px;
-    padding: .7rem;
-    color: #ffffff;
-    cursor: pointer;
-    transition: .4s;
-  }
-  
+  .connect {
+      background-color: $color_btn_morado_semioscuro;
+      border-style: none;
+      border-radius: 10px;
+      padding: .7rem;
+      color: #ffffff;
+      cursor: pointer;
+      transition: .4s;
+    }
   .connect:hover {
     background-color: #321f31;
   }
