@@ -3,18 +3,33 @@ import styles from "../../../styles/user/inventario/infocarta.module.scss";
 import PropsNftcartas from "@/components/props/propsnftcartas";
 import img from '../../../../public/img/lal.png'
 import Image from "next/image";
-import Funcioncontract from "@/etherjs/goerlialchemy";
-import { getStoredAddress } from "@/components/loginmetamask";
-
+import { ethers } from "ethers";
+// import connectWallet from "@/etherjs/borrador";
+import connectWallet,{web3Modal} from "@/etherjs/borrador";
 import { useEffect,useState } from "react";
+import getAddress from "./getaddress";
+// import getNFTs from "./idnft";
 const InfoNft = () => {
     const [fusion, setFusion]= useState(false)
-    
-setTimeout(() => {
-    const address = getStoredAddress();
-    console.log(address);
-  }, 1000);
+    const [confirmfusion, setConfirmfusion]= useState(true)
+    const [confirmdefusion, setConfirmdefusion]= useState(false)
 
+    const switchfusion = ()=>{
+      if(confirmfusion===true){
+        setConfirmfusion(!confirmfusion)
+      }
+    }
+    const switchdefusion = ()=>{
+      if(confirmdefusion===true){
+        setConfirmdefusion(!confirmdefusion)
+      }
+    }
+
+    // const myFunc = async () => {
+    //   const address = await getAddress(window.ethereum);
+    //   console.log(`La dirección es: ${address}`);
+    // };
+    // myFunc()
   return (
     <>
       <Layout>
@@ -36,22 +51,38 @@ setTimeout(() => {
                 <Image src={img} alt='lol'/>
               </div>
               <div className={styles.infohabilidades}>
-               <p> asdasdasdasdasdadasd mamamam huevo fluglguglguggluggklgu</p>
+               <div>asdasdasdasdasdadasd mamamam huevo fluglguglguggluggklgu</div>
               </div>
             </div>
           </div>
+          {/* --------------------FUSION-------------------- */}
           { fusion ? 
           <div className={styles.containfusion}>
+            <div className={styles.nftfusion}>aaaa</div>
             <div className={styles.cartsfusion}>
                 <PropsNftcartas/>
                 <PropsNftcartas/>
                 <PropsNftcartas/>
             </div>
             <div className={styles.btndefusion}> 
-                <div onClick={()=>{Funcioncontract()}}>fusion</div>
-                <div onClick={()=>{}}>defusion</div>
+                <div onClick={()=>{setConfirmfusion(!confirmfusion),switchdefusion()}}>fusion</div>
+                <div onClick={()=>{setConfirmdefusion(!confirmdefusion),switchfusion()}}>defusion</div>
             </div>
-            <div onClick={()=>{}} className={styles.btnaceptfusion}>confirmar</div>
+            {/* <div className={styles.btnaceptfusion}>confirmar</div>   */}
+              { confirmfusion ? 
+              
+              <div onClick={()=>{connectWallet()}} className={styles.btnaceptfusion}>confirmar fusion</div>  
+              // : <div className={styles.btnaceptfusion}>fusion</div>
+              :null
+            }
+            { confirmdefusion ?
+
+              <div onClick={()=>{connectWallet()}} className={styles.btnaceptfusion}>confirmar defusion</div>  
+              // : <div className={styles.btnaceptfusion}>fusion</div>
+              :null
+
+            }
+            {/* <div onClick={()=>{connectWallet()}} className={styles.btnaceptfusion}>confirmar</div> */}
           </div> : null}
           
         </div>

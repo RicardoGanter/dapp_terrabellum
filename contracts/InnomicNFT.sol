@@ -1,19 +1,17 @@
 // SPDX-License-Identifier: MIT
 
-// Habilitar el optimizador
 pragma solidity ^0.8.0;
 pragma experimental ABIEncoderV2;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./PoolNFT.sol";
 
-contract InnomicNFT is ERC721 {
+contract InnomicNFT is ERC721Enumerable {
 
     // Mapping from token ID to token URI
     mapping(uint256 => string) private _tokenURIs;
 
     // Actual URL base for the URI
-
     string private baseURI;// https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/
 
     // Module for the calculation of token URI
@@ -277,6 +275,16 @@ contract InnomicNFT is ERC721 {
         }
     }
 
+    function burn(uint256 tokenId) public virtual {
+        require(ownerOf(tokenId) == msg.sender, "el token debe pertenecerte");
+
+        super._burn(tokenId);
+
+        if (bytes(_tokenURIs[tokenId]).length != 0) {
+            delete _tokenURIs[tokenId];
+        }
+    }
+
     function _calculateURI(uint256 id, uint256 module) private pure returns (uint256) {
         uint8[6] memory mult = [2, 3, 4, 5, 6, 7];
         uint256 i = 0;
@@ -422,9 +430,11 @@ contract InnomicNFT is ERC721 {
         _blocked[_parents[tokenId][0]] = false;
         _blocked[_parents[tokenId][1]] = false;
         _blocked[_parents[tokenId][2]] = false;
+
         poolNFT.guardar(_parents[tokenId][0], msg.sender);
         poolNFT.guardar(_parents[tokenId][1], msg.sender);
         poolNFT.guardar(_parents[tokenId][2], msg.sender);
+        
         poolNFT.sacar(_parents[tokenId][0], msg.sender);
         poolNFT.sacar(_parents[tokenId][1], msg.sender);
         poolNFT.sacar(_parents[tokenId][2], msg.sender);

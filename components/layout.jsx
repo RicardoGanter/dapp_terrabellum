@@ -1,5 +1,5 @@
-import Header from "@/components/header"
-import Opcion from "@/components/opcion"
+import Header from "./header.jsx"
+import Opcion from "./opcion.jsx"
 import Head from "next/head"
 
 const Layout = ({title, description,children})=>{

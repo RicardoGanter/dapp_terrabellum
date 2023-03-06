@@ -6,7 +6,7 @@ import global from "../public/globe.svg";
 import bar from "../public/icon/bar.svg";
 import toggle from "../public/toggle.svg";
 import Login from "./login";
-import {mint, Balance, Tokenuri} from "@/etherjs/infonft";
+// import {mint, Balance, Tokenuri} from "@/etherjs/infonft";
 import { useState,useEffect } from "react";
 
 // import DataIpfs from "@/ipfs/ipfs";

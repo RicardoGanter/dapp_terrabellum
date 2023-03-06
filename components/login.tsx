@@ -6,8 +6,9 @@ import Link from "next/link"
 import Image from "next/image"
 import imagenperfil from '../public/img/lal.png'
 import { signOut,signIn } from "next-auth/react"
+import { NextPage } from "next"
 
-const Login = (style)=>{
+const Login = ()=>{
     const [login, setLogin] = useState(false)
     const [perfil, setPerfil] = useState(false)
 
@@ -25,7 +26,7 @@ const Login = (style)=>{
             <Metamasklogin/>
             <div>conectar con Google</div>
             <div>Registrar</div>
-            <div onClick={signIn}>Conectar con Github</div>
+            <div onClick={()=>{signIn}}>Conectar con Github</div>
         </div>
         : null}
 
@@ -37,7 +38,7 @@ const Login = (style)=>{
             <Link href={'/user/perfil'}>Historial</Link>
             <Link href={'/user/estadistics'}>Estadisticas</Link>
             <Link href={'/user/perfil'}>Inventario</Link>
-            <Link href={'/'} onClick={signOut}> Signout</Link>
+            <Link href={'/'} onClick={()=>{signOut}}> Signout</Link>
             </div>
         </div>
 

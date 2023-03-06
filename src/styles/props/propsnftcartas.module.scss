@@ -4,24 +4,34 @@
     width: 260px;
     height: 420px;
     background-color: rgb(56, 1, 58);
-    transition: 1s;
+    // transition: 1s;
 } 
-/* .cards:hover{
-    width: 300px;
-    height: 500px;
-} */
+.contain{
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
 .nft{
-    /* background-image: url('../../../public/img/spectre_plus1.jpg'); */
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    width: 230px;
-    height: 249px;
+    // width: 90%;
+    height: 270px;
+    // margin: 1rem 0;
 }
 
 .hability{
+    display: flex;
     background-color: rgb(69, 32, 62);
     width: 230px;
     height: 100px;
+    align-items: center;
+
+}
+.power{
+    margin: 1rem;
+    padding: 1.3rem;
+    background-color: rgb(92, 30, 116);
+    border-radius: 50%;
 }
 .texto{
     position: absolute;
@@ -29,17 +39,8 @@
     left: 10%;
     color: rgb(255, 255, 255);
     font-size: 1.5rem;
-
-    -webkit-box-shadow: 5px 6px 13px 3px rgba(0,0,0,0.78);
--moz-box-shadow: 5px 6px 13px 3px rgba(0,0,0,0.78);
-box-shadow: 5px 6px 13px 3px rgba(0,0,0,0.78);
 }
 
-.power{
-    padding: 1.3rem;
-    background-color: rgb(92, 30, 116);
-    border-radius: 50%;
-}
 .price{
     color: aliceblue;
 }

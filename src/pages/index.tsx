@@ -1,7 +1,7 @@
 // import { Inter } from '@next/font/google'
 import Layout from "../../components/layout"
-import Marketcompra from "@/components/marketcompra"
-import Sosol from "@/components/botonsol"
+import Marketcompra from '../../components/marketcompra'
+import Sosol from "../../components/botonsol"
 import { useEffect, useState } from "react"
 import { getSession } from "next-auth/react" //desde el front-end
 // import { GetServerSideProps } from "next" desde el back-end

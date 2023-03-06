@@ -39,17 +39,10 @@ const Sosol = ()=>{
             let nftMarketBalance = await nftmarket.methods.balanceOf(accounts[0].call())
             console.log(nftMarketBalance)
         }
-
         
         loadsos()
         
     }
-    console.log('su lol?')
-    
-    return(
-        <>
-        </>
-    )
 }
 
 export default Sosol;

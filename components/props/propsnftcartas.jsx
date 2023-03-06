@@ -32,17 +32,17 @@ const PropsNftcartas = ({ texto }) => {
 
   return (
     <div className={styles.cards}>
+      <div className={styles.contain}>
       <img src={imageUrl}  className={styles.nft}/>
-      <p className={styles.texto}>{texto}</p>
+      
       <div className={styles.hability}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div className={styles.power} />
           <div className={styles.power}></div>
           <div className={styles.power}></div>
-        </div>
       </div>
-
+      </div>
       {/* <div className={styles.price}>usdt</div> */}
+      {/* <p className={styles.texto}>{texto}</p> */}
     </div>
   );
 };

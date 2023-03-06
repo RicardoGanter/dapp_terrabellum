@@ -1,5 +1,5 @@
-import Marketcompra from "@/components/marketcompra"
-import Sosol from "@/components/botonsol"
+import Marketcompra from "../../components/marketcompra"
+import Sosol from "../../components/botonsol"
 import Layout from "../../components/layout"
 
 
@@ -8,7 +8,6 @@ return (
     <>
     <main>
       <Layout>
-
       </Layout>
     </main>
     {/* <div>
