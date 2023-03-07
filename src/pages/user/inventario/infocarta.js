@@ -7,7 +7,7 @@ import { ethers } from "ethers";
 // import connectWallet from "@/etherjs/borrador";
 // import connectWallet,{web3Modal} from "@/etherjs/borrador";
 import { useEffect,useState } from "react";
-import getAddress from "./getaddress";
+// import getAddress from "./getaddress";
 // import getNFTs from "./idnft";
 const InfoNft = () => {
     const [fusion, setFusion]= useState(false)
