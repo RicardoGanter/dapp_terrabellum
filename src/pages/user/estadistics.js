@@ -2,7 +2,7 @@ import Layout from "../../../components/layout";
 import Image from "next/image";
 import styles from "../../styles/user/estadistic.module.scss";
 import imagen from "../../../public/img/lal.png";
-import { getSession } from "next-auth/react";
+// import { getSession } from "next-auth/react";
 const Estadistics = () => {
 
   // seguridad de usuario
@@ -94,17 +94,17 @@ const Estadistics = () => {
 
 export default Estadistics;
 
-export const getServerSideProps = async(context)=>{
-    const session = await getSession(context)
-    if (!session) return{
-      redirect:{
-        destination: '/login',
-        permanent: false
-      }
-    }
-    return{
-      props:{
-        session
-      }
-    }
-  }
+// export const getServerSideProps = async(context)=>{
+//     const session = await getSession(context)
+//     if (!session) return{
+//       redirect:{
+//         destination: '/login',
+//         permanent: false
+//       }
+//     }
+//     return{
+//       props:{
+//         session
+//       }
+//     }
+//   }
