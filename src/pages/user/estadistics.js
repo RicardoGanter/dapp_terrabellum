@@ -1,4 +1,4 @@
-import Layout from "@/components/layout";
+import Layout from "../../../components/layout";
 import Image from "next/image";
 import styles from "../../styles/user/estadistic.module.scss";
 import imagen from "../../../public/img/lal.png";

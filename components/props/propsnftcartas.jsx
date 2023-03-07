@@ -2,20 +2,20 @@ import styles from "../../src/styles/props/propsnftcartas.module.scss";
 import React, { useState, useEffect } from 'react'
 import Image from "next/image";
 import IPFS from 'ipfs-http-client'
-import { create } from 'ipfs-http-client'
+import { create } from 'ipfs-http-client';
 
-const PropsNftcartas = ({ texto }) => {
+const PropsNftcartas = ({ name,img }) => {
   const [imageUrl, setImageUrl] = useState("");
   // const [data, setData] = useState(null);
-  async function fetchImage() {
-    const response = await fetch("https://api.thecatapi.com/v1/images/search");
-    const data = await response.json();
-    setImageUrl(data[0].url);
-  }
+  // async function fetchImage() {
+  //   const response = await fetch("https://api.thecatapi.com/v1/images/search");
+  //   const data = await response.json();
+  //   setImageUrl(data[0].url);
+  // }
 
-  useEffect(() => {
-    fetchImage();
-  }, []);
+  // useEffect(() => {
+  //   fetchImage();
+  // }, []);
 
   // fetch de ipfs
 //   const fetchDataFromIPFS = async () => {
@@ -33,16 +33,16 @@ const PropsNftcartas = ({ texto }) => {
   return (
     <div className={styles.cards}>
       <div className={styles.contain}>
-      <img src={imageUrl}  className={styles.nft}/>
+      <img src={img}  className={styles.nft}/>
       
       <div className={styles.hability}>
-          <div className={styles.power} />
+          <div className={styles.power}/>
           <div className={styles.power}></div>
           <div className={styles.power}></div>
+          <p className={styles.texto}>{name}</p>
       </div>
       </div>
-      {/* <div className={styles.price}>usdt</div> */}
-      {/* <p className={styles.texto}>{texto}</p> */}
+      
     </div>
   );
 };

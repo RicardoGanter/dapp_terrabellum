@@ -5,22 +5,17 @@ import styles from "../src/styles/header.module.scss";
 import global from "../public/globe.svg";
 import bar from "../public/icon/bar.svg";
 import toggle from "../public/toggle.svg";
-import Login from "./login";
-// import {mint, Balance, Tokenuri} from "@/etherjs/infonft";
+import Login from "./login.jsx";
+// import {mint, Balance, Tokenuri} from "@/etherjs/borrador";
 import { useState,useEffect } from "react";
 
-// import DataIpfs from "@/ipfs/ipfs";
-
-
+// import DataIpfs from "../ipfs/ipfs";
 import { create } from 'ipfs-http-client'
 
 const Header = () => {
   // const sus = Tokenuri()
   // const sas = Tokenuri.toString();
-
   // Tokenuri()
-  
-
   const cid = 'QmUNisJskUs7g6UdymhXdQEY7ULtyL96C5VXWhn5L3F5rg/sas/Axe.png';
   const projectId = '2HdtR7fw87DXMsYJBlLLeQl27aM';
   const projectSecret = '41b8ca7bf059eafb70f5305628849b4f';
@@ -29,6 +24,7 @@ const Header = () => {
     authorization: auth,
 }, });
   
+  //Ipfs
   const getImageFromIPFS = async (cid) => {
     const stream = ipfs.cat(cid);
     const chunks = [];
@@ -44,6 +40,7 @@ const Header = () => {
 
   const [imageUrl, setImageUrl] = useState('');
 
+  //IPFS
   useEffect(() => {
     const fetchImage = async () => {
       const imageUrl = await getImageFromIPFS(cid);
@@ -53,6 +50,7 @@ const Header = () => {
     fetchImage();
   }, []);
 
+  //media Query
   const [navbarcontainMovile, setNavbarcontainMovile] = useState(false);
   const [interresolution, setInterresolution] = useState(false);
   

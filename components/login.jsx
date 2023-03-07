@@ -26,7 +26,7 @@ const Login = ()=>{
             <Metamasklogin/>
             <div>conectar con Google</div>
             <div>Registrar</div>
-            <div onClick={()=>{signIn}}>Conectar con Github</div>
+            <div onClick={signIn}>Conectar con Github</div>
         </div>
         : null}
 
@@ -37,8 +37,8 @@ const Login = ()=>{
             <Link href={'/user/perfil'}>perfil</Link>
             <Link href={'/user/perfil'}>Historial</Link>
             <Link href={'/user/estadistics'}>Estadisticas</Link>
-            <Link href={'/user/perfil'}>Inventario</Link>
-            <Link href={'/'} onClick={()=>{signOut}}> Signout</Link>
+            <Link href={'/user/inventario/inventario'}>Inventario</Link>
+            <Link href={'/'} onClick={signOut}> Signout</Link>
             </div>
         </div>
 

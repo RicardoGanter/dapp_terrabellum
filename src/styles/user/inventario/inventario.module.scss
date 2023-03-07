@@ -1,0 +1,30 @@
+.contain{
+    display: flex;
+    flex-direction: column;
+    margin: 10rem 0;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;;
+    align-items: center;
+}
+
+.filter{
+        text-align: center;
+        background-color: rgb(20, 20, 20);
+        button{
+        background-color: rgb(83, 80, 80);
+        margin: 1rem;
+        padding: 1rem;
+        color: aliceblue;
+        border-radius: 1rem;
+        cursor: pointer;
+        }
+        button:hover{
+            opacity: 70%;
+        }
+        button:active{
+            background-color: rgb(54, 53, 53);
+        }
+}

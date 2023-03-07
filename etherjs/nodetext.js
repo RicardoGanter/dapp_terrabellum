@@ -6,7 +6,7 @@ const  {ethers}  = require('ethers');
     // const privateKey = "af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd";
     const signer = new ethers.Wallet(privateKey, provider);
     // const signer = provider.getSigner();
-    const Address = '0x85721b88Bd588f433601AF9ad505BDC633cc86B9'; // la dirección del contrato NFT
+    const Address = '0x0Bc916E4DD112d7Ab395b2E669100A827203DD51'; // la dirección del contrato NFT
     const abi = require('../web3/abi.js')
     
     // const privateKey = 'af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd'; // clave privada de la cuenta
@@ -16,7 +16,7 @@ const  {ethers}  = require('ethers');
 const contract = new ethers.Contract(Address, abi, signer);
 // 0x621f47478a55583084e9bD70e535D509f95D9B78 mi wallet publica
 
-// contract.setPoolNFT("0x72663d37D859EA388518a696F7E83EA53A994c43","0x72663d37D859EA388518a696F7E83EA53A994c43")
+// contract.setPoolNFT("0x49831028570FEA2cb997D4C5087A7df492B8Cbca","0x49831028570FEA2cb997D4C5087A7df492B8Cbca")
 
 // contract._safeTransfer("0x621f47478a55583084e9bD70e535D509f95D9B78", 5)  //transferir nft
 
@@ -25,7 +25,7 @@ const contract = new ethers.Contract(Address, abi, signer);
 //     console.log(cantidadmint)})
 
   // contract.downgrade(5)
-  //  contract._mintTokenAllowedToEarn("0x65197058cE55937675d604B89e6404816BF1b797")
+   contract._mintTokenAllowedToEarn("0x621f47478a55583084e9bD70e535D509f95D9B78")
 
   //  contract.tokenURI(10)
   //  .then(cantidadmint=>{
@@ -42,12 +42,6 @@ const contract = new ethers.Contract(Address, abi, signer);
   // .catch(error=>{
   //   console.log(error)
   // })
-
-
-
-
-
-
 
 
 

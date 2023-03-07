@@ -169,7 +169,7 @@ contract InnomicNFT is ERC721Enumerable {
         _safeMint(to, tokenId);
         string memory base = _baseURI();
 
-        string memory finalURI = ".png";
+        string memory finalURI = ".json";
 
         string memory _tokenURI = string(abi.encodePacked(string(abi.encodePacked(base, Strings.toString(_calculateURI(tokenId, mod)))), finalURI));
 
@@ -201,7 +201,7 @@ contract InnomicNFT is ERC721Enumerable {
         _safeMint(to, tokenId);
         string memory base = _baseURI();
 
-        string memory finalURI = ".png";
+        string memory finalURI = ".json";
 
         string memory _tokenURI = string(abi.encodePacked(string(abi.encodePacked(base, Strings.toString(_calculateURI(tokenId, mod)))), finalURI));
 

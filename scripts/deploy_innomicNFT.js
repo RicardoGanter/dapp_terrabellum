@@ -4,7 +4,7 @@ async function main() {
     // const [deployer] = await ethers.getSigners();
     // console.log("este es tu addres:", deployer.address);
     // console.log("este es tu balance:", (await deployer.getBalance()).toString());
-    const uri =  'https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/'
+    const uri =  'https://ipfs.io/ipfs/Qmacrqvf5U71anT5sSxT5H8PLuVwoCvm3GxbVTZX7eBieL/jsonipfs/'
 
     const Contract = await ethers.getContractFactory("InnomicNFT");
 

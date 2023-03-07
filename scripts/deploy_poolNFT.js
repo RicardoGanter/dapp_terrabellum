@@ -1,6 +1,6 @@
 async function main() {
     const Contract = await ethers.getContractFactory("PoolNFT");
-    const contract = await Contract.deploy("0x85721b88Bd588f433601AF9ad505BDC633cc86B9")
+    const contract = await Contract.deploy("0x0Bc916E4DD112d7Ab395b2E669100A827203DD51")
     const addreses = await contract.address;
     console.log("contrato: ",addreses)
     await contract.deployed();

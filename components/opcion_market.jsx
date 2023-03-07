@@ -1,7 +1,7 @@
 import styles from "../src/styles/opcmarket.module.scss";
 // import { createAutocomplete } from '@algolia/autocomplete-js';
 import { useEffect, useState } from "react";
-import { Habilidades } from "@/src/pages/api/habilidades";
+import { Habilidades } from "../src/pages/api/habilidades";
 import Search from "./search";
 const Barrafiltros = () => {
   return (
