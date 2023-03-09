@@ -1,7 +1,6 @@
-import Head from "next/head";
 import styles from "../src/styles/Home.module.scss";
 import { useState, useEffect } from 'react';
-
+import {connectToMetaMask} from './funcion/loginmetamask'
 export default function ConnectButton() {
   const [address, setAddress] = useState('');
 
@@ -15,14 +14,21 @@ export default function ConnectButton() {
   async function handleClick() {
     const web3 = await connectToMetaMask();
     const accounts = await web3.eth.getAccounts();
+    console.log(accounts)
     setAddress(accounts[0]);
     localStorage.setItem('address', accounts[0]);
   }
-
+  function handleDisconnect() {
+    setAddress('');
+    localStorage.removeItem('address');
+  }
   if (address) {
-    return <p>Connected with address: {address}</p>;
+    return (<><p>{address}</p>
+    <button onClick={handleDisconnect} style={{cursor:"pointer", margin:"0 1rem", padding:".8rem", backgroundColor:"white", borderRadius:"0 1rem 1rem 0"}}>Disconnect</button>
+    </>
+    )
   } else {
-    return <button onClick={handleClick}>Connect to MetaMask</button>;
+    return <button onClick={handleClick} style={{cursor:"pointer", margin:"0 1rem", padding:".8rem", backgroundColor:"white", borderRadius:"0 1rem 1rem 0"}}>Connect</button>;
   }
 }
 

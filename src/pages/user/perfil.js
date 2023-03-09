@@ -2,7 +2,7 @@ import Layout from "../../../components/layout"
 import Image from "next/image";
 import yoxd from '../../../public/img/lal.png'
 import styles from '../../styles/user/perfil.module.scss'
-import Metamasklogin from "../../../components/loginmetamask";
+import ConnectButton from "../../../components/loginmetamask";
 // import { getSession } from "next-auth/react";
 const Perfil = ({name})=>{
     return(
@@ -24,7 +24,7 @@ const Perfil = ({name})=>{
                 </div>
 
                 <div className={styles.wallet}>
-                    <div> Wallet:</div><Metamasklogin/>
+                    <div> Wallet:</div><ConnectButton/>
                 </div>
             </div>
         </Layout>

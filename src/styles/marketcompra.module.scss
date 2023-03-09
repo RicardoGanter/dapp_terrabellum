@@ -1,7 +1,31 @@
+@import 'var.module';
 .contain{
     margin: 2rem 10rem;
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+
+.containPrice{
+    align-items: center;
+    align-content: center;
+}
+
+.price{
+background-color: aliceblue;
+}
+
+.btnbuy{
+    background-color: $color_btn_morado;
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    color: $color_text_white;
+    cursor: pointer;
+}
+.btnbuy:hover{
+    opacity: 70%;
+}
+.btnbuy:active{
+    opacity: 100%
 }
 

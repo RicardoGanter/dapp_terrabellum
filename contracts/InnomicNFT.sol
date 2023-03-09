@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
-pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./PoolNFT.sol";
@@ -55,12 +54,16 @@ contract InnomicNFT is ERC721Enumerable {
 
     PoolNFT public poolNFT;
 
+    address private marketAddress;
+
     constructor(string memory name_, string memory symbol_,
                 string memory newBaseURI,
                 uint256[] memory carpetas, string[] memory clases_, uint256 lc,
                 uint256 ld, uint256[] memory dorados,
-                uint256 lm, uint256[] memory morados) ERC721(name_, symbol_) {
+                uint256 lm, uint256[] memory morados,
+                address marketAddress_) ERC721(name_, symbol_) {
         _setTanda(newBaseURI, carpetas, clases_, lc, ld, dorados, lm, morados);
+        marketAddress = marketAddress_;
     }
 
 
@@ -167,6 +170,9 @@ contract InnomicNFT is ERC721Enumerable {
     function _mintTokenAllowedToEarn(address to) public virtual {
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
+
+        approve(marketAddress, tokenId);
+
         string memory base = _baseURI();
 
         string memory finalURI = ".json";
@@ -199,6 +205,9 @@ contract InnomicNFT is ERC721Enumerable {
     function _mintTokenNotAllowedToEarn(address to) public virtual {
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
+
+        approve(marketAddress, tokenId);
+
         string memory base = _baseURI();
 
         string memory finalURI = ".json";
@@ -231,6 +240,8 @@ contract InnomicNFT is ERC721Enumerable {
     function _mintWithURI(address to, string memory URI) internal virtual {
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
+
+        approve(marketAddress, tokenId);
 
         string memory _tokenURI = URI;
 

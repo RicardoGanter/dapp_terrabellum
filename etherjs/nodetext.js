@@ -6,7 +6,7 @@ const  {ethers}  = require('ethers');
     // const privateKey = "af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd";
     const signer = new ethers.Wallet(privateKey, provider);
     // const signer = provider.getSigner();
-    const Address = '0x0Bc916E4DD112d7Ab395b2E669100A827203DD51'; // la dirección del contrato NFT
+    const Address = '0x4Df0137edBcfA16f2743223Ea9835A93C1D900c3'; // la dirección del contrato NFT
     const abi = require('../web3/abi.js')
     
     // const privateKey = 'af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd'; // clave privada de la cuenta

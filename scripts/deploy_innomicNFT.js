@@ -8,7 +8,7 @@ async function main() {
 
     const Contract = await ethers.getContractFactory("InnomicNFT");
 
-    const contract = await Contract.deploy('Innomicv2','Inno', uri, [1,2,3,4,5,6,7,8], ["1","2","3","4","5","6","7","8"],8,0,[],0,[]);
+    const contract = await Contract.deploy('Innomicv2','Inno', uri, [1,2,3,4,5,6,7,8], ["1","2","3","4","5","6","7","8"],8,0,[],0,[],"0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F");
     // const token = await Token.deploy('0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC')
     
     const addreses = await contract.address;

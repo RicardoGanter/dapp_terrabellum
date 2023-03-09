@@ -50,6 +50,11 @@ module.exports =[
         "internalType": "uint256[]",
         "name": "morados",
         "type": "uint256[]"
+      },
+      {
+        "internalType": "address",
+        "name": "marketAddress_",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",

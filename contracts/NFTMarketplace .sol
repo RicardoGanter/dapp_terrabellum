@@ -51,15 +51,22 @@ contract NFTMarketplace {
 
         emit SaleCancelled(_tokenId);
     }
+        function getPrice(uint256 _tokenId) public view returns (uint256) {
+        Sale memory sale = tokenIdToSale[_tokenId];
+        require(sale.seller != address(0), "This NFT is not for sale");
+        return sale.price;
+    }
 
-    function buy(uint256 _tokenId) external payable {
+     function buy(uint256 _tokenId) external payable {
         Sale storage sale = tokenIdToSale[_tokenId];
 
         require(sale.seller != address(0), "This NFT is not for sale");
         require(!sale.sold, "This NFT has already been sold");
         require(msg.value == sale.price, "Incorrect amount of ETH sent");
+        require(nft.isApprovedForAll(sale.seller, address(this)), "Contract is not approved to transfer this NFT");
+    
+        nft.safeTransferFrom(sale.seller, msg.sender, _tokenId);
 
-        nft.safeTransferFrom(sale.seller, msg.sender, sale.tokenId);
         delete tokenIdToSale[_tokenId];
 
         for (uint256 i = 0; i < sales.length; i++) {
@@ -68,12 +75,12 @@ contract NFTMarketplace {
             }
         }
 
-        uint256 fee = (msg.value * feePercentage) / 100;
-        payable(owner()).transfer(fee);
-        payable(sale.seller).transfer(msg.value - fee);
+    uint256 fee = (msg.value * feePercentage) / 100;
+    payable(owner()).transfer(fee);
+    payable(sale.seller).transfer(msg.value - fee);
 
-        emit SaleSuccessful(msg.sender, _tokenId, sale.price);
-    }
+    emit SaleSuccessful(msg.sender, _tokenId, sale.price);
+}
 
     function setFeePercentage(uint256 _feePercentage) external {
         require(msg.sender == owner(), "Only the contract owner can set the fee percentage");

@@ -37,6 +37,7 @@ module.exports = {
       accounts: [GOERLI_PRIVATE_KEY],
       gasPrice: 40000000000,
       gas: 1000000000,
+      gasLimit:100000000000,
       chainId: 5,
   },
   goerliInfura: {
