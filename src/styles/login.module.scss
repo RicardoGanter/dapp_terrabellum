@@ -1,7 +1,7 @@
 @import 'var.module';
 
 .contain{
-    background-color: rgb(64, 37, 54);
+    background-color: $color_bg_morado_oscuro;
     padding: 10rem;
     display: flex;
     flex-direction: column;
@@ -11,9 +11,10 @@
     *{
         margin: 1rem 0;
         padding: .5rem 1rem;
-        background-color: rgb(58, 20, 93);
+        background-color: $color_btn_morado;
         border-radius: 1rem;
         cursor: pointer;
+        color: $color_text_white;
     }
 }
  

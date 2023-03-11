@@ -1,8 +1,10 @@
+@import '../var.module';
+
 .contain{
    display: flex;
    flex-direction: column;
    align-items: center;
-   background-color: rgb(66, 24, 65);
+   background-color: $color_bg_morado_oscuro;
    margin: 8.5rem 1rem;
    height: 100%;
    padding: 1rem;
@@ -46,13 +48,24 @@
     margin: 3rem 0;
     align-items: center;
     
-    div{
-        background-color: #D9D9D9;
+    
+    .address{
+        background-color: $color_btn_morado;
         color: black;
         margin: 0 1rem;
         padding: .6rem 1rem;
         border-radius: 1rem 0 0 1rem;
+        color: $color_text_white;
     }
+}
+.addressr{
+    background-color: $color_btn_morado;
+    color: black;
+    margin: 0 1rem;
+    padding: .8rem 1rem;
+    border-radius: 0 1rem 1rem 0;
+    cursor: pointer;
+    color: $color_text_white;
 }
 
 .img{

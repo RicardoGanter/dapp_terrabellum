@@ -8,13 +8,12 @@ import imagenperfil from '../public/img/lal.png'
 import { signOut,signIn } from "next-auth/react"
 import { NextPage } from "next"
 
+// import getStoredAddress  from './loginmetamask';
 const Login = ()=>{
     const [login, setLogin] = useState(false)
     const [perfil, setPerfil] = useState(false)
-
     const {data: session, status} = useSession();
-
-
+     
     return(
         <>
         { status==='unauthenticated' ? <button style={{backgroundColor:'#853a7e', padding :'0 1rem', borderRadius:'1rem', color:'aliceblue', margin:'0 2rem 0 0'}} onClick={()=>{ setLogin(!login)}} >Login</button>
@@ -25,8 +24,9 @@ const Login = ()=>{
             <div className={styles.exit} onClick={()=>{ setLogin(!login)}}>X</div>
             <Metamasklogin/>
             <div>conectar con Google</div>
-            <div>Registrar</div>
             <div onClick={signIn}>Conectar con Github</div>
+            <div>Registrar</div>
+           
         </div>
         : null}
 
@@ -38,6 +38,7 @@ const Login = ()=>{
             <Link href={'/user/perfil'}>Historial</Link>
             <Link href={'/user/estadistics'}>Estadisticas</Link>
             <Link href={'/user/inventario/inventario'}>Inventario</Link>
+            <Link href={'/user/fusion'}>fusion</Link>
             <Link href={'/'} onClick={signOut}> Signout</Link>
             </div>
         </div>

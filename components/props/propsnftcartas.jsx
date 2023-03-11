@@ -1,22 +1,54 @@
 import styles from "../../src/styles/props/propsnftcartas.module.scss";
 import React, { useState, useEffect } from 'react'
 
-const PropsNftcartas = ({ name,img,Ida}) => {
+const PropsNftcartas = ({ name,img,Ida,Rare}) => {
 
   return (
-    <div className={styles.cards}>
+    <>
+    { Rare==="normal" ? (
+      <div className={styles.cards}>
       <div className={styles.contain}>
       <img src={img}  className={styles.nft}>
-        {/* <p className={styles.texto}>{name}</p> */}
       </img>
       <div className={styles.hability}>
-          <div className={styles.power}/>
-          <div className={styles.power}></div>
-          <div className={styles.power}></div>
+        <div>nombre : {name} </div>
+        <div>Rareza : {Rare}</div>
+        <div>nombre : </div>
       </div>
       <h1>{Ida}</h1>
       </div>
     </div>
+
+    ) : Rare==="pococomun" ? (
+      <div className={styles.cardsRare}>
+      <div className={styles.contain}>
+      <img src={img}  className={styles.nft}>
+      </img>
+      <div className={styles.hability}>
+        <div>nombre : {name} </div>
+        <div>Rareza : {Rare}</div>
+        <div>nombre : </div>
+      </div>
+      <h1>{Ida}</h1>
+      </div>
+    </div>
+
+    ) : Rare==="legendaria" ? (
+      <div className={styles.cardsLegendary}>
+      <div className={styles.contain}>
+      <img src={img}  className={styles.nft}>
+      </img>
+      <div className={styles.hability}>
+        <div>nombre : {name} </div>
+        <div>Rareza : {Rare}</div>
+        <div>nombre : </div>
+      </div>
+      <h1>{Ida}</h1>
+      </div>
+    </div>
+    ): null}
+
+    </>
   );
 };
 

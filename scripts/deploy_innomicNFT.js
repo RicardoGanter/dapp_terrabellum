@@ -4,11 +4,11 @@ async function main() {
     // const [deployer] = await ethers.getSigners();
     // console.log("este es tu addres:", deployer.address);
     // console.log("este es tu balance:", (await deployer.getBalance()).toString());
-    const uri =  'https://ipfs.io/ipfs/Qmacrqvf5U71anT5sSxT5H8PLuVwoCvm3GxbVTZX7eBieL/jsonipfs/'
+    const uri =  'https://ipfs.io/ipfs/QmPwJHPf6Gx6tj1V45g1bkDLMShkwJ6VNwRJZhXkhR8JwT/nftlvl1_1/'
 
     const Contract = await ethers.getContractFactory("InnomicNFT");
 
-    const contract = await Contract.deploy('Innomicv2','Inno', uri, [1,2,3,4,5,6,7,8], ["1","2","3","4","5","6","7","8"],8,0,[],0,[],"0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F");
+    const contract = await Contract.deploy('Innomicv2','Inno', uri, [1,2], ["1","2"],2,2,[1,2],0,[],"0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F");
     // const token = await Token.deploy('0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC')
     
     const addreses = await contract.address;

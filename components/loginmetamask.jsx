@@ -1,4 +1,4 @@
-import styles from "../src/styles/Home.module.scss";
+import styles from "../src/styles/user/perfil.module.scss";
 import { useState, useEffect } from 'react';
 import {connectToMetaMask} from './funcion/loginmetamask'
 export default function ConnectButton() {
@@ -10,7 +10,7 @@ export default function ConnectButton() {
       setAddress(storedAddress);
     }
   }, []);
-
+  
   async function handleClick() {
     const web3 = await connectToMetaMask();
     const accounts = await web3.eth.getAccounts();
@@ -18,20 +18,22 @@ export default function ConnectButton() {
     setAddress(accounts[0]);
     localStorage.setItem('address', accounts[0]);
   }
+  function getStoredAddress() {
+    if (address) {
+      return localStorage.getItem('address');
+    }
+  }
   function handleDisconnect() {
     setAddress('');
     localStorage.removeItem('address');
   }
   if (address) {
     return (<><p>{address}</p>
-    <button onClick={handleDisconnect} style={{cursor:"pointer", margin:"0 1rem", padding:".8rem", backgroundColor:"white", borderRadius:"0 1rem 1rem 0"}}>Disconnect</button>
+    <button onClick={handleDisconnect} className={styles.addressr}>Disconnect</button>
     </>
     )
   } else {
-    return <button onClick={handleClick} style={{cursor:"pointer", margin:"0 1rem", padding:".8rem", backgroundColor:"white", borderRadius:"0 1rem 1rem 0"}}>Connect</button>;
+    return <button onClick={handleClick} className={styles.addressr}>Connect</button>;
   }
 }
 
-export function getStoredAddress() {
-  return localStorage.getItem('address');
-}

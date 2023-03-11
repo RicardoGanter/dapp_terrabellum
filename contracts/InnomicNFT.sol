@@ -360,8 +360,8 @@ contract InnomicNFT is ERC721Enumerable {
         } else {
             tokenClase = string(abi.encodePacked(claseToken(tokenId1), claseToken(clases[_calculateURI(tokenCount + 1, 3 + n) - 1])));
         }
-        string memory baseURI_ = "https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/";
-        string memory finalURI = ".png";
+        string memory baseURI_ = "https://ipfs.io/ipfs/QmY5rezFfkPSGXDiAh9ZAEghMDnHL4APryPcM3aNntpTKa/nftlvl2_1/";
+        string memory finalURI = ".json";
         string memory tokenURI_ = string(abi.encodePacked(string(abi.encodePacked(baseURI_, tokenClase)), finalURI));
         _mintWithURI(to, tokenURI_);
         _parents[tokenCount] = [tokenId1, tokenId2, tokenId3];

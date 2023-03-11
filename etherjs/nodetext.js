@@ -3,17 +3,15 @@ const  {ethers}  = require('ethers');
     const provider = new ethers.providers.JsonRpcProvider("https://eth-goerli.g.alchemy.com/v2/gIYahKEbCs9lj1MRp6mwlzYHxonY3hYL");
     // const provider = new ethers.providers.JsonRpcProvider('https://goerli.infura.io/v3/f8191b77762f407da099f89c34a57514')
     const privateKey = "af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd";
-    // const privateKey = "af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd";
     const signer = new ethers.Wallet(privateKey, provider);
     // const signer = provider.getSigner();
-    const Address = '0x4Df0137edBcfA16f2743223Ea9835A93C1D900c3'; // la dirección del contrato NFT
+    const Address = '0xD8b2B4a011d14a6c14EF2C99697082AA42897594'; // la dirección del contrato NFT
     const abi = require('../web3/abi.js')
-    
-    // const privateKey = 'af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd'; // clave privada de la cuenta
     // const wallet = new ethers.Wallet(privateKey, provider);
     
     // const accountAddress = wallet.getAddress();
 const contract = new ethers.Contract(Address, abi, signer);
+contract._mintTokenAllowedToEarn("0x621f47478a55583084e9bD70e535D509f95D9B78")
 // 0x621f47478a55583084e9bD70e535D509f95D9B78 mi wallet publica
 
 // contract.setPoolNFT("0x49831028570FEA2cb997D4C5087A7df492B8Cbca","0x49831028570FEA2cb997D4C5087A7df492B8Cbca")
@@ -25,7 +23,6 @@ const contract = new ethers.Contract(Address, abi, signer);
 //     console.log(cantidadmint)})
 
   // contract.downgrade(5)
-   contract._mintTokenAllowedToEarn("0x621f47478a55583084e9bD70e535D509f95D9B78")
 
   //  contract.tokenURI(10)
   //  .then(cantidadmint=>{

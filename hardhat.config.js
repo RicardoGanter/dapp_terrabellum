@@ -5,7 +5,6 @@ const ALCHEMY_API_KEY = "gIYahKEbCs9lj1MRp6mwlzYHxonY3hYL";
 const GOERLI_PRIVATE_KEY = "af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd";
 // const GOERLI_PRIVATE_KEY = "a43171098a3ea626a1e63f45a1ad72adedf9e162efbffdbe065aaaa7a62c4cb4";
 const INFURA_API_KEY = "f8191b77762f407da099f89c34a57514"
-// const GOERLY_PIVATE_KEY = "finger mule virus ugly plug flip unfair scene clog nothing trophy proof"
 
 
 module.exports = {

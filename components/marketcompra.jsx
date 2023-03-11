@@ -10,11 +10,8 @@ import Image from "next/image";
 const Marketcompra = ()=>{
   const [sales, setSales] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  const [uritoken,setUritoken] = useState([])
-  console.log(uritoken.toString())
   // const lol = sales[1].price.toString();
   // const laal = lol
-  
   useEffect(() => {
     async function fetchSales() {
       try {
@@ -50,7 +47,7 @@ const Marketcompra = ()=>{
       const ethersProvider = new ethers.providers.Web3Provider(provider);
       const signer = ethersProvider.getSigner();
       const abi = require("../web3/abi.js");
-      const contractAddress = "0x4Df0137edBcfA16f2743223Ea9835A93C1D900c3";
+      const contractAddress = "0xD8b2B4a011d14a6c14EF2C99697082AA42897594";
       const contract = new ethers.Contract(
         contractAddress,
         abi,
@@ -84,20 +81,17 @@ const Marketcompra = ()=>{
         abi,
         signer
       );
-      //20usd = 10000000
-      const valueswei= (values/(10**18))
-      // const options = {value: ethers.utils.parseUnits(String(values),"wei")
-      // , gasLimit: 1000000 }
       const options = {
         value: ethers.utils.parseUnits(String(values),0), // Convertir a WEI sin decimales
         gasLimit: 1000000 
       };
 
-      const compra = await contract.buyNft("0x4Df0137edBcfA16f2743223Ea9835A93C1D900c3",Number(Id),options);
-      contract.aprobe("0x4Df0137edBcfA16f2743223Ea9835A93C1D900c3",Id,{
+      const compra = await contract.buyNft("0xD8b2B4a011d14a6c14EF2C99697082AA42897594",Number(Id),options);
+      
+      const aprob = await contract.aprobe("0xD8b2B4a011d14a6c14EF2C99697082AA42897594",Id,{
           gasLimit: 10000000,
         })
-      console.log(compra)
+      console.log(aprob)
     } catch (error) {
       console.error(error); 
 
@@ -117,16 +111,12 @@ const Marketcompra = ()=>{
     <>
     <div style={{ margin: "200px" }} className={styles.contain}>
       {imageUrls.map((data, index) => (
-        <div key={index} >
-          {/* <img src={ iconeth }/> */}
-          {data && <PropsNftcartas img={data.image} />}
-          {/* <div className={styles.containPrice}> */}
-          <h4>Price: {sales[index].price.toString()} <Image src={iconeth} width={40} height={40} /></h4>
-          {/* </div> */}
-          {/* <h1>{((sales[index].price)/(10**18)).toString()}</h1> */}
-          
-          {/* <div className={styles.price}> </div> */}
+        <div key={index}>
+          <div className={styles.containcard}>
+          {data && <PropsNftcartas  name={data.name}/>}
+          <div className={styles.containPrice}>Price:{sales[index].price.toString()} <Image src={iconeth} width={40} height={40} /></div>
           <button onClick={ ()=>{compra(sales[index].tokenId,sales[index].price)} } className={styles.btnbuy}> Comprar </button>
+          </div>
         </div> 
       ))}
     </div>

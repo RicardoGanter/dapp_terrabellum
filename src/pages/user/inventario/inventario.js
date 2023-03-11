@@ -33,7 +33,7 @@ const NFTContainer = () => {
 
         // Crea una instancia de la clase ethers.Contract
         const abi = require("../../../../web3/abi");
-        const contractAddress = "0x4Df0137edBcfA16f2743223Ea9835A93C1D900c3";
+        const contractAddress = "0xD8b2B4a011d14a6c14EF2C99697082AA42897594";
         const contract = new ethers.Contract(
           contractAddress,
           abi,
@@ -52,7 +52,7 @@ const NFTContainer = () => {
     
       if (tokenId) {
         const metadata = await fetch(tokenURI).then((res) => res.json());
-        const imageUrl = metadata.image;
+        const imageUrl = metadata.name;
         nftPromises.push({
           id: tokenId.toNumber(),
           metadata: metadata,
@@ -100,7 +100,7 @@ const venderNFT = async (Id) => {
     // })
 
     const response = await contract.listNft(
-      "0x4Df0137edBcfA16f2743223Ea9835A93C1D900c3",
+      "0xD8b2B4a011d14a6c14EF2C99697082AA42897594",
       Id,
     Number(price),{
       gasLimit: 1000000,
@@ -113,7 +113,7 @@ const venderNFT = async (Id) => {
 
   return (
     <Layout>
-      <div className={styles.contain}>
+      {/* <div className={styles.contain}> */}
         <div className={styles.filter}>
           <button>Personaje</button>
           <button>Habilidades</button>
@@ -121,8 +121,6 @@ const venderNFT = async (Id) => {
           <button>Nivel</button>
           <button>Rareza</button>
         </div>
-        <h1>Mis NFTs:</h1>
-
         {!loading && nfts.length <= 0 && (
   <p>No tienes NFTs en tu billetera.</p>
 )}
@@ -133,8 +131,7 @@ const venderNFT = async (Id) => {
   <div className={styles.grid}>
     {nfts.map((nft) => (
               <div key={nft.id}>
-                <PropsNftcartas img={nft.imageUrl} />
-                <h1>{nft.id}</h1>
+                <PropsNftcartas img={nft.imageUrl} Rare={nft.metadata.Rare} name={nft.metadata.name}/>
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -155,7 +152,7 @@ const venderNFT = async (Id) => {
             ))}
   </div>
 )}
-</div>
+{/* </div> */}
     </Layout>
   );
 };

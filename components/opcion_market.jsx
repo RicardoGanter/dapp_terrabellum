@@ -9,6 +9,7 @@ const Barrafiltros = () => {
       <div className={styles.lol}>
         <div className={styles.containfilt}>
           <Search api={Habilidades} title="Habilidades" />
+          
           <div className={styles.containlvl}>
             <div>Lvl</div>
             <div className={styles.containlvl}>
@@ -19,7 +20,7 @@ const Barrafiltros = () => {
           </div>
 
           {/* price */}
-          <div style={{ margin: "1rem .4rem" }}>personaje</div>
+          <div style={{ margin: "1rem .4rem" }}>Rareza</div>
           <div style={{ margin: "1rem .4rem" }}>personaje</div>
           <div style={{ margin: "1rem .4rem" }}>personaje</div>
         </div>

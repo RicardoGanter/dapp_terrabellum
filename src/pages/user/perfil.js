@@ -24,7 +24,7 @@ const Perfil = ({name})=>{
                 </div>
 
                 <div className={styles.wallet}>
-                    <div> Wallet:</div><ConnectButton/>
+                    <div className={styles.address}> Wallet:</div><ConnectButton/>
                 </div>
             </div>
         </Layout>

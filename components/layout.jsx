@@ -12,7 +12,7 @@ const Layout = ({title, description,children})=>{
             </Head>
             <main>
                 <Header/>
-                <div style={{margin:'80px 140px 0 140px'}}>
+                <div style={{margin:'80px 133px 0 133px'}}>
                     {children}
                 </div>
                 <Opcion/>
