@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../public/img/logo.png";
-import styles from "../src/styles/header.module.scss";
-import global from "../public/globe.svg";
-import bar from "../public/icon/bar.svg";
-import toggle from "../public/toggle.svg";
-import Login from "./login.jsx";
+import logo from "../../public/img/logo.png";
+import styles from "../../src/styles/header/header.module.scss"
+import global from "../../public/globe.svg";
+import bar from "../../public/icon/bar.svg";
+import toggle from "../../public/toggle.svg";
+import Login from "./login/login.jsx";
 // import {mint, Balance, Tokenuri} from "@/etherjs/borrador";
 import { useState,useEffect } from "react";
 

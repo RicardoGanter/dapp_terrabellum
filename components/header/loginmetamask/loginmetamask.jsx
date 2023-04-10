@@ -1,6 +1,6 @@
-import styles from "../src/styles/user/perfil.module.scss";
+import styles from "../../../src/styles/user/perfil.module.scss";
 import { useState, useEffect } from 'react';
-import {connectToMetaMask} from './funcion/loginmetamask'
+import {connectToMetaMask} from '../../funcion/loginmetamask'
 export default function ConnectButton() {
   const [address, setAddress] = useState('');
 

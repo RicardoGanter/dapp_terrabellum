@@ -1,10 +1,10 @@
 import { useState } from "react"
-import Metamasklogin from "./loginmetamask"
-import styles from '../src/styles/login.module.scss'
+import Metamasklogin from "../loginmetamask/loginmetamask"
+import styles from '../../../src/styles/header/login/login.module.scss'
 import { useSession } from 'next-auth/react'
 import Link from "next/link"
 import Image from "next/image"
-import imagenperfil from '../public/img/lal.png'
+import imagenperfil from '../../../public/img/lal.png'
 import { signOut,signIn } from "next-auth/react"
 import { NextPage } from "next"
 

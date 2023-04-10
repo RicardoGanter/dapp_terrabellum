@@ -1,7 +1,7 @@
 import Layout from "../../components/layout";
-import Marketcompra from "../../components/marketcompra";
-import Marketfiltros from "../../components/marketfiltros";
-import Barrafiltros from "../../components/opcion_market";
+import Marketcompra from "../../components/navbar/market/marketcompra.jsx";
+import Marketfiltros from "../../components/navbar/market/marketfiltros.jsx";
+import Barrafiltros from "../../components/navbar/market/opcion_market";
 
 const Market = ()=>{
 

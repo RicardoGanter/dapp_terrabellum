@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../src/styles/opcion.module.scss'
+import styles from '../../src/styles/navbar/opcion.module.scss'
 
 
 const Opcion = ()=>{

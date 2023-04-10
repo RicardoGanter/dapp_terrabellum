@@ -2,10 +2,10 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import Layout from "./layout";
-import PropsNftcartas from "./props/propsnftcartas";
-import styles from '../src/styles/marketcompra.module.scss'
-import iconeth from '../public/icon/ethereum.svg'
+import Layout from "../../layout";
+import PropsNftcartas from "../../props/propsnftcartas";
+import styles from '../../../src/styles/navbar/market/marketcompra.module.scss'
+import iconeth from '../../../public/icon/ethereum.svg'
 import Image from "next/image";
 const Marketcompra = ()=>{
   const [sales, setSales] = useState([]);
@@ -18,7 +18,7 @@ const Marketcompra = ()=>{
         const provider = new ethers.providers.JsonRpcProvider(
           "https://eth-goerli.g.alchemy.com/v2/gIYahKEbCs9lj1MRp6mwlzYHxonY3hYL"
         );
-        const abi = require("../web3/abinft.js");
+        const abi = require("../../../web3/abinft.js");
         const contract = new ethers.Contract(
           "0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F",
           abi,
@@ -46,7 +46,7 @@ const Marketcompra = ()=>{
       const provider = await web3Modal.connect();
       const ethersProvider = new ethers.providers.Web3Provider(provider);
       const signer = ethersProvider.getSigner();
-      const abi = require("../web3/abi.js");
+      const abi = require("../../../web3/abi.js");
       const contractAddress = "0xD8b2B4a011d14a6c14EF2C99697082AA42897594";
       const contract = new ethers.Contract(
         contractAddress,
@@ -74,7 +74,7 @@ const Marketcompra = ()=>{
       const provider = await web3Modal.connect();
       const ethersProvider = new ethers.providers.Web3Provider(provider);
       const signer = ethersProvider.getSigner();
-      const abi = require("../web3/abinft.js");
+      const abi = require("../../../web3/abinft.js");
       const contractAddress = "0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F";
       const contract = new ethers.Contract(
         contractAddress,
