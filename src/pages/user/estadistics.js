@@ -40,7 +40,7 @@ const Estadistics = () => {
               <div className={styles.subgroup2}>
                 <p
                   className={styles.backgrouninfo1}
-                  style={{ borderRadius: "1rem 1rem 0 0" }}
+                  style={{ borderRadius: ".5rem .5rem 0 0" }}
                 >
                   Tiempo jugado
                 </p>
@@ -51,7 +51,7 @@ const Estadistics = () => {
               <div className={styles.subgroup2}>
                 <p
                   className={styles.backgrouninfo1}
-                  style={{ borderRadius: "1rem 1rem 0 0" }}
+                  style={{ borderRadius: ".5rem .5rem 0 0" }}
                 >
                   Asesinatos
                 </p>

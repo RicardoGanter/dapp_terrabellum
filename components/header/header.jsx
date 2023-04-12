@@ -58,7 +58,11 @@ const Header = () => {
   //cambio de color
   const [color, setColor] = useState('#461739')
   const switchColor = ()=>{
-    setColor( color=== '#461739' ? 'white': '#461739'  )
+    // setColor( color=== '#461739' ? 'white': '#461739'  )
+    const nuevoColor = 'blue'; // Cambiar aquí el nuevo color deseado
+    document.documentElement.style.setProperty('colorBtnMorado', nuevoColor);
+    console.log("lol")
+  
   }
   return (
     <>
@@ -125,7 +129,7 @@ const Header = () => {
             {/* {imageUrl && <img src={imageUrl} />} */}
 
             <div className={styles.iconos}>
-              <Image onClick={switchColor}  src={toggle} className={styles.icon}/>
+              <Image onClick={()=>switchColor()}  src={toggle} className={styles.icon}/>
             </div>
             {/* <p>{fileContent}</p> */}
             {/* {imageUrl && (
