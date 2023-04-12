@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import Layout from "../../layout";
 import PropsNftcartas from "../../props/propsnftcartas";
 import styles from '../../../src/styles/navbar/market/marketcompra.module.scss'
 import iconeth from '../../../public/icon/ethereum.svg'
@@ -85,28 +84,22 @@ const Marketcompra = ()=>{
         value: ethers.utils.parseUnits(String(values),0), // Convertir a WEI sin decimales
         gasLimit: 1000000 
       };
-
       const compra = await contract.buyNft("0xD8b2B4a011d14a6c14EF2C99697082AA42897594",Number(Id),options);
-      
       const aprob = await contract.aprobe("0xD8b2B4a011d14a6c14EF2C99697082AA42897594",Id,{
           gasLimit: 10000000,
         })
       console.log(aprob)
     } catch (error) {
       console.error(error); 
-
     }
   };
-
   useEffect(() => {
     const getImageUrls = async () => {
       const urls = await Promise.all(sales.map(async (sale) => await fetchImageUrl(sale.tokenId)));
       setImageUrls(urls);
-  
     };
     getImageUrls();
   }, [sales]);
-  
   return (
     <>
     <div style={{ margin: "200px" }} className={styles.contain}>

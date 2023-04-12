@@ -2,7 +2,7 @@ import Layout from "../../../components/layout"
 import Image from "next/image";
 import yoxd from '../../../public/img/lal.png'
 import styles from '../../styles/user/perfil.module.scss'
-import ConnectButton from "../../../components/loginmetamask";
+import ConnectButton from "../../../components/header/loginmetamask/loginmetamask.jsx"
 // import { getSession } from "next-auth/react";
 const Perfil = ({name})=>{
     return(

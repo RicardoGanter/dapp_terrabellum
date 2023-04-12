@@ -1,5 +1,4 @@
-import Marketcompra from "../../components/marketcompra"
-import Sosol from "../../components/botonsol"
+
 import Layout from "../../components/layout"
 
 

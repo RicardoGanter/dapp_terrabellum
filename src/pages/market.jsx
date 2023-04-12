@@ -7,13 +7,11 @@ const Market = ()=>{
 
 
     return(
-        <>
         <Layout>
             <Barrafiltros/>
             <Marketfiltros/>
             <Marketcompra/>
         </Layout>
-        </>
     )
 }
 

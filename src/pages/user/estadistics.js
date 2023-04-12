@@ -2,6 +2,8 @@ import Layout from "../../../components/layout";
 import Image from "next/image";
 import styles from "../../styles/user/estadistic.module.scss";
 import imagen from "../../../public/img/lal.png";
+import fondoperfil from '../../../public/img/Rectangle.jpg'
+import stars from '../../../public/img/Star.png'
 // import { getSession } from "next-auth/react";
 const Estadistics = () => {
 
@@ -18,22 +20,20 @@ const Estadistics = () => {
         <div className={styles.contain}>
           <div className={styles.containestruct}>
             <div className={styles.group1}>
-              <Image src={imagen} className={styles.img} />
-              {/* <div
-                style={{
-                  backgroundColor: "#5C225B",
-                  padding: "2rem 6rem",
-                  margin: " 1rem",
-                }}
-              ></div>
-              <div
-                style={{
-                  backgroundColor: "#5C225B",
-                  padding: "2rem 6rem",
-                  margin: " 1rem",
-                }}
-              ></div> */}
-              <Image src={imagen} className={styles.img} />
+              <Image src={imagen} 
+              className={styles.img} 
+              style={{left: 5}}
+              />
+              <Image src={fondoperfil} className={styles.fondo}/>
+              <div className={styles.fondo}> 
+                <Image src={stars} />
+                <Image src={stars} />
+                <Image src={stars} />
+                <Image src={stars} />
+              </div>
+              <Image src={imagen} 
+              className={styles.img} 
+              style={{right: 5}}/>
             </div>
 
             <div className={styles.group2}>
@@ -74,13 +74,14 @@ const Estadistics = () => {
             <div
               style={{
                 backgroundColor: "#461739",
-                padding: "11rem",
-                margin: "2rem .6rem",
+                padding: "1rem",
+                height: "auto",
+                margin: "2rem 0",
                 borderRadius: "0 0 4rem 4rem",
               }}
             >
-              <div></div>
-              <div></div>
+              {/* <div></div>
+              <div></div> */}
             </div>
           </div>
         </div>
