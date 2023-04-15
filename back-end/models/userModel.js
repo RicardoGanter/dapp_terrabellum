@@ -6,5 +6,7 @@ const UsuarioModel= db.define('usuarios',{
     email:{ type:DataTypes.STRING},
     contraseña:{type:DataTypes.STRING}
 })
-
+// const UsuarioModel= db.define('roles',{
+//     rol:{ type:DataTypes.STRING},
+// })
 export default UsuarioModel;
