@@ -1,6 +1,10 @@
 import UsuarioModel from "../models/userModel.js";
-import bcrypt, { compare } from 'bcrypt'
+import bcrypt from 'bcrypt'
 import { Sequelize } from "sequelize";
+// const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken'
+const secretKey = 'a';
+
 
 //-------------------Register-POST---------------------------
 
@@ -36,23 +40,30 @@ export const createUsuario = async (req, res) => {
   export const iniciarSesion = async (req, res) => {
     try {
       const { nombre, contraseña } = req.body;
-      // Busca en la base de datos si hay un usuario con el correo electrónico dado
-      const usuario = await UsuarioModel.findOne({ nombre });
+      // Busca en la base de datos si hay un usuario con el nombredado
+      const usuario = await UsuarioModel.findOne({ where: {nombre} });
       if (!usuario) {
-        return res.status(400).json({ message: "Correo electrónico no registrado" });
+        return res.status(400).json({ message: "Nombre o contraseña incorrecta" });
       }
       // Verifica si la contraseña coincide con la almacenada en la base de datos
-      const isMatch = await bcrypt.compare(contraseña, usuario.contraseña);
-      if (!isMatch) {
+      const isMatch = await bcrypt.compareSync(contraseña, usuario.contraseña);
+      if (!usuario.contraseña) {
+        return res.status(400).json({ message: "Contraseña no establecida" });
+      }
+      
+      if (!bcrypt.compareSync(contraseña, usuario.contraseña)) {
+        console.log("lollololo",bcrypt.compareSync(contraseña, usuario.contraseña))
         return res.status(400).json({ message: "Contraseña incorrecta" });
       }
-      // Crea una sesión para el usuario
-      req.session.usuario = usuario;
-      res.json({ message: "Inicio de sesión exitoso" });
+      // Genera un token de autenticación
+      const token = await jwt.sign({ id: usuario.id }, secretKey);
+      // Envia el token como respuesta
+      res.json({ token });
     } catch (error) {
       res.json({ message: error.message });
     }
   };
+  
 
 
   export const searchUsuario = async (req, res) => {
