@@ -10,7 +10,7 @@ const secretKey = 'a';
 
 export const createUsuario = async (req, res) => {
   try {
-    const { email, contraseña, nombre } = req.body;
+    const { nombre,email,contraseña } = req.body;
     // Verifica si el correo electrónico es válido
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
@@ -28,7 +28,7 @@ export const createUsuario = async (req, res) => {
     }
     // encrypta la contraseña
     const hashedPassword = await bcrypt.hash(contraseña, 14);
-    await UsuarioModel.create({ nombre, email, contraseña: hashedPassword });
+    await UsuarioModel.create({ nombre, email, contraseña:hashedPassword });
     res.json({ message: "Registro completado" });
   } catch (error) {
     res.json({ message: error.message });
@@ -41,17 +41,14 @@ export const createUsuario = async (req, res) => {
     try {
       const { nombre, contraseña } = req.body;
       // Busca en la base de datos si hay un usuario con el nombredado
-      const usuario = await UsuarioModel.findOne({ where: {nombre} });
+      const usuario = await UsuarioModel.findOne({ where: {nombre}});
+
       if (!usuario) {
         return res.status(400).json({ message: "Nombre o contraseña incorrecta" });
       }
       // Verifica si la contraseña coincide con la almacenada en la base de datos
-      const isMatch = await bcrypt.compareSync(contraseña, usuario.contraseña);
-      if (!usuario.contraseña) {
-        return res.status(400).json({ message: "Contraseña no establecida" });
-      }
-      
-      if (!bcrypt.compareSync(contraseña, usuario.contraseña)) {
+     
+      if (bcrypt.compare(contraseña, usuario.contraseña) === false) {
         console.log("lollololo",bcrypt.compareSync(contraseña, usuario.contraseña))
         return res.status(400).json({ message: "Contraseña incorrecta" });
       }
