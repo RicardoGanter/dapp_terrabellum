@@ -16,18 +16,27 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "components/header/login/login.jsx"  ],
+    "**/*.tsx",
+    "components/header/login/login.jsx",
+    ".next/types/**/*.ts"
+, "src/app/loading.tsx"  ],
   "exclude": [
     "node_modules"
   ],
   "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
+  "paths": {
+    "@/*": [
+      "./*"
+    ]
+  }
 }

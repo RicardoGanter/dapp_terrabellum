@@ -1,3 +1,4 @@
+"use client"
 import styles from "../../../src/styles/user/perfil.module.scss";
 import { useState, useEffect } from 'react';
 import {connectToMetaMask} from '../../funcion/loginmetamask'

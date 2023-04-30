@@ -1,9 +1,8 @@
-import Layout from "../../../components/layout";
 import Image from "next/image";
-import styles from "../../styles/user/estadistic.module.scss";
-import imagen from "../../../public/img/lal.png";
-import fondoperfil from '../../../public/img/Rectangle.jpg'
-import stars from '../../../public/img/Star.png'
+import styles from "../../../styles/user/estadistic.module.scss";
+import imagen from "../../../../public/img/lal.png";
+import fondoperfil from '../../../../public/img/Rectangle.jpg'
+import stars from '../../../../public/img/Star.png'
 // import { getSession } from "next-auth/react";
 const Estadistics = () => {
 
@@ -11,29 +10,30 @@ const Estadistics = () => {
   // const session = await getSession()
 
   // if (!session) return res.status(403).send('No Authenticathe')
-
   return (
-     
-        <>
-         
-      <Layout>
         <div className={styles.contain}>
           <div className={styles.containestruct}>
             <div className={styles.group1}>
-              <Image src={imagen} 
+              <Image 
+              src={imagen} 
               className={styles.img} 
               style={{left: 5}}
+              alt="Image icon perfil"
               />
-              <Image src={fondoperfil} className={styles.fondo}/>
-              <div className={styles.fondo}> 
-                <Image src={stars} />
-                <Image src={stars} />
-                <Image src={stars} />
-                <Image src={stars} />
-              </div>
+              <Image 
+              src={fondoperfil}
+              className={styles.fondo}
+              alt="Fondo perfil"/>
+                <div className={styles.fondo}> 
+                  <Image src={stars} alt="start" />
+                  <Image src={stars} alt="start" />
+                  <Image src={stars} alt="start" />
+                  <Image src={stars} alt="start" />
+                </div>
               <Image src={imagen} 
               className={styles.img} 
-              style={{right: 5}}/>
+              style={{right: 5}}
+              alt="icon lvl"/>
             </div>
 
             <div className={styles.group2}>
@@ -62,11 +62,14 @@ const Estadistics = () => {
               <div className={styles.subgroup2_1}>
                 <div>
                   <p>Personaje Top</p>
-                  <Image src={imagen} className={styles.imgfrecuente} />
+                  <Image src={imagen} 
+                  className={styles.imgfrecuente}
+                  alt="img personaje frecuente"/>
                 </div>
                 <div>
                   <p>Arma Top</p>
-                  <Image src={imagen} className={styles.imgfrecuente} />
+                  <Image src={imagen} className={styles.imgfrecuente}
+                  alt="img arma frecuente"/>
                 </div>
               </div>
             </div>
@@ -85,16 +88,9 @@ const Estadistics = () => {
             </div>
           </div>
         </div>
-      </Layout>
-     
-    </>
-   
   );
-
 };
-
 export default Estadistics;
-
 // export const getServerSideProps = async(context)=>{
 //     const session = await getSession(context)
 //     if (!session) return{

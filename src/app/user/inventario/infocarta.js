@@ -1,4 +1,3 @@
-import Layout from "../../../../components/layout";
 import styles from "../../../styles/user/inventario/infocarta.module.scss";
 import PropsNftcartas from "../../../../components/props/propsnftcartas";
 import img from '../../../../public/img/lal.png'
@@ -25,7 +24,6 @@ const InfoNft = () => {
     }
   return (
     <>
-      <Layout>
         <div className={styles.contain}>
           <div className={styles.info}>
             <div className={styles.infoleft}>
@@ -76,7 +74,6 @@ const InfoNft = () => {
           
         </div>
         <PropsNftcartas/>
-      </Layout>
     </>
   );
 };

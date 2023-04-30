@@ -1,7 +1,7 @@
+"use client"
 import { useState, useEffect } from "react";
 import Web3Modal from "web3modal";
 import styles from "../../../styles/user/inventario/inventario.module.scss";
-import Layout from "../../../../components/layout";
 import { ethers } from "ethers";
 import Link from "next/link";
 import PropsNftcartas from '../../../../components/props/propsnftcartas';
@@ -112,7 +112,7 @@ const venderNFT = async (Id) => {
 };
 
   return (
-    <Layout>
+    <div>
       {/* <div className={styles.contain}> */}
         <div className={styles.filter}>
           <button>Personaje</button>
@@ -122,7 +122,7 @@ const venderNFT = async (Id) => {
           <button>Rareza</button>
         </div>
         {!loading && nfts.length <= 0 && (
-  <p>No tienes NFTs en tu billetera.</p>
+        <p>No tienes NFTs en tu billetera.</p>
 )}
 
 {loading ? (
@@ -153,8 +153,7 @@ const venderNFT = async (Id) => {
   </div>
 )}
 {/* </div> */}
-    </Layout>
+    </div>
   );
 };
-
 export default NFTContainer;
