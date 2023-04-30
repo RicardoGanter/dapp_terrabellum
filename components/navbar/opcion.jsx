@@ -6,10 +6,10 @@ const Opcion = ()=>{
     return(
         <>
             <div className={styles.contain}>
-                <Link href={'/'}>Home</Link>
-                <Link href={'/noticias'}>Noticias</Link>
-                <div>Becas</div>
-                <Link href={'/market'}>Market</Link>
+                <Link href={'/'}> <button> Home </button>  </Link>
+                <Link href={'/noticias'}> <button> Noticias </button> </Link>
+                <button>Becas</button>
+                <Link href={'/market'}> <button>Market</button></Link>
                 
             </div>
             <div className={styles.containrigth}>

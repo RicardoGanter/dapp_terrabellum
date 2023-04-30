@@ -138,6 +138,26 @@ body{
   text-align: center;
   align-items: center;
 }
+button{
+    width: fit-content;
+    background-color: $color_btn_morado;
+    border-radius: .6rem;
+    padding: 1rem 1.3rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: auto 1.7rem;
+    color: $color_text_white;
+    -webkit-box-shadow: inset 29px -32px 21px -21px rgba(92,41,88,0.9);
+    -moz-box-shadow: inset 29px -32px 21px -21px rgba(92,41,88,0.9);
+    box-shadow: inset 29px -32px 21px -21px rgba(92,41,88,0.9);
+}
+
+button:hover{
+  opacity: 65%;
+}
+button:active{
+  opacity: 80%;
+}
 
 p{
   color: $color_text_white;

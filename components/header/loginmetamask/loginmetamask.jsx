@@ -1,5 +1,4 @@
 "use client"
-import styles from "../../../src/styles/user/perfil.module.scss";
 import { useState, useEffect } from 'react';
 import {connectToMetaMask} from '../../funcion/loginmetamask'
 export default function ConnectButton() {
@@ -30,11 +29,11 @@ export default function ConnectButton() {
   }
   if (address) {
     return (<><p>{address}</p>
-    <button onClick={handleDisconnect} className={styles.addressr}>Disconnect</button>
+    <button onClick={handleDisconnect}>Disconnect</button>
     </>
     )
   } else {
-    return <button onClick={handleClick} className={styles.addressr}>Connect</button>;
+    return <button onClick={handleClick}>Connect</button>;
   }
 }
 

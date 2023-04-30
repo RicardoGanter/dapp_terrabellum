@@ -65,7 +65,7 @@ const Header = () => {
 
         {/* resolucion 1080px       */}
         <nav className={styles.navbarcontain}>
-          <button className={styles.btnnavbar}>Download</button>
+          <button>Download</button>
           <Link href={"/"}>
             <Image src={logo} alt="Logo" className={styles.img} />
           </Link>

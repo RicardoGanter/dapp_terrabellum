@@ -88,7 +88,7 @@ const Login = ()=>{
 
     return(
         <>
-        { !token ? <button className={styles.login} onClick={()=>{ setLogin(true)}} >Login</button>
+        { !token ? <button onClick={()=>{ setLogin(true) }}>Login</button>
         : <Image onClick={()=>{setPerfil(!perfil)}} className={styles.imgheader} src={imagenperfil} alt='img perfil'/>}
         
         { register ?
@@ -113,20 +113,20 @@ const Login = ()=>{
         { sigin ?
 
             <div className={styles.contain} style={{padding:"5rem"}}>
-            <div className={styles.exit} onClick={() => { setSigin(!sigin) }}>X</div>
-            <form className={styles.containform} onSubmit={iniciarSesion}>
-            <label htmlFor="name">
-                <pre> Name    :
-                <input placeholder=" Name" required id="name" name="name" value={Nombre} type={'text'} onChange={req => setNombre(req.target.value)} />
-                </pre>
-            </label>
-            <label htmlFor="password">
-                <pre> Password:
-                <input placeholder=" Password" required id="password" value={Contraseña} type={'password'} onChange={(req) => setContraseña(req.target.value)} />
-                </pre>
-            </label>
-            <button type={"submit"}>Save</button>
-            </form>
+                <div className={styles.exit} onClick={() => { setSigin(!sigin) }}>X</div>
+                <form className={styles.containform} onSubmit={iniciarSesion}>
+                <label htmlFor="name">
+                    <pre> Name    :
+                    <input placeholder=" Name" required id="name" name="name" value={Nombre} type={'text'} onChange={req => setNombre(req.target.value)} />
+                    </pre>
+                </label>
+                <label htmlFor="password">
+                    <pre> Password:
+                    <input placeholder=" Password" required id="password" value={Contraseña} type={'password'} onChange={(req) => setContraseña(req.target.value)} />
+                    </pre>
+                </label>
+                <button type={"submit"}>Save</button>
+                </form>
             </div>
         : null
         }
@@ -136,11 +136,10 @@ const Login = ()=>{
         <div className={styles.contain}>
             <div className={styles.exit} onClick={()=>{ setLogin(false)}}>X</div>
             <Metamasklogin/>
-            <p >connect</p>
-            <p>connect with Google</p>
-            <p onClick={signIn}>connect with Github</p>
-            <p onClick={()=>{setSigin(!sigin); setLogin(!login)}}>sigin</p>
-            <p onClick={()=>{setRegister(!register); setLogin(!login)}}>register</p>
+            <button>connect with Google</button>
+            <button onClick={signIn}>connect with Github</button>
+            <button onClick={()=>{setSigin(!sigin); setLogin(!login)}}>sigin</button>
+            <button onClick={()=>{setRegister(!register); setLogin(!login)}}>register</button>
            
         </div>
         : null}
