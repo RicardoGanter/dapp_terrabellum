@@ -1,5 +1,4 @@
 import styles from "../../../src/styles/navbar/market/opcmarket.module.scss";
-// import { createAutocomplete } from '@algolia/autocomplete-js';
 import { useEffect, useState } from "react";
 import { Habilidades } from "../../../src/app/api/habilidades";
 import Search from "./search";
