@@ -1,15 +1,16 @@
 "use client"
-import { useEffect, useState } from "react"
-import Metamasklogin from "../loginmetamask/loginmetamask"
-import styles from '../../../src/styles/header/login/login.module.scss'
-import Link from "next/link"
 import Image from "next/image"
-import imagenperfil from '../../../public/img/lal.png'
-import { signOut,signIn } from "next-auth/react"
-import axios from "axios"
+import Link from "next/link"
+import styles from '../../../src/styles/header/login/login.module.scss'
+import Metamasklogin from "../loginmetamask/loginmetamask"
+import { useEffect, useState } from "react"
+import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
+import { signIn, signOut } from "next-auth/react"
+import axios from "axios"
 import Cookies from 'js-cookie';
 import { cookies } from "next/dist/client/components/headers"
+import imagenperfil from '../../../public/img/lal.png'
 
 const Login = ()=>{
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
@@ -22,7 +23,9 @@ const Login = ()=>{
     const [register, setRegister]= useState(false);
     
     const router = useRouter();
+    const {data: session, status} = useSession()
     
+
     const GuardarUsuario = async(req)=>{
         req.preventDefault()
         const response = await axios.post(`${URI}register`,
@@ -88,7 +91,7 @@ const Login = ()=>{
 
     return(
         <>
-        { !token ? <button onClick={()=>{ setLogin(true) }}>Login</button>
+        { status==="unauthenticated" ? <button onClick={()=>{ setLogin(true) }}>Login</button>
         : <Image onClick={()=>{setPerfil(!perfil)}} className={styles.imgheader} src={imagenperfil} alt='img perfil'/>}
         
         { register ?
@@ -136,10 +139,10 @@ const Login = ()=>{
         <div className={styles.contain}>
             <div className={styles.exit} onClick={()=>{ setLogin(false)}}>X</div>
             <Metamasklogin/>
-            <button>connect with Google</button>
-            <button onClick={signIn}>connect with Github</button>
-            <button onClick={()=>{setSigin(!sigin); setLogin(!login)}}>sigin</button>
-            <button onClick={()=>{setRegister(!register); setLogin(!login)}}>register</button>
+            <button target="_blank" onClick={() => {signIn('google')}}>connect with Google</button>
+            <button onClick={() => {signIn('github')}}>connect with Github</button>
+            <button onClick={() => {setSigin(!sigin); setLogin(!login)}}>sigin</button>
+            <button onClick={() => {setRegister(!register); setLogin(!login)}}>register</button>
            
         </div>
         : null}

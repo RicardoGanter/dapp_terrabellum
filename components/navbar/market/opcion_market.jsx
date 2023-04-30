@@ -1,6 +1,6 @@
 import styles from "../../../src/styles/navbar/market/opcmarket.module.scss";
 import { useEffect, useState } from "react";
-import { Habilidades } from "../../../src/app/api/habilidades";
+import { Habilidades } from "../../../src/pages/api/habilidades";
 import Search from "./search";
 const Barrafiltros = () => {
   return (
@@ -12,9 +12,9 @@ const Barrafiltros = () => {
           <div className={styles.containlvl}>
             <div>Lvl</div>
             <div className={styles.containlvl}>
-              <div className={styles.opclvl}>1</div>
-              <div className={styles.opclvl}>2</div>
-              <div className={styles.opclvl}>3</div>
+              <button className={styles.opclvl}>1</button>
+              <button className={styles.opclvl}>2</button>
+              <button className={styles.opclvl}>3</button>
             </div>
           </div>
 

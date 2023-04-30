@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Web3Modal from "web3modal";
 import styles from "../../../styles/user/inventario/inventario.module.scss";
 import { ethers } from "ethers";
-import Link from "next/link";
 import PropsNftcartas from '../../../../components/props/propsnftcartas';
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
