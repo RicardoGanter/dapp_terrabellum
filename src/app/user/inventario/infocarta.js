@@ -1,6 +1,6 @@
 import styles from "../../../styles/user/inventario/infocarta.module.scss";
 import PropsNftcartas from "../../../../components/props/propsnftcartas";
-import img from '../../../../public/img/lal.png'
+import img from '../../../../public/img/lal.webp'
 import Image from "next/image";
 import { ethers } from "ethers";
 // import connectWallet from "@/etherjs/borrador";

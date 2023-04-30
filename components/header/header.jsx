@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/img/logo.png";
+import logo from "../../public/img/logo.webp";
 import styles from "../../src/styles/header/header.module.scss"
 import global from "../../public/globe.svg";
 import bar from "../../public/icon/bar.svg";

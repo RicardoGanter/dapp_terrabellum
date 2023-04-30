@@ -10,7 +10,7 @@ import { signIn, signOut } from "next-auth/react"
 import axios from "axios"
 import Cookies from 'js-cookie';
 import { cookies } from "next/dist/client/components/headers"
-import imagenperfil from '../../../public/img/lal.png'
+import imagenperfil from '../../../public/img/lal.webp'
 
 const Login = ()=>{
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'

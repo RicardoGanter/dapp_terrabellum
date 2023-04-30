@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../../../styles/user/estadistic.module.scss";
-import imagen from "../../../../public/img/lal.png";
-import fondoperfil from '../../../../public/img/Rectangle.jpg'
+import imagen from "../../../../public/img/lal.webp";
+import fondoperfil from '../../../../public/img/Rectangle.webp'
 import stars from '../../../../public/img/Star.png'
 // import { getSession } from "next-auth/react";
 const Estadistics = () => {
