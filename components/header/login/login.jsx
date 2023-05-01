@@ -151,12 +151,12 @@ const Login = ()=>{
         {   perfil ?
         <div className={styles.contain_perfil}>
             <div style={{margin:'5rem 0 0 0', display:'flex', flexDirection:'column'}}>
-            <Link href={'/user/perfil'}>perfil</Link>
-            <Link href={'/user/perfil'}>Historial</Link>
-            <Link href={'/user/statistics'}>Estadisticas</Link>
-            <Link href={'/user/inventario'}>Inventario</Link>
-            <Link href={'/user/fusion'}>fusion</Link>
-            <Link href={'/'} onClick={signOut}> Signout</Link>
+            <Link href={'/user/perfil'}> <button>perfil</button> </Link>
+            <Link href={'/user/perfil'}> <button>Historial</button></Link>
+            <Link href={'/user/statistics'}> <button>statistics</button></Link>
+            <Link href={'/user/inventario'}> <button>inventario</button></Link>
+            <Link href={'/user/fusion'}> <button>fusion</button></Link>
+            <Link href={'/'} onClick={signOut}> <button>Signout</button></Link>
             </div>
         </div>
 

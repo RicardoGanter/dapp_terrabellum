@@ -87,21 +87,17 @@
     position: fixed;
     background-color: rgb(0, 0, 0);
     padding: 0 .4rem;
-    right: .95rem;
+    right: .57rem;
     top: 2px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     border-radius: 1rem;
     flex-direction: column;
     border-radius: 5rem 5rem 1rem 1rem;
-    div {
-        *{
+    button{
             margin: .6rem 0;
-            text-decoration: none;
             color: aliceblue;
-            padding: .8rem .4rem;
-            background-color: $color_btn_morado;
-            border-radius: .4rem;
-        }
+            width: 100%;
     }
 } 
