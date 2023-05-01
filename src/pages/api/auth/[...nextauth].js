@@ -7,12 +7,12 @@ import Google from 'next-auth/providers/google'
 export default NextAuth({
     providers : [
     GitHub({
-        clientId: "dc352a34360b51da2150",
-        clientSecret: "760494c7e390daac75d045ab86089d431a156381",
+        clientId: process.env.GITHUB_ID,
+        clientSecret: process.env.GITHUB_SECRET,
     }),
     Google({
-         clientId: "23310389581-d3r95rdiup65onjk72d0ru7cv47rgjve.apps.googleusercontent.com",
-         clientSecret: "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"
+         clientId: process.env.GOOGLE_ID,
+         clientSecret: process.env.GOOGLE_SECRET,
      })
     ]
 })
