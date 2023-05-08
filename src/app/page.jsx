@@ -1,5 +1,4 @@
 "use client"
-import styles from './loading.module.scss'
 import { useEffect, useState } from "react"
 import { getSession } from "next-auth/react" //desde el front-end 
 // import { GetServerSideProps } from "next" desde el back-end
@@ -7,8 +6,6 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from "next/navigation"
 export default function Home() {
   const router = useRouter()
-  const {data: session, status} = useSession()
-
   //si no esta auntenticado entonces.
   // if (status==='unauthenticated'){
     // router.push('./login')
@@ -20,19 +17,16 @@ export default function Home() {
        const session = await getSession()
        setUser(session)
        if(!session){
-        //  router.push('./login')
+         router.push('./login')
        }
      })()
    },[])
   return (
     <>
+    { user ? <>a </> :  <>b </> }
     </>
   )
 }
-{/* <div>
-      {JSON.stringify(user)}
-    </div> */}
-// desde el back-end
 
 // export const getServerSideProps = async(context)=>{
 //   const session = await getSession(context)

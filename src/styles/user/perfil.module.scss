@@ -18,6 +18,7 @@
 }
 
 .contain_datos{
+    border-radius: .7rem;
     margin: 0 2rem;
     width: 500px;
     display: flex;
@@ -36,8 +37,8 @@
     color: black;
     height: 150px;
     width: 300px;
-
-    .descripcion p{
+    border-radius: .7rem;
+    p{
         margin: 1rem;
     }
 }
@@ -59,8 +60,6 @@
 }
 
 .img{
-    width: 200px;
-    height: 200px;
     border-radius: 50%;
     background-color: #D9D9D9;
 }

@@ -1,18 +1,35 @@
+"use client"
 import Image from "next/image";
 import yoxd from '../../../../public/img/lal.webp'
 import styles from '../../../styles/user/perfil.module.scss'
 import ConnectButton from "../../../../components/header/loginmetamask/loginmetamask.jsx"
-// import { getSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 const Perfil = ()=>{
+    const router = useRouter()
+    const [user, setUser] = useState(null)
+    useEffect(()=>{
+        (async()=>{
+          const session = await getSession()
+          if(!session){
+            router.push('./login')
+          }
+          setUser(session)
+        })()
+      },[])
     return (
+        <>
+        { user ?
             <div className={styles.contain}>
                 <div className={styles.containinfo}>
-                    <Image src={yoxd} className={styles.img} alt='perfil_usuario'/>
+                    <img src={ user.user.image } 
+                    className={styles.img} width={200} height={200}  
+                    alt='perfil_usuario'/>
                     
-                    <div className={styles.contain_datos}>
-                        <p>Usuario: </p>
-                        <p>Nombre: </p>
-                        <p>Correo: </p>
+                    <div className={ styles.contain_datos }>
+                        <p>Usuario : { user.user.name } </p>
+                        <p>Correo: { user.user.email }</p>
                         <p>Miembro desde: </p>
                     </div>
                 </div>
@@ -22,9 +39,11 @@ const Perfil = ()=>{
                 </div>
 
                 <div className={styles.wallet}>
-                    <div className={styles.address}> Wallet:</div><ConnectButton/>
+                    <p className={styles.address}> Wallet:</p><ConnectButton/>
                 </div>
             </div>
+               :  null}
+            </>
     )
 }
 

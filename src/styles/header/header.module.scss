@@ -10,16 +10,21 @@
     width: 100%;
     top: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     background-color: $color_bg_morado_oscuro;
     /* align-items: center; */
     height: 80px;
     box-sizing: border-box;
     /* border-bottom: 5px solid rgb(123, 123, 123); */
-    text-align: center;
     align-items: center;
-  }
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.15);
 
+  }
+  .prueba{
+    position: absolute;
+    top: 16px;
+    left: -15px;
+  }
   .btnsrigth{
     display: flex;
     flex-direction: row;
@@ -34,11 +39,11 @@
 
   .img {
     position: absolute;
-    top: 0px;
+    top: -5px;
     left: 50%;
     transform: translateX(-50%);
-    height: 120px;
-    width: 140px;
+    height: 86px;
+    width: 100px;
   }
 
   .iconos{

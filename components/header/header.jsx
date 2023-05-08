@@ -65,7 +65,9 @@ const Header = () => {
 
         {/* resolucion 1080px       */}
         <nav className={styles.navbarcontain}>
-          <button>Download</button>
+          <Link href={"https://pruebajuego1.s3.sa-east-1.amazonaws.com/up-long-solid.svg?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXNhLWVhc3QtMSJIMEYCIQCTatiwiW83wcz4HwCenAVkt7xtC%2BrukzZSRYvJ1gDYfAIhAPLW%2BGy2Hhmgcu3M70ejcrYyd5KkI4w4FUcGidcOD7JnKu0CCJ7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNDI5MTY1Njg0MjI1IgwJMhUK7WjxI7aoHu8qwQLKIUse3Bnz%2Ber%2B%2FTPC92Qa8UOsjVSiDRFbBe%2FgqeULVnDTX8G79j6LzXsdufERxNj2MgYj8fG6Cfgg7iDgztAJ6RQXGcZdfMdDGs7pz3J8RTR5HrcmELHefEUoG5yyeJRlJuzp06OM80lGle8OU8TC18cMwdsQ1sigRXyJvzMbNDv1z1IzVJNwJhEdk4SPoWf2sLCI6sPhbTHFMXnTcwDxA3QPvulop1WItFKv%2BWlJaCqIW8NYygYlUrJ8b8Sz%2BN%2BWbIybzYqeKxKlrEOtfE%2BQGQO5DYxYJIM5S2LKEkjhTX5wxQHXN%2FGT3nhwpwIfFkRol3XF2CX7rV%2BmqXWD8pIAoxCdJyNhaUvfygCO1ZYv7XuVykkz5PH4dTFn2rNzVNyK%2BfrOZbiWlvh9qzrKpKVZAZRpN%2BuqOuV8sajnZrJKjwQwkZi7ogY6sgKFor05v0%2BaimtsXqp%2F2VZ6aFdhxcszauX2M9zaHLdxMBXjQXGOghid%2B0yCkHJwIRSYAuibA1V228lTwVWWBAaBHLzmF%2Fa%2FYjiTkcSCfD4h5IHRUdFiuFhN8ha1YsrRL1eGVRcY9YZGp5jdm7Re9Lvu4OC4BBLyKFJ89P4AdfGOtkqHp1JDlnm0wEH8gdhFQeGiLJrif%2Fz%2BU%2F%2F8apgT11YpkuBWBw2TzQ5EGw4adr72WK14bHboB6jx3diMAkmBOa6ukwRlgJP01%2BTybRL%2B8eDTZQK32958zmcYBtH7JTccdF5FUhfPZABtzT0QdFHabaBThr6kkQTF0GUtOfIQOkIwY6piB8arNzth%2BIkP8c%2BYbyrgLiIJL131sg2B7d2so%2F67hr9wS5HpJvS6wBWbRHk5gXU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230501T044703Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIAWH3CEUYAW3APJ56F%2F20230501%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Signature=db44276477f7c2c6a46b5718c7b7f9312643ec78e88a0f6dff20c2ae9d013729"} >
+            <button className={styles.prueba}>Download</button>
+          </Link> 
           <Link href={"/"}>
             <Image src={logo} alt="Logo" className={styles.img} />
           </Link>

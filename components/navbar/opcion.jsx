@@ -7,8 +7,8 @@ const Opcion = ()=>{
         <>
             <div className={styles.contain}>
                 <Link href={'/'}> <button> Home </button>  </Link>
-                <Link href={'/noticias'}> <button> Noticias </button> </Link>
-                <button>Becas</button>
+                <Link href={'/noticias'}> <button> News </button> </Link>
+                <button>ScolarShips</button>
                 <Link href={'/market'}> <button>Market</button></Link>
                 
             </div>
