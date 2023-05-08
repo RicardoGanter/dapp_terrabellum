@@ -1,9 +1,10 @@
 @import '../../var.module';
 .contain{
-    // margin: 2rem 10rem;
+    width: 100%;
+    margin: 5rem 3rem;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
 }
 
 .containcard{

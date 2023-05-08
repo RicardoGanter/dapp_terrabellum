@@ -5,8 +5,7 @@ const Marketfiltros = ()=>{
 
     return (
       <div className={styles.contain}>
-        <div>All filters</div>
-        <select name=''>
+        <select>
           <option>Lowest Price</option>
           <option>Highest Price</option>
         </select>

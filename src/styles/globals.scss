@@ -132,7 +132,7 @@ a {
 }
 
 body{
-  background-color: #47213c;
+  background-color: $color_bg;
   margin: 0;
   font-size: 1.1rem;
   text-align: center;
@@ -148,10 +148,7 @@ button{
     margin: auto 1.7rem;
     color: $color_text_white;
 
-
-
 /* text-button-12px */
-
     font-family: 'Crimson Pro';
     // font-style: normal;
     font-weight: 400;
@@ -171,6 +168,19 @@ button:hover{
 }
 button:active{
   opacity: 80%;
+}
+
+h2{
+  font-family: 'Crimson Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 16px;
+  /* identical to box height */
+  text-align: center;
+  letter-spacing: -0.03em;
+
+  color: #FFFFFF;
 }
 
 p{

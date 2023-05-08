@@ -1,6 +1,9 @@
 @import '../../var.module';
 .contain{
     /* background-color: black; */
+    position: absolute;
+    top: 103px;
+    right: 200px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

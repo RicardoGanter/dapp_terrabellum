@@ -4,7 +4,7 @@ import Marketfiltros from "../../../components/navbar/market/marketfiltros.jsx";
 import Barrafiltros from "../../../components/navbar/market/opcion_market";
 const Market = ()=>{
     return(
-        <div>
+        <div style={{display: "flex"}}>
             <Barrafiltros/>
             <Marketfiltros/>
             <Marketcompra/>

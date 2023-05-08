@@ -4,8 +4,46 @@ import { Habilidades } from "../../../src/pages/api/habilidades";
 import Search from "./search";
 const Barrafiltros = () => {
   return (
-    <>
-      <div className={styles.lol}>
+    <div className={styles.container}>
+      <div className={styles.subContainer}>
+        <div className={styles.filtros}>
+          <h2>Hability</h2>
+          <select>
+              <option>noc</option>
+              <option>n213123oc</option>
+              <option>noc2312312</option>
+          </select>
+        </div>
+        <div className={styles.filtros}>
+          <h2>Lvl</h2>
+          <input type="range" min="1" max="3"/>
+          <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
+            <h2>1</h2> <h2>2</h2> <h2>3</h2>
+          </div>
+        </div>
+        <div className={styles.filtros}>
+          <h2>Rarity</h2>
+          <div style={{display:"grid", gridTemplateColumns:"1fr 4fr", gap:"10px", placeItems:"start"}}>
+          <input type="checkbox" name="a" /> 
+          <label style={{color: "white"}}>Common</label>
+          <input type="checkbox" name="a" />
+          <label style={{color: "white"}}>Rare</label>
+          <input type="checkbox" name="a" />
+          <label style={{color: "white"}}>Legendary</label>
+          </div>
+        </div>
+        <div className={styles.filtros}>
+          <h2>Characters</h2>
+          <select>
+              <option>noc</option>
+              <option>n213123oc</option>
+              <option>noc2312312</option>
+          </select>
+        </div>
+      </div>
+
+
+      {/* <div className={styles.lol}>
         <div className={styles.containfilt}>
           <Search api={Habilidades} title="Habilidades" />
           
@@ -19,12 +57,12 @@ const Barrafiltros = () => {
           </div>
 
           {/* price */}
-          <div style={{ margin: "1rem .4rem" }}>Rareza</div>
+          {/* <div style={{ margin: "1rem .4rem" }}>Rareza</div>
           <div style={{ margin: "1rem .4rem" }}>personaje</div>
           <div style={{ margin: "1rem .4rem" }}>personaje</div>
         </div>
-      </div>
-    </>
+      </div>  */}
+    </div>
   );
 };
 

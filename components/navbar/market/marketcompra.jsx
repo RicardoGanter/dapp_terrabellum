@@ -102,7 +102,7 @@ const Marketcompra = ()=>{
   }, [sales]);
   return (
     <>
-    <div style={{ margin: "200px" }} className={styles.contain}>
+    <div className={styles.contain}>
       {imageUrls.map((data, index) => (
         <div key={index}>
           <div className={styles.containcard}>
