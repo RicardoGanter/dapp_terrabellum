@@ -17,13 +17,13 @@ export default function Home() {
        const session = await getSession()
        setUser(session)
        if(!session){
-         router.push('./login')
+         router.push('/')
        }
      })()
    },[])
   return (
     <>
-    { user ? <>a </> :  <>b </> }
+    { user ? <> </> :  <> </> }
     </>
   )
 }

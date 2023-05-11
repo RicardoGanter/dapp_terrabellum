@@ -1,0 +1,47 @@
+@import '../var.module';
+
+.contain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .subcontainer{
+    display: flex;
+    flex-direction: column;
+    background-color: $color_bg_morado_oscuro;
+    padding: 1rem 5rem;
+    border-radius: 5px;
+        span{
+            color: $color_btn_morado;
+            cursor: pointer;
+        }
+        .optionsignin{
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            *{
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+        .color{
+            color: $color_btn_morado;
+        }
+        .containform{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: start;
+            gap: 1rem;
+            // color: $color_text_white;
+            label input{
+                background-color: $color_bg;
+                padding: .5rem 1rem;
+                border-radius: .3rem;
+            }
+            button{
+                background-color: $color_btn_morado;
+                width: 100%;
+            }
+        }
+    }
+}

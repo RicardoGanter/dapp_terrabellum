@@ -29,7 +29,7 @@
     "**/*.tsx",
     "components/header/login/login.jsx",
     ".next/types/**/*.ts"
-, "src/app/loading.tsx", "src/app/page.jsx"  ],
+, "src/app/loading.tsx", "src/app/page.jsx", "src/app/signin/page.tsx"  ],
   "exclude": [
     "node_modules"
   ],

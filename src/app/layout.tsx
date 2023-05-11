@@ -21,7 +21,7 @@ export default function RootLayout({
 
       <body>
       <Header/>
-      <div style={{margin:'120px 0 0 170px'}}>
+      <div style={{margin:'120px 0 0 0'}}>
         { <Suspense fallback={<Loading/>}>
           {children}
         </Suspense>}

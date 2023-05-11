@@ -9,7 +9,6 @@ import bar from "../../public/icon/bar.svg";
 import Login from "./login/login.jsx";
 // import {mint, Balance, Tokenuri} from "@/etherjs/borrador";
 import { useState,useEffect } from "react";
-import notification from '../../public/icon/bell-regular.svg'
 const Header = () => {
   //media Query
   const [navbarcontainMovile, setNavbarcontainMovile] = useState(false);
@@ -80,9 +79,7 @@ const Header = () => {
             {/* <div className={styles.iconos}>
               <Image src={toggle} className={styles.icon}/>
             </div> */}
-            <Image src={notification} alt="notificacion" width={30} style={{margin:"0 1rem"}}/>
             <Login/>
-            <button>Register</button>
           </div>
         </nav>
       </header>
