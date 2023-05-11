@@ -12,18 +12,29 @@ const UsuarioModel= db.define('usuarios',{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    contraseña: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    contraseña: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   { timestamps: false }
 );
-// const UsuarioModel= db.define('roles',{
-//     rol:{ type:DataTypes.STRING},
-// })
+const MoneyblueModel= db.define('moneyblue',{
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
+  },
+  money:{ type:DataTypes.INTEGER,
+          allowNull: false,
+        },
+  puntos:{ type:DataTypes.INTEGER,
+           allowNull: false,
+         }
+})
 export default UsuarioModel;

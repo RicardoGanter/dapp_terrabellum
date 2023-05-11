@@ -3,14 +3,14 @@ import bcrypt from 'bcrypt'
 import { Sequelize } from "sequelize";
 // const jwt = require('jsonwebtoken');
 import jwt from 'jsonwebtoken'
-const secretKey = 'a';
+const secretKey = 'hgfhfghfgh45try64ty5a';
 
 
 //-------------------Register-POST---------------------------
 
 export const createUsuario = async (req, res) => {
   try {
-    const { nombre,email,contraseña } = req.body;
+    const { nombre, contraseña, email } = req.body;
     // Verifica si el correo electrónico es válido
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {

@@ -1,6 +1,6 @@
 import {Sequelize} from 'sequelize';
-const db = new Sequelize('prueba','admin','demierda123',{
-    host:'database-tb-2023-p.cu94oq6oymht.us-east-1.rds.amazonaws.com',
+const db = new Sequelize('Sas','admin','terrabellum23',{
+    host:'prueba.cccsrfisiszh.sa-east-1.rds.amazonaws.com',
     dialect:'mysql',
     port:'3306'
 });
