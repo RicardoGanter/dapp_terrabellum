@@ -14,7 +14,7 @@ body{
 button{
     width: fit-content;
     background-color: #411535;;
-    border-radius: .6rem;
+    border-radius: 5px;
     padding: .7rem 1.3rem;
     font-size: 1rem;
     cursor: pointer;
@@ -44,7 +44,6 @@ button:active{
 
 input{
   background-color: $color_bg_morado_oscuro;
-  padding: .7rem;
   border-radius: 5px;
   color: #D9D9D9;
 }

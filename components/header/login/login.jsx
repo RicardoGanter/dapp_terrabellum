@@ -17,9 +17,9 @@ const Login = ()=>{
     const Register = ()=>router.push('/register')
 
     return(
-        <>
-            { status==="unauthenticated" ? <div> <button onClick={()=>Signin()}>Login</button> <button onClick={()=>Register()}>Register</button> </div>
-                : status==="authenticated" ? <div><Image src={notification} alt="notificacion" width={30} style={{margin:"0 1rem"}}/> <Image onClick={()=>{setPerfil(!perfil)}} className={styles.imgheader} src={imagenperfil} alt='img perfil'/> </div> : null }
+        <div>
+            { status==="unauthenticated" ? <div> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
+                : <div className={styles.contain}><Image src={notification} alt="notificacion" width={30} style={{margin:"0 1rem"}}/> <Image onClick={()=>setPerfil(!perfil)} className={styles.imgheader} src={imagenperfil} alt='img perfil'/> </div> }
                 {/* perfil autenticado */}
                 {   perfil ?
                 <div className={styles.contain_perfil}>
@@ -29,11 +29,11 @@ const Login = ()=>{
                     <Link href={'/user/statistics'}> <button>statistics</button></Link>
                     <Link href={'/user/inventario'}> <button>inventario</button></Link>
                     <Link href={'/user/fusion'}> <button>fusion</button></Link>
-                    <Link href={'/'} onClick={signOut}> <button>Sign out</button></Link>
+                    <Link href={'/'} onClick={()=>signOut()}> <button>Sign out</button></Link>
                     </div>
                 </div>
             :null }
-        </>
+        </div>
     )
 }
 

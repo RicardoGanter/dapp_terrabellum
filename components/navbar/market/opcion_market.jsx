@@ -7,6 +7,12 @@ const Barrafiltros = () => {
     <div className={styles.container}>
       <div className={styles.subContainer}>
         <div className={styles.filtros}>
+        <h2>Type NFT</h2>
+          <select>
+              <option>noc</option>
+              <option>n213123oc</option>
+              <option>noc2312312</option>
+          </select>
           <h2>Hability</h2>
           <select>
               <option>noc</option>
@@ -15,7 +21,7 @@ const Barrafiltros = () => {
           </select>
         </div>
         <div className={styles.filtros}>
-          <h2>Lvl</h2>
+          <h2>Level</h2>
           <input type="range" min="1" max="3"/>
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
             <h2>1</h2> <h2>2</h2> <h2>3</h2>
@@ -39,6 +45,13 @@ const Barrafiltros = () => {
               <option>n213123oc</option>
               <option>noc2312312</option>
           </select>
+        </div>
+        <div className={styles.filtros}>
+          <h2>unmerge</h2>
+          <input type="range" min="1" max="7"/>
+          <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
+            <h2>1</h2> <h2>2</h2> <h2>3</h2> <h2>4</h2> <h2>5</h2> <h2>6</h2> <h2>7</h2> 
+          </div>
         </div>
       </div>
 
@@ -67,7 +80,7 @@ const Barrafiltros = () => {
 };
 
 export default Barrafiltros;
-export function Select({ name }) {
+// export function Select({ name }) {
   // return(
   //     <div className={styles.containselect}>
   //         <p>{name}</p>
@@ -76,7 +89,7 @@ export function Select({ name }) {
   //     </select>
   //     </div>
   // )
-}
+// }
 
 // export function PriceFilter() {
 //     const [price, setPrice] = useState(50);
