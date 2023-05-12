@@ -29,11 +29,11 @@ export default function ConnectButton() {
   }
   if (address) {
     return (<><p>{address}</p>
-    <button style={{margin :"0 auto", width:"100%"}} onClick={handleDisconnect}>Disconnect</button>
+    <button style={{margin :"0 auto", width:"100%"}} onClick={()=>handleDisconnect()}>Disconnect</button>
     </>
     )
   } else {
-    return <button style={{margin :"0 auto", width:"100%"}} onClick={handleClick}>Sign in with Wallet </button>;
+    return <button style={{margin :"0 auto", width:"100%"}} onClick={()=>handleClick()}>Sign in with Wallet </button>;
   }
 }
 

@@ -1,11 +1,13 @@
 "use client"
 // import Cookies from "js-cookie";
 import styles from '../../styles/signin/signin.module.scss'
+import Image from 'next/image'
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import axios from "axios"
 import { useSession } from 'next-auth/react';
 import { signIn } from "next-auth/react"
+import back from '../../../public/icon/circle-arrow-left-solid.svg'
 import Metamasklogin from '../../../components/header/loginmetamask/loginmetamask'
 const Signin = () => {
   const {data: session, status} = useSession()
@@ -46,8 +48,7 @@ const Signin = () => {
     <div>
       { status==='unauthenticated'? <div className={styles.contain}>
           <div className={styles.subcontainer}>
-            {/* <div className={styles.exit} onClick={() => { setSigin(!sigin) }}>X</div> */}
-            
+          <Image onClick={()=>{router.push('/')}} className={styles.back} src={back} width={30} height={30} alt="back" />
             {/* FORMULARIO */}
             <form className={styles.containform} onSubmit={iniciarSesion}>
             <label htmlFor="name">

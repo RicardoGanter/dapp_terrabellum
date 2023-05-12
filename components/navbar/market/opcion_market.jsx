@@ -54,27 +54,6 @@ const Barrafiltros = () => {
           </div>
         </div>
       </div>
-
-
-      {/* <div className={styles.lol}>
-        <div className={styles.containfilt}>
-          <Search api={Habilidades} title="Habilidades" />
-          
-          <div className={styles.containlvl}>
-            <div>Lvl</div>
-            <div className={styles.containlvl}>
-              <button className={styles.opclvl}>1</button>
-              <button className={styles.opclvl}>2</button>
-              <button className={styles.opclvl}>3</button>
-            </div>
-          </div>
-
-          {/* price */}
-          {/* <div style={{ margin: "1rem .4rem" }}>Rareza</div>
-          <div style={{ margin: "1rem .4rem" }}>personaje</div>
-          <div style={{ margin: "1rem .4rem" }}>personaje</div>
-        </div>
-      </div>  */}
     </div>
   );
 };

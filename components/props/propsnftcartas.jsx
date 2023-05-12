@@ -1,7 +1,7 @@
 import styles from "../../src/styles/props/propsnftcartas.module.scss";
 import React, { useState, useEffect } from 'react'
 
-const PropsNftcartas = ({ name,img,Ida,Rare}) => {
+const PropsNftcartas = ({ name,img,Ida,Rare, Level}) => {
 
   return (
     <>
@@ -11,11 +11,11 @@ const PropsNftcartas = ({ name,img,Ida,Rare}) => {
       <img src={img}  className={styles.nft}>
       </img>
       <div className={styles.hability}>
-        <div>nombre : {name} </div>
-        <div>Rareza : {Rare}</div>
-        <div>nombre : </div>
+        <pre>Name  : {name} </pre>
+        <pre>Rarity: {Rare}</pre>
+        <pre>Level : {Level} </pre>
       </div>
-      <h1>{Ida}</h1>
+      {/* <h1>{Ida}</h1> */}
       </div>
     </div>
 
@@ -25,9 +25,9 @@ const PropsNftcartas = ({ name,img,Ida,Rare}) => {
       <img src={img}  className={styles.nft}>
       </img>
       <div className={styles.hability}>
-        <div>nombre : {name} </div>
-        <div>Rareza : {Rare}</div>
-        <div>nombre : </div>
+        <pre>Name  : {name} </pre>
+        <pre>Rarity: {Rare}</pre>
+        <pre>Level : {Level} </pre>
       </div>
       <h1>{Ida}</h1>
       </div>
@@ -39,9 +39,9 @@ const PropsNftcartas = ({ name,img,Ida,Rare}) => {
       <img src={img}  className={styles.nft}>
       </img>
       <div className={styles.hability}>
-        <div>nombre : {name} </div>
-        <div>Rareza : {Rare}</div>
-        <div>nombre : </div>
+      <pre>Name  : {name} </pre>
+        <pre>Rarity: {Rare}</pre>
+        <pre>Level : {Level} </pre>
       </div>
       <h1>{Ida}</h1>
       </div>
@@ -81,41 +81,3 @@ export default PropsNftcartas;
 
 //   return <img src={imageUrl} alt="IPFS Image" />
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- // const [data, setData] = useState(null);
-  // async function fetchImage() {
-  //   const response = await fetch("https://api.thecatapi.com/v1/images/search");
-  //   const data = await response.json();
-  //   setImageUrl(data[0].url);
-  // }
-
-  // useEffect(() => {
-  //   fetchImage();
-  // }, []);
-
-  // fetch de ipfs
-//   const fetchDataFromIPFS = async () => {
-//   const response = await fetch("https://ipfs.io/ipns/k51qzi5uqu5dlefd1gznkz19mm9mjtggeakwp58oye9mmqv526jp2z86v1vome");
-//   const data = await response.json();
-//   setData(data);
-//   console.log(data)
-// };
-
-// useEffect(() => {
-//   fetchDataFromIPFS();
-//   console.log(data)
-// }, []);

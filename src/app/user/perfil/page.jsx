@@ -9,36 +9,35 @@ import { useRouter } from "next/navigation";
 const Perfil = ()=>{
     const router = useRouter()
     const [user, setUser] = useState(null)
-    // useEffect(()=>{
-    //     (async()=>{
-    //       const session = await getSession()
-    //       if(!session){
-    //         router.push('./signin')
-    //       }
-    //       setUser(session)
-    //     })()
-    //   },[])
+    useEffect(()=>{
+        (async()=>{
+          const session = await getSession()
+          if(!session){
+            router.push('./signin')
+          }
+          setUser(session)
+        })()
+      },[])
     return (
         <>
-         <div className={styles.contain}>
+        { user ?  
+            <div className={styles.contain}>
             <div className={styles.containinfo}>
-                <img src={yoxd} 
+                <img src={ user.user.image } 
                 className={styles.img} width={150} height={150}  
                 alt='perfil_usuario'/>
                 <div className={ styles.contain_datos }>
                     <p>Name:  </p>
                     <div>
-                        <input />
+                        <input value={ user.user.name } />
                         <button>Change Name</button>
                     </div>
 
                     <p>Email: </p>
-
                     <div>
-                        <input />
+                        <input value={ user.user.email } />
                         <button>Change Name</button>
                     </div>
-
                     <button style={{width:"100%", margin:"2rem auto"}}>Change Password</button>
                 </div>
                 
@@ -47,6 +46,8 @@ const Perfil = ()=>{
                 <button>Change wallet</button> <ConnectButton/> 
             </div>
     </div>
+      : null  }
+         
         </>
     )
 }

@@ -2,13 +2,15 @@
 .contain{
     /* background-color: black; */
     position: absolute;
-    top: 103px;
-    right: 200px;
+    top: 100px;
+    right: 65px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    *{
-        background-color: $color_btn_morado;
+    *{  
+        font-size: $size_14;
+        background-color: $color_bg_morado_oscuro;
+        border-radius: 5px;
         margin: 1rem;
         color: $color_text_white;
         padding: .6rem 1rem;
