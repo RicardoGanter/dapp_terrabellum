@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import axios from "axios"
 import { useSession } from 'next-auth/react';
-import { signIn, signOut } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import Metamasklogin from '../../../components/header/loginmetamask/loginmetamask'
 const Signin = () => {
   const {data: session, status} = useSession()
@@ -64,7 +64,7 @@ const Signin = () => {
             <p className={styles.color}>Forgot password?</p>
             <p>OR</p>
             <div className={styles.optionsignin}>
-              <button onClick={() => {signIn('github'); router.push('/')}}>sign in with Github</button>
+              <button onClick={() => {signIn('github')}}>sign in with Github</button>
               <button onClick={() => {signIn('google')}}>sign in with Google</button>
               <Metamasklogin/>
             </div>

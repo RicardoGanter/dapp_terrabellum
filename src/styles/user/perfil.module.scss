@@ -3,62 +3,33 @@
 .contain{
    display: flex;
    flex-direction: column;
-   align-items: center;
-   background-color: $color_bg_morado_oscuro;
-   margin: 8.5rem 1rem;
-   height: 100%;
-   padding: 1rem;
-   
-}
-
-.containinfo{
-    justify-content: center;
+   justify-content: end;
+   align-items: start;
+   margin: 0 0 0 200px;
+   .wallet{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: end;
+    gap: 1rem;
+    }
+   .containinfo{
     display: flex;
+    justify-content: start;
+    align-items: start;
     margin: 4rem 2rem;
-}
-
-.contain_datos{
-    border-radius: .7rem;
-    margin: 0 2rem;
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    background-color: #5b3858;
-    color: black;
-    text-align: start;
-    p{
-        margin: .7rem 2rem;
+        .contain_datos{
+            flex-direction: column;
+            border-radius: .7rem;
+            margin: 0 2rem;
+            display: flex;
+            color: black;
+            text-align: start;
+            div button{
+                margin: 0 0 0 1rem;
+            }
+        }
     }
 }
-
-.descripcion{
-    text-align: start ;
-    background-color: #5b3858;
-    color: black;
-    height: 150px;
-    width: 300px;
-    border-radius: .7rem;
-    p{
-        margin: 1rem;
-    }
-}
-
-.wallet{
-    display: flex;
-    flex-direction: row;
-    margin: 3rem 0;
-    align-items: center;
-}
-.addressr{
-    background-color: $color_btn_morado;
-    color: black;
-    margin: 0 1rem;
-    padding: .8rem 1rem;
-    border-radius: 0 1rem 1rem 0;
-    cursor: pointer;
-    color: $color_text_white;
-}
-
 .img{
     border-radius: 50%;
     background-color: #D9D9D9;

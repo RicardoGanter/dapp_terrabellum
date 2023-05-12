@@ -7,7 +7,6 @@ const Register = ()=>{
     const [Nombre, setNombre] = useState('')
     const [Email,setEmail] = useState('');
     const [Contraseña, setContraseña] = useState('')
-    const [register, setRegister]= useState(false);
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
 
     const GuardarUsuario = async(req:any)=>{
@@ -32,7 +31,6 @@ const Register = ()=>{
     return(
         <div>
             <div className={styles.contain} style={{padding:"5rem"}}>
-                {/* <div className={styles.exit} onClick={()=>{ setRegister(!register)}}>X</div> */}
                 <form className={styles.containform} onSubmit={GuardarUsuario}>
                     <label htmlFor="name"><pre> Name    : 
                     <input placeholder=" Name" required id="name" name="name" value={Nombre}  type={'text'} onChange={req=>setNombre(req.target.value)}/>
