@@ -5,7 +5,7 @@ import personaje from '../../../../public/borrar/Ejemplo1..png'
 import habilidad3 from '../../../../public/borrar/HABILIDAD3.webp'
 import habilidad2 from '../../../../public/borrar/HABILIDAD2.webp'
 import habilidad1 from '../../../../public/borrar/HABILIDAD1.webp'
-
+import Web3Modal from "web3modal";
 import tb from '../../../../public/img/logo.webp'
 import Image from 'next/image'
 
@@ -15,8 +15,39 @@ function DestinationPage({params}) {
   // const { id } = router.query;
   const router = useRouter();
   const { id } = params;
-  
-  console.log(encodeURIComponent(params))
+
+
+  const fetchImageUrl = async (tokenId) => {
+    try {
+      const web3Modal = new Web3Modal({
+        network: "goerli",
+        cacheProvider: true,
+        providerOptions: {
+          gasPrice: 200000000,
+          gasLimit: 1000000
+        }, // Opciones del proveedor
+      });
+      const provider = await web3Modal.connect();
+      const ethersProvider = new ethers.providers.Web3Provider(provider);
+      const signer = ethersProvider.getSigner();
+      const abi = require("../../../web3/abi.js");
+      const contractAddress = "0xD8b2B4a011d14a6c14EF2C99697082AA42897594";
+      const contract = new ethers.Contract(
+        contractAddress,
+        abi,
+        signer
+      );
+      const response = await contract.tokenURI(tokenId);
+      const uritokenn = await fetch(response);
+      const uritokenjson = await uritokenn.json();
+      // return {image: uritokenjson.image, name: uritokenjson.name, description: uritokenjson.description};
+      return {image: uritokenjson.image, name: uritokenjson.name, description: uritokenjson.description}
+    } catch (error) {
+      console.error(error);
+    }}
+
+    console.log(fetchImageUrl(id))
+
   return (
     <div style={{display:"flex", flexDirection:"column", margin:"160px 120px 0 200px", position:"relative"}}>
 

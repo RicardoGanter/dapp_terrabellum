@@ -11,8 +11,6 @@ import Link from "next/link";
 const Marketcompra = ()=>{
   const [sales, setSales] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  // console.log("imaeeeee",imageUrls[1])
-  console.log("salesssses",sales)
   // const laal = lol
   useEffect(() => {
     async function fetchSales() {
@@ -55,6 +53,7 @@ const Marketcompra = ()=>{
         abi,
         signer
       );
+      console.log("contract",contract)
       const response = await contract.tokenURI(tokenId);
       const uritokenn = await fetch(response);
       const uritokenjson = await uritokenn.json();
@@ -91,7 +90,7 @@ const Marketcompra = ()=>{
       const aprob = await contract.aprobe("0xD8b2B4a011d14a6c14EF2C99697082AA42897594",Id,{
           gasLimit: 10000000,
         })
-      console.log(aprob)
+      console.log("aprob",aprob)
     } catch (error) {
       console.error(error); 
     }
@@ -99,6 +98,7 @@ const Marketcompra = ()=>{
   useEffect(() => {
     const getImageUrls = async () => {
       const urls = await Promise.all(sales.map(async (sale) => await fetchImageUrl(sale.tokenId)));
+      console.log(urls,"xd")
       setImageUrls(urls);
     };
     getImageUrls();
@@ -106,17 +106,20 @@ const Marketcompra = ()=>{
   return (
     <>
       <div className={styles.contain}>
-        {imageUrls.map((data, index) => (
+        { imageUrls.length !== 0 ? 
+        imageUrls.map((data, index) => (
           <div key={index} >
             {/* <Link className={styles.containcard} href={`/market/[id]`} as={`/market/${sales[index].owner}`}> */}
             <Link className={styles.containcard} href={`/market/${sales[index].tokenId}`}>
-            <PropsNftcartas  name="Red Spectre" Rare="normal" Ida="1" img={borrar} Level={"3"}/>
+           {data && <PropsNftcartas  name="Red Spectre" Rare="normal" Ida="1" img={data.image} Level={"3"}/>}
             {/* {data && <PropsNftcartas  name={data.name}/>} */}
             <div className={styles.containPrice}>Price:{sales[index].price.toString()} <Image src={iconeth} width={40} height={40} /></div>
             <button onClick={ ()=>{compra(sales[index].tokenId,sales[index].price)} } className={styles.btnbuy}> Comprar </button>
             </Link>
           </div> 
-        ))}
+        ))
+      : null}
+        
       </div>
     </>
   );
