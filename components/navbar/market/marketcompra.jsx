@@ -7,10 +7,11 @@ import styles from '../../../src/styles/navbar/market/marketcompra.module.scss'
 import iconeth from '../../../public/icon/ethereum.svg'
 import Image from "next/image";
 import borrar from '../../../public/img/logo.webp'
+import Link from "next/link";
 const Marketcompra = ()=>{
   const [sales, setSales] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  console.log("imaeeeee",imageUrls[1])
+  // console.log("imaeeeee",imageUrls[1])
   console.log("salesssses",sales)
   // const laal = lol
   useEffect(() => {
@@ -106,22 +107,14 @@ const Marketcompra = ()=>{
     <>
       <div className={styles.contain}>
         {imageUrls.map((data, index) => (
-          //hacer filtros del 1 hasta el 3 con promps
-          
-           
-
-          <div key={index}>
-            <div className={styles.containcard}>
-
-              {/* borrar */}
+          <div key={index} >
+            {/* <Link className={styles.containcard} href={`/market/[id]`} as={`/market/${sales[index].owner}`}> */}
+            <Link className={styles.containcard} href={`/market/${sales[index].tokenId}`}>
             <PropsNftcartas  name="Red Spectre" Rare="normal" Ida="1" img={borrar} Level={"3"}/>
-            {/* borrar */}
-
-
             {/* {data && <PropsNftcartas  name={data.name}/>} */}
             <div className={styles.containPrice}>Price:{sales[index].price.toString()} <Image src={iconeth} width={40} height={40} /></div>
             <button onClick={ ()=>{compra(sales[index].tokenId,sales[index].price)} } className={styles.btnbuy}> Comprar </button>
-            </div>
+            </Link>
           </div> 
         ))}
       </div>

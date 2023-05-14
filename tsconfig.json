@@ -27,9 +27,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/header/login/login.jsx",
+    "components/header/login/login.tsx",
     ".next/types/**/*.ts"
-, "src/app/loading.tsx", "src/app/page.jsx", "src/app/signin/page.tsx"  ],
+, "src/app/loading.tsx", "src/app/page.jsx", "src/app/signin/page.tsx", "components/funcion/loginmetamask.js"  ],
   "exclude": [
     "node_modules"
   ],
