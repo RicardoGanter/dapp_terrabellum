@@ -1,0 +1,35 @@
+
+
+[
+    {
+        "nombre" : "redspectre",
+        "habilidad1 " : 1,
+        "habilidad2 " : 2,
+        "habilidad3 " : 3
+    },
+    {
+        "nombre" : "redspectre",
+        "habilidad1 " : 1
+    },  
+    {
+        "nombre" : "cunion",
+        "habilidad1 " : 2
+    },
+    {
+        "nombre" : "cunion",
+        "habilidad1 " : 2
+    },
+
+
+    {
+        "nombre" : "redspectre",
+        "habilidad1 " : 1,
+        "habilidad2 " : 2
+    },
+
+    {
+        "personaje":{
+            "nombre":"redspectre"
+        }
+    }
+]
