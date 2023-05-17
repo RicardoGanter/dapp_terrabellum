@@ -7,7 +7,7 @@ const  {ethers}  = require('ethers');
     const privateKey = "39aad856cd1eee56fc2f94c754e853ef353feccff38ad57176869d7c5784ff23";  // mi wallet privada las dos tienen que estar relacionadas
     const Address = '0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f'; // la dirección del contrato NFT
     const signer = new ethers.Wallet(privateKey, provider);
-    const abi = require('../web3/abi.js')
+    const abi = require('../abi/abi')
     // const wallet = new ethers.Wallet(privateKey, provider);
     
     // const accountAddress = wallet.getAddress();
