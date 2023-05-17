@@ -1,9 +1,12 @@
 "use client"
-import { useState, useEffect } from "react";
 import Web3Modal from "web3modal";
-import styles from "../../../styles/user/inventario/inventario.module.scss";
 import { ethers } from "ethers";
-import PropsNftcartas from '../../../../components/props/propsnftcartas';
+import { useState, useEffect } from "react";
+import styles from "../../../styles/user/inventario/inventario.module.scss";
+import PropsNftcartas from "../../../../components/props/propsnftcartas";
+import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft";
+import ConnectMarket from "../../../../components/funcion/connectmarket";
+import NetworkGoerliEth from "../../../../components/funcion/network";
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,99 +15,49 @@ const NFTContainer = () => {
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
-        // Inicializa Web3Modal
-        const web3Modal = new Web3Modal({
-          network: "goerli",
-          cacheProvider: true,
-          providerOptions: {},
-          chainId: 5 // Opciones del proveedor
-        });
-
-        // Conecta la billetera del usuario
-        const provider = await web3Modal.connect();
-
-        // Crea una instancia de ethers.js
-        const ethersProvider = new ethers.providers.Web3Provider(provider);
-
-        // Obtiene la dirección de la cuenta activa de MetaMask
-        const signer = ethersProvider.getSigner();
+        const signer = await NetworkGoerliEth();
         const address = await signer.getAddress();
-
-        // Crea una instancia de la clase ethers.Contract
-        const abi = require("../../../../web3/abi");
-        const contractAddress = "0xD8b2B4a011d14a6c14EF2C99697082AA42897594";
-        const contract = new ethers.Contract(
-          contractAddress,
-          abi,
-          ethersProvider
-        );
-
+        const contract = await ConnectInnomicNft();
          // Obtiene el número total de tokens del usuario
-    const tokenCount = await contract.balanceOf(address);
-
-    // Crea un arreglo con los NFTs del usuario
-    const nftPromises = [];
-
-    for (let i = 0; i < tokenCount; i++) {
-      const tokenId = await contract.tokenOfOwnerByIndex(address, i);
-      const tokenURI = await contract.tokenURI(tokenId);
+        const tokenCount = await contract.balanceOf(address);
+        // Crea un arreglo con los NFTs del usuario
+        const nftPromises = [];
+        for (let i = 0; i < tokenCount; i++) {
+          const tokenId = await contract.tokenOfOwnerByIndex(address, i);
+          const tokenURI = await contract.tokenURI(tokenId);
+          if (tokenId) {
+            const metadata = await fetch(tokenURI).then((res) => res.json());
+            nftPromises.push({
+              id: tokenId.toNumber(),
+              metadata
+            });
+        }
+      }
+        setNfts(nftPromises);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
     
-      if (tokenId) {
-        const metadata = await fetch(tokenURI).then((res) => res.json());
-        const imageUrl = metadata.name;
-        nftPromises.push({
-          id: tokenId.toNumber(),
-          metadata: metadata,
-          imageUrl: imageUrl
-        });
-    }
-  }
-    setNfts(nftPromises);
-    setLoading(false);
-  } catch (error) {
-    console.error(error);
-    setLoading(false);
-  }
-};
-
-fetchNFTs();
-}, []);
+    fetchNFTs();
+    }, []);
 
 // Función para vender un NFT
 const venderNFT = async (Id) => {
   try {
     // Llama a la función de venta del contrato Solidity
-    const web3Modal = new Web3Modal({
-      network: "goerli",
-      cacheProvider: true,
-      providerOptions: {},
-      chainId: "5" // Opciones del proveedor
-    });
-    // Conecta la billetera del usuario
-    const provider = await web3Modal.connect();
-    // Crea una instancia de ethers.js
-    const ethersProvider = new ethers.providers.Web3Provider(provider);
-    const signer = ethersProvider.getSigner();
-    const address = await signer.getAddress();
-    const abi = require("../../../../web3/abinft.js");
-    const contractAddress = "0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F";
-    const contract = new ethers.Contract(
-      contractAddress,
-      abi,
-      signer
-    );
-    
-    // contract.aprobe("0x0Bc916E4DD112d7Ab395b2E669100A827203DD51", 5,{
+    const contract = await ConnectMarket();
+    // contract.aprobe("0x3B92E898442BEEf2ECB82746AaCC5a353933cb28", 5,{
     //   gasLimit: 10000000,
     // })
-
-    const response = await contract.listNft(
-      "0xD8b2B4a011d14a6c14EF2C99697082AA42897594",
+     await contract.listNft(
+      "0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",  // CONTRATO INNOMIC
       Id,
-    Number(price),{
+      price,{
       gasLimit: 1000000,
     } );
-    console.log(response);
   } catch (error) {
     console.error(error);
   }
@@ -112,31 +65,22 @@ const venderNFT = async (Id) => {
 
   return (
     <div>
-      {/* <div className={styles.contain}> */}
-        <div className={styles.filter}>
-          <button>Personaje</button>
-          <button>Habilidades</button>
-          <button>Armas</button>
-          <button>Nivel</button>
-          <button>Rareza</button>
-        </div>
-        {!loading && nfts.length <= 0 && (
-        <p>No tienes NFTs en tu billetera.</p>
-)}
-
+      <PropsNftcartas name="a"  />
 {loading ? (
   <p>Cargando NFTs...</p>
-) : (
+) : nfts ? (
   <div className={styles.grid}>
     {nfts.map((nft) => (
               <div key={nft.id}>
-                <PropsNftcartas img={nft.imageUrl} Rare={nft.metadata.Rare} name={nft.metadata.name}/>
+                <PropsNftcartas Href={nft.id} name={nft.metadata.name} Rare={"normal"}/>
+                
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
                     venderNFT(nft.id);
                   }}
                 >
+                  <PropsNftcartas/>
                   <input
                     type="number"
                     placeholder="Precio en Wei"
@@ -150,7 +94,7 @@ const venderNFT = async (Id) => {
               </div>
             ))}
   </div>
-)}
+) : null }
 {/* </div> */}
     </div>
   );

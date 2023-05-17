@@ -7,5 +7,5 @@ async function main() {
     console.log("fue deployado :o")
     }
 
-//0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F
+// Contract address:  0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F  || 0x964D7ea49a7d96443ed6cCeE4973151E5E424017
     main()

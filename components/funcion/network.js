@@ -1,0 +1,18 @@
+import Web3Modal from "web3modal";
+import { ethers } from "ethers";
+const NetworkGoerliEth = async ()=>{
+    const web3Modal = new Web3Modal({
+        network: "goerli",
+        cacheProvider: true,
+        providerOptions: {
+        gasPrice: 200000000,
+        gasLimit: 1000000
+        }, // Opciones del proveedor
+    });
+    const provider = await web3Modal.connect();
+    const ethersProvider = new ethers.providers.Web3Provider(provider);
+    const signer = ethersProvider.getSigner();
+    return signer;
+}
+
+export default NetworkGoerliEth;

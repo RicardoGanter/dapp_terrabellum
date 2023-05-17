@@ -13,23 +13,23 @@ const Opcion = ()=>{
             <div className={styles.contain}>
                 <div>
                     <Link className={styles.option} href={'/'}>
-                    <Image src={home} width={30} style={{margin: " 0 1rem"}}/>
+                    <Image src={home} width={30} style={{margin: " 0 1rem"}} alt='Home'/>
                         <p> Home </p>  </Link>
                     <Link href={'/noticias'} className={styles.option}> 
-                    <Image src={news} width={30} style={{margin: " 0 1rem"}}/>
+                    <Image src={news} width={30} style={{margin: " 0 1rem"}} alt='News'/>
                         <p> News </p> </Link>
                     <Link href={'/cambiame'} className={styles.option}>
-                    <Image src={scolarship} width={30} style={{margin: " 0 1rem"}}/> 
+                    <Image src={scolarship} width={30} style={{margin: " 0 1rem"}} alt='scolarships'/> 
                         <p>ScolarShips</p>
                         </Link>
                     <Link href={'/market'}className={styles.option}> 
-                    <Image src={market} width={30} style={{margin: " 0 1rem"}}/> 
+                    <Image src={market} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p>Market</p></Link>
                 </div>
                 {/* potencial actualizacion */}
                 <div style={{ position:"absolute", bottom: 60, left:20}}> 
                 <div style={{display:"flex",flexDirection:"row", margin:"1rem"}}>
-                    <Image src={glob} width={40}/>
+                    <Image src={glob} width={40} alt='language'/>
                     <h2>Es</h2>
                 </div>
                 </div>

@@ -12,11 +12,7 @@ export default function ConnectButton() {
   }, []);
   
   async function handleClick() {
-    const web3 = await connectToMetaMask();
-    const accounts = await web3.eth.getAccounts();
-    console.log(accounts)
-    setAddress(accounts[0]);
-    localStorage.setItem('address', accounts[0]);
+    await connectToMetaMask();
   }
   function getStoredAddress() {
     if (address) {

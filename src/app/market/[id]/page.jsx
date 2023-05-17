@@ -49,7 +49,7 @@ function DestinationPage({params}) {
     console.log(fetchImageUrl(id))
 
   return (
-    <div style={{display:"flex", flexDirection:"column", margin:"160px 120px 0 200px", position:"relative"}}>
+    <div style={{display:"flex", flexDirection:"column", margin:"160px 120px 0 20px", position:"relative"}}>
 
       <div className={styles.typegame}>
           <h2>Type Game</h2>

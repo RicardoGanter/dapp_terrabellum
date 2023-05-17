@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
-
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./PoolNFT.sol";
 
 contract InnomicNFT is ERC721Enumerable {
@@ -14,7 +13,7 @@ contract InnomicNFT is ERC721Enumerable {
     string private baseURI;// https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/
 
     // Module for the calculation of token URI
-    uint256 private mod = 8;
+    uint256 private mod = 2;
 
     // Actual token count
     uint256 private tokenCount;

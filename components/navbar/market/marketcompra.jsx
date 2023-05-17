@@ -1,29 +1,19 @@
-// import Marketfiltros from "./Marketfiltros"
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import Web3Modal from "web3modal";
 import PropsNftcartas from "../../props/propsnftcartas";
 import styles from '../../../src/styles/navbar/market/marketcompra.module.scss'
 import iconeth from '../../../public/icon/ethereum.svg'
 import Image from "next/image";
-import borrar from '../../../public/img/logo.webp'
-import Link from "next/link";
+import ConnectInnomicNft from "../../funcion/connectinnomicnft.js";
+import ConnectMarket from "../../funcion/connectmarket";
+
 const Marketcompra = ()=>{
   const [sales, setSales] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  // const laal = lol
   useEffect(() => {
     async function fetchSales() {
       try {
-        const provider = new ethers.providers.JsonRpcProvider(
-          "https://eth-goerli.g.alchemy.com/v2/gIYahKEbCs9lj1MRp6mwlzYHxonY3hYL"
-        );
-        const abi = require("../../../web3/abinft.js");
-        const contract = new ethers.Contract(
-          "0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F",
-          abi,
-          provider
-        );
+        const contract = await ConnectMarket() // conectar a el smart contract Market
         const sales = await contract.getListedNfts();
         setSales(sales);
       } catch (error) {
@@ -35,62 +25,27 @@ const Marketcompra = ()=>{
 
  const fetchImageUrl = async (tokenId) => {
     try {
-      const web3Modal = new Web3Modal({
-        network: "goerli",
-        cacheProvider: true,
-        providerOptions: {
-          gasPrice: 200000000,
-          gasLimit: 1000000
-        }, // Opciones del proveedor
-      });
-      const provider = await web3Modal.connect();
-      const ethersProvider = new ethers.providers.Web3Provider(provider);
-      const signer = ethersProvider.getSigner();
-      const abi = require("../../../web3/abi.js");
-      const contractAddress = "0xD8b2B4a011d14a6c14EF2C99697082AA42897594";
-      const contract = new ethers.Contract(
-        contractAddress,
-        abi,
-        signer
-      );
-      console.log("contract",contract)
+      const contract = await ConnectInnomicNft() // conectar a el smart contract innomic
       const response = await contract.tokenURI(tokenId);
       const uritokenn = await fetch(response);
       const uritokenjson = await uritokenn.json();
-      // return {image: uritokenjson.image, name: uritokenjson.name, description: uritokenjson.description};
       return {image: uritokenjson.image, name: uritokenjson.name, description: uritokenjson.description}
     } catch (error) {
       console.error(error);
     }}
 
- 
     // COMPRA 
   const compra =async (Id,values)=>{
     try {
-      const web3Modal = new Web3Modal({
-        network: "goerli",
-        cacheProvider: true,
-        providerOptions: { gasLimit: 1000000 }, // Opciones del proveedor
-      });
-      const provider = await web3Modal.connect();
-      const ethersProvider = new ethers.providers.Web3Provider(provider);
-      const signer = ethersProvider.getSigner();
-      const abi = require("../../../web3/abinft.js");
-      const contractAddress = "0x9bFfE512fa1595728f8dDCD8b5c9C59fcAF7056F";
-      const contract = new ethers.Contract(
-        contractAddress,
-        abi,
-        signer
-      );
+      const contract = await ConnectMarket() // conectar a el smart contract Market
       const options = {
         value: ethers.utils.parseUnits(String(values),0), // Convertir a WEI sin decimales
         gasLimit: 1000000 
       };
-      const compra = await contract.buyNft("0xD8b2B4a011d14a6c14EF2C99697082AA42897594",Number(Id),options);
-      const aprob = await contract.aprobe("0xD8b2B4a011d14a6c14EF2C99697082AA42897594",Id,{
+      const compra = await contract.buyNft("0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",Number(Id),options);
+      const aprob = await contract.aprobe("0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",Id,{
           gasLimit: 10000000,
         })
-      console.log("aprob",aprob)
     } catch (error) {
       console.error(error); 
     }
@@ -98,11 +53,12 @@ const Marketcompra = ()=>{
   useEffect(() => {
     const getImageUrls = async () => {
       const urls = await Promise.all(sales.map(async (sale) => await fetchImageUrl(sale.tokenId)));
-      console.log(urls,"xd")
       setImageUrls(urls);
     };
     getImageUrls();
   }, [sales]);
+
+
   return (
     <>
       <div className={styles.contain}>
@@ -110,12 +66,11 @@ const Marketcompra = ()=>{
         imageUrls.map((data, index) => (
           <div key={index} >
             {/* <Link className={styles.containcard} href={`/market/[id]`} as={`/market/${sales[index].owner}`}> */}
-            <Link className={styles.containcard} href={`/market/${sales[index].tokenId}`}>
-           {data && <PropsNftcartas  name="Red Spectre" Rare="normal" Ida="1" img={data.image} Level={"3"}/>}
-            {/* {data && <PropsNftcartas  name={data.name}/>} */}
-            <div className={styles.containPrice}>Price:{sales[index].price.toString()} <Image src={iconeth} width={40} height={40} /></div>
+            <div className={styles.containcard} >
+           {data && <PropsNftcartas Href={sales[index].tokenId} name="Red Spectre" Rare="normal" Ida="1" img={data.image} Level={"3"}/>}
+            <div className={styles.containPrice}>Price:{sales[index].price.toString()} <Image src={iconeth} width={40} height={40} alt='Icon ETH' /></div>
             <button onClick={ ()=>{compra(sales[index].tokenId,sales[index].price)} } className={styles.btnbuy}> Comprar </button>
-            </Link>
+            </div>
           </div> 
         ))
       : null}

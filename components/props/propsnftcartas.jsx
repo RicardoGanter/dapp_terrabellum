@@ -1,10 +1,9 @@
 import styles from "../../src/styles/props/propsnftcartas.module.scss";
-import React, { useState, useEffect } from 'react'
-
-const PropsNftcartas = ({ name,img,Ida,Rare, Level}) => {
+import Link from "next/link";
+const PropsNftcartas = ({ Href,name,img,Ida,Rare, Level}) => {
 
   return (
-    <>
+    <Link href={`/market/${Href}`}>
     { Rare==="normal" ? (
       <div className={styles.cards}>
       <div className={styles.contain}>
@@ -48,7 +47,7 @@ const PropsNftcartas = ({ name,img,Ida,Rare, Level}) => {
     </div>
     ): null}
 
-    </>
+    </Link>
   );
 };
 
