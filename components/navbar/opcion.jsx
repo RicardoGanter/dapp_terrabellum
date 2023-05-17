@@ -6,6 +6,7 @@ import home from '../../public/icon/house-solid.svg'
 import scolarship from '../../public/icon/file-signature-solid.svg'
 import news from '../../public/icon/bullhorn-solid.svg'
 import glob from '../../public/icon/globe.svg'
+import shield from '../../public/icon/shield-heart-solid.svg'
 
 const Opcion = ()=>{
     return(
@@ -25,6 +26,9 @@ const Opcion = ()=>{
                     <Link href={'/market'}className={styles.option}> 
                     <Image src={market} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p>Market</p></Link>
+                    <Link href={'/heros'}className={styles.option}> 
+                    <Image src={shield} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
+                        <p>Heros</p></Link>
                 </div>
                 {/* potencial actualizacion */}
                 <div style={{ position:"absolute", bottom: 60, left:20}}> 

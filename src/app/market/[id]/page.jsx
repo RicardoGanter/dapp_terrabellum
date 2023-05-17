@@ -1,4 +1,6 @@
 "use client"
+import { React } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../../styles/idmarket/idmarket.module.scss'
 import personaje from '../../../../public/borrar/Ejemplo1..png'
@@ -8,45 +10,58 @@ import habilidad1 from '../../../../public/borrar/HABILIDAD1.webp'
 import Web3Modal from "web3modal";
 import tb from '../../../../public/img/logo.webp'
 import Image from 'next/image'
-
+import ConnectInnomicNft from '../../../../components/funcion/connectinnomicnft';
+import ConnectMarket from '../../../../components/funcion/connectmarket';
 
 function DestinationPage({params}) {
   // const router = useRouter();
   // const { id } = router.query;
+  const [Sales, setSales] = useState();
   const router = useRouter();
   const { id } = params;
+  const ID = id - 1;
 
-
-  const fetchImageUrl = async (tokenId) => {
+  useEffect(() => {
+    async function fetchSales() {
+      try {
+        const contract = await ConnectMarket() // conectar a el smart contract Market
+        const sales = await contract.getListedNfts(); 
+        setSales(sales);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchSales();
+  }, []);
+  const fetchImageUrl = async () => {
     try {
-      const web3Modal = new Web3Modal({
-        network: "goerli",
-        cacheProvider: true,
-        providerOptions: {
-          gasPrice: 200000000,
-          gasLimit: 1000000
-        }, // Opciones del proveedor
-      });
-      const provider = await web3Modal.connect();
-      const ethersProvider = new ethers.providers.Web3Provider(provider);
-      const signer = ethersProvider.getSigner();
-      const abi = require("../../../web3/abi.js");
-      const contractAddress = "0xD8b2B4a011d14a6c14EF2C99697082AA42897594";
-      const contract = new ethers.Contract(
-        contractAddress,
-        abi,
-        signer
-      );
-      const response = await contract.tokenURI(tokenId);
+      const contract = await ConnectInnomicNft() // conectar a el smart contract innomic
+      const response = await contract.tokenURI(1);
       const uritokenn = await fetch(response);
       const uritokenjson = await uritokenn.json();
-      // return {image: uritokenjson.image, name: uritokenjson.name, description: uritokenjson.description};
-      return {image: uritokenjson.image, name: uritokenjson.name, description: uritokenjson.description}
+      console.log("aaaaaaaaa",uritokenjson);
+      return {name: uritokenjson.name, rare : uritokenjson.Rare, hability: uritokenjson.hability }
     } catch (error) {
       console.error(error);
     }}
-
-    console.log(fetchImageUrl(id))
+    fetchImageUrl()
+  const venderNFT = async (Id) => {
+    try {
+      // Llama a la función de venta del contrato Solidity
+      const contract = await ConnectMarket();
+      // contract.aprobe("0x3B92E898442BEEf2ECB82746AaCC5a353933cb28", 5,{
+      //   gasLimit: 10000000,
+      // })
+       await contract.listNft(
+        "0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",  // CONTRATO INNOMIC
+        Id,
+        price,{
+        gasLimit: 1000000,
+      } );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div style={{display:"flex", flexDirection:"column", margin:"160px 120px 0 20px", position:"relative"}}>
@@ -58,7 +73,7 @@ function DestinationPage({params}) {
       </div>
       <div className={styles.owner}>
         {/* borrar */}
-        <p>Owner: 0x41603311FC9A25E16c90Df3c1F2CeFf2D36BeD69</p>
+       {/* { Sales &&  ID   &&  id&& <p>Owner : {Sales[ID].seller}  </p>} */}
       </div>
 
       <div   className={styles.containcharacterinfo} >
@@ -82,7 +97,7 @@ function DestinationPage({params}) {
           <div className={styles.description}>
            <p className={styles.descriptiontext}> 
            {/* borrar */}
-            Description : aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            {/* Description : aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */}
             </p>
           </div>
         </div>
@@ -90,7 +105,7 @@ function DestinationPage({params}) {
       <form className={styles.sell}>
         <input type="number" className={styles.priceinput}/> 
         <div className={styles.sellbuttons}>
-          <button>Sell</button>
+          <button onClick={()=>venderNFT(id)} >Sell</button>
           <button>Auction</button>
         </div>
       </form>

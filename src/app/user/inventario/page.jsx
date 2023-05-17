@@ -18,6 +18,7 @@ const NFTContainer = () => {
         const signer = await NetworkGoerliEth();
         const address = await signer.getAddress();
         const contract = await ConnectInnomicNft();
+        
          // Obtiene el número total de tokens del usuario
         const tokenCount = await contract.balanceOf(address);
         // Crea un arreglo con los NFTs del usuario

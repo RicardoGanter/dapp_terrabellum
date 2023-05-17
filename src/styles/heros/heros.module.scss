@@ -1,0 +1,26 @@
+@import '../var.module';
+.contain{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    .boxhero{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        .vault{
+            width: 200px;
+            height: 200px;
+        }
+    }
+    .boxheroinfo{
+        width: 400px;
+        height: 200px;
+        background-color: $color_bg_morado_oscuro;
+    }
+    .Ranking{
+        width: 400px;
+        height: 600px;
+        background-color: $color_bg_morado_oscuro;
+    }
+}

@@ -69,7 +69,7 @@ const Marketcompra = ()=>{
             <div className={styles.containcard} >
            {data && <PropsNftcartas Href={sales[index].tokenId} name="Red Spectre" Rare="normal" Ida="1" img={data.image} Level={"3"}/>}
             <div className={styles.containPrice}>Price:{sales[index].price.toString()} <Image src={iconeth} width={40} height={40} alt='Icon ETH' /></div>
-            <button onClick={ ()=>{compra(sales[index].tokenId,sales[index].price)} } className={styles.btnbuy}> Comprar </button>
+            <button onClick={ ()=>{compra(sales[index].tokenId , sales[index].price)} } className={styles.btnbuy}> Comprar </button>
             </div>
           </div> 
         ))
