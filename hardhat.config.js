@@ -22,10 +22,10 @@ module.exports = {
     }
   },
   paths:{
-    artifacts: "./artifacts",
-    sources: "./contracts",
-    cache: "./cache",
-    tests :"./tests"
+    artifacts: "./blockchain/artifacts",
+    sources: "./blockchain/contracts",
+    cache: "./blockchain/cache",
+    tests :"./blockchain/tests"
   },
   networks: {
     // ganache:{
