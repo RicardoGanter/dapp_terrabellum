@@ -1,28 +1,155 @@
+@import '../var.module';
 .contain{
     display: flex;
-    flex-direction: row;
-    background-color: aqua;
-    width: 100%;
-    margin: 4rem;
-    
-}
-.cotainleft{
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    *{  
-        margin: .5rem;
-        height: 100%;
-        
-    padding: 1rem ;
-    }
-    .contain1{
-        background-color: red;
+    gap: 2rem;
+    margin: 0 auto;
+    .containnfts{
+        border-radius: 5px;
+        margin: 0 1rem 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 514px;
+        background-color: $color_bg_morado_oscuro2;    
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: $color_bg_morado_oscuro2;
+          }
+          
+        ::-webkit-scrollbar-thumb {
+        border-radius: 2em;
+        background: $color_bg_morado_oscuro;
+        }
+          
+        .filter{
+            background-color: $color_bg_morado_oscuro2;
+            box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            .filter1{
+                display: flex;
+                justify-content: start;
+                gap: 1rem;
+                padding: .7rem 0;
+                flex-wrap: wrap;
+                margin: 0 1.5rem;
+                .filterinput{
+                    display: flex;
+                    align-items: center;
+                    background-color: $color_bg;
+                    border-radius: 5px;
+                    padding: .5rem;
+                    gap: .5rem;
+                    input{
+                        margin: .3rem;
+                        height: 100%;
+                        background-color: $color_bg_morado_oscuro2;
+                    }
+                    div{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 40px;
+                        height: 40px;
+                        background-color: $color_bg_morado_oscuro2;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
 
+        .nfts{
+            overflow-y: scroll;
+            display: flex;
+            justify-content: start;
+            gap: 1rem;
+            flex-wrap: wrap;
+            // height: 100%;
+            margin: 1rem 1rem 0 1rem;
+        }
+        
     }
-    .contain2{
-        background-color: black;
+    .fusionnft{
+        display: flex;
+        margin: 0 1rem;
+        width: 100%;
+        justify-content: center;
+        border-radius: 5px;
+        background-color: $color_bg_morado_oscuro2;
+        padding: .5rem 0 1rem 0;
+        .containfusionnft{
+            display: flex;
+            gap: .7rem;
+            
+        }
     }
+    
+    .containtypemerge{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .top{
+            padding: 1rem;
+            background-color: $color_bg_morado_oscuro2;
+            display: flex;
+            border-radius: 5px;
+            .left{
+                display:  flex;
+                flex-direction: column;
+                .fusion{
+                    margin: 1rem 0;
+                    background-color: $color_bg;
+                    padding: .7rem 0;
+                    border-radius: 5px;
+                }
+            }
+            .right{
+                display:  flex;
+                flex-direction: column;
+                justify-content: space-between;
+                h1{
+                    margin: 1rem;
+                    background-color: $color_bg;
+                    padding: .7rem 6rem;
+                    border-radius: 5px;
+                }
+            }
+        }
+        .bottom{
+            display: flex;
+            justify-content: space-around;
+            background-color: $color_bg_morado_oscuro2;
+            padding: 1rem;
+            border-radius: 5px;
+            .containcircle{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                button{
+                    padding: 1rem 3rem;
+                    font-size: 1.7rem;
+                    background-color: $color_bg;
+                }
+                
+                .circleG{
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    background-color: blue;
+                }
+                .circleM{
+                    width: 75px;
+                    height: 75px;
+                    border-radius: 50%;
+                    background-color: blue;
+                }
+            }
+        }
+        
+    }
+
 }
+
+
 
