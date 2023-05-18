@@ -18,9 +18,9 @@ const PropsNftcartas = ({ Href,name,img,Ida,Rare, Level, height }) => {
       //  400 = 50   800 = 60   200 = 45  100 = 42.5 0 = 40 
   },[])
    
-
+  // <Link className={styles.link} href={`/market/${Href}`}>
   return (
-    <Link className={styles.link} href={`/market/${Href}`  }>
+    <div className={styles.link}>
     { Rare==="normal" ? (
       <div className={styles.cards} style={{width:width,height:height}}>
       <div className={styles.contain}>
@@ -63,7 +63,7 @@ const PropsNftcartas = ({ Href,name,img,Ida,Rare, Level, height }) => {
     </div>
     ): null}
 
-    </Link>
+    </div>
   );
 };
 

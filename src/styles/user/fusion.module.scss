@@ -52,6 +52,7 @@
                         height: 40px;
                         background-color: $color_bg_morado_oscuro2;
                         border-radius: 50%;
+                        cursor: pointer;
                     }
                 }
             }
@@ -100,6 +101,8 @@
                     background-color: $color_bg;
                     padding: .7rem 0;
                     border-radius: 5px;
+                    cursor: pointer;
+                    color: $color_text_white;
                 }
             }
             .right{
@@ -111,6 +114,8 @@
                     background-color: $color_bg;
                     padding: .7rem 6rem;
                     border-radius: 5px;
+                    cursor: pointer;
+                    color: $color_text_white;
                 }
             }
         }
@@ -136,13 +141,13 @@
                     width: 120px;
                     height: 120px;
                     border-radius: 50%;
-                    background-color: blue;
+                    background-color: $color_bg;
                 }
                 .circleM{
                     width: 75px;
                     height: 75px;
                     border-radius: 50%;
-                    background-color: blue;
+                    background-color: $color_bg;
                 }
             }
         }
