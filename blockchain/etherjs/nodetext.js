@@ -13,10 +13,10 @@ const  {ethers}  = require('ethers');
     // const accountAddress = wallet.getAddress();
     const contract = new ethers.Contract(Address, abi, signer);
     // contract._setMod(2)
-  contract._mintTokenAllowedToEarn("0x41603311FC9A25E16c90Df3c1F2CeFf2D36BeD69")
+   contract._mintTokenAllowedToEarn("0x41603311FC9A25E16c90Df3c1F2CeFf2D36BeD69")
 // 0x621f47478a55583084e9bD70e535D509f95D9B78 mi wallet publica
 
-// contract.setPoolNFT("0x49831028570FEA2cb997D4C5087A7df492B8Cbca","0x49831028570FEA2cb997D4C5087A7df492B8Cbca")
+  // contract.setPoolNFT("0x400c7eEfAeb3e981Db9E9a62FC5c9A2b97C4EB00","0x400c7eEfAeb3e981Db9E9a62FC5c9A2b97C4EB00")
 
 // contract._safeTransfer("0x621f47478a55583084e9bD70e535D509f95D9B78", 5)  //transferir nft
 
@@ -24,11 +24,10 @@ const  {ethers}  = require('ethers');
 // .then(cantidadmint=>{
 //     console.log(cantidadmint)})
 
-  // contract.downgrade(5)
-
-  //  contract.tokenURI(10)
-  //  .then(cantidadmint=>{
-  //   console.log(cantidadmint)})
+// contract.tokenURI(10)
+// contract.downgrade(20)
+    // .then(cantidadmint=>{
+    //  console.log(cantidadmint)})
 
 
   // contract.balance()
