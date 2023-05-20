@@ -6,25 +6,73 @@ import PropsNftcartas from "../../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft";
 import NetworkGoerliEth from "../../../../components/funcion/network";
 const Fusion = () => {
-  const [merge, setMerge] = useState(false)
-  const [unmerge, setUnmerge] = useState(null)
+  // const [merge, setMerge] = useState(false)
   const [nfts, setNfts] = useState([]);
   const [characteristics, setCharacteristics] = useState(null);
+  const [unmerge, setUnmerge] = useState(null)
   const [nfttomerge, setNfttomerge] = useState([]);
-
-  // unmerge nfttomerge
-  // if(unmerge){
-  //   if(nfttomerge.length>0){
-  //     setNfttomerge([])
-  //   }
-  // }
-
-  const arraymerge = (merged) => {
-    let isDuplicate = false;
-    if(nfttomerge.length>0){
-      console.log("aaaaaaa",nfttomerge.length)
-      console.log("looooooool", nfttomerge[0][0].lvl, merged[0].lvl)
+  const [unmergechildrens, setUnmergechildrens] = useState([])
+  const [aw, setaw] = useState(null)
+  const [probability, setProbability] = useState(null)
+  if(unmerge){
+    if(nfttomerge.length > 0){
+      console.log("aaaaaaaaa", unmerge.length)
+      setNfttomerge([])
     }
+  }
+  if( nfttomerge.length > 0 ){
+    if(unmerge ){
+      console.log("aaaaaaaaavvvvvvvvvvvvvvvv", nfttomerge.length)
+      setUnmerge(null)
+    }
+  }
+  useEffect(()=>{
+    if(nfttomerge.length===3){
+      seleccionarNumeroConProbabilidad(nfttomerge[0][0].hability1 ,nfttomerge[1][0].hability1,nfttomerge[2][0].hability1)
+      if(probability){  
+        const arrayOrdenado = probability.sort((a, b) => b - a);
+        const dosNumerosMasAltos = arrayOrdenado.slice(0, 2);
+        // console.log(dosNumerosMasAltos)
+        // setProbability()
+      }
+    }
+  },[nfttomerge])
+  
+
+
+  useEffect(()=>{
+    setaw(unmergechildrens)
+  },[unmergechildrens])
+  const getchildrens = async (father, data) => {
+        setUnmergechildrens([]); // Limpiar los datos anteriores
+        const nftPromises = [];
+        if( data.hability2 > 0 || data.hability3 > 0){
+          const contract = await ConnectInnomicNft();
+          const childrens = await contract.getParents(father);
+          if (childrens.length === 3) {
+            childrens.forEach(async (tokenId) => {
+              const tokenURI = await contract.tokenURI(tokenId);
+              if (tokenId) {
+                const metadata = await fetch(tokenURI).then((res) => res.json());
+                nftPromises.push({
+                metadata,
+              });
+              setUnmergechildrens(nftPromises);
+            }
+          });
+        }
+        }
+        else{
+          return console.error("Habilidad 2 o Habilidad 3 deben ser mayores a cero")
+        }
+    }
+
+    const arraymerge = (merged) => {
+    let isDuplicate = false;
+    if(nfttomerge.length>=3){
+      return console.error("no puedes igresar mas personajes")
+    }
+
     for (let i = 0; i < nfttomerge.length; i++) {
       const a = nfttomerge[i];
       if (a[1] === merged[1]) {
@@ -33,9 +81,10 @@ const Fusion = () => {
       }
     }
     if (!isDuplicate && nfttomerge.length < 3) {
-      setNfttomerge((prevData) => [...prevData, merged]);
+      return setNfttomerge((prevData) => [...prevData, merged]);
     }
   };
+
 const removeItem = (index) => {
   const updatedData = [...nfttomerge];
   updatedData.splice(index, 1);
@@ -47,20 +96,47 @@ const removeItem = (index) => {
   contract.downgrade(id)
   }
 
+  function seleccionarNumeroConProbabilidad(...valores) {
+    const total = valores.length; // Obtener el total de valores
+  
+    // Calcular la probabilidad de cada valor
+    const probabilidades = valores.reduce((prob, valor) => {
+      prob[valor] = (prob[valor] || 0) + 1;
+      return prob;
+    }, {});
+  
+    for (const valor in probabilidades) {
+      probabilidades[valor] = ((probabilidades[valor] / total) * 100).toFixed(2) + "%";
+    }
+  
+    setProbability(Object.values(probabilidades)); // Actualizar el estado con las probabilidades
+  
+    const valoresProbabilidad = Object.values(probabilidades); // Obtener los valores del objeto
+    const totalProbabilidad = valoresProbabilidad.reduce((sum, prob) => sum + parseFloat(prob), 0); // Utilizar parseFloat para convertir los porcentajes en números
+    let acumulativo = 0;
+    const rand = Math.random() * totalProbabilidad;
+    for (let i = 0; i < valoresProbabilidad.length; i++) {
+      acumulativo += parseFloat(valoresProbabilidad[i]); // Utilizar parseFloat para convertir los porcentajes en números
+      if (rand <= acumulativo) {
+        return Object.keys(probabilidades)[i]; // Retorna la clave seleccionada
+      }
+    }
+  }
+  
   const upgradenft = async ( id ) =>{
-    console.log(id)
     const data = []
     if (id.length === 3){
       id.map((a)=>{
         data.push(a[1]) 
-        console.log("mamahuevo",data)
       })
     }
+    // const array = []
     if(data.length>2){
-      const contract = await ConnectInnomicNft()
-      contract.upgrade(data[0],data[1],data[2])
+      // const contract = await ConnectInnomicNft()
+      // contract.upgrade(data[0],data[1],data[2], probabilidad )
     }
   }
+
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
@@ -91,18 +167,6 @@ const removeItem = (index) => {
     
     fetchNFTs();
     }, []);
-  
-  // if(merge==true){
-  //   if( unmerge){
-  //   setUnmerge(false)
-  // }
-  // }
-  // if(unmerge==true){
-  //   if( merge){
-  //   setMerge(false)
-  // }
-  // }
-
   return (
     <>
         <div className={styles.contain}>
@@ -145,10 +209,10 @@ const removeItem = (index) => {
 
               {/* NFTS */}
               <div className={styles.nfts}>
-              {nfts.map((nft) => (
+              { nfts &&  nfts.map((nft) => (
               <div key={nft.id}>
                 <div  onClick={()=> setCharacteristics([nft.metadata,  nft.id])} >
-                <PropsNftcartas name={nft.metadata.name} Rare={"normal"} img={nft.metadata.image} Level={nft.metadata.lvl}/>
+                <PropsNftcartas name={nft.metadata.name} image={nft.metadata.image} height={370} Rare={"normal"}/>
                 </div>
               </div>
             ))}
@@ -162,13 +226,12 @@ const removeItem = (index) => {
                 
                 { nfttomerge &&  nfttomerge.length>0 && nfttomerge.length < 4 ? nfttomerge.map((nfttomerge,index) => 
                   <div onClick={ ()=> removeItem(index)}> 
-                    <PropsNftcartas name={nfttomerge[0].name} Rare={"normal"} 
-                    img={nfttomerge[0].image} Level={nfttomerge[0].lvl}/>  
+                    <PropsNftcartas height={370} name={nfttomerge[0].name} image={nfttomerge[0].image} Rare={"normal"}/>  
                   </div>
                 )
-                :
-                    <PropsNftcartas Rare="normal" height={320} name={"null"}/> 
-                    
+                 : aw && aw.length == 3 ? aw.map((a)=> <PropsNftcartas height={370} image={a.metadata.image} name={a.metadata.name} Rare={"normal"}/>  
+                  )
+                  : <PropsNftcartas height={370} Rare="normal" name={"null"}/> 
                  }
 
               </div>
@@ -184,41 +247,56 @@ const removeItem = (index) => {
               <div className={styles.top}>
 
               <div className={styles.left}>
-               { characteristics && <div> <PropsNftcartas Rare="normal" height={320} img={characteristics[0].image} name={characteristics[0].name} Level={characteristics[0].lvl }/></div>}
-               { !characteristics ? <PropsNftcartas Rare="normal" height={320} name={"null"}/> : null}
+               { characteristics ?  <PropsNftcartas Rare="normal" height={320} image={characteristics[0].image} name={characteristics[0].name}/>
+               : <PropsNftcartas Rare="normal" height={320} name={"null"}/> }
               { characteristics ? <h1 className={styles.fusion}  onClick={()=> arraymerge(characteristics)}>merge</h1> : 
                <h1 className={styles.fusion} style={{opacity:.7, backgroundColor:"grey"}}>merge</h1> }  
               </div>
               
               <div className={styles.right}>
-                <div><h1>hability1</h1> <h1>hability2</h1> <h1>hability3</h1></div>  
-                { characteristics ? <h1 onClick={()=> setUnmerge(characteristics)} >unmerge</h1>
+                
+                { characteristics ? <div><h1>{characteristics[0].hability1} </h1> <h1>{characteristics[0].hability2}</h1> <h1>{characteristics[0].hability3} </h1></div> :
+                <div>
+                  <h1>hability1</h1> 
+                  <h1>hability2</h1> 
+                  <h1>hability3</h1>
+                </div> }
+
+                { characteristics ? <h1 onClick={()=> {setUnmerge(characteristics); if(unmerge && unmerge.length>0 ){getchildrens(unmerge[1], unmerge[0])}}} >unmerge</h1>
                 : <h1 style={{opacity:.7, backgroundColor:"grey"}}>unmerge</h1> }              
                 
               </div>
-
+              {/* getParents */}
               </div>
                 {/* FUNCION FUSION */}
               <div className={styles.bottom}>
-                { unmerge &&
-                 <PropsNftcartas Rare="normal" height={320} img={unmerge[0].image} name={unmerge[0].name} Level={unmerge[0].lvl }/>
+                { unmerge && unmerge.length  > 0  ? <PropsNftcartas Rare="normal" height={320} image={unmerge[0].image} name={unmerge[0].name}/>
+
+                : nfttomerge.length === 3 ? <PropsNftcartas Rare="normal" height={320} name={nfttomerge[0][0].name} image={nfttomerge[0][0].image}/>
+                 : <PropsNftcartas Rare="normal" height={320} name={"null"}/>
+                //  CAMBIOS
                 }
+                 
+                
                   <div className={styles.containcircle}> 
-                    <div style={{display: "flex", alignItems:"center", gap:"1rem" }}>
+                  { nfttomerge.length === 3 ?
+                  <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:"1rem"}}>
+                  <div style={{display: "flex", alignItems:"center", gap:"1rem" }}>
                       <div className={styles.circleG}/> 
-                      <h2>66%</h2>
+                      { probability && <h2>{probability[0]}</h2> } 
                   </div> 
                   <div style={{display: "flex", alignItems:"center", gap:"1rem" }}>
                      <div className={styles.circleM}/>
-                     <h2>33%</h2>
+                     { probability && <h2>{probability[1]}</h2> } 
                   </div>
-
+                  </div>
+                    : null}
                   {/* MERGE */}
                   { nfttomerge.length === 3 ?
                   <button onClick={()=> upgradenft(nfttomerge)}>Complete Merge</button>
-                  : unmerge && unmerge.length === 2 && !nfttomerge.length > 0  ?
+                  : aw && aw.length == 3 && !nfttomerge.length > 0  ?
                   <button onClick={()=> downgradenft(unmerge[1])}>Complete Unmerge</button>
-                  : <button onClick={()=> upgradenft(nfttomerge)} style={{opacity:.7, backgroundColor:"grey"}}>Complete</button>
+                  : <button  style={{opacity:.7, backgroundColor:"grey"}}>Complete</button>
                   }
                   {/* UNMERGE */}
                   {

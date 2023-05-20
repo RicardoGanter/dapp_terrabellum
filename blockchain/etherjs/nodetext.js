@@ -5,7 +5,7 @@ const  {ethers}  = require('ethers');
     // const signer = provider.getSigner();
     // const privateKey = "af28d50f35dff3890a623374f65656227d9c7b92d9fee07ffa398657047c5ebd";
     const privateKey = "39aad856cd1eee56fc2f94c754e853ef353feccff38ad57176869d7c5784ff23";  // mi wallet privada las dos tienen que estar relacionadas
-    const Address = '0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f'; // la dirección del contrato NFT
+    const Address = '0x7751611Ef1581b7487AC92a5d3450233cB1B7007'; // la dirección del contrato NFT
     const signer = new ethers.Wallet(privateKey, provider);
     const abi = require('../abi/abi')
     // const wallet = new ethers.Wallet(privateKey, provider);
@@ -13,10 +13,10 @@ const  {ethers}  = require('ethers');
     // const accountAddress = wallet.getAddress();
     const contract = new ethers.Contract(Address, abi, signer);
     // contract._setMod(2)
-   contract._mintTokenAllowedToEarn("0x41603311FC9A25E16c90Df3c1F2CeFf2D36BeD69")
+    contract._mintTokenAllowedToEarn("0x41603311FC9A25E16c90Df3c1F2CeFf2D36BeD69", 2)
 // 0x621f47478a55583084e9bD70e535D509f95D9B78 mi wallet publica
 
-  // contract.setPoolNFT("0x400c7eEfAeb3e981Db9E9a62FC5c9A2b97C4EB00","0x400c7eEfAeb3e981Db9E9a62FC5c9A2b97C4EB00")
+  //  contract.setPoolNFT("0x980626E546fbbfD987a767dAb84a0a4440f84cEa","0x980626E546fbbfD987a767dAb84a0a4440f84cEa")
 
 // contract._safeTransfer("0x621f47478a55583084e9bD70e535D509f95D9B78", 5)  //transferir nft
 

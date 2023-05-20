@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
+
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 import "./PoolNFT.sol";
 
 contract InnomicNFT is ERC721Enumerable {
@@ -10,16 +12,13 @@ contract InnomicNFT is ERC721Enumerable {
     mapping(uint256 => string) private _tokenURIs;
 
     // Actual URL base for the URI
-    string private baseURI;// https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/
-
-    // Module for the calculation of token URI
-    uint256 private mod = 2;
+    string private baseURI;
 
     // Actual token count
     uint256 private tokenCount;
 
     // Limit token mint
-    uint256 public limite = 2;
+    uint256 public limite = 100;
 
     // Mapping from token ID to allowance to earn rewards
     mapping(uint256 => bool) private _allowToEarn;
@@ -27,44 +26,173 @@ contract InnomicNFT is ERC721Enumerable {
     // Mapping from token ID to token level
     mapping(uint256 => uint8) private _lvl;
 
-    // Actual event of minting count
-    uint256 private tanda_ = 0;
-
-    // Mapping from token ID to when where minting the token
-    mapping(uint256 => uint256) private _tanda;
-
     // Mapping from token ID to the number of representation of his class
-    mapping(uint256 => string) private _numClase;
-
-    // Mapping from a number to a class
-    mapping(uint256 => string) private _clase;
+    mapping(uint256 => uint256) private _numClase;
 
     mapping(uint256 => uint256[3]) private _parents;
 
     mapping(uint256 => bool) private _blocked;
-
-    mapping(uint256 => uint256) private _color;
-
-    mapping(uint256 => mapping(uint256 => bool)) private _dorados;
-
-    mapping(uint256 => mapping(uint256 => bool)) private _morados;
-
+    
     address private poolNFTaddress;
 
     PoolNFT public poolNFT;
 
-    address private marketAddress;
+    address marketplaceContract;
+
+    /////////////////////////////////MARKET//////////////////////////////////
+    using Counters for Counters.Counter;
+    Counters.Counter private _itemIds;
+    Counters.Counter private _itemsSold;
+
+    address payable owner;
+    uint256 impuesto = 20;
+    /////////////////////////////////////////////////////////////////////////
 
     constructor(string memory name_, string memory symbol_,
-                string memory newBaseURI,
-                uint256[] memory carpetas, string[] memory clases_, uint256 lc,
-                uint256 ld, uint256[] memory dorados,
-                uint256 lm, uint256[] memory morados,
-                address marketAddress_) ERC721(name_, symbol_) {
-        _setTanda(newBaseURI, carpetas, clases_, lc, ld, dorados, lm, morados);
-        marketAddress = marketAddress_;
+                string memory newBaseURI) ERC721(name_, symbol_) {
+        baseURI = newBaseURI;
+        /////////////////////////////////MARKET//////////////////////////////////
+        owner = payable(msg.sender);
+        /////////////////////////////////////////////////////////////////////////
     }
 
+    function getAllNFTs() public view returns (uint256[] memory) {
+        uint256[] memory tokenList = new uint256[](tokenCount);
+        uint256 validTokenCount = 0;
+
+        for (uint256 tokenId = 0; tokenId < tokenCount; tokenId++) {
+            if (_exists(tokenId + 1)) {
+                tokenList[tokenId] = tokenId + 1;
+                validTokenCount++;
+            }
+        }
+
+        // Redimensionar la matriz para eliminar los espacios no utilizados
+        assembly {
+            mstore(tokenList, validTokenCount)
+        }
+
+        return tokenList;
+    }
+
+    /////////////////////////////////MARKET//////////////////////////////////
+    struct MarketItem {
+        uint256 itemId;
+        uint256 tokenId;
+        address payable seller;
+        address payable owner;
+        uint256 price;
+        bool sold;
+    }
+
+    mapping(uint256 => MarketItem) private idToMarketItem;
+
+    event MarketItemCreated(
+        uint256 indexed itemId,
+        uint256 indexed tokenId,
+        address seller,
+        address owner,
+        uint256 price,
+        bool sold
+    );
+
+    event MarketItemSold(
+        uint256 indexed itemId,
+        uint256 indexed tokenId,
+        address seller,
+        address owner,
+        uint256 price
+    );
+
+    function createMarketItem(
+        uint256 tokenId,
+        uint256 price
+    ) public payable {
+        require(price > 0, "ERR_PR");
+
+        _itemIds.increment();
+        uint256 itemId = _itemIds.current();
+
+        idToMarketItem[itemId] = MarketItem(
+            itemId,
+            tokenId,
+            payable(msg.sender),
+            payable(address(0)),
+            price,
+            false
+        );
+
+        _safeTransfer(msg.sender, poolNFTaddress, tokenId, "");
+
+        poolNFT.guardar(tokenId, msg.sender);
+
+        emit MarketItemCreated(
+            itemId,
+            tokenId,
+            msg.sender,
+            address(0),
+            price,
+            false
+        );
+    }
+
+    function unListMarketItem(uint256 itemId) public payable
+    {
+
+        require(msg.sender == idToMarketItem[itemId].seller, "ERR_SEL");
+        uint tokenId = idToMarketItem[itemId].tokenId;
+        idToMarketItem[itemId].owner = payable(msg.sender);
+        poolNFT.sacar(tokenId, msg.sender);
+    }
+
+    function createMarketSale(uint256 itemId)
+        public
+        payable
+    {
+        uint256 price = idToMarketItem[itemId].price;
+        uint256 tokenId = idToMarketItem[itemId].tokenId;
+
+        require(msg.value == price, "ERR_DIF_PR");
+
+        owner.transfer(msg.value / impuesto);
+        idToMarketItem[itemId].seller.transfer(msg.value - msg.value / impuesto);
+        poolNFT.guardar(tokenId, msg.sender);
+        poolNFT.sacar(tokenId, msg.sender);
+        idToMarketItem[itemId].owner = payable(msg.sender);
+        idToMarketItem[itemId].sold = true;
+        _itemsSold.increment();
+
+        emit MarketItemSold(
+            itemId,
+            tokenId,
+            idToMarketItem[itemId].seller,
+            msg.sender,
+            price
+        );
+    }
+
+    function fetchUnSoldMarketItems() public view returns (MarketItem[] memory) {
+        uint itemCount = _itemIds.current();
+        uint unsoldItemCount = 0;
+        uint currentIndex = 0;
+
+        for (uint i = 0; i < itemCount; i++) {
+          if (!idToMarketItem[i + 1].sold && idToMarketItem[i + 1].owner == poolNFTaddress) {
+            unsoldItemCount += 1;
+          }
+        }
+
+        MarketItem[] memory items = new MarketItem[](unsoldItemCount);
+        for (uint i = 0; i < itemCount; i++) {
+          uint currentId = i + 1;
+          if (idToMarketItem[currentId].owner == poolNFTaddress) {
+            MarketItem storage currentItem = idToMarketItem[currentId];
+            items[currentIndex] = currentItem;
+          }
+        }
+        return items;
+    }
+    /////////////////////////////////////////////////////////////////////////
 
     /**
      * @dev Returns the number of tokens minted.
@@ -86,8 +214,7 @@ contract InnomicNFT is ERC721Enumerable {
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         _requireMinted(tokenId);
 
-        string memory _tokenURI = _tokenURIs[tokenId];
-
+        string memory _tokenURI = string(abi.encodePacked(_baseURI(), _tokenURIs[tokenId]));
         return _tokenURI;
     }
 
@@ -99,7 +226,7 @@ contract InnomicNFT is ERC721Enumerable {
      * - `tokenId` must exist.
      */
     function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
-        require(_exists(tokenId), "ERC721URIStorage: URI set of nonexistent token");
+        require(_exists(tokenId), "ERR_UNEXIST");
         _tokenURIs[tokenId] = _tokenURI;
     }
 
@@ -114,47 +241,11 @@ contract InnomicNFT is ERC721Enumerable {
 
     function _setBaseURI(string memory newBaseURI) public virtual {
         baseURI = newBaseURI;
-        //tanda_ += 1;
     }
 
-    function _addClase(uint256 carpeta, string memory clase_) public virtual {
-        _clase[carpeta] = clase_;
-    }
-
-    function numClase(uint256 tokenId) public view virtual returns (string memory) {
-        string memory nC = _numClase[tokenId];
+    function claseToken(uint256 tokenId) public view virtual returns (uint256) {
+        uint256 nC = _numClase[tokenId];
         return nC;
-    }
-
-    function claseToken(uint256 tokenId) public view virtual returns (string memory) {
-        string memory nC = _numClase[tokenId];
-        //string memory cT = _clase[nC];
-        return nC;
-    }
-
-    function _setDorados(uint256 l, uint256[] memory dorados) public virtual {
-        for (uint256 i = 0; i < l; i++){
-            _dorados[tanda_][dorados[i]] = true;
-        }
-    }
-
-    function _setMorados(uint256 l, uint256[] memory morados) public virtual {
-        for (uint256 i = 0; i < l; i++){
-            _morados[tanda_][morados[i]] = true;
-        }
-    }
-
-    function _setTanda(string memory newBaseURI,
-     uint256[] memory carpetas, string[] memory clases_, uint256 lc,
-     uint256 ld, uint256[] memory dorados,
-     uint256 lm, uint256[] memory morados) public virtual {
-        tanda_++;
-        for (uint256 i = 0; i < lc; i++){
-            _addClase((tanda_ * 100) + carpetas[i], clases_[i]);
-        }
-        _setDorados(ld, dorados);
-        _setMorados(lm, morados);
-        _setBaseURI(newBaseURI);
     }
 
     function setPoolNFT(address poola, PoolNFT pool) public virtual {
@@ -162,76 +253,47 @@ contract InnomicNFT is ERC721Enumerable {
         poolNFT = pool;
     }
 
-    function _getColor(uint256 tokenId) public view returns (uint256) {
-        return _color[tokenId];
+    function getParents(uint256 tokenId) public view virtual returns (uint256[] memory) {
+        require(_lvl[tokenId] > 1, "ERR_LVL");
+        uint256[] memory tokenList = new uint256[](3);
+        tokenList[0] = _parents[tokenId][0];
+        tokenList[1] = _parents[tokenId][1];
+        tokenList[2] = _parents[tokenId][2];
+        return tokenList;
     }
 
-    function _mintTokenAllowedToEarn(address to) public virtual {
+    function _mintTokenAllowedToEarn(address to, uint256 URInum) public virtual {
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
 
-        approve(marketAddress, tokenId);
-
-        string memory base = _baseURI();
-
         string memory finalURI = ".json";
 
-        string memory _tokenURI = string(abi.encodePacked(string(abi.encodePacked(base, Strings.toString(_calculateURI(tokenId, mod)))), finalURI));
+        string memory _tokenURI = string(abi.encodePacked(Strings.toString(URInum), finalURI));
 
         _tokenURIs[tokenId] = _tokenURI;
 
-        _tanda[tokenId] = tanda_;
-
-        uint256 num = (tanda_ * 100) + _calculateURI(tokenId, mod);
-
-        _numClase[tokenId] = _clase[num];
+        _numClase[tokenId] = URInum;
 
         _lvl[tokenId] = 1;
 
-        if (_dorados[tanda_][_calculateURI(tokenId, mod)]) {
-            _color[tokenId] = 0;
-        } else {
-            if (_morados[tanda_][_calculateURI(tokenId, mod)]) {
-                _color[tokenId] = 1;
-            } else {
-                _color[tokenId] = 2;
-            }
-        }
         tokenCount++;
         _allowToEarn[tokenId] = true;
     }
 
-    function _mintTokenNotAllowedToEarn(address to) public virtual {
+    function _mintTokenNotAllowedToEarn(address to, uint256 URInum) public virtual {
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
 
-        approve(marketAddress, tokenId);
-
-        string memory base = _baseURI();
-
         string memory finalURI = ".json";
 
-        string memory _tokenURI = string(abi.encodePacked(string(abi.encodePacked(base, Strings.toString(_calculateURI(tokenId, mod)))), finalURI));
+        string memory _tokenURI = string(abi.encodePacked(Strings.toString(URInum), finalURI));
 
         _tokenURIs[tokenId] = _tokenURI;
 
-        _tanda[tokenId] = tanda_;
-
-        uint256 num = (tanda_ * 100) + _calculateURI(tokenId, mod);
-
-        _numClase[tokenId] = _clase[num];
+        _numClase[tokenId] = URInum;
 
         _lvl[tokenId] = 1;
 
-        if (_dorados[tanda_][_calculateURI(tokenId, mod)]) {
-            _color[tokenId] = 0;
-        } else {
-            if (_morados[tanda_][_calculateURI(tokenId, mod)]) {
-                _color[tokenId] = 1;
-            } else {
-                _color[tokenId] = 2;
-            }
-        }
         tokenCount++;
         _allowToEarn[tokenId] = false;
     }
@@ -240,13 +302,9 @@ contract InnomicNFT is ERC721Enumerable {
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
 
-        approve(marketAddress, tokenId);
-
         string memory _tokenURI = URI;
 
         _tokenURIs[tokenId] = _tokenURI;
-
-        _tanda[tokenId] = tanda_;
 
         tokenCount++;
     }
@@ -286,44 +344,13 @@ contract InnomicNFT is ERC721Enumerable {
     }
 
     function burn(uint256 tokenId) public virtual {
-        require(ownerOf(tokenId) == msg.sender, "el token debe pertenecerte");
+        require(ownerOf(tokenId) == msg.sender, "ERR_OW");
 
         super._burn(tokenId);
 
         if (bytes(_tokenURIs[tokenId]).length != 0) {
             delete _tokenURIs[tokenId];
         }
-    }
-
-    function _calculateURI(uint256 id, uint256 module) private pure returns (uint256) {
-        uint8[6] memory mult = [2, 3, 4, 5, 6, 7];
-        uint256 i = 0;
-        uint256 m = 10;
-        uint256 num = 0;
-        uint256 s = 0;
-        while (num != id) {
-            if (i == 0) {
-                num = id % m;
-                uint256 bar = id % m;
-                s += (bar * mult[i % 6]);
-                i += 1;
-                m *= 10;
-            }
-            else {
-                num = id % m;
-                uint256 bar = ((id % m) - (id % (m / 10))) / (m / 10);
-                s += (bar * mult[i % 6]);
-                i += 1;
-                m *= 10;
-            }
-        }
-        uint256 z = s / module;
-        uint256 r = module + (z * module) - s;
-        return r;
-    }
-
-    function _setMod(uint256 newmod) public virtual {
-        mod = newmod;
     }
 
     function _setlimite(uint256 newlimite) public virtual {
@@ -336,32 +363,16 @@ contract InnomicNFT is ERC721Enumerable {
         _blocked[tokenIds[2]] = true;
     }
 
-    function upgradeLvl2(address to, uint256 tokenId1, uint256 tokenId2, uint256 tokenId3) internal virtual {
-        uint256[] memory clases = new uint256[](6);
+    function upgradeLvl2(address to, uint256 tokenId1, uint256 tokenId2, uint256 tokenId3, uint8 num) internal virtual {
+        uint256[] memory clases = new uint256[](3);
         clases[0] = tokenId1;
         clases[1] = tokenId2;
         clases[2] = tokenId3;
-        uint256[] memory clasesD = new uint256[](3);
-        uint256 d = 0;
-        uint256 n = 0;
-        for (uint i = 0; i < 3; i++){
-            if (_color[clases[i]] == 0) {
-                clasesD[d] = clases[i];
-                d++;
-            } if (_color[clases[i]] == 1) {
-                clases[3 + n] = clases[i];
-                n++;
-            }
-        }
-        string memory tokenClase;
-        if (d > 0){
-            tokenClase = string(abi.encodePacked(claseToken(tokenId1), claseToken(clasesD[_calculateURI(tokenCount + 1, d) - 1])));
-        } else {
-            tokenClase = string(abi.encodePacked(claseToken(tokenId1), claseToken(clases[_calculateURI(tokenCount + 1, 3 + n) - 1])));
-        }
-        string memory baseURI_ = "https://ipfs.io/ipfs/QmY5rezFfkPSGXDiAh9ZAEghMDnHL4APryPcM3aNntpTKa/nftlvl2_1/";
+        uint256 tokenClase;
+        tokenClase = claseToken(tokenId1) * 100 + claseToken(clases[num]);
+        
         string memory finalURI = ".json";
-        string memory tokenURI_ = string(abi.encodePacked(string(abi.encodePacked(baseURI_, tokenClase)), finalURI));
+        string memory tokenURI_ = string(abi.encodePacked(Strings.toString(tokenClase), finalURI));
         _mintWithURI(to, tokenURI_);
         _parents[tokenCount] = [tokenId1, tokenId2, tokenId3];
         _block(_parents[tokenCount]);
@@ -370,8 +381,8 @@ contract InnomicNFT is ERC721Enumerable {
         _allowToEarn[tokenCount] = _allowToEarn[tokenId1];
     }
 
-    function upgradeLvl3(address to, uint256 tokenId1, uint256 tokenId2, uint256 tokenId3) internal virtual {
-        uint256[] memory clases = new uint256[](18);
+    function upgradeLvl3(address to, uint256 tokenId1, uint256 tokenId2, uint256 tokenId3, uint8 num) internal virtual {
+        uint256[] memory clases = new uint256[](9);
         clases[0] = _parents[tokenId1][0];
         clases[1] = _parents[tokenId2][0];
         clases[2] = _parents[tokenId3][0];
@@ -381,27 +392,12 @@ contract InnomicNFT is ERC721Enumerable {
         clases[6] = _parents[tokenId1][2];
         clases[7] = _parents[tokenId2][2];
         clases[8] = _parents[tokenId3][2];
-        uint256[] memory clasesD = new uint256[](9);
-        uint256 d = 0;
-        uint256 n = 0;
-        for (uint i = 0; i < 9; i++){
-            if (_color[clases[i]] == 0) {
-                clasesD[d] = clases[i];
-                d++;
-            } if (_color[clases[i]] == 1) {
-                clases[9 + n] = clases[i];
-                n++;
-            }
-        }
-        string memory tokenClase;
-        if (d > 0){
-            tokenClase = string(abi.encodePacked(claseToken(tokenId1), claseToken(clasesD[_calculateURI(tokenCount + 1, d) - 1])));
-        } else {
-            tokenClase = string(abi.encodePacked(claseToken(tokenId1), claseToken(clases[_calculateURI(tokenCount + 1, 9 + n) - 1])));
-        }
-        string memory baseURI_ = "https://ipfs.io/ipfs/QmVPqReUDz3r7DHAJDMxgaDXwtWckUJQqsQWSgR5uNQYHn/";
-        string memory finalURI = ".png";
-        string memory tokenURI_ = string(abi.encodePacked(string(abi.encodePacked(baseURI_, tokenClase)), finalURI));
+        
+        uint256 tokenClase;
+        tokenClase = claseToken(tokenId1) * 100 + claseToken(clases[num]);
+        
+        string memory finalURI = ".json";
+        string memory tokenURI_ = string(abi.encodePacked(Strings.toString(tokenClase), finalURI));
         _mintWithURI(to, tokenURI_);
         _parents[tokenCount] = [tokenId1, tokenId2, tokenId3];
         _block(_parents[tokenCount]);
@@ -410,19 +406,19 @@ contract InnomicNFT is ERC721Enumerable {
         _allowToEarn[tokenCount] = _allowToEarn[tokenId1];
     }
 
-    function upgrade(uint256 tokenId1, uint256 tokenId2, uint256 tokenId3) public virtual {
-        require((_lvl[tokenId1] == _lvl[tokenId2]) && (_lvl[tokenId1] == _lvl[tokenId3]), "los token deben ser del mismo lvl");
+    function upgrade(uint256 tokenId1, uint256 tokenId2, uint256 tokenId3, uint8 num) public virtual {
+        require((_lvl[tokenId1] == _lvl[tokenId2]) && (_lvl[tokenId1] == _lvl[tokenId3]), "ERR_LVL");
         require((_allowToEarn[tokenId1] == _allowToEarn[tokenId2]) && (_allowToEarn[tokenId1] == _allowToEarn[tokenId3]),
-                "los token deben ser del mismo tipo");
-        require(!_blocked[tokenId1] || !_blocked[tokenId2] || !_blocked[tokenId3], "un token esta blockeado");
-        require(_lvl[tokenId1] != 3, "no se puede usar un token lvl 3");
+                "ERR_TYP");
+        require(!_blocked[tokenId1] || !_blocked[tokenId2] || !_blocked[tokenId3], "ERR_BLK");
+        require(_lvl[tokenId1] != 3, "ERR_LVL3");
         require(((ownerOf(tokenId1) == ownerOf(tokenId2)) && (ownerOf(tokenId1) == ownerOf(tokenId3))) && (ownerOf(tokenId1) == msg.sender),
-                "los token deben pertenecerte");
+                "ERR_OW");
 
         if (_lvl[tokenId1] == 1) {
-            upgradeLvl2(msg.sender, tokenId1, tokenId2, tokenId3);
+            upgradeLvl2(msg.sender, tokenId1, tokenId2, tokenId3, num);
         } else {
-            upgradeLvl3(msg.sender, tokenId1, tokenId2, tokenId3);
+            upgradeLvl3(msg.sender, tokenId1, tokenId2, tokenId3, num);
         }
 
         _safeTransfer(msg.sender, poolNFTaddress, tokenId1, "");
@@ -435,8 +431,8 @@ contract InnomicNFT is ERC721Enumerable {
     }
 
     function downgrade(uint256 tokenId) public virtual {
-        require(_lvl[tokenId] > 1, "el token debe ser de lvl mayor a 1");
-        require(ownerOf(tokenId) == msg.sender, "el token debe pertenecerte");
+        require(_lvl[tokenId] > 1, "ERR_LVL");
+        require(ownerOf(tokenId) == msg.sender, "ERR_OW");
         _blocked[_parents[tokenId][0]] = false;
         _blocked[_parents[tokenId][1]] = false;
         _blocked[_parents[tokenId][2]] = false;

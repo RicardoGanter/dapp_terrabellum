@@ -15,46 +15,6 @@ module.exports = [
         "internalType": "string",
         "name": "newBaseURI",
         "type": "string"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "carpetas",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "string[]",
-        "name": "clases_",
-        "type": "string[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lc",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "ld",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "dorados",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lm",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "morados",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "address",
-        "name": "marketAddress_",
-        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -115,6 +75,86 @@ module.exports = [
     "inputs": [
       {
         "indexed": true,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "sold",
+        "type": "bool"
+      }
+    ],
+    "name": "MarketItemCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "MarketItemSold",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
         "internalType": "address",
         "name": "from",
         "type": "address"
@@ -138,46 +178,14 @@ module.exports = [
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "carpeta",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "clase_",
-        "type": "string"
-      }
-    ],
-    "name": "_addClase",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "_getColor",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "to",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "URInum",
+        "type": "uint256"
       }
     ],
     "name": "_mintTokenAllowedToEarn",
@@ -191,6 +199,11 @@ module.exports = [
         "internalType": "address",
         "name": "to",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "URInum",
+        "type": "uint256"
       }
     ],
     "name": "_mintTokenNotAllowedToEarn",
@@ -243,103 +256,6 @@ module.exports = [
       }
     ],
     "name": "_setBaseURI",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "l",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "dorados",
-        "type": "uint256[]"
-      }
-    ],
-    "name": "_setDorados",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "newmod",
-        "type": "uint256"
-      }
-    ],
-    "name": "_setMod",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "l",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "morados",
-        "type": "uint256[]"
-      }
-    ],
-    "name": "_setMorados",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "newBaseURI",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "carpetas",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "string[]",
-        "name": "clases_",
-        "type": "string[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lc",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "ld",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "dorados",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lm",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "morados",
-        "type": "uint256[]"
-      }
-    ],
-    "name": "_setTanda",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -431,12 +347,43 @@ module.exports = [
     "name": "claseToken",
     "outputs": [
       {
-        "internalType": "string",
+        "internalType": "uint256",
         "name": "",
-        "type": "string"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "createMarketItem",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      }
+    ],
+    "name": "createMarketSale",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -453,6 +400,64 @@ module.exports = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "fetchUnSoldMarketItems",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "itemId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "sold",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct InnomicNFT.MarketItem[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllNFTs",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -466,6 +471,25 @@ module.exports = [
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getParents",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
       }
     ],
     "stateMutability": "view",
@@ -530,25 +554,6 @@ module.exports = [
   {
     "inputs": [],
     "name": "name",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "numClase",
     "outputs": [
       {
         "internalType": "string",
@@ -812,6 +817,19 @@ module.exports = [
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      }
+    ],
+    "name": "unListMarketItem",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "tokenId1",
         "type": "uint256"
       },
@@ -824,6 +842,11 @@ module.exports = [
         "internalType": "uint256",
         "name": "tokenId3",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "num",
+        "type": "uint8"
       }
     ],
     "name": "upgrade",

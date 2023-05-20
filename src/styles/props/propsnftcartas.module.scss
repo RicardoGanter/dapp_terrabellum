@@ -1,52 +1,84 @@
 @import '../var.module';
 .link{
     text-decoration: none;
+    margin: .3rem;
 }
-.contain{
-    margin: .6rem;
-    display: flex;
-    flex-direction: column;
-}
-.nft{
-    width: auto;
-    // height: 270px;
-    margin: .6rem 0;
-    border-radius: 3px;
-}
-
-.hability{
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(69, 32, 62);
-    width: 100%;
-    height: auto;
-    padding: .5rem 0;
-    align-items: start;
-    justify-content: center;
-    border-radius: 3px;
-    pre{
-        color: $color_text_white;
-        margin: 0 .5rem ;
-    }
-
-}
-
 .cards{
-    width: 240px;
-    height: 375px;
-    background-color: rgb(56, 1, 58);
-    transition: .4s;
-    border-radius: 5px;
+    padding: .4rem;
+    background: #7A0D69;
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5), inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    .contain{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        .nft{
+            width: 230px;
+            height: 300px;
+            border-radius: 3px;
+        }
+        .absotule{
+            position: absolute;
+            bottom: 90px;
+            width: 100%;
+            height: 46px;
+            background: rgba(133, 17, 135, 0.7);
+            box-shadow: 0px 1px 2px rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            .containlvlnft{
+                width: 100%;
+                top: -10px;
+                position: absolute;
+                display: flex;
+                justify-content: space-around;
+                .energi{
+                    background: #5F036F;
+                    box-shadow: 0px 0px 2px #000000;
+                    height: 3px;
+                    top: 8px;
+                    width: 100%;
+                    position: absolute;
+                }
+                .lvlnft{
+                    z-index: 1;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: rgb(41, 14, 14);
+                }
+            }
+
+            p{
+                position: absolute;
+            }
+        }
+        .habilitys{
+            display: flex;
+            background: #47213C;
+            box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.25);
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            // border-radius: 3px;
+            padding: 1rem 0;
+            .hability{
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.20));
+            }
+        
+        }
+    }
 } 
-
-
 .cards:hover{
     -webkit-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
     -moz-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
     box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
     transition: .4s;
-}   
-
+}
 .cardsRare{
     width: 260px;
     height: 420px;
