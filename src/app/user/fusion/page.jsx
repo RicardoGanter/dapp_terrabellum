@@ -1,6 +1,6 @@
 "use client"
 import styles from "../../../styles/user/fusion.module.scss";
-import { ethers } from "ethers";
+// import { ethers } from "ethers";
 import { useEffect,useState } from "react";
 import PropsNftcartas from "../../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft";
@@ -14,6 +14,23 @@ const Fusion = () => {
   const [unmergechildrens, setUnmergechildrens] = useState([])
   const [aw, setaw] = useState(null)
   const [probability, setProbability] = useState(null)
+  const [filterlevel, setFilterlevel] = useState(null)
+  const [filtercharacters, setFiltercharacters] = useState("")
+  const [filterRarity, setFilterRarity] = useState(null)
+  function norepeatlvl(value){
+    if(filterlevel==value){
+      setFilterlevel(null)
+    }
+    else{
+      setFilterlevel(value)
+    }
+  }
+  const Filter = nfts.filter((nft)=> nft.metadata.name.toLowerCase().includes(filtercharacters.toLowerCase()) &&
+  ( filterlevel ? nft.metadata.level == filterlevel : nft.metadata.level) 
+  // ( filterRarity ? nft.metadata.rarity == filterRarity : nft.metadata.rarity )
+    
+  )
+
   if(unmerge){
     if(nfttomerge.length > 0){
       console.log("aaaaaaaaa", unmerge.length)
@@ -178,30 +195,29 @@ const removeItem = (index) => {
                 <div className={styles.filter1}>
                   <div className={styles.filterinput}>
                     <p>Characters</p>
-                    <input type="text" />
+                    <input type="text" value={filtercharacters} onChange={(e)=> setFiltercharacters(e.target.value)} />
                   </div>
                   <div className={styles.filterinput}>
                     <p>Skills</p>
                     <input type="text" />
                   </div>
                  <div className={styles.filterinput}>
-                  <p>Rarity</p>
-                  <input type="text" /> 
-                 </div>
-                  <div className={styles.filterinput}> 
-                    <p> Level </p>
-                    <div>
-                      <p>1</p>
-                    </div>
-                    <div>
-                      <p >2</p>
-                    </div>
-                    <div> 
-                      <p>3</p>
-                    </div>
-                    {/* <input type="checkbox" name="" id="" />
-                    <input type="checkbox" name="" id="" />
-                    <input type="checkbox" name="" id="" />  */}
+                 <p>Rarity</p>
+                  {/* <input type="text" />  */}
+                 <select className={styles.rarity} value={filterRarity} onChange={(e) => console.log(e.target.value)}>
+                    <option value={0} > All </option>s
+                    <option value={"1"} >Common</option>
+                    <option value={"2"} >Rare</option>
+                    <option value={"3"} >Legendary</option>
+                </select>
+                </div>
+                  <form className={styles.filterinput}>
+                    <p>Level</p>
+                  </form>
+                  <div className={styles.containlvl}>
+                      <p className={styles.aaa} value={"1"} name="lvl" style={ filterlevel== 1 ? {backgroundColor:"red"} : null} onClick={()=>norepeatlvl(1)} >1</p>
+                      <p className={styles.aaa} value={"2"} name="lvl" style={ filterlevel== 2 ? {backgroundColor:"red"} : null} onClick={()=>norepeatlvl(2)} >2</p>
+                      <p className={styles.aaa} value={"3"} name="lvl" style={ filterlevel== 3 ? {backgroundColor:"red"} : null} onClick={()=>norepeatlvl(3)} >3</p>
                   </div>
                 </div>
               </div>
@@ -209,7 +225,7 @@ const removeItem = (index) => {
 
               {/* NFTS */}
               <div className={styles.nfts}>
-              { nfts &&  nfts.map((nft) => (
+              { nfts &&  Filter.map((nft) => (
               <div key={nft.id}>
                 <div  onClick={()=> setCharacteristics([nft.metadata,  nft.id])} >
                 <PropsNftcartas name={nft.metadata.name} image={nft.metadata.image} height={370} Rare={"normal"}/>

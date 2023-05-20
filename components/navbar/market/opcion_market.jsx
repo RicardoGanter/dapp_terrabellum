@@ -4,8 +4,18 @@ import { useEffect, useState } from "react";
 import { Habilidades } from "../../../src/pages/api/habilidades";
 import Search from "./search";
 const Barrafiltros = () => {
-  const [selectedLevel, setSelectedLevel] = useState(1)
-  const [ selectedCharacter , setSelectedCharacter] = useState(null )
+  
+  const [selectedLevel, setSelectedLevel] = useState(1);
+  const [selectedCharacter, setSelectedCharacter] = useState()
+  const [selectedRarities, setSelectedRarities] = useState([]);
+  const handleCheckboxChange = (e) => {
+    const value = e.target.value;
+    if (e.target.checked) {
+      setSelectedRarities([...selectedRarities, value]);
+    } else {
+      setSelectedRarities(selectedRarities.filter(item => item !== value));
+    }
+  };
   return (
     <div className={styles.container}>
     <div className={styles.subContainer}>
