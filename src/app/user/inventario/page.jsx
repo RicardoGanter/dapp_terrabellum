@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import styles from "../../../styles/user/inventario/inventario.module.scss";
 import PropsNftcartas from "../../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft";
-import ConnectMarket from "../../../../components/funcion/connectmarket";
 import NetworkGoerliEth from "../../../../components/funcion/network";
 import Barrafiltros from "../../../../components/navbar/market/opcion_market";
 // import styles from "../../../styles/navbar/market/opcmarket.module.scss";
@@ -17,10 +16,10 @@ const NFTContainer = () => {
   const [selectedCharacter, setSelectedCharacter] = useState()
   const [selectedRarities, setSelectedRarities] = useState([]);
   const filteredNFTs = nfts.filter((nft) => 
-  nft.metadata.level == selectedLevel &&  
-  (nft.metadata.name == selectedRarities[0] || selectedRarities[1] || selectedRarities[2]))
+  nft.metadata.level == selectedLevel  &&
+  (nft.metadata.name == selectedRarities[0] || selectedRarities[1] || selectedRarities[2])
 
-
+  )
 
   const handleCheckboxChange = (e) => {
     const value = e.target.value;
@@ -119,16 +118,16 @@ const NFTContainer = () => {
         </div>
 
         <div className={styles.filtros}>
-          <h2>Rarity</h2>
-          <form style={{ display: "grid", gridTemplateColumns: "1fr 4fr", gap: "10px", placeItems: "start" }}>
-            <input type="checkbox" name="a" value={"Red Spectre"} onChange={handleCheckboxChange} checked={selectedRarities.includes("Red Spectre")} />
-            <label style={{ color: "white" }}>Red Spectre</label>
-            <input type="checkbox" name="a" value={"Agente"} onChange={handleCheckboxChange} checked={selectedRarities.includes("Agente")} />
-            <label style={{ color: "white" }}>Agente</label>
-            <input type="checkbox" name="a" value={"Aifos"} onChange={handleCheckboxChange} checked={selectedRarities.includes("Aifos")} />
-            <label style={{ color: "white" }}>Aifos</label>
-          </form>
-        </div>
+        <h2>Rarity</h2>
+        <form style={{ display: "grid", gridTemplateColumns: "1fr 4fr", gap: "10px", placeItems: "start" }}>
+          <input type="checkbox" name="a" value={"1"} onChange={handleCheckboxChange} checked={selectedRarities.includes("1")} />
+          <label style={{ color: "white" }}>Common</label>
+          <input type="checkbox" name="a" value={"2"} onChange={handleCheckboxChange} checked={selectedRarities.includes("2")} />
+          <label style={{ color: "white" }}>Rare</label>
+          <input type="checkbox" name="a" value={"3"} onChange={handleCheckboxChange} checked={selectedRarities.includes("3")} />
+          <label style={{ color: "white" }} htmlFor="a">Legendary</label>
+        </form>
+      </div>
         <select value={selectedCharacter} onChange={(e) => setSelectedCharacter(e.target.value)}>
             <option>Red Spectre</option>
             <option>Agente</option>
@@ -154,11 +153,14 @@ const NFTContainer = () => {
   <div className={styles.grid}>
     {filteredNFTs.map((nft) => (
     <div key={nft.id}>
-      <PropsNftcartas
-        name={nft.metadata.name}
-        image={nft.metadata.image}
-        Rare={"normal"}
-      />
+      <PropsNftcartas 
+                   level={nft.metadata.level}
+                   name={nft.metadata.name}
+                   image={nft.metadata.image} height={370}
+                   Rare={"normal"}
+                   hability1={nft.metadata.hability1}
+                   hability2={nft.metadata.hability2}
+                   hability3={nft.metadata.hability3}/>
 
       <form
         className={styles.form}

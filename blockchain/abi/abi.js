@@ -404,41 +404,9 @@ module.exports = [
     "name": "fetchUnSoldMarketItems",
     "outputs": [
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "itemId",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address payable",
-            "name": "seller",
-            "type": "address"
-          },
-          {
-            "internalType": "address payable",
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "price",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "sold",
-            "type": "bool"
-          }
-        ],
-        "internalType": "struct InnomicNFT.MarketItem[]",
+        "internalType": "uint256",
         "name": "",
-        "type": "tuple[]"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -490,6 +458,25 @@ module.exports = [
         "internalType": "uint256[]",
         "name": "",
         "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getUnFusioned",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",

@@ -4,8 +4,8 @@ export async function connectToMetaMask() {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
     
     const web3 = new Web3(window.ethereum);
-    const chainId = await window.ethereum.request({ method: 'eth_chainId', params: ['0x5'] }); // Obtener el chainId actual
-    if (chainId === '0x5') { // Comprobar si ya está conectado a Goerli
+    const chainId = await window.ethereum.request({ method: 'eth_chainId', params: ['0xaa36a7'] }); // Obtener el chainId actual
+    if (chainId === '0xaa36a7') { // Comprobar si ya está conectado a Goerli
       const account = await web3.eth.accounts[0]
       console.log(`Connected to chain ${chainId}, address ${account}`);
       return localStorage.setItem('address', account);
@@ -13,7 +13,7 @@ export async function connectToMetaMask() {
       // alert('Por favor, cambie a la red de Goerli en MetaMask');
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x5' }],
+        params: [{ chainId: '0xaa36a7' }],
       });
       return await connectToMetaMask(); // Volver a llamar a la función para asegurarse de que esté conectado a Goerli
     }

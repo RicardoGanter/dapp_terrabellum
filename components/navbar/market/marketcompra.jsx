@@ -38,21 +38,21 @@ const Marketcompra = ()=>{
     }}
 
     // COMPRA 
-  // const compra =async (Id,values)=>{
-  //   try {
-  //     const contract = await ConnectMarket() // conectar a el smart contract Market
-  //     const options = {
-  //       value: ethers.utils.parseUnits(String(values),0), // Convertir a WEI sin decimales
-  //       gasLimit: 1000000 
-  //     };
-  //     const compra = await contract.buyNft("0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",Number(Id),options);
-  //     const aprob = await contract.aprobe("0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",Id,{
-  //         gasLimit: 10000000,
-  //       })
-  //   } catch (error) {
-  //     console.error(error); 
-  //   }
-  // };
+   const compra =async (Id,values)=>{
+     try {
+       const contract = await ConnectMarket() // conectar a el smart contract Market
+       const options = {
+         value: ethers.utils.parseUnits(String(values),0), // Convertir a WEI sin decimales
+         gasLimit: 1000000 
+       };
+       const compra = await contract.createMarketSale("0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",Number(Id),options);
+       const aprob = await contract.aprobe("0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",Id,{
+           gasLimit: 10000000,
+         })
+     } catch (error) {
+       console.error(error); 
+     }
+   };
 
   useEffect(() => {
     const getImageUrls = async () => {

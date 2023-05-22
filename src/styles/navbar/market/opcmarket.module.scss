@@ -29,7 +29,18 @@
                 border-radius: 15px;
                 height: 6px;
             }
-              
+            input[type='checkbox']{
+                appearance: none;
+                width: 13px;
+                height: 13px;
+                border-radius: 3px;
+                background: $color_btn_morado;
+              }  
+              input[type='checkbox']:focus{
+                appearance: none;
+                background-color: red;
+              }  
+
             input[type='range']::-webkit-slider-thumb {
               width: 15px;
               height: 15px;
@@ -37,17 +48,17 @@
               -webkit-appearance: none;
               background: $color_btn_morado;
             }
-            select{
-                width: 100%;
-                background-color: $color_bg;
-                border-radius: 5px;
-                height: 31px;
+        }
+        select{
+            width: 100%;
+            background-color: $color_bg;
+            border-radius: 5px;
+            height: 31px;
+            color: white;
+            option{
                 color: white;
-                option{
-                    color: white;
-                    margin: 1rem;
-                    padding: 3rem;
-                }
+                margin: 1rem;
+                padding: 3rem;
             }
         }
     }

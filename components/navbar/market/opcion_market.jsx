@@ -51,12 +51,12 @@ const Barrafiltros = () => {
       <div className={styles.filtros}>
         <h2>Rarity</h2>
         <form style={{ display: "grid", gridTemplateColumns: "1fr 4fr", gap: "10px", placeItems: "start" }}>
-          <input type="checkbox" name="a" value={"Red Spectre"} onChange={handleCheckboxChange} checked={selectedRarities.includes("Red Spectre")} />
-          <label style={{ color: "white" }}>Red Spectre</label>
-          <input type="checkbox" name="a" value={"Agente"} onChange={handleCheckboxChange} checked={selectedRarities.includes("Agente")} />
-          <label style={{ color: "white" }}>Agente</label>
-          <input type="checkbox" name="a" value={"Aifos"} onChange={handleCheckboxChange} checked={selectedRarities.includes("Aifos")} />
-          <label style={{ color: "white" }}>Aifos</label>
+          <input type="checkbox" name="a" value={"1"} onChange={handleCheckboxChange} checked={selectedRarities.includes("1")} />
+          <label style={{ color: "white" }}>Common</label>
+          <input type="checkbox" name="a" value={"2"} onChange={handleCheckboxChange} checked={selectedRarities.includes("2")} />
+          <label style={{ color: "white" }}>Rare</label>
+          <input type="checkbox" name="a" value={"3"} onChange={handleCheckboxChange} checked={selectedRarities.includes("3")} />
+          <label style={{ color: "white" }} htmlFor="a">Legendary</label>
         </form>
       </div>
       <select value={selectedCharacter} onChange={(e) => setSelectedCharacter(e.target.value)}>

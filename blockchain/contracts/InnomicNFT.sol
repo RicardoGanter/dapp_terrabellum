@@ -3,9 +3,8 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
 import "./PoolNFT.sol";
-
+import "@openzeppelin/contracts/utils/Counters.sol";
 contract InnomicNFT is ERC721Enumerable {
 
     // Mapping from token ID to token URI
@@ -32,6 +31,8 @@ contract InnomicNFT is ERC721Enumerable {
     mapping(uint256 => uint256[3]) private _parents;
 
     mapping(uint256 => bool) private _blocked;
+
+    mapping(uint256 => uint8) private _unFusioned;
     
     address private poolNFTaddress;
 
@@ -117,7 +118,7 @@ contract InnomicNFT is ERC721Enumerable {
             itemId,
             tokenId,
             payable(msg.sender),
-            payable(address(0)),
+            payable(poolNFTaddress),
             price,
             false
         );
@@ -130,7 +131,7 @@ contract InnomicNFT is ERC721Enumerable {
             itemId,
             tokenId,
             msg.sender,
-            address(0),
+            poolNFTaddress,
             price,
             false
         );
@@ -171,7 +172,7 @@ contract InnomicNFT is ERC721Enumerable {
         );
     }
 
-    function fetchUnSoldMarketItems() public view returns (MarketItem[] memory) {
+    function fetchUnSoldMarketItems() public view returns (uint) {
         uint itemCount = _itemIds.current();
         uint unsoldItemCount = 0;
         uint currentIndex = 0;
@@ -190,7 +191,7 @@ contract InnomicNFT is ERC721Enumerable {
             items[currentIndex] = currentItem;
           }
         }
-        return items;
+        return items[0].tokenId;
     }
     /////////////////////////////////////////////////////////////////////////
 
@@ -262,6 +263,11 @@ contract InnomicNFT is ERC721Enumerable {
         return tokenList;
     }
 
+    function getUnFusioned(uint256 tokenId) public view virtual returns (uint8) {
+        uint8 num = _unFusioned[tokenId];
+        return num;
+    }
+
     function _mintTokenAllowedToEarn(address to, uint256 URInum) public virtual {
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
@@ -275,6 +281,8 @@ contract InnomicNFT is ERC721Enumerable {
         _numClase[tokenId] = URInum;
 
         _lvl[tokenId] = 1;
+
+        _unFusioned[tokenId] = 0;
 
         tokenCount++;
         _allowToEarn[tokenId] = true;
@@ -293,6 +301,8 @@ contract InnomicNFT is ERC721Enumerable {
         _numClase[tokenId] = URInum;
 
         _lvl[tokenId] = 1;
+
+        _unFusioned[tokenId] = 0;
 
         tokenCount++;
         _allowToEarn[tokenId] = false;
@@ -444,6 +454,46 @@ contract InnomicNFT is ERC721Enumerable {
         poolNFT.sacar(_parents[tokenId][0], msg.sender);
         poolNFT.sacar(_parents[tokenId][1], msg.sender);
         poolNFT.sacar(_parents[tokenId][2], msg.sender);
+
+        if (_lvl[tokenId] == 2) {
+            if (_unFusioned[_parents[tokenId][0]] < 5) {
+                _unFusioned[_parents[tokenId][0]] += 1;
+            }
+            if (_unFusioned[_parents[tokenId][1]] < 5) {
+                _unFusioned[_parents[tokenId][1]] += 1;
+            }
+            if (_unFusioned[_parents[tokenId][2]] < 5) {
+                _unFusioned[_parents[tokenId][2]] += 1;
+            }
+        } else {
+            if (_unFusioned[_parents[_parents[tokenId][0]][0]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][0]][0]] += 1;
+            }
+            if (_unFusioned[_parents[_parents[tokenId][0]][1]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][0]][1]] += 1;
+            }
+            if (_unFusioned[_parents[_parents[tokenId][0]][2]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][0]][2]] += 1;
+            }
+            if (_unFusioned[_parents[_parents[tokenId][1]][0]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][1]][0]] += 1;
+            }
+            if (_unFusioned[_parents[_parents[tokenId][1]][1]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][1]][1]] += 1;
+            }
+            if (_unFusioned[_parents[_parents[tokenId][1]][2]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][1]][2]] += 1;
+            }
+            if (_unFusioned[_parents[_parents[tokenId][2]][0]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][2]][0]] += 1;
+            }
+            if (_unFusioned[_parents[_parents[tokenId][2]][1]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][2]][1]] += 1;
+            }
+            if (_unFusioned[_parents[_parents[tokenId][2]][2]] < 5) {
+                _unFusioned[_parents[_parents[tokenId][2]][2]] += 1;
+            }
+        }
 
         _burn(tokenId);
     }

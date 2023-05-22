@@ -2,11 +2,11 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 const NetworkGoerliEth = async ()=>{
     const web3Modal = new Web3Modal({
-        network: "goerli",
+        network: "sepolia",
         cacheProvider: true,
         providerOptions: {
-        gasPrice: 200000000,
-        gasLimit: 1000000
+        gasPrice: 21200000000,
+        gasLimit: 141000000
         }, // Opciones del proveedor
     });
     const provider = await web3Modal.connect();

@@ -17,6 +17,8 @@ const Fusion = () => {
   const [filterlevel, setFilterlevel] = useState(null)
   const [filtercharacters, setFiltercharacters] = useState("")
   const [filterRarity, setFilterRarity] = useState(null)
+  const [showUnmergeData, setShowUnmergeData] = useState(false);
+
   function norepeatlvl(value){
     if(filterlevel==value){
       setFilterlevel(null)
@@ -26,23 +28,23 @@ const Fusion = () => {
     }
   }
   const Filter = nfts.filter((nft)=> nft.metadata.name.toLowerCase().includes(filtercharacters.toLowerCase()) &&
-  ( filterlevel ? nft.metadata.level == filterlevel : nft.metadata.level) 
-  // ( filterRarity ? nft.metadata.rarity == filterRarity : nft.metadata.rarity )
+  ( filterlevel ? nft.metadata.level == filterlevel : nft.metadata.level)&&
+  ( filterRarity > 0 ? nft.metadata.rarity == filterRarity : true )
     
   )
 
-  if(unmerge){
-    if(nfttomerge.length > 0){
-      console.log("aaaaaaaaa", unmerge.length)
-      setNfttomerge([])
-    }
-  }
-  if( nfttomerge.length > 0 ){
-    if(unmerge ){
-      console.log("aaaaaaaaavvvvvvvvvvvvvvvv", nfttomerge.length)
-      setUnmerge(null)
-    }
-  }
+  // if(unmerge){
+  //   if(nfttomerge.length > 1){
+  //     console.log("aaaaaaaaa", unmerge.length)
+  //     setNfttomerge([])
+  //   }
+  // }
+  // if( nfttomerge.length > 0 ){
+  //   if(unmerge ){
+  //     console.log("aaaaaaaaavvvvvvvvvvvvvvvv", nfttomerge.length)
+  //     setUnmerge(null)
+  //   }
+  // }
   useEffect(()=>{
     if(nfttomerge.length===3){
       seleccionarNumeroConProbabilidad(nfttomerge[0][0].hability1 ,nfttomerge[1][0].hability1,nfttomerge[2][0].hability1)
@@ -74,7 +76,7 @@ const Fusion = () => {
                 nftPromises.push({
                 metadata,
               });
-              setUnmergechildrens(nftPromises);
+              return setUnmergechildrens(nftPromises);
             }
           });
         }
@@ -149,8 +151,9 @@ const removeItem = (index) => {
     }
     // const array = []
     if(data.length>2){
-      // const contract = await ConnectInnomicNft()
-      // contract.upgrade(data[0],data[1],data[2], probabilidad )
+      const probabilidad = (seleccionarNumeroConProbabilidad(id[0][0].hability1,id[1][0].hability1,id[2][0].hability1))
+      const contract = await ConnectInnomicNft()
+      contract.upgrade(data[0],data[1],data[2], probabilidad )
     }
   }
 
@@ -160,8 +163,7 @@ const removeItem = (index) => {
         const signer = await NetworkGoerliEth();
         const address = await signer.getAddress();
         const contract = await ConnectInnomicNft();
-        
-         // Obtiene el número total de tokens del usuario
+        // Obtiene el número total de tokens del usuario
         const tokenCount = await contract.balanceOf(address);
         // Crea un arreglo con los NFTs del usuario
         const nftPromises = [];
@@ -188,7 +190,7 @@ const removeItem = (index) => {
     <>
         <div className={styles.contain}>
             {/* TOP */}
-            <div>
+            <div style={{width:"100%"}}>
             <div className={styles.containnfts}>
               {/* FILTERS */}
               <div className={styles.filter}>
@@ -197,28 +199,31 @@ const removeItem = (index) => {
                     <p>Characters</p>
                     <input type="text" value={filtercharacters} onChange={(e)=> setFiltercharacters(e.target.value)} />
                   </div>
-                  <div className={styles.filterinput}>
+                  {/* <div className={styles.filterinput}>
                     <p>Skills</p>
                     <input type="text" />
-                  </div>
+                  </div> */}
                  <div className={styles.filterinput}>
                  <p>Rarity</p>
                   {/* <input type="text" />  */}
-                 <select className={styles.rarity} value={filterRarity} onChange={(e) => console.log(e.target.value)}>
+                 <select className={styles.rarity} value={filterRarity} onChange={(e) => setFilterRarity(e.target.value)}>
                     <option value={0} > All </option>s
-                    <option value={"1"} >Common</option>
-                    <option value={"2"} >Rare</option>
-                    <option value={"3"} >Legendary</option>
+                    <option value={1} >Common</option>
+                    <option value={2} >Rare</option>
+                    <option value={3} >Legendary</option>
                 </select>
                 </div>
+                <div style={{display:"flex", gap:"1.5rem"}}>
                   <form className={styles.filterinput}>
                     <p>Level</p>
                   </form>
                   <div className={styles.containlvl}>
-                      <p className={styles.aaa} value={"1"} name="lvl" style={ filterlevel== 1 ? {backgroundColor:"red"} : null} onClick={()=>norepeatlvl(1)} >1</p>
-                      <p className={styles.aaa} value={"2"} name="lvl" style={ filterlevel== 2 ? {backgroundColor:"red"} : null} onClick={()=>norepeatlvl(2)} >2</p>
-                      <p className={styles.aaa} value={"3"} name="lvl" style={ filterlevel== 3 ? {backgroundColor:"red"} : null} onClick={()=>norepeatlvl(3)} >3</p>
+                      <p className={styles.aaa} value={"1"} name="lvl" style={ filterlevel== 1 ? {backgroundColor:"#57213C"} : null} onClick={()=>norepeatlvl(1)} >1</p>
+                      <p className={styles.aaa} value={"2"} name="lvl" style={ filterlevel== 2 ? {backgroundColor:"#57213C"} : null} onClick={()=>norepeatlvl(2)} >2</p>
+                      <p className={styles.aaa} value={"3"} name="lvl" style={ filterlevel== 3 ? {backgroundColor:"#57213C"} : null} onClick={()=>norepeatlvl(3)} >3</p>
                   </div>
+                </div>
+                <button onClick={()=> {setFilterRarity(null);setCharacteristics("");setFilterlevel(null)}}>reset</button>
                 </div>
               </div>
               {/* FILTERS */}
@@ -228,7 +233,14 @@ const removeItem = (index) => {
               { nfts &&  Filter.map((nft) => (
               <div key={nft.id}>
                 <div  onClick={()=> setCharacteristics([nft.metadata,  nft.id])} >
-                <PropsNftcartas name={nft.metadata.name} image={nft.metadata.image} height={370} Rare={"normal"}/>
+                <PropsNftcartas 
+                   level={nft.metadata.level}
+                   name={nft.metadata.name}
+                   image={nft.metadata.image} height={370}
+                   Rare={nft.metadata.rarity}
+                   hability1={nft.metadata.hability1}
+                   hability2={nft.metadata.hability2}
+                   hability3={nft.metadata.hability3}/>
                 </div>
               </div>
             ))}
@@ -245,7 +257,8 @@ const removeItem = (index) => {
                     <PropsNftcartas height={370} name={nfttomerge[0].name} image={nfttomerge[0].image} Rare={"normal"}/>  
                   </div>
                 )
-                 : aw && aw.length == 3 ? aw.map((a)=> <PropsNftcartas height={370} image={a.metadata.image} name={a.metadata.name} Rare={"normal"}/>  
+                 :showUnmergeData && aw && aw.length == 3 ? aw.map((a) => <PropsNftcartas height={370} image={a.metadata.image} name={a.metadata.name} Rare={"normal"}/>
+
                   )
                   : <PropsNftcartas height={370} Rare="normal" name={"null"}/> 
                  }
@@ -278,7 +291,7 @@ const removeItem = (index) => {
                   <h1>hability3</h1>
                 </div> }
 
-                { characteristics ? <h1 onClick={()=> {setUnmerge(characteristics); if(unmerge && unmerge.length>0 ){getchildrens(unmerge[1], unmerge[0])}}} >unmerge</h1>
+                { characteristics ? <h1 onClick={()=> {setUnmerge(characteristics); setShowUnmergeData(true); if(unmerge && unmerge ){getchildrens(unmerge[1], unmerge[0])}}}  >unmerge</h1>
                 : <h1 style={{opacity:.7, backgroundColor:"grey"}}>unmerge</h1> }              
                 
               </div>
