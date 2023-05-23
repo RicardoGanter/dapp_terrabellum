@@ -48,6 +48,9 @@
         padding: 3rem 0;
         width: 100%;
         background-color: $color_bg_morado_oscuro;
+        img{
+            height: 600px;
+        }
     }
     .containhabilitys{
         margin: 0 auto;
@@ -55,14 +58,14 @@
         padding: 1rem;
         border-radius: 5px;
         background-color: $color_bg_morado_oscuro;
-        // div{
-        //     display: flex;
-        //     gap: 1rem;
+        .grouphabilitys{
+            display: flex;
+            justify-content: space-between;
             .hability{
                 width: 125px;
                 height: 125px;
             }
-        // }
+        }
         
         .containhabilityinfo{
             display: flex;

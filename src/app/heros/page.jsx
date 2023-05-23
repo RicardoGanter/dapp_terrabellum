@@ -5,12 +5,21 @@ import vault from '../../../public/icon/vault-solid.svg'
 import NetworkGoerliEth from '../../../components/funcion/network'
 import ConnectInnomicNft from '../../../components/funcion/connectinnomicnft'
 const Heros = ()=>{
+    const probabilidad = ()=>{
+        var randomNumber = Math.floor(Math.random() * 4) + 1;
+        if (Math.random() < 0.01) {
+            return randomNumber += 66;
+          } else if (Math.random() < 0.2) {
+            return randomNumber += 33;
+          }
+          return randomNumber
+        }
     const Mint = async ()=>{
         const signer = await NetworkGoerliEth();
         const address = await signer.getAddress();
-        console.log(address)
         const contract = await ConnectInnomicNft();
-        const mint = await contract._mintTokenAllowedToEarn(address);
+        const nftaleatoreo = probabilidad()
+        const mint = await contract._mintTokenAllowedToEarn(address,nftaleatoreo);
       }
 
     return(

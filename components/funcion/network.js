@@ -6,7 +6,8 @@ const NetworkGoerliEth = async ()=>{
         cacheProvider: true,
         providerOptions: {
         gasPrice: 21200000000,
-        gasLimit: 141000000
+        gas: 3022000000,
+        gasLimit: 110333333000000
         }, // Opciones del proveedor
     });
     const provider = await web3Modal.connect();

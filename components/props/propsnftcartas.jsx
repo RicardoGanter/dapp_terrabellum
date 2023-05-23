@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ha from '../../public/borrar/HABILIDAD3.webp'
 import lvls from '../../public/borrar/Group 157.png'
 import rdsp from '../../public/borrar/spectre_plus1.jpg'
-const PropsNftcartas = ({ Href,name,Ida,Rare, level, height, image, hability1, hability2, hability3 }) => {
+const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, hability2, hability3 }) => {
   const width = height * 0.7
   const [size_pre , setsize_pre] = useState();
   const [fontsize, setFontsize] = useState();
@@ -24,13 +24,12 @@ const PropsNftcartas = ({ Href,name,Ida,Rare, level, height, image, hability1, h
   // <Link className={styles.link} href={`/market/${Href}`}>
   return (
     <div className={styles.link}>
-      <div className={styles.cards} 
-      style={
-        Rare && Rare==1 ? {backgroundColor:"#45C7FF"}
+      <div className={`${styles.cards} ${Rare === 1 ? styles.cardsblue : Rare === 3 ? styles.cardsgold : ''}`}
+
+      style={ 
+        Rare && Rare==1 ?  {backgroundColor:"#45C7FF"}
         : Rare== 3 ? { backgroundColor:"#FFE145" }
         :null
-      
-      
       }>
         <div className={styles.contain}>
           { image ? <img src={image}  alt={`image from ${name}`} className={styles.nft}/>     
@@ -40,24 +39,44 @@ const PropsNftcartas = ({ Href,name,Ida,Rare, level, height, image, hability1, h
                     </div>    
           }
           <div className={styles.absotule} style={ Rare && Rare == 3 ? {backgroundColor:"#D1B00066"} : Rare== 1 ? {backgroundColor:"#0D42493B", 
-boxShadow:"inset 0px 0.5px 4px #45C7FF"}: null }>
+                boxShadow:"inset 0px 0.5px 4px #45C7FF"}: null }>
             <div className={styles.containlvlnft}>
-              { hability1 && !hability2 && !hability3 ? <div className={styles.energi} style={{width:"20%"}} />
-              : hability1 && hability2 && !hability3? <div className={styles.energi} style={{width:"50%"}} />
-              : hability1 && hability2 && hability3? <div className={styles.energi} style={{width:"100%"}} />
+              { hability1 && !hability2 && !hability3 ? <div className={styles.energi} 
+              style={{ width: "20%", 
+              ...(Rare === 1 ? { backgroundColor: "#45C7FF",boxShadow:"0px 0px 6px 5px #1594CA" } 
+              : Rare === 3 ? { backgroundColor: "#FFE145",boxShadow:"0px 0px 6px 5px #E0C11F" } : null) }} />
+
+
+              : hability1 && hability2 && !hability3? <div className={styles.energi} style={{width:"50%",
+              ...(Rare === 1 ? { backgroundColor: "#45C7FF",boxShadow:"0px 0px 6px 5px #1594CA" } 
+              : Rare === 3 ? { backgroundColor: "#FFE145",boxShadow:"0px 0px 6px 5px #E0C11F" } : null)}} />
+              : hability1 && hability2 && hability3? <div className={styles.energi} style={{width:"100%",
+              ...(Rare === 1 ? { backgroundColor: "#45C7FF",boxShadow:"0px 0px 6px 5px #1594CA" } 
+              : Rare === 3 ? { backgroundColor: "#FFE145",boxShadow:"0px 0px 6px 5px #E0C11F" } : null)}} />
               : null  
               }
 
-              {  level >= 1 ? <Image alt={"image lvl nft"} src={ha} className={styles.lvlnft}/>
+              {  level >= 1 ? <div className={styles.lvlnft} 
+              style={ Rare == 1 ? {backgroundColor:"#45C7FF", boxShadow:"0px 0px 6px 5px #1594CA"}  
+                    : Rare == 2 ? {backgroundColor:"#e015ff", boxShadow:"0px 0px 6px 5px #9C26B0"}
+                    : Rare == 3 ? {backgroundColor:"#FFE145", boxShadow:"0px 0px 6px 5px #E0C11F"}
+                    : null}/>
               :  <div  style={{opacity:"70%", backgroundColor:"grey"}} className={styles.lvlnft}/>
               }
 
-              { level >= 2 ?   <Image alt={"image lvl nft"} src={ha} className={styles.lvlnft}/>
+              { level >= 2 ?  
+                <div style={ 
+                  Rare == 1 ? {backgroundColor:"#45C7FF", boxShadow:"0px 0px 6px 5px #1594CA"}
+                  :  Rare == 2 ? {backgroundColor:"#e015ff", boxShadow:"0px 0px 6px 5px #9C26B0"}
+                  :  Rare == 3 ? {backgroundColor:"#FFE145", boxShadow:"0px 0px 6px 5px #E0C11F"}: null} className={styles.lvlnft}/>
               : <div  style={{opacity:"70%", backgroundColor:"grey"}} className={styles.lvlnft}/>
               }
 
               {
-                level === 3 ? <Image alt={"image lvl nft"} src={ha} className={styles.lvlnft}/>
+                level === 3 ? <div style={ 
+                  Rare == 1 ? {backgroundColor:"#45C7FF", boxShadow:"0px 0px 6px 5px #1594CA"}
+                : Rare == 2 ? {backgroundColor:"#e015ff", boxShadow:"0px 0px 6px 5px #9C26B0"}
+                : Rare == 3 ? {backgroundColor:"#FFE145", boxShadow:"0px 0px 6px 5px #E0C11F"}: null} className={styles.lvlnft}/>
               :  <div  style={{opacity:"70%", backgroundColor:"grey"}} className={styles.lvlnft}/>
               }
 

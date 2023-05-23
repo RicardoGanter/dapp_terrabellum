@@ -3,6 +3,7 @@
     width: 100%;
     margin: 5.8rem 1rem 5.8rem 3rem;
     display: grid;
+    align-content: center;
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
 }
@@ -10,38 +11,29 @@
 .containcard{
     display: flex;
     flex-direction: column;
-    width: 240px;
-    margin: 0 0 5rem 0;
+    width: fit-content;
 }
 
 .containPrice{
-    margin: 1rem;
+    margin: 1rem auto;
+    width: fit-content;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    // background-color: red;
     color: aliceblue;
     font-size: $size_18;
-    
 }
 
 .price{
-background-color: aliceblue;
+    background-color: aliceblue;
 }
 
 .btnbuy{
-    background-color: $color_btn_morado;
     padding: 1rem 0;
     border-radius: .5rem;
     color: $color_text_white;
-    width: 100%;
+    margin: 0 auto;
+    width: 90%;
     cursor: pointer;
 }
-.btnbuy:hover{
-    opacity: 70%;
-}
-.btnbuy:active{
-    opacity: 100%
-}
-

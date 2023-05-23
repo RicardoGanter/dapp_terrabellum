@@ -75,29 +75,18 @@
     }
 } 
 .cards:hover{
-    -webkit-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
-    -moz-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
+    // -webkit-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
+    // -moz-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
     box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
     transition: .4s;
 }
-.cardsRare{
-    padding: .4rem;
-    background-color: rgb(56, 1, 58);
-    transition: .4s;
-    border-radius: .5rem;
-} 
-.cardsRare:hover{
-    -webkit-box-shadow: 0px 0px 11px 8px rgb(126, 53, 204);
-    -moz-box-shadow: 0px 0px 11px 8px rgb(126, 53, 204);
-    box-shadow: 0px 0px 11px 8px rgb(126, 53, 204);
-    transition: .4s;
+.cardsblue:hover{
+    box-shadow: 0px 0px 11px 8px #328aaf;
 }
-.cardsLegendary:hover{
-    -webkit-box-shadow: 0px 0px 11px 8px rgb(204, 186, 53);
-    -moz-box-shadow: 0px 0px 11px 8px rgb(204, 186, 53);
-    box-shadow: 0px 0px 11px 8px rgb(204, 186, 53);
-    transition: .4s;
+.cardsgold:hover{
+    box-shadow: 0px 0px 11px 8px #a38f2b;
 }
+
 .power{
     margin: 1rem;
     padding: 1.4rem;
@@ -115,3 +104,4 @@
 .price{
     color: aliceblue;
 }
+

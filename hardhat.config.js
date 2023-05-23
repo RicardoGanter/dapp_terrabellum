@@ -25,7 +25,7 @@ module.exports = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 1000
+        runs: 500
       }
     }
   },
@@ -50,9 +50,9 @@ module.exports = {
   sepoliaInfura: {
     url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
       accounts: [SEPOLIA_PRIVATE_KEY],
-      gasPrice: 70000000000,
-      gas: 1000000000,
-      gasLimit:1000000000000,
+      gasPrice: 90000000000,
+      gas: 44000000000,
+      gasLimit:8700000000000000,
       chainId: 11155111,
 }
   }

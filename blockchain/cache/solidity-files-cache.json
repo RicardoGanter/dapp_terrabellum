@@ -2,15 +2,15 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/ricardo/Program/nextjs/dapp_tb/front-end/blockchain/contracts/InnomicNFT.sol": {
-      "lastModificationDate": 1684701986484,
-      "contentHash": "9d6e674b11d52880a08ad6cb8d79df8b",
+      "lastModificationDate": 1684806240456,
+      "contentHash": "7181399d7f29ed5aae7016281ecc4583",
       "sourceName": "blockchain/contracts/InnomicNFT.sol",
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -49,7 +49,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -87,7 +87,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -122,7 +122,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -160,7 +160,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -197,7 +197,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -232,7 +232,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -275,7 +275,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -312,7 +312,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -347,7 +347,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -384,7 +384,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -421,7 +421,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -456,7 +456,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -493,7 +493,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -530,7 +530,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -565,7 +565,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -600,7 +600,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {

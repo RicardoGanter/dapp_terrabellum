@@ -11,7 +11,7 @@ import Web3Modal from "web3modal";
 import tb from '../../../../public/img/logo.webp'
 import Image from 'next/image'
 import ConnectInnomicNft from '../../../../components/funcion/connectinnomicnft';
-import ConnectMarket from '../../../../components/funcion/connectmarket';
+import PropsNftcartas from '../../../../components/props/propsnftcartas';
 
 function DestinationPage({params}) {
   // const router = useRouter();
@@ -21,34 +21,40 @@ function DestinationPage({params}) {
   const { id } = params;
   const ID = id - 1;
 
-  useEffect(() => {
-    async function fetchSales() {
+  // useEffect(() => {
+  //   async function fetchSales() {
+  //     try {
+  //       const contract = await ConnectInnomicNft() // conectar a el smart contract Market
+  //       const sales = await contract.getAllNFTs(); 
+  //       setSales(sales);
+  //       console.log(sales[ID].toString(),"aaasdasdadaaaaaaaa")
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchSales();
+  // }, []);
+  useEffect(()=>{
+    const fetchImageUrl = async () => {
       try {
-        const contract = await ConnectMarket() // conectar a el smart contract Market
-        const sales = await contract.getListedNfts(); 
-        setSales(sales);
+        const contract = await ConnectInnomicNft() // conectar a el smart contract innomic
+        const response = await contract.tokenURI(id);
+        const uritokenn = await fetch(response);
+        const uritokenjson = await uritokenn.json();
+        console.log("aaaaaaaaa",uritokenjson);
+        setSales({ name: uritokenjson.name, hability1: uritokenjson.hability1, level: uritokenjson.level, rarity : uritokenjson.rarity,
+          hability2: uritokenjson.hability2, hability3: uritokenjson.hability3, image: uritokenjson.image})
       } catch (error) {
         console.error(error);
-      }
-    }
-    fetchSales();
-  }, []);
-  const fetchImageUrl = async () => {
-    try {
-      const contract = await ConnectInnomicNft() // conectar a el smart contract innomic
-      const response = await contract.tokenURI(1);
-      const uritokenn = await fetch(response);
-      const uritokenjson = await uritokenn.json();
-      console.log("aaaaaaaaa",uritokenjson);
-      return {name: uritokenjson.name, rare : uritokenjson.Rare, hability: uritokenjson.hability }
-    } catch (error) {
-      console.error(error);
-    }}
-    fetchImageUrl()
+      }}
+      fetchImageUrl()
+  },[])
+  
+    // fetchImageUrl()
   const venderNFT = async (Id) => {
     try {
       // Llama a la función de venta del contrato Solidity
-      const contract = await ConnectMarket();
+      const contract = await ConnectInnomicNft();
       // contract.aprobe("0x3B92E898442BEEf2ECB82746AaCC5a353933cb28", 5,{
       //   gasLimit: 10000000,
       // })
@@ -78,13 +84,15 @@ function DestinationPage({params}) {
 
       <div   className={styles.containcharacterinfo} >
         <div className={styles.Character}>
-          <Image src={personaje} alt="personaje" />
+          { Sales && Sales.name == "Aifos" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/AIFOS_prot_a.png"}/> }
+          { Sales && Sales.name == "Capitan Union" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/capitan_Tango_D.png"}/> }
+          { Sales && Sales.name == "Red Spectre" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/Ejemplo1..png"}/> }
         </div>
         <div className={styles.containhabilitys}>
-          <div>
-            <Image className={styles.hability} src={habilidad1} alt="habilidad1" />
-            <Image className={styles.hability} src={habilidad2} alt="habilidad2" />
-            <Image className={styles.hability} src={habilidad2} alt="habilidad3" />
+          <div className={styles.grouphabilitys}>
+            { Sales && Sales.hability1 > 0 ? <Image className={styles.hability} src={habilidad1} alt="habilidad1" /> : null }
+            { Sales && Sales.hability2 > 0 ? <Image className={styles.hability} src={habilidad1} alt="habilidad1" /> : null }
+            { Sales && Sales.hability3 > 0 ? <Image className={styles.hability} src={habilidad1} alt="habilidad1" /> : null }
           </div>
 
           <div className={styles.containhabilityinfo}>
@@ -93,7 +101,6 @@ function DestinationPage({params}) {
             <p>Redspectre</p>
             <p>Level</p>
           </div>
-
           <div className={styles.description}>
            <p className={styles.descriptiontext}> 
            {/* borrar */}

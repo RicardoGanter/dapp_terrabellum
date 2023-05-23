@@ -57,11 +57,10 @@ const Fusion = () => {
     }
   },[nfttomerge])
   
-
-
   useEffect(()=>{
     setaw(unmergechildrens)
   },[unmergechildrens])
+  
   const getchildrens = async (father, data) => {
         setUnmergechildrens([]); // Limpiar los datos anteriores
         const nftPromises = [];
@@ -223,7 +222,7 @@ const removeItem = (index) => {
                       <p className={styles.aaa} value={"3"} name="lvl" style={ filterlevel== 3 ? {backgroundColor:"#57213C"} : null} onClick={()=>norepeatlvl(3)} >3</p>
                   </div>
                 </div>
-                <button onClick={()=> {setFilterRarity(null);setCharacteristics("");setFilterlevel(null)}}>reset</button>
+                <button style={{backgroundColor:"#47213c", fontSize:"1.3rem"}} onClick={()=> {setFilterRarity(null);setCharacteristics("");setFilterlevel(null)}}>reset</button>
                 </div>
               </div>
               {/* FILTERS */}
@@ -254,10 +253,26 @@ const removeItem = (index) => {
                 
                 { nfttomerge &&  nfttomerge.length>0 && nfttomerge.length < 4 ? nfttomerge.map((nfttomerge,index) => 
                   <div onClick={ ()=> removeItem(index)}> 
-                    <PropsNftcartas height={370} name={nfttomerge[0].name} image={nfttomerge[0].image} Rare={"normal"}/>  
+                    <PropsNftcartas 
+                      level={nfttomerge[0].level}
+                      name={nfttomerge[0].name}
+                      image={nfttomerge[0].image}
+                      Rare={nfttomerge[0].rarity}
+                      hability1={nfttomerge[0].hability1}
+                      hability2={nfttomerge[0].hability2}
+                      hability3={nfttomerge[0].hability3}/>  
                   </div>
                 )
-                 :showUnmergeData && aw && aw.length == 3 ? aw.map((a) => <PropsNftcartas height={370} image={a.metadata.image} name={a.metadata.name} Rare={"normal"}/>
+                 :showUnmergeData && aw && aw.length == 3 ? aw.map((a) => 
+                 <PropsNftcartas 
+                      level={a.metadata.level}
+                      name={a.metadata.name}
+                      image={a.metadata.image}
+                      Rare={a.metadata.rarity}
+                      hability1={a.metadata.hability1}
+                      hability2={a.metadata.hability2}
+                      hability3={a.metadata.hability3}/> 
+                 
 
                   )
                   : <PropsNftcartas height={370} Rare="normal" name={"null"}/> 
@@ -276,7 +291,16 @@ const removeItem = (index) => {
               <div className={styles.top}>
 
               <div className={styles.left}>
-               { characteristics ?  <PropsNftcartas Rare="normal" height={320} image={characteristics[0].image} name={characteristics[0].name}/>
+               { characteristics ?  
+               <PropsNftcartas 
+                level={characteristics[0].level}
+                name={characteristics[0].name}
+                image={characteristics[0].image}
+                Rare={characteristics[0].rarity}
+                hability1={characteristics[0].hability1}
+                hability2={characteristics[0].hability2}
+                hability3={characteristics[0].hability3}/> 
+
                : <PropsNftcartas Rare="normal" height={320} name={"null"}/> }
               { characteristics ? <h1 className={styles.fusion}  onClick={()=> arraymerge(characteristics)}>merge</h1> : 
                <h1 className={styles.fusion} style={{opacity:.7, backgroundColor:"grey"}}>merge</h1> }  
@@ -284,12 +308,12 @@ const removeItem = (index) => {
               
               <div className={styles.right}>
                 
-                { characteristics ? <div><h1>{characteristics[0].hability1} </h1> <h1>{characteristics[0].hability2}</h1> <h1>{characteristics[0].hability3} </h1></div> :
+                {/* { characteristics ? <div><h1>{characteristics[0].hability1} </h1> <h1>{characteristics[0].hability2}</h1> <h1>{characteristics[0].hability3} </h1></div> :
                 <div>
                   <h1>hability1</h1> 
                   <h1>hability2</h1> 
                   <h1>hability3</h1>
-                </div> }
+                </div> } */}
 
                 { characteristics ? <h1 onClick={()=> {setUnmerge(characteristics); setShowUnmergeData(true); if(unmerge && unmerge ){getchildrens(unmerge[1], unmerge[0])}}}  >unmerge</h1>
                 : <h1 style={{opacity:.7, backgroundColor:"grey"}}>unmerge</h1> }              
@@ -299,10 +323,28 @@ const removeItem = (index) => {
               </div>
                 {/* FUNCION FUSION */}
               <div className={styles.bottom}>
-                { unmerge && unmerge.length  > 0  ? <PropsNftcartas Rare="normal" height={320} image={unmerge[0].image} name={unmerge[0].name}/>
+                { unmerge && unmerge.length  > 0  ? 
+                <PropsNftcartas 
+                  level={unmerge[0].level}
+                  name={unmerge[0].name}
+                  image={unmerge[0].image}
+                  Rare={unmerge[0].rarity}
+                  hability1={unmerge[0].hability1}
+                  hability2={unmerge[0].hability2}
+                  hability3={unmerge[0].hability3}/> 
 
-                : nfttomerge.length === 3 ? <PropsNftcartas Rare="normal" height={320} name={nfttomerge[0][0].name} image={nfttomerge[0][0].image}/>
-                 : <PropsNftcartas Rare="normal" height={320} name={"null"}/>
+                : nfttomerge.length === 3 ?
+                  <PropsNftcartas 
+                  level={nfttomerge[0][0].level}
+                  name={nfttomerge[0][0].name}
+                  image={nfttomerge[0][0].image}
+                  Rare={nfttomerge[0][0].rarity}
+                  hability1={nfttomerge[0][0].hability1}
+                  hability2={nfttomerge[0][0].hability2}
+                  hability3={nfttomerge[0][0].hability3}/> 
+                 
+                 
+                  : <PropsNftcartas Rare="normal" height={320} name={"null"}/>
                 //  CAMBIOS
                 }
                  
@@ -328,9 +370,6 @@ const removeItem = (index) => {
                   : <button  style={{opacity:.7, backgroundColor:"grey"}}>Complete</button>
                   }
                   {/* UNMERGE */}
-                  {
-
-                  }
                   </div>
               </div>
             </div>

@@ -5,7 +5,7 @@ import styles from '../../../src/styles/navbar/market/marketcompra.module.scss'
 import iconeth from '../../../public/icon/ethereum.svg'
 import Image from "next/image";
 import ConnectInnomicNft from "../../funcion/connectinnomicnft.js";
-
+import Link from "next/link";
 const Marketcompra = ()=>{
   const [sales, setSales] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
@@ -15,7 +15,6 @@ const Marketcompra = ()=>{
         const contract = await ConnectInnomicNft() // conectar a el smart contract Market
         const sales = await contract.fetchUnSoldMarketItems()
         setSales(sales);
-        console.log("asdasdasdasd",sales)
       } catch (error) {
         console.error(error);
       }
@@ -25,34 +24,30 @@ const Marketcompra = ()=>{
 
  const fetchImageUrl = async (tokenId) => {
     try {
-     
       const contract = await ConnectInnomicNft() 
       const response = await contract.tokenURI(tokenId);
-      
       const uritokenn = await fetch(response);
       const uritokenjson = await uritokenn.json();
-      
-      return { name: uritokenjson.Name}
+      return { name: uritokenjson.name, hability1: uritokenjson.hability1, level: uritokenjson.level, rarity : uritokenjson.rarity,
+         hability2: uritokenjson.hability2, hability3: uritokenjson.hability3, image: uritokenjson.image}
     } catch (error) {
       console.error(error);
     }}
 
     // COMPRA 
-   const compra =async (Id,values)=>{
-     try {
-       const contract = await ConnectMarket() // conectar a el smart contract Market
-       const options = {
-         value: ethers.utils.parseUnits(String(values),0), // Convertir a WEI sin decimales
-         gasLimit: 1000000 
-       };
-       const compra = await contract.createMarketSale("0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",Number(Id),options);
-       const aprob = await contract.aprobe("0x93a6B40Ff6101246b1eE6BAD63DeC48d41E2786f",Id,{
-           gasLimit: 10000000,
-         })
-     } catch (error) {
-       console.error(error); 
-     }
-   };
+    const compra =async (Id,values)=>{
+      try {
+        const contract = await ConnectInnomicNft() // conectar a el smart contract Market
+        const options = {
+          value: ethers.utils.parseUnits(String(values),0), // Convertir a WEI sin decimales
+          gasLimit: 5000000
+        };
+        console.log(options.value.toString(),"aaaaaaaaaaa")
+        const compra = await contract.createMarketSale(Number(Id),options);
+      } catch (error) {
+        console.error(error); 
+      }
+    };
 
   useEffect(() => {
     const getImageUrls = async () => {
@@ -64,23 +59,36 @@ const Marketcompra = ()=>{
 
 
   return (
-    <>
       <div className={styles.contain}>
-        { imageUrls.length !== 0 ? 
-        imageUrls.map((data, index) => (
-          <div key={index} >
-            {/* <Link className={styles.containcard} href={`/market/[id]`} as={`/market/${sales[index].owner}`}> */}
-            <div className={styles.containcard} >
-           {data && <PropsNftcartas Href={sales[index].tokenId} name={"aa"} Rare="normal" Ida="1" img={"a"} Level={"3"}/>}
-            <div className={styles.containPrice}>Price:{sales[index].price.toString()} <Image src={iconeth} width={40} height={40} alt='Icon ETH' /></div>
-            <button onClick={ ()=>{compra(sales[index].tokenId , sales[index].price)} } className={styles.btnbuy}> Comprar </button>
-            </div>
-          </div> 
-        ))
-      : null}
+      {imageUrls.length > 0 && sales.length > 0 ? 
+  imageUrls.map((data, index) => (
+    <div className={styles.containcard}  key={index} >
+      <div >
+        {data && (
+          <Link href={`/market/${sales[index].tokenId}`}>
+          <PropsNftcartas 
+            name={data.name} 
+            Rare={data.rarity} 
+            image={data.image} 
+            level={data.level} 
+            hability1={data.hability1} 
+            hability2={data.hability2} 
+            hability3={data.hability3}
+          /></Link>
+        )}
+      </div>
+      <div className={styles.containPrice}>
+        Price: {(sales[index].price/10**14).toString()} <Image src={iconeth} width={40} height={40} alt='Icon ETH' />
+      </div>
+      <button onClick={() => compra(sales[index].itemId, sales[index].price)} className={styles.btnbuy}>
+        Comprar
+      </button>
+    </div> 
+      ))
+    : null}
+
         
       </div>
-    </>
   );
   };
 export default Marketcompra;

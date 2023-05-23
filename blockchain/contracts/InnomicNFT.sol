@@ -5,6 +5,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./PoolNFT.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+
 contract InnomicNFT is ERC721Enumerable {
 
     // Mapping from token ID to token URI
@@ -172,10 +173,10 @@ contract InnomicNFT is ERC721Enumerable {
         );
     }
 
-    function fetchUnSoldMarketItems() public view returns (uint) {
+    function fetchUnSoldMarketItems() public view returns (MarketItem[] memory) {
         uint itemCount = _itemIds.current();
         uint unsoldItemCount = 0;
-        uint currentIndex = 0;
+        uint itemId = 0;
 
         for (uint i = 0; i < itemCount; i++) {
           if (!idToMarketItem[i + 1].sold && idToMarketItem[i + 1].owner == poolNFTaddress) {
@@ -186,12 +187,13 @@ contract InnomicNFT is ERC721Enumerable {
         MarketItem[] memory items = new MarketItem[](unsoldItemCount);
         for (uint i = 0; i < itemCount; i++) {
           uint currentId = i + 1;
-          if (idToMarketItem[currentId].owner == poolNFTaddress) {
+          if (!idToMarketItem[currentId].sold && idToMarketItem[currentId].owner == poolNFTaddress) {
             MarketItem storage currentItem = idToMarketItem[currentId];
-            items[currentIndex] = currentItem;
+            items[itemId] = currentItem;
+            itemId += 1;
           }
         }
-        return items[0].tokenId;
+        return items;
     }
     /////////////////////////////////////////////////////////////////////////
 

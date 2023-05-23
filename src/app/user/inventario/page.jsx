@@ -2,22 +2,26 @@
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
-import styles from "../../../styles/user/inventario/inventario.module.scss";
+import styles2 from "../../../styles/user/inventario/inventario.module.scss";
+import styles from '../../../styles/navbar/market/opcmarket.module.scss'
 import PropsNftcartas from "../../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft";
 import NetworkGoerliEth from "../../../../components/funcion/network";
 import Barrafiltros from "../../../../components/navbar/market/opcion_market";
+import Link from 'next/link'
 // import styles from "../../../styles/navbar/market/opcmarket.module.scss";
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [price, setPrice] = useState({});
   const [selectedLevel, setSelectedLevel] = useState(1);
-  const [selectedCharacter, setSelectedCharacter] = useState()
   const [selectedRarities, setSelectedRarities] = useState([]);
+  const [filtercharacters, setFiltercharacters] = useState("")
+  
   const filteredNFTs = nfts.filter((nft) => 
   nft.metadata.level == selectedLevel  &&
-  (nft.metadata.name == selectedRarities[0] || selectedRarities[1] || selectedRarities[2])
+  nft.metadata.name.toLowerCase().includes(filtercharacters.toLowerCase()) &&
+   (nft.metadata.name == selectedRarities[0] || selectedRarities[1] || selectedRarities[2])
 
   )
 
@@ -75,7 +79,7 @@ const NFTContainer = () => {
      // })
       await contract.createMarketItem( // CONTRATO INNOMIC
        Id,
-       price,{
+       price *10**9 ,{
        gasLimit: 1000000,
      } );
    } catch (error) {
@@ -84,7 +88,7 @@ const NFTContainer = () => {
  };
 
   return (
-    <div style={{display:"flex"}}>
+    <div style={{display:"flex", gap: "1rem"}}>
       {/* <Barrafiltros/> */}
       <div className={styles.container}>
       <div className={styles.subContainer}>
@@ -95,12 +99,14 @@ const NFTContainer = () => {
               <option>Items</option>
               <option>Weapon</option>
           </select>
-          <h2>Hability</h2>
+          <h2>Characters</h2>
+          <input type="text" value={filtercharacters} style={{backgroundColor:"#47213c", padding:".5rem 0", width:"100%"}} onChange={(e)=> setFiltercharacters(e.target.value)} />
+          {/* <h2>Hability</h2>
           <select>
               <option>noc</option>
               <option>n213123oc</option>
               <option>noc2312312</option>
-          </select>
+          </select> */}
         </div>
 
         <div className={styles.filtros}>
@@ -117,7 +123,7 @@ const NFTContainer = () => {
           </div>
         </div>
 
-        <div className={styles.filtros}>
+        <div className={styles2.filtros}>
         <h2>Rarity</h2>
         <form style={{ display: "grid", gridTemplateColumns: "1fr 4fr", gap: "10px", placeItems: "start" }}>
           <input type="checkbox" name="a" value={"1"} onChange={handleCheckboxChange} checked={selectedRarities.includes("1")} />
@@ -128,12 +134,12 @@ const NFTContainer = () => {
           <label style={{ color: "white" }} htmlFor="a">Legendary</label>
         </form>
       </div>
-        <select value={selectedCharacter} onChange={(e) => setSelectedCharacter(e.target.value)}>
+        {/* <select value={selectedCharacter} onChange={(e) => setSelectedCharacter(e.target.value)}>
             <option>Red Spectre</option>
             <option>Agente</option>
             <option>Aifos</option>
-        </select>
-        <div className={styles.filtros}>
+        </select> */}
+        <div className={styles2.filtros}>
           <h2>unmerge</h2>
           <input type="range" min="1" max="7"/>
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
@@ -150,20 +156,22 @@ const NFTContainer = () => {
 {loading ? (
   <p>Cargando NFTs...</p>
 ) : nfts ? (
-  <div className={styles.grid}>
+  <div className={styles2.grid} style={{display:"flex"}}>
     {filteredNFTs.map((nft) => (
     <div key={nft.id}>
+      <Link href={`/market/${nft.id}`}>
       <PropsNftcartas 
                    level={nft.metadata.level}
                    name={nft.metadata.name}
                    image={nft.metadata.image} height={370}
-                   Rare={"normal"}
+                   Rare={nft.metadata.rarity}
                    hability1={nft.metadata.hability1}
                    hability2={nft.metadata.hability2}
-                   hability3={nft.metadata.hability3}/>
+                   hability3={nft.metadata.hability3}/></Link>
+                   
 
       <form
-        className={styles.form}
+        className={styles2.form}
         onSubmit={(e) => {
           e.preventDefault();
           venderNFT(nft.id);
@@ -176,7 +184,7 @@ const NFTContainer = () => {
           onChange={(e) => setPrice(e.target.value)}
           max={99999999999}
         />
-        <button className={styles.sell} type="submit">
+        <button className={styles2.sell} type="submit">
           vender
         </button>
       </form>
