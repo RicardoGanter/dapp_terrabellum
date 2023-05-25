@@ -9,21 +9,76 @@ import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft"
 import NetworkGoerliEth from "../../../../components/funcion/network";
 import Barrafiltros from "../../../../components/navbar/market/opcion_market";
 import Link from 'next/link'
-// import styles from "../../../styles/navbar/market/opcmarket.module.scss";
+import ReactSlider from 'react-slider'
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [price, setPrice] = useState({});
-  const [selectedLevel, setSelectedLevel] = useState(1);
   const [selectedRarities, setSelectedRarities] = useState([]);
   const [filtercharacters, setFiltercharacters] = useState("")
+  const [selectedRange, setSelectedRange] = useState([1, 3]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [selectedRangedefusion, setSelectedRangedefusion] = useState([0, 5]);
+  const [filteredItemsdefusion, setFilteredItemsdefusion] = useState([]);
+  const [orderprice, setOrderprice] = useState(false)
   
-  const filteredNFTs = nfts.filter((nft) => 
-  nft.metadata.level == selectedLevel  &&
-  nft.metadata.name.toLowerCase().includes(filtercharacters.toLowerCase()) &&
-   (nft.metadata.name == selectedRarities[0] || selectedRarities[1] || selectedRarities[2])
+   const filteredNFTs = nfts.filter((nft) => 
+   filteredItems.includes(nft.metadata.level) &&
+  //  filteredItemsdefusion.includes(nft.metadata.unfusioned)
+    ( selectedRarities.length > 0 ? nft.metadata.rarity.filter(nft => selectedRarities.some(rarity => rarity === nft.metadata.rarity)) : nft.metadata.rarity) &&
+    nft.metadata.name.toLowerCase().includes(filtercharacters.toLowerCase())
+   )
+  //FILTERS
 
-  )
+  const handleOrderChange = (e) => {
+    const value = e.target.value;
+    if (value === "lowest") {
+      setOrderprice(false);
+    } else if (value === "highest") {
+      setOrderprice(true);
+    }
+  };
+
+  useEffect(() => {
+    const filtered = [];
+    for (let i = selectedRange[0]; i <= selectedRange[1]; i++) {
+      filtered.push(i);
+    }
+    setFilteredItems(filtered);
+  }, [selectedRange]);
+
+  const handleRangeChange = (value) => {
+    setSelectedRange(value);
+  };
+
+  //PRICE
+  // useEffect(() => {
+  //   const filtered = [];
+  //   for (let i = minprice[0]; i <= minprice[1]; i++) {
+  //     filtered.push(i);
+  //   }
+  //   setFilteredItemsprice(filtered);
+  // }, [minprice]);
+
+  // const handleRangeChangeprice = (value) => {
+  //   setMinprice(value);
+  // };
+
+
+
+  useEffect(() => {
+    const filtered = [];
+    for (let i = selectedRangedefusion[0]; i <= selectedRangedefusion[1]; i++) {
+      filtered.push(i);
+    }
+    setFilteredItemsdefusion(filtered);
+  }, [selectedRangedefusion]);
+
+  const handleRangeChangefusion = (value) => {
+    setSelectedRangedefusion(value);
+  };
+
+
 
   const handleCheckboxChange = (e) => {
     const value = e.target.value;
@@ -31,6 +86,18 @@ const NFTContainer = () => {
       setSelectedRarities([...selectedRarities, value]);
     } else {
       setSelectedRarities(selectedRarities.filter(item => item !== value));
+    }
+    
+    applyFilter(); // Aplicar filtro automáticamente al cambiar las selecciones de las casillas de verificación
+  };
+  const applyFilter = () => {
+    let filterValue = 0;
+    if (selectedRarities.includes("1")) {
+      filterValue = 1;
+    } else if (selectedRarities.includes("2")) {
+      filterValue = 2;
+    } else if (selectedRarities.includes("3")) {
+      filterValue = 3;
     }
   };
 
@@ -108,42 +175,72 @@ const NFTContainer = () => {
               <option>noc2312312</option>
           </select> */}
         </div>
-
+          
         <div className={styles.filtros}>
+          {/* <h2>price</h2>
+          <ReactSlider
+            className={styles2.horizontalslider}
+            thumbClassName={styles2.examplethumb}
+            defaultValue={minprice}
+            onChange={handleRangeChangeprice}
+            trackClassName="slider-track"
+            renderTrack={(props, state) => (
+              <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
+            )}
+            /> */}
+
           <h2>Level</h2>
-          <input 
-            type="range" 
-            defaultValue="1"
-            min="1" 
-            max="3"
-            onChange={(e) => setSelectedLevel(parseInt(e.target.value))}
-          />
+          <ReactSlider
+            className={styles.horizontalslider}
+            thumbClassName={styles.examplethumb}
+            min={1}
+            max={3}
+            defaultValue={selectedRange}
+            onChange={handleRangeChange}
+            trackClassName="slider-track"
+            renderTrack={(props, state) => (
+              <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
+            )}
+            />
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
             <h2>1</h2> <h2>2</h2> <h2>3</h2>
           </div>
         </div>
 
-        <div className={styles2.filtros}>
+        <div className={styles.filtros}>
         <h2>Rarity</h2>
         <form style={{ display: "grid", gridTemplateColumns: "1fr 4fr", gap: "10px", placeItems: "start" }}>
-          <input type="checkbox" name="a" value={"1"} onChange={handleCheckboxChange} checked={selectedRarities.includes("1")} />
-          <label style={{ color: "white" }}>Common</label>
-          <input type="checkbox" name="a" value={"2"} onChange={handleCheckboxChange} checked={selectedRarities.includes("2")} />
-          <label style={{ color: "white" }}>Rare</label>
-          <input type="checkbox" name="a" value={"3"} onChange={handleCheckboxChange} checked={selectedRarities.includes("3")} />
-          <label style={{ color: "white" }} htmlFor="a">Legendary</label>
-        </form>
+        <input type="checkbox" name="a" value={"1"} onChange={handleCheckboxChange} checked={selectedRarities.includes("1")} />
+        <label style={{ color: "white" }}>Common</label>
+        <input type="checkbox" name="a" value={"2"} onChange={handleCheckboxChange} checked={selectedRarities.includes("2")} />
+        <label style={{ color: "white" }}>Rare</label>
+        <input type="checkbox" name="a" value={"3"} onChange={handleCheckboxChange} checked={selectedRarities.includes("3")} />
+        <label style={{ color: "white" }} htmlFor="a">Legendary</label>
+      </form>
+
       </div>
         {/* <select value={selectedCharacter} onChange={(e) => setSelectedCharacter(e.target.value)}>
             <option>Red Spectre</option>
             <option>Agente</option>
             <option>Aifos</option>
         </select> */}
-        <div className={styles2.filtros}>
+        <div className={styles.filtros}>
           <h2>unmerge</h2>
-          <input type="range" min="1" max="7"/>
+          <ReactSlider
+            className={styles.horizontalslider}
+            thumbClassName={styles.examplethumb}
+            min={0}
+            max={5}
+            defaultValue={selectedRangedefusion}
+            onChange={handleRangeChangefusion}
+            trackClassName="slider-track"
+            renderTrack={(props, state) => (
+              <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
+            )}
+            />
+          {/* <input type="range" min="1" max="7"/> */}
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
-            <h2>1</h2> <h2>2</h2> <h2>3</h2> <h2>4</h2> <h2>5</h2> <h2>6</h2> <h2>7</h2> 
+            <h2>0</h2> <h2>1</h2> <h2>2</h2> <h2>3</h2> <h2>4</h2> <h2>5</h2>
           </div>
         </div>
       </div>
@@ -192,6 +289,12 @@ const NFTContainer = () => {
   ))}
   </div>
 ) : null }
+  <div className={styles.contain}>
+      <select onChange={handleOrderChange}>
+        <option value="lowest">Lowest Price</option>
+        <option value="highest">Highest Price</option>
+      </select>
+      </div>
 {/* </div> */}
     </div>
   );

@@ -3,19 +3,19 @@
 .contain{
    display: flex;
    flex-direction: column;
-   justify-content: end;
-   align-items: start;
+   justify-content: flex-end;
+   align-items:  flex-start;
    margin: 0 0 0 200px;
    .wallet{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    place-items: end;
+    place-items: flex-end;
     gap: 1rem;
     }
    .containinfo{
     display: flex;
-    justify-content: start;
-    align-items: start;
+    justify-content:  flex-start;
+    align-items:  flex-start;
     margin: 4rem 2rem;
         .contain_datos{
             flex-direction: column;

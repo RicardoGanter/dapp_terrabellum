@@ -1,17 +1,20 @@
 @import '../../var.module';
 .contain{
     width: 100%;
-    margin: 5.8rem 1rem 5.8rem 3rem;
-    display: grid;
-    align-content: center;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    margin: 5.8rem 1rem 3rem 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    // display: grid;
+    // align-content: center;
+    // gap: 1rem;
+    // grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
 }
 
 .containcard{
     display: flex;
     flex-direction: column;
     width: fit-content;
+    margin: 1rem;
 }
 
 .containPrice{

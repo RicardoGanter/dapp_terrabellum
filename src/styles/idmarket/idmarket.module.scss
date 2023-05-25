@@ -69,7 +69,7 @@
         
         .containhabilityinfo{
             display: flex;
-            justify-content: start;
+            justify-content:  flex-start;
             gap: .5rem;
             p{
                 padding: .5rem .7rem;
@@ -86,7 +86,7 @@
             .descriptiontext{
                 margin: 1rem;
                 color: $color_text_white;
-                text-align: start;
+                text-align:  flex-start;
                 word-wrap: break-word;
             }
         }

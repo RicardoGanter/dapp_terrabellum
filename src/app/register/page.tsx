@@ -2,7 +2,7 @@
 import styles from '../../styles/register/register.module.scss'
 import { useState } from 'react'
 import axios from 'axios'
-import { cookies } from 'next/dist/client/components/headers'
+// import { cookies } from 'next/dist/client/components/headers'
 const Register = ()=>{
     const [Nombre, setNombre] = useState('')
     const [Email,setEmail] = useState('');

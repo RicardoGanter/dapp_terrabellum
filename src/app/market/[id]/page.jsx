@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../../styles/idmarket/idmarket.module.scss'
 import personaje from '../../../../public/borrar/Ejemplo1..png'
-import habilidad3 from '../../../../public/borrar/HABILIDAD3.webp'
-import habilidad2 from '../../../../public/borrar/HABILIDAD2.webp'
 import habilidad1 from '../../../../public/borrar/HABILIDAD1.webp'
 import Web3Modal from "web3modal";
 import tb from '../../../../public/img/logo.webp'

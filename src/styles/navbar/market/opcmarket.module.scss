@@ -17,7 +17,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: start;
+            align-items: flex-start;
             margin: 1rem 0;
             input[type='range']{
                 background-color: $color_bg;
@@ -29,17 +29,17 @@
                 border-radius: 15px;
                 height: 6px;
             }
-            input[type='checkbox']{
-                appearance: none;
-                width: 13px;
-                height: 13px;
-                border-radius: 3px;
-                background: $color_btn_morado;
-              }  
-              input[type='checkbox']:focus{
-                appearance: none;
-                background-color: red;
-              }  
+            // input[type='checkbox']{
+            //     appearance: none;
+            //     width: 13px;
+            //     height: 13px;
+            //     border-radius: 3px;
+            //     background: $color_btn_morado;
+            //   }  
+            //   input[type='checkbox']:focus{
+            //     appearance: none;
+            //     background-color: red;
+            //   }  
 
             input[type='range']::-webkit-slider-thumb {
               width: 15px;
@@ -65,9 +65,46 @@
 }
 
 
+.horizontalslider{
+    width: 100%;
+    background-color: $color_bg;
+    color: white;
+    padding: .2rem 0;
+    cursor: pointer;
+}
+.examplethumb{
+    top: -3px;
+    margin: auto;
+    background-color: $color_btn_morado;
+    padding: .1rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
 
 
-
+.contain{
+    /* background-color: black; */
+    position: absolute;
+    top: 100px;
+    right: 65px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    *{  
+        font-size: $size_14;
+        background-color: $color_bg_morado_oscuro;
+        border-radius: 5px;
+        margin: 1rem;
+        color: $color_text_white;
+        padding: .6rem 1rem;
+    }
+} 
+// .slidertrack{
+//     background-color: blue;
+//     width: 10px;
+//     height: 10px;
+// }
 
 
 

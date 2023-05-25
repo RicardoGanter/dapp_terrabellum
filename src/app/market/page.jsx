@@ -5,8 +5,8 @@ import Barrafiltros from "../../../components/navbar/market/opcion_market";
 const Market = ()=>{
     return(
         <div style={{display: "flex", margin:"0 0 0 5px"}}>
-            <Barrafiltros/>
-            <Marketfiltros/>
+            {/* <Barrafiltros/> */}
+            {/* <Marketfiltros/> */}
             <Marketcompra/>
         </div>
     )

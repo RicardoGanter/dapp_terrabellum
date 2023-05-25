@@ -3,7 +3,7 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items:  flex-start;
     justify-content: center;
         .subcontainer{
             position: relative;
@@ -38,7 +38,7 @@
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    text-align: start;
+                    text-align:  flex-start;
                     gap: 1rem;
                     // color: $color_text_white;
                     label input{

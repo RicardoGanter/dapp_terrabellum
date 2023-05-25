@@ -3,11 +3,13 @@ import styles from "../../../src/styles/navbar/market/opcmarket.module.scss";
 import { useEffect, useState } from "react";
 import { Habilidades } from "../../../src/pages/api/habilidades";
 import Search from "./search";
+
 const Barrafiltros = () => {
   
   const [selectedLevel, setSelectedLevel] = useState(1);
   const [selectedCharacter, setSelectedCharacter] = useState()
   const [selectedRarities, setSelectedRarities] = useState([]);
+  const [filtercharacters, setFiltercharacters] = useState("")
   const handleCheckboxChange = (e) => {
     const value = e.target.value;
     if (e.target.checked) {
@@ -26,12 +28,9 @@ const Barrafiltros = () => {
             <option>Items</option>
             <option>Weapon</option>
         </select>
-        <h2>Hability</h2>
-        <select>
-            <option>noc</option>
-            <option>n213123oc</option>
-            <option>noc2312312</option>
-        </select>
+        <h2>Characters</h2>
+          <input type="text" value={filtercharacters} style={{backgroundColor:"#47213c", padding:".5rem 0", width:"100%"}} onChange={(e)=> setFiltercharacters(e.target.value)} />
+          
       </div>
 
       <div className={styles.filtros}>
@@ -77,38 +76,5 @@ const Barrafiltros = () => {
 };
 
 export default Barrafiltros;
-// export function Select({ name }) {
-  // return(
-  //     <div className={styles.containselect}>
-  //         <p>{name}</p>
-  //     <select className={styles.opcion}>
-  //         <option>{opcion}</option>
-  //     </select>
-  //     </div>
-  // )
-// }
 
-// export function PriceFilter() {
-//     const [price, setPrice] = useState(50);
 
-//     const handlePriceChange = (event) => {
-//       setPrice(event.target.value);
-//       // Aquí podrías llamar a una función que filtre los datos en función del precio seleccionado
-//     };
-
-//     return (
-//       <div>
-//         <label htmlFor="price-filter">Precio:</label>
-//         <RangeInput
-//           id="price-filter"
-//           name="price-filter"
-//           min={0}
-//           max={100}
-//           step={1}
-//           value={price}
-//           onChange={handlePriceChange}
-//         />
-//         <p>{price}</p>
-//       </div>
-//     );
-//   }
