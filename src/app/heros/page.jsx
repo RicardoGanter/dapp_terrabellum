@@ -1,27 +1,25 @@
 "use client"
 import styles from '../../styles/heros/heros.module.scss'
 import Image from 'next/image'
-import vault from '../../../public/icon/vault-solid.svg'
-import NetworkGoerliEth from '../../../components/funcion/network'
-import ConnectInnomicNft from '../../../components/funcion/connectinnomicnft'
-const Heros = ()=>{
-    const probabilidad = ()=>{
-        var randomNumber = Math.floor(Math.random() * 4) + 1;
-        if (Math.random() < 0.01) {
-            return randomNumber += 66;
-          } else if (Math.random() < 0.2) {
-            return randomNumber += 33;
-          }
-          return randomNumber
-        }
-    const Mint = async ()=>{
-        const signer = await NetworkGoerliEth();
-        const address = await signer.getAddress();
-        const contract = await ConnectInnomicNft();
-        const nftaleatoreo = probabilidad()
-        const mint = await contract._mintTokenAllowedToEarn(address,nftaleatoreo);
-      }
+import vault from '../../public/icon/vault-solid.svg'
+import NetworkGoerliEth from '../../components/funcion/network'
+import ConnectInnomicNft from '../../components/funcion/connectinnomicnft'
+import axios from 'axios'
 
+const Heros = ()=>{
+    const Mint = async ()=>{
+        try{
+            const signer = await NetworkGoerliEth();
+            const address = await signer.getAddress();
+            const contract = await ConnectInnomicNft();
+            const response = await axios.get( "http://localhost:8000/usuarios/Mintt" );
+            const lol = response.data.message
+            const mint = await contract._mintTokenAllowedToEarn(address,lol);
+        }
+        catch(error){
+            console.log(error);
+        }
+      }
     return(
         <>
             <div className={styles.contain}>
@@ -35,5 +33,4 @@ const Heros = ()=>{
         </>
     )
 }
-
 export default Heros

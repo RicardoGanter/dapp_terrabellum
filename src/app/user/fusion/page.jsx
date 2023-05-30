@@ -2,9 +2,9 @@
 import styles from "../../../styles/user/fusion.module.scss";
 // import { ethers } from "ethers";
 import { useEffect,useState } from "react";
-import PropsNftcartas from "../../../../components/props/propsnftcartas";
-import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft";
-import NetworkGoerliEth from "../../../../components/funcion/network";
+import PropsNftcartas from "../../../components/props/propsnftcartas";
+import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
+import NetworkGoerliEth from "../../../components/funcion/network";
 const Fusion = () => {
   // const [merge, setMerge] = useState(false)
   const [nfts, setNfts] = useState([]);

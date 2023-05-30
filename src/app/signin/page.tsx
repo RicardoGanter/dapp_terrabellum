@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation';
 import axios from "axios"
 import { useSession } from 'next-auth/react';
 import { signIn } from "next-auth/react"
-import back from '../../../public/icon/circle-arrow-left-solid.svg'
-import ConnectButton from "../../../components/header/loginmetamask/loginmetamask.jsx"
+import back from '../../public/icon/circle-arrow-left-solid.svg'
+import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx"
 const Signin = () => {
   const {data: session, status} = useSession()
   const router = useRouter();

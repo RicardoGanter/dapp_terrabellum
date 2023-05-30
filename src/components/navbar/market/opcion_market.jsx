@@ -1,8 +1,6 @@
 "use client"
-import styles from "../../../src/styles/navbar/market/opcmarket.module.scss";
+import styles from "../../../styles/navbar/market/opcmarket.module.scss";
 import { useEffect, useState } from "react";
-import { Habilidades } from "../../../src/pages/api/habilidades";
-import Search from "./search";
 
 const Barrafiltros = () => {
   

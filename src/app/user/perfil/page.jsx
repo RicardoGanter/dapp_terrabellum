@@ -1,8 +1,8 @@
 "use client"
 import Image from "next/image";
-import yoxd from '../../../../public/img/lal.webp'
+import yoxd from '../../../public/img/lal.webp'
 import styles from '../../../styles/user/perfil.module.scss'
-import ConnectButton from "../../../../components/header/loginmetamask/loginmetamask.jsx"
+import ConnectButton from "../../../components/header/loginmetamask/loginmetamask";
 import { useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";

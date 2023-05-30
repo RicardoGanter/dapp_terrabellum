@@ -1,7 +1,7 @@
 "use client"
 import '../styles/globals.scss'
-import Header from '../../components/header/header'
-import Option from '../../components/navbar/opcion'
+import Header from '../components/header/header'
+import Option from '../components/navbar/opcion'
 import Loading from './loading'
 import { Suspense } from 'react'
 import { SessionProvider } from 'next-auth/react'

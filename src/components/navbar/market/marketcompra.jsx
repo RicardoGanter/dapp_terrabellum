@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import PropsNftcartas from "../../props/propsnftcartas";
-import styles from '../../../src/styles/navbar/market/marketcompra.module.scss'
+import styles from '../../../styles/navbar/market/marketcompra.module.scss'
 import iconeth from '../../../public/icon/ethereum.svg'
 import Image from "next/image";
 import ConnectInnomicNft from "../../funcion/connectinnomicnft.js";
-import styles2 from '../../../src/styles/navbar/market/opcmarket.module.scss'
+import styles2 from '../../../styles/navbar/market/opcmarket.module.scss'
 import ReactSlider from 'react-slider';
 import Link from "next/link";
 const Marketcompra = ()=>{
@@ -267,7 +267,7 @@ const Marketcompra = ()=>{
     <div className={styles.containcard}  key={data.id} >
       <div >
         {data && (
-          // <Link href={`/market/${sales[data.id].tokenId}`}>
+          <Link href={`/market/${data.id.tokenId}`}>
           <PropsNftcartas 
             name={data.name} 
             Rare={data.rarity} 
@@ -277,6 +277,7 @@ const Marketcompra = ()=>{
             hability2={data.hability2} 
             hability3={data.hability3}
           />
+          </Link>
         )}
       </div>
       <div className={styles.containPrice}>

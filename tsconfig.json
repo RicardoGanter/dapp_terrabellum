@@ -27,16 +27,13 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/header/login/login.tsx",
+    "src/components/header/login/login.tsx",
     ".next/types/**/*.ts"
-, "src/app/loading.tsx", "src/app/page.jsx", "src/app/signin/page.tsx", "components/funcion/loginmetamask.js"  ],
+, "src/app/loading.tsx", "src/app/page.jsx", "src/app/signin/page.tsx", "src/components/funcion/loginmetamask.js", "src/components/funcion/connectinnomicnft.js"  ],
   "exclude": [
     "node_modules"
   ],
-  "baseUrl": ".",
-  "paths": {
-    "@/*": [
-      "./*"
-    ]
-  }
+    "paths": {
+      "@/*": ["./src/*"]
+    }
 }

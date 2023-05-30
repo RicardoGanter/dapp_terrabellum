@@ -11,8 +11,8 @@ const NetworkGoerliEth = async ()=>{
         }, // Opciones del proveedor
     });
     const provider = await web3Modal.connect();
-    const ethersProvider = new ethers.providers.Web3Provider(provider);
-    const signer = ethersProvider.getSigner();
+    const ethersProvider =  new ethers.providers.Web3Provider(provider);
+    const signer =  ethersProvider.getSigner();
     return signer;
 }
 

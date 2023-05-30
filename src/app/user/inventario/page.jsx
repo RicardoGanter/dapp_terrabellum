@@ -4,10 +4,10 @@ import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import styles2 from "../../../styles/user/inventario/inventario.module.scss";
 import styles from '../../../styles/navbar/market/opcmarket.module.scss'
-import PropsNftcartas from "../../../../components/props/propsnftcartas";
-import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft";
-import NetworkGoerliEth from "../../../../components/funcion/network";
-import Barrafiltros from "../../../../components/navbar/market/opcion_market";
+import PropsNftcartas from "../../../components/props/propsnftcartas";
+import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
+import NetworkGoerliEth from "../../../components/funcion/network";
+import Barrafiltros from "../../../components/navbar/market/opcion_market";
 import Link from 'next/link'
 import ReactSlider from 'react-slider'
 const NFTContainer = () => {
@@ -24,8 +24,8 @@ const NFTContainer = () => {
   
    const filteredNFTs = nfts.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&
-  //  filteredItemsdefusion.includes(nft.metadata.unfusioned)
-    ( selectedRarities.length > 0 ? nft.metadata.rarity.filter(nft => selectedRarities.some(rarity => rarity === nft.metadata.rarity)) : nft.metadata.rarity) &&
+    // filteredItemsdefusion
+    ( selectedRarities.length > 0 ? nft.metadata.rarity == selectedRarities[0] || selectedRarities[1] || selectedRarities[2] : true) &&
     nft.metadata.name.toLowerCase().includes(filtercharacters.toLowerCase())
    )
   //FILTERS

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../../src/styles/navbar/opcion.module.scss'
+import styles from '../../styles/navbar/opcion.module.scss'
 import Image from 'next/image';
 import market from '../../public/icon/shop-solid.svg'
 import home from '../../public/icon/house-solid.svg'
