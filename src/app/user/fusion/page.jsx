@@ -33,18 +33,18 @@ const Fusion = () => {
     
   )
 
-  // if(unmerge){
-  //   if(nfttomerge.length > 1){
-  //     console.log("aaaaaaaaa", unmerge.length)
-  //     setNfttomerge([])
-  //   }
-  // }
-  // if( nfttomerge.length > 0 ){
-  //   if(unmerge ){
-  //     console.log("aaaaaaaaavvvvvvvvvvvvvvvv", nfttomerge.length)
-  //     setUnmerge(null)
-  //   }
-  // }
+  if(unmerge){
+    if(nfttomerge.length > 1){
+      console.log("aaaaaaaaa", unmerge.length)
+      setNfttomerge([])
+    }
+  }
+  if( nfttomerge.length > 0 ){
+    if(unmerge ){
+      console.log("aaaaaaaaavvvvvvvvvvvvvvvv", nfttomerge.length)
+      setUnmerge(null)
+    }
+  }
   useEffect(()=>{
     if(nfttomerge.length===3){
       seleccionarNumeroConProbabilidad(nfttomerge[0][0].hability1 ,nfttomerge[1][0].hability1,nfttomerge[2][0].hability1)
@@ -198,13 +198,8 @@ const removeItem = (index) => {
                     <p>Characters</p>
                     <input type="text" value={filtercharacters} onChange={(e)=> setFiltercharacters(e.target.value)} />
                   </div>
-                  {/* <div className={styles.filterinput}>
-                    <p>Skills</p>
-                    <input type="text" />
-                  </div> */}
                  <div className={styles.filterinput}>
                  <p>Rarity</p>
-                  {/* <input type="text" />  */}
                  <select className={styles.rarity} value={filterRarity} onChange={(e) => setFilterRarity(e.target.value)}>
                     <option value={0} > All </option>s
                     <option value={1} >Common</option>
@@ -222,7 +217,7 @@ const removeItem = (index) => {
                       <p className={styles.aaa} value={"3"} name="lvl" style={ filterlevel== 3 ? {backgroundColor:"#57213C"} : null} onClick={()=>norepeatlvl(3)} >3</p>
                   </div>
                 </div>
-                <button style={{backgroundColor:"#47213c", fontSize:"1.3rem"}} onClick={()=> {setFilterRarity(null);setCharacteristics("");setFilterlevel(null)}}>reset</button>
+                <button style={{backgroundColor:"#47213c", fontSize:"1.3rem"}} onClick={()=> {setFilterRarity(0);setFiltercharacters("");setFilterlevel(null)}}>reset</button>
                 </div>
               </div>
               {/* FILTERS */}
@@ -272,8 +267,6 @@ const removeItem = (index) => {
                       hability1={a.metadata.hability1}
                       hability2={a.metadata.hability2}
                       hability3={a.metadata.hability3}/> 
-                 
-
                   )
                   : <PropsNftcartas height={370} Rare="normal" name={"null"}/> 
                  }
@@ -289,7 +282,6 @@ const removeItem = (index) => {
             <div className={styles.containtypemerge}>
               {/* TYPE OF MERGE ?  */}
               <div className={styles.top}>
-
               <div className={styles.left}>
                { characteristics ?  
                <PropsNftcartas 
@@ -300,24 +292,14 @@ const removeItem = (index) => {
                 hability1={characteristics[0].hability1}
                 hability2={characteristics[0].hability2}
                 hability3={characteristics[0].hability3}/> 
-
                : <PropsNftcartas Rare="normal" height={320} name={"null"}/> }
+
               { characteristics ? <h1 className={styles.fusion}  onClick={()=> arraymerge(characteristics)}>merge</h1> : 
                <h1 className={styles.fusion} style={{opacity:.7, backgroundColor:"grey"}}>merge</h1> }  
               </div>
               
-              <div className={styles.right}>
-                
-                {/* { characteristics ? <div><h1>{characteristics[0].hability1} </h1> <h1>{characteristics[0].hability2}</h1> <h1>{characteristics[0].hability3} </h1></div> :
-                <div>
-                  <h1>hability1</h1> 
-                  <h1>hability2</h1> 
-                  <h1>hability3</h1>
-                </div> } */}
-
-                { characteristics ? <h1 onClick={()=> {setUnmerge(characteristics); setShowUnmergeData(true); if(unmerge && unmerge ){getchildrens(unmerge[1], unmerge[0])}}}  >unmerge</h1>
-                : <h1 style={{opacity:.7, backgroundColor:"grey"}}>unmerge</h1> }              
-                
+              <div className={styles.right}> { characteristics ? <h1 onClick={()=> {setUnmerge(characteristics); setShowUnmergeData(true); if(unmerge && unmerge ){getchildrens(unmerge[1], unmerge[0])}}}  >unmerge</h1>
+                : <h1 style={{opacity:.7, backgroundColor:"grey"}}>unmerge</h1> }         
               </div>
               {/* getParents */}
               </div>
@@ -347,8 +329,6 @@ const removeItem = (index) => {
                   : <PropsNftcartas Rare="normal" height={320} name={"null"}/>
                 //  CAMBIOS
                 }
-                 
-                
                   <div className={styles.containcircle}> 
                   { nfttomerge.length === 3 ?
                   <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:"1rem"}}>

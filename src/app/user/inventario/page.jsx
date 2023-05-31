@@ -139,12 +139,8 @@ const NFTContainer = () => {
 //  Función para vender un NFT
  const venderNFT = async (Id) => {
    try {
-     // Llama a la función de venta del contrato Solidity
-     const contract = await ConnectInnomicNft();
-     // contract.aprobe("0x3B92E898442BEEf2ECB82746AaCC5a353933cb28", 5,{
-     //   gasLimit: 10000000,
-     // })
-      await contract.createMarketItem( // CONTRATO INNOMIC
+     const contract = await ConnectInnomicNft(); // CONTRATO INNOMIC
+      await contract.createMarketItem( 
        Id,
        price *10**9 ,{
        gasLimit: 1000000,

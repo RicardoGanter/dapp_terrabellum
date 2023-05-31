@@ -26,7 +26,7 @@ const Marketcompra = ()=>{
   filteredItemsdefusion.includes(nft.unfusioned) &&
   filteredItems.includes(nft.level) && 
   nft.name.toLowerCase().includes(filtercharacters.toLowerCase()) &&
-   ( selectedRarities.length > 0 ? nft.rarity == selectedRarities[0] || selectedRarities[1] || selectedRarities[2] : true)
+  (selectedRarities.length === 0 || selectedRarities.includes(nft.rarity.toString()))
 
   )
   const handleOrderChange = (e) => {
@@ -82,6 +82,7 @@ const Marketcompra = ()=>{
     const value = e.target.value;
     if (e.target.checked) {
       setSelectedRarities([...selectedRarities, value]);
+      console.log(selectedRarities)
     } else {
       setSelectedRarities(selectedRarities.filter(item => item !== value));
     }
