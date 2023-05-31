@@ -1,26 +1,146 @@
 @import '../var.module';
 .contain{
+    margin: 0 auto;
+    border-radius: 14px;
+    position: relative;
+    width: fit-content;
     display: flex;
     justify-content: center;
     gap: 2rem;
+    background-color: $color_bg_morado_oscuro;
+    padding: .7rem;
+    .circle_absolute{
+        z-index: 1;
+        position: absolute;
+        background-color: $color_bg;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.20));
+    }
+    .rectangle_absolute{
+        position: absolute;
+        width: 7px;
+        height: 90%;
+        background-color: $color_bg;
+        filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.20));
+    }
+    .rectangle_absolute_h{
+        position: absolute;
+        width: 95%;
+        height: 7px;
+        background-color: $color_bg;
+        filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.20));
+    }
     .boxhero{
+        padding: 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1rem;
         .vault{
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
+        }
+        .contain_pricebuy{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .price{
+                z-index: 1;
+                background-color: $color_bg_morado_oscuro;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.384);
+                color: $color_text_white;
+                padding: .4rem 1rem;
+            }
+            .valor{
+                background-color: $color_bg;
+                padding: .3rem 1rem;
+                color: $color_text_white;
+            }
+            .btnbuy{
+                cursor: pointer;
+                background-color: #D6C317;
+                color: black;
+                font-weight: 500;
+                padding: .4rem 2rem;
+                border-radius: 3px;
+            }
         }
     }
-    .boxheroinfo{
-        width: 400px;
-        height: 200px;
-        background-color: $color_bg_morado_oscuro;
+
+
+
+
+    .contain_infodrop{
+        display: flex;
+        flex-direction: column;
+        gap: .4rem;
+        background-color: $color_bg;
+        padding: .5rem .7rem;
+        margin: .6rem;
+        border-radius: 5px;
+        .droprate{
+            background-color: $color_bg_morado_oscuro;
+            text-align: start;
+            padding: .7rem;
+            border-radius: 3px;
+            color: $color_text_white;
+            
+        }
+        .raritys{
+            display: flex;
+            gap: .5rem;
+            .rarity{
+                position: relative;
+                box-shadow: inset -20px 0px 40px -10px rgba(255, 255, 255, 0.3);
+                color: $color_text_white;
+                padding: .8rem 0;
+                border-radius: 3px;
+                width: 140px;
+            }
+            .circlesimbol{
+                position: absolute;
+                background-color: $color_bg;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+            }
+        }
+        .characters{
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            background-color: #4085B7;
+            border-radius: 3px;
+            .containcharact{
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                height: 200px;
+                overflow-y: scroll;
+                .character{
+                    background-color: #062a44;
+                    width: 170px;
+                    text-align: center;
+                    padding: .3rem .3rem;
+                    border-radius: 3px;
+                    color: $color_text_white;
+                }
+            }
+            
+        }
     }
-    .Ranking{
-        width: 400px;
-        height: 600px;
-        background-color: $color_bg_morado_oscuro;
-    }
+    // .boxheroinfo{
+    //     width: 400px;
+    //     height: 200px;
+    //     background-color: $color_bg_morado_oscuro;
+    // }
+    // .Ranking{
+    //     width: 400px;
+    //     height: 600px;
+    //     background-color: $color_bg_morado_oscuro;
+    // }
 }

@@ -25,8 +25,8 @@ const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, habi
   return (
     <div className={styles.link}>
       <div className={`${styles.cards} ${Rare === 1 ? styles.cardsblue : Rare === 3 ? styles.cardsgold : ''}`}
-
       style={ 
+
         Rare && Rare==1 ?  {backgroundColor:"#45C7FF"}
         : Rare== 3 ? { backgroundColor:"#FFE145" }
         :null
