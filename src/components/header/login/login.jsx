@@ -14,7 +14,7 @@ const Login = ()=>{
     // const [status, setStatus] = useState(null)
     const [perfil, setPerfil] = useState(false)
     // const [session, setSession] = useSession()
-     const { data: session, status } = useSession()
+     const { data: session, status } = useSession() 
      const Signin = ()=> router.push('/signin')
      const Register = ()=>router.push('/register')
         return(
@@ -26,7 +26,6 @@ const Login = ()=>{
                     <div className={styles.contain_perfil}>
                         <div style={{margin:'5rem 0 0 0', display:'flex', flexDirection:'column'}}>
                         <Link href={'/user/perfil'}> <button>perfil</button> </Link>
-                        {/* <Link href={'/user/perfil'}> <button>Historial</button></Link> */}
                         <Link href={'/user/statistics'}> <button>statistics</button></Link>
                         <Link href={'/user/inventario'}> <button>inventario</button></Link>
                         <Link href={'/user/fusion'}> <button>fusion</button></Link>

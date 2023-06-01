@@ -5,6 +5,9 @@ import { useEffect,useState } from "react";
 import PropsNftcartas from "../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
 import NetworkGoerliEth from "../../../components/funcion/network";
+import { getSession } from "next-auth/react";
+import { useRouter } from "next/navigation"
+
 const Fusion = () => {
   // const [merge, setMerge] = useState(false)
   const [nfts, setNfts] = useState([]);
@@ -18,6 +21,18 @@ const Fusion = () => {
   const [filtercharacters, setFiltercharacters] = useState("")
   const [filterRarity, setFilterRarity] = useState(null)
   const [showUnmergeData, setShowUnmergeData] = useState(false);
+  const [user, setUser] = useState(null)
+  const router = useRouter();
+  useEffect(()=>{
+    (async()=>{
+      const session = await getSession()
+      if(!session){
+        router.push('./signin')
+      }
+      setUser(session)
+    })()
+  },[])
+
 
   function norepeatlvl(value){
     if(filterlevel==value){
@@ -186,7 +201,8 @@ const removeItem = (index) => {
     fetchNFTs();
     }, []);
   return (
-    <>
+    <>  {user ?
+    
         <div className={styles.contain}>
             {/* TOP */}
             <div style={{width:"100%"}}>
@@ -355,6 +371,7 @@ const removeItem = (index) => {
             </div>
               {/* BOTTOM */}
         </div>
+        : null }
     </>
   );
 };

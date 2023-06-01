@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 const Perfil = ()=>{
     const router = useRouter()
     const [user, setUser] = useState(null)
+
+    
+
     useEffect(()=>{
         (async()=>{
           const session = await getSession()

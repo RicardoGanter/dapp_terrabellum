@@ -1,17 +1,32 @@
+"use client"
 import Image from "next/image";
 import styles from "../../../styles/user/estadistic.module.scss";
 import imagen from "../../../public/img/lal.webp";
 import fondoperfil from '../../../public/img/Rectangle.webp'
 import stars from '../../../public/img/Star.png'
+import { useState,useEffect } from "react";
+import { getSession } from "next-auth/react";
+import { useRouter} from "next/navigation";
 // import { getSession } from "next-auth/react";
 const Estadistics = () => {
-
+  const [user, setUser] = useState(null)
+  const router = useRouter();
+  useEffect(()=>{
+    (async()=>{
+      const session = await getSession()
+      if(!session){
+        router.push('./signin')
+      }
+      setUser(session)
+    })()
+  },[])
   // seguridad de usuario
   // const session = await getSession()
 
   // if (!session) return res.status(403).send('No Authenticathe')
   return (
         <div className={styles.contain}>
+          {user?
           <div className={styles.containestruct}>
             <div className={styles.group1}>
               <Image 
@@ -87,6 +102,7 @@ const Estadistics = () => {
               <div></div> */}
             </div>
           </div>
+          : null }
         </div>
   );
 };

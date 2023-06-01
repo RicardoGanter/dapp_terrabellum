@@ -10,6 +10,10 @@ import NetworkGoerliEth from "../../../components/funcion/network";
 import Barrafiltros from "../../../components/navbar/market/opcion_market";
 import Link from 'next/link'
 import ReactSlider from 'react-slider'
+import { getSession } from "next-auth/react";
+import { useRouter } from "next/navigation"
+
+
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +25,19 @@ const NFTContainer = () => {
   const [selectedRangedefusion, setSelectedRangedefusion] = useState([0, 5]);
   const [filteredItemsdefusion, setFilteredItemsdefusion] = useState([]);
   const [orderprice, setOrderprice] = useState(false)
-  
+  const [user, setUser] = useState(null)
+  const router = useRouter();
+  useEffect(()=>{
+    (async()=>{
+      const session = await getSession()
+      if(!session){
+        router.push('./signin')
+      }
+      setUser(session)
+    })()
+  },[])
+
+
    const filteredNFTs = nfts.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&
     // filteredItemsdefusion
@@ -151,7 +167,10 @@ const NFTContainer = () => {
  };
 
   return (
+    <>
+    {user ?
     <div style={{display:"flex", gap: "1rem"}}>
+      
       {/* <Barrafiltros/> */}
       <div className={styles.container}>
       <div className={styles.subContainer}>
@@ -293,6 +312,7 @@ const NFTContainer = () => {
       </div>
 {/* </div> */}
     </div>
+    : null}</>
   );
 };
 export default NFTContainer;
