@@ -2,7 +2,7 @@
 // import Cookies from "js-cookie";
 import styles from '../../styles/signin/signin.module.scss'
 import Image from 'next/image'
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from 'next/navigation';
 import axios from "axios"
 import { useSession } from 'next-auth/react';
@@ -65,8 +65,8 @@ const Signin = () => {
             <p className={styles.color}>Forgot password?</p>
             <p>OR</p>
             <div className={styles.optionsignin}>
-              <button onClick={() => {signIn('github')}}>sign in with Github</button>
-              <button onClick={() => {signIn('google')}}>sign in with Google</button>
+              <button onClick={() => {signIn('github',{callbackUrl: '/api/auth/callback/github'}) }} >sign in with Github</button>
+              <button onClick={() => {signIn('google'),{callbackUrl: '/api/auth/callback/google'}}} >sign in with Google</button>
               <ConnectButton/>
             </div>
             <p>Don't have an account? <span onClick={()=>{ Register() }}>Register</span></p>
