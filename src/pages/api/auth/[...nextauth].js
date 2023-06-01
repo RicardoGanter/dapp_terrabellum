@@ -11,8 +11,8 @@ export default NextAuth({
         clientSecret: process.env.GITHUB_SECRET,
     }),
     Google({
-         clientId: process.env.GOOGLE_ID,
-         clientSecret: process.env.GOOGLE_SECRET,
+         clientId: "23310389581-d3r95rdiup65onjk72d0ru7cv47rgjve.apps.googleusercontent.com",
+         clientSecret: "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",
      })
     ]
 })

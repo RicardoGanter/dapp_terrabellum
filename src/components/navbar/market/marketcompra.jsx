@@ -8,6 +8,7 @@ import ConnectInnomicNft from "../../funcion/connectinnomicnft.js";
 import styles2 from '../../../styles/navbar/market/opcmarket.module.scss'
 import ReactSlider from 'react-slider';
 import Link from "next/link";
+import ContentLoader, { Instagram } from "react-content-loader";
 const Marketcompra = ()=>{
   const [sales, setSales] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
@@ -289,7 +290,80 @@ const Marketcompra = ()=>{
       </button>
     </div> 
       ))
-    : null}
+    : <div className={styles.saasdasd} >
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+    </div>}
       </div>
       <div className={styles2.contain}>
       <select onChange={handleOrderChange}>

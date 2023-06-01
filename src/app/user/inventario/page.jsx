@@ -12,7 +12,7 @@ import Link from 'next/link'
 import ReactSlider from 'react-slider'
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation"
-
+import ContentLoader, { Instagram } from "react-content-loader";
 
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
@@ -266,7 +266,87 @@ const NFTContainer = () => {
 
 
 {loading ? (
-  <p>Cargando NFTs...</p>
+  <div className={styles2.grid} style={{display:"flex"}}>
+  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+  </div>
 ) : nfts ? (
   <div className={styles2.grid} style={{display:"flex"}}>
     {filteredNFTs.map((nft) => (

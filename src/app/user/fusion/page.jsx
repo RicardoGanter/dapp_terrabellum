@@ -7,7 +7,7 @@ import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
 import NetworkGoerliEth from "../../../components/funcion/network";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation"
-
+import ContentLoader, { Instagram } from "react-content-loader";
 const Fusion = () => {
   // const [merge, setMerge] = useState(false)
   const [nfts, setNfts] = useState([]);
@@ -23,6 +23,7 @@ const Fusion = () => {
   const [showUnmergeData, setShowUnmergeData] = useState(false);
   const [user, setUser] = useState(null)
   const router = useRouter();
+  
   useEffect(()=>{
     (async()=>{
       const session = await getSession()
@@ -167,7 +168,7 @@ const removeItem = (index) => {
     if(data.length>2){
       const probabilidad = (seleccionarNumeroConProbabilidad(id[0][0].hability1,id[1][0].hability1,id[2][0].hability1))
       const contract = await ConnectInnomicNft()
-      contract.upgrade(data[0],data[1],data[2], probabilidad )
+      await  contract.upgrade(data[0],data[1],data[2], probabilidad ) 
     }
   }
 
@@ -239,8 +240,8 @@ const removeItem = (index) => {
               {/* FILTERS */}
 
               {/* NFTS */}
-              <div className={styles.nfts}>
-              { nfts &&  Filter.map((nft) => (
+              <div className={styles.nfts}> 
+              { nfts && nfts.length > 0 ? Filter.map((nft) => (
               <div key={nft.id}>
                 <div  onClick={()=> setCharacteristics([nft.metadata,  nft.id])} >
                 <PropsNftcartas 
@@ -253,7 +254,44 @@ const removeItem = (index) => {
                    hability3={nft.metadata.hability3}/>
                 </div>
               </div>
-            ))}
+            )) : <> 
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+                  <Instagram
+                    gradientRatio={4}
+                    backgroundColor={'#333'}
+                    foregroundColor={'#999'}
+                    width={300}
+                  />
+            </> }
               </div>
               {/* NFTS */}
             </div>

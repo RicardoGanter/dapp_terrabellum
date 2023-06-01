@@ -15,9 +15,11 @@
     "next": "^13.4.3",
     "next-auth": "^4.19.2",
     "react": "18.2.0",
+    "react-content-loader": "^6.2.1",
     "react-dom": "18.2.0",
     "react-select": "^5.7.3",
     "react-slider": "^2.0.4",
+    "react-spinners": "^0.13.8",
     "sass": "^1.62.1",
     "web3modal": "^1.9.12"
   },

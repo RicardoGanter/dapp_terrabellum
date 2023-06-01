@@ -4,6 +4,7 @@ import { getSession } from "next-auth/react" //desde el front-end
 // import { GetServerSideProps } from "next" desde el back-end
 import { useSession } from 'next-auth/react'
 import { useRouter } from "next/navigation"
+import { ClipLoader } from 'react-spinners'
 export default function Home() {
   const router = useRouter()
   //si no esta auntenticado entonces.
@@ -23,7 +24,14 @@ export default function Home() {
    },[])
   return (
     <>
-    { user ? <> </> :  <> </> }
+    { user ? <div style={{position:"absolute", right:40, bottom:30}} >
+                      
+        <ClipLoader
+          color="#f200ff"
+          cssOverride={{}}
+          size={60}
+        />
+            </div>:  <> </> }
     </>
   )
 }
