@@ -6,6 +6,8 @@ require("@nomiclabs/hardhat-ethers");
 const SEPOLIA_PRIVATE_KEY = "39aad856cd1eee56fc2f94c754e853ef353feccff38ad57176869d7c5784ff23"
 const SEPOLIA_API_KEY = "6FBaabNdtIXtCvmVyrai6H_TpdX6MYQB"
 
+//mumbaialchemy
+const MUMBAI_API_KEY = "dEniHEulCNQyZOPDY3FbGt7zJnLYwB2B"
 
 //INFURA
 const IFURA_SEPOLIA_PRIVATE_KEY = "39aad856cd1eee56fc2f94c754e853ef353feccff38ad57176869d7c5784ff23"
@@ -39,6 +41,14 @@ module.exports = {
     // ganache:{
     //   url: "HTTP://127.0.0.1:7545"
     // },
+    maticmumbaiAlchemy:{
+      url: `https://polygon-mumbai.g.alchemy.com/v2/${MUMBAI_API_KEY}`,
+      accounts: [SEPOLIA_PRIVATE_KEY],
+      gasPrice: 40000000000,
+      gas: 1000000000,
+      gasLimit:100000000000,
+      chainId: 5,
+    },
     goerliAlchemy: {
       url: `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
       accounts: [GOERLI_PRIVATE_KEY],

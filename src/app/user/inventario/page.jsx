@@ -13,7 +13,8 @@ import ReactSlider from 'react-slider'
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation"
 import ContentLoader, { Instagram } from "react-content-loader";
-
+import Cookies from 'js-cookie';
+import jwt  from 'jsonwebtoken';
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,13 +28,21 @@ const NFTContainer = () => {
   const [orderprice, setOrderprice] = useState(false)
   const [user, setUser] = useState(null)
   const router = useRouter();
+
   useEffect(()=>{
     (async()=>{
       const session = await getSession()
-      if(!session){
-        router.push('./signin')
+      const token = Cookies.get('token');
+      const decodedToken = jwt.decode(token);
+      const userId = decodedToken.id;
+      if(session){
+      return setUser(session)
       }
-      setUser(session)
+      if(userId){
+      return  setUser(userId)
+      }
+
+      router.push('./signin')
     })()
   },[])
 

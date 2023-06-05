@@ -68,9 +68,9 @@ const Header = () => {
           <Link target="blank" href={"https://terrabellum.s3.sa-east-1.amazonaws.com/TBOF.zip"} >
             <button className={styles.prueba}>Download</button>
           </Link> 
-          <Link href={"/"}>
+          {/* <Link href={"/"}>
             <Image src={logo} alt="Logo" className={styles.img} />
-          </Link>
+          </Link> */}
           <div className={styles.btnsrigth}>
             {/* <div className={styles.iconos}>
               <Image src={global} className={styles.icon}/>
