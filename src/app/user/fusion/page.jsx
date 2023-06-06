@@ -264,42 +264,7 @@ const removeItem = (index) => {
                 </div>
               </div>
             )) : <> 
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
+                  <h1>No tienes nft</h1>
             </> }
               </div>
               {/* NFTS */}
