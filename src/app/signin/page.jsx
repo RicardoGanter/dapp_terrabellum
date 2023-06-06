@@ -25,22 +25,21 @@ const Signin = () => {
   const [sigin,setSigin] = useState(false)
   // const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
   const URI = 'http://localhost:8000/usuarios/'
-  const iniciarSesion = async (req:any) => {
+  const iniciarSesion = async (req) => {
     req.preventDefault()
     try {
       const response = await axios.post(`${URI}signin`,{
         nombre: Nombre,
         contraseña: Contraseña
-      });
-      if (response.status == 400) {
-        // Cookies.set('token', response.data.token);
-        alert('usuario o contraseña incorrectos')
+      }); 
+      if (response.status === 400) { 
+      return  alert('usuario o contraseña incorrectos')
         // Redirect to the home page
       }
-      if(response.status == 200){
+      if(response.status === 200){
         const cookie = response.data.token 
         Cookies.set('token', cookie)
-        router.push('/');
+        return  router.push('/');
       }
     } catch (error) {
         // router.push('/');

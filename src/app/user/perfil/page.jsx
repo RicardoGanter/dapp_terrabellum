@@ -34,10 +34,8 @@ const Perfil = ()=>{
    useEffect(()=>{
     const getdata = async()=> {
       try {
-        const token = Cookies.get('token');
-        const decodedToken = jwt.decode(token);
-        const userId = decodedToken.id;
-        const response = await axios.get(`${URI}${userId}`);
+        const token = Cookies.get('token');  
+        const response = await axios.post(`${URI}getuser`,{id : token});
         if(response.data){
         return setUserInno(response.data)
         }
@@ -45,7 +43,7 @@ const Perfil = ()=>{
         if(session){
           return setUser(session)
           }
-        else{
+        if(!session && !response){
           router.push('./signin')
         }
       } catch (error) {
@@ -61,30 +59,30 @@ const Perfil = ()=>{
             <div className={styles.contain}>
               <div className={styles.containinfo}>
                   <img src={ user ? user.user.image : userInno ? null : null } 
-                  className={styles.img} width={150} height={150}  
+                  className={styles.img} width={200} height={200}  
                   alt='perfil_usuario'/>
                   <div className={ styles.contain_datos }>
                       <p>Name:  </p>
                       <div>
-                          <input value={ user ? user.user.name : userInno ? userInno.nombre : null } />
+                          <div className={styles.datauser}>{ user ? user.user.name : userInno ? userInno.nombre : null }</div>
                           <button>Change Name</button>
                       </div>
 
                       <p>Email: </p>
                       <div>
-                          <input value={ user ? user.user.email: userInno ? userInno.email : null } />
+                          <div className={styles.datauser}>{ user ? user.user.email: userInno ? userInno.email : null } </div>
                           <button>Change Name</button>
                       </div>
                       <div style={{display:"flex", justifyContent:"start", alignItems:"center", gap:"1rem"}}>
                       <button style={{ width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
-                      <Image src={lock} width={25}/>
+                      <Image alt="Shield_image" src={lock} width={25}/>
                       </div>
                   </div>
               </div>
               <div className={styles.containWallets}>
                   <p>Wallets Connected In account</p>
                 <div className={styles.wallet}>
-                  <Image src={metamaskimage}  height={40}/> 
+                  <Image alt="Image_wallet" src={metamaskimage}  height={40}/> 
                   <div>
                     { address ? address.toString() : <button onClick={()=>{}}> Connect Wallet</button> }
                     
@@ -92,7 +90,7 @@ const Perfil = ()=>{
                   
                 </div>
                 <div className={styles.wallet}>
-                  <Image src={trustimage} height={40}/>
+                  <Image alt="Image_wallet" src={trustimage} height={40}/>
                   
                 </div>
                 
