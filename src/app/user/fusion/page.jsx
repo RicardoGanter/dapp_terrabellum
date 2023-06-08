@@ -112,20 +112,34 @@ const Fusion = () => {
 
     const arraymerge = (merged) => {
     let isDuplicate = false;
+    if(merged[0].level>=3){
+      return console.error("no se puede con nft lvl 3")
+    }
     if(nfttomerge.length>=3){
       return console.error("no puedes igresar mas personajes")
     }
-
-    for (let i = 0; i < nfttomerge.length; i++) {
-      const a = nfttomerge[i];
-      if (a[1] === merged[1]) {
-        isDuplicate = true;
-        break; // Salir del bucle si se encuentra un duplicado
+    if(nfttomerge.length>0){
+      if(merged[0].level===(nfttomerge ? nfttomerge[0][0].level : merged[0].level)){ 
+        for (let i = 0; i < nfttomerge.length; i++) {
+          const a = nfttomerge[i];
+          if (a[1] === merged[1]) {
+            isDuplicate = true;
+            break; // Salir del bucle si se encuentra un duplicado
+            
+          }
+        }
+        if(isDuplicate){
+          return console.error("no puedes agregar los mismo nft al filtro")
+        }
+        if (!isDuplicate && nfttomerge.length < 3) {
+          return setNfttomerge((prevData) => [...prevData, merged]);
+        }
       }
-    }
-    if (!isDuplicate && nfttomerge.length < 3) {
-      return setNfttomerge((prevData) => [...prevData, merged]);
-    }
+      else{
+        return  console.error("los nft son de distinto lvl")
+      }
+    } 
+    return setNfttomerge((prevData) => [...prevData, merged])
   };
 
 const removeItem = (index) => {

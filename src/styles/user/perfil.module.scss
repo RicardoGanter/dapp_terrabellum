@@ -1,6 +1,7 @@
 @import '../var.module';
 
 .contain{
+    position: relative;
    display: flex;
    flex-direction: column;
    justify-content: flex-end;
@@ -71,9 +72,72 @@
 
 .containconfirmdelete{
     position: fixed;
-    top: 30%;
+    top: 20%;
     background-color: $color_bg;
     border-radius: 5px;
-    padding: 4rem 2rem;
-    border: solid 4px rgb(56, 56, 56);
+    padding: 4rem 2rem;  
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 0px 55px 10px rgba(0, 0, 0, 0.15);
+}
+
+.containswitchpassword{
+    position: absolute;
+    top: 10%; 
+    left: 25%;
+    padding: 2rem 2rem 3rem 2rem;
+    background-color: $color_bg; 
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), inset 0px 0px 55px 10px rgba(0, 0, 0, 0.1);
+    form{
+        display: flex;
+        gap: 1rem;
+        .switchpassword{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+        }
+        .option{
+            display: flex; 
+            justify-content: space-around;
+            gap: 2rem;
+        }
+        .errortext{
+            color: rgb(233, 23, 23);
+        }
+    }
+    input{
+        padding: .7rem 1rem; 
+        width: 90%;
+        background-color: $color_bg_morado_oscuro; 
+        box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.4);
+        margin: .5rem 0 0 0;
+    }
+    button{
+        width: 100%;  
+        margin: 1.5rem 0;  
+        padding: .9rem 0;
+    }
+    p{
+        text-align: start;
+    }
+}
+
+
+.contain_switchname{
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: $color_bg;
+    padding: 3rem 2rem;
+    gap: 1rem;
+    border-radius: 3px;
+    p{
+        text-align: start; 
+    }
+    input{
+        padding: .7rem 1rem;
+    }
 }

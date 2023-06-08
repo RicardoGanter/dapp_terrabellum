@@ -23,8 +23,8 @@ const Signin = () => {
   const [Nombre,setNombre] = useState('');
   const [Contraseña,setContraseña] = useState('');
   const [sigin,setSigin] = useState(false)
-  // const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
-  const URI = 'http://localhost:8000/usuarios/'
+  const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+  // const URI = 'http://localhost:8000/usuarios/'
   const iniciarSesion = async (req) => {
     req.preventDefault()
     try {
@@ -37,9 +37,12 @@ const Signin = () => {
         // Redirect to the home page
       }
       if(response.status === 200){
-        const cookie = response.data.token 
+        const cookie = await response.data.token  
         Cookies.set('token', cookie)
-        return  router.push('/');
+        setTimeout(() => {
+          return  router.push('/');
+        }, 1000);
+        
       }
     } catch (error) {
         // router.push('/');
@@ -51,6 +54,7 @@ const Signin = () => {
     <div>
       { status==='unauthenticated'? <div className={styles.contain}>
           <div className={styles.subcontainer}>
+            <h2>account access</h2>
           <Image onClick={()=>{router.push('/')}} className={styles.back} src={back} width={30} height={30} alt="back" />
             {/* FORMULARIO */}
             <form className={styles.containform} onSubmit={iniciarSesion}>

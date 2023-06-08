@@ -29,6 +29,7 @@ const Login = ()=>{
     },[])  
      const deletcookie =()=>{
         Cookies.remove('token');
+        Cookies.remove('userdata') 
         setToken(null);
      }
         return(

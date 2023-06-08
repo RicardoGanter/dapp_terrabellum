@@ -15,14 +15,78 @@ import metamaskimage from '../../../public/img/full-metamask-logo.png'
 import NetworkGoerliEth from "../../../components/funcion/network";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
+import eye from '../../../public/img/eye-solid.svg'
+import noeye from '../../../public/img/eye-slash-solid.svg'
 const Perfil = ()=>{
     const router = useRouter()
     const [user, setUser] = useState(null)
     const [userInno, setUserInno] = useState(null)
-    const [addressMetamask, setAddressMetamask] = useState(null)
+    const [addressMetamask, setAddressMetamask] = useState(null) 
     const [confirmdeleted, setConfirmdeleted] = useState(null)
-    const URI = 'http://localhost:8000/usuarios/' 
+    const [changepassword, setChangepassword] = useState(false)
+    const [contraActual, setContraActual] = useState(null)
+    const [newcontraseña, setNewcontraseña] = useState(null)
+    const [repetnewcontraseña, setRepetnewcontraseña ] = useState(null)
+    const [validationpassword, setValidationpassword] = useState(false)
+    const [switchname ,setSwitchname] = useState(false)
+    const [newemail ,setNewemail] = useState(null)
+    const [repetnewemail,setRepetnewemail] = useState(null)
+    const [invalidpassword, setInvalidpassword] = useState(null)
+    const [eye1, setEye1] = useState(false)
+    const [eye2, setEye2] = useState(false)
+    const [eye3, setEye3] = useState(false)
 
+    const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+    // const URI = 'http://localhost:8000/usuarios/' 
+
+    const switchpassword = async (req)=>{
+      req.preventDefault() 
+      if( newcontraseña.lenght< 8 || repetnewcontraseña.lenght< 8 || newcontraseña !=repetnewcontraseña){
+       return console.error('contraseña erronea o menor a 8 caracteres')
+      }
+      const token = Cookies.get('token');  
+      console.log("qsdad")
+      const response = await axios.put(`${URI}switchpassword`,{ id : token, contraseña: contraActual , newcontraseña: newcontraseña  }); 
+      if( response.status === 204 ){ 
+        return  setInvalidpassword(true)
+      }
+      if( response.status===200){ 
+        return  clearformpassword()
+      } 
+    } 
+
+    const switch_name = async (req)=>{
+      req.preventDefault() 
+      if( newemail != repetnewemail){
+       return console.error('los emails no coinciden')
+      }
+      const token = Cookies.get('token');   
+      const response = await axios.put(`${URI}switchname`,{ id : token, newnombre: newemail }); 
+      if( response.status === 204 ){ 
+        return  setInvalidpassword(true)
+      }
+      if( response.status===200){ 
+        return  clearformpassword()
+      }
+      
+    } 
+
+    const clearformpassword = ()=>{
+      setChangepassword(false)
+      setRepetnewcontraseña(null)
+      setNewcontraseña(null)
+      setContraActual(null)
+      setInvalidpassword(false)
+    }
+    useEffect(()=>{ 
+      if(repetnewcontraseña && repetnewcontraseña.length>1){
+        if(newcontraseña!=repetnewcontraseña){
+        console.error("las contraseñas no son iguales")
+        return setValidationpassword(false)
+      }
+        return setValidationpassword(true) 
+      }
+    },[newcontraseña, repetnewcontraseña])
 
     const DeleteAddressMetamask = async()=>{ 
       const token = Cookies.get('token');  
@@ -44,40 +108,35 @@ const Perfil = ()=>{
         if(response.status===200){
           const newaddresdata = {...userInno}
           newaddresdata.address_metamask = addresss 
-          setUserInno(newaddresdata)
-          return  alert('Wallet ingresada')
+          setUserInno(newaddresdata) 
         } 
       }
     } 
    useEffect(()=>{
-    const getdata = async()=> {
-      try {
+    const getdata = async()=> { 
+        const token = Cookies.get('token');  
+        const session = await getSession()
+        if(!token && !session){
+          console.error("no tienes una sesion iniciada")
+          return router.push('./signin')
+        }
+        if(session){
+          return setUser(session)
+        } 
         const userdata = Cookies.get('userdata') 
         if(!userdata){ 
-          const token = Cookies.get('token');  
           const response = await axios.post(`${URI}getuser`,{id : token});
           if(response.data){
-          const datauser = Cookies.set('userdata', JSON.stringify(response.data)) 
-          const data = JSON.parse(datauser)  
-          return setUserInno(data)
-          }
-          const session = await getSession()
-          if(session){
-            return setUser(session)
-            }
-          if(!session && !response){
-           return router.push('./signin')
+          const datauser = await Cookies.set('userdata', JSON.stringify(response.data))   
+          return setUserInno(response.data)
           }
         }
-        if(userdata){
+        if(userdata){ 
           const data = JSON.parse(userdata)  
           return setUserInno(data)
         }
         
-      } catch (error) {
-        console.error(error);
-        alert('Error al iniciar sesión, Nombre o contraseña incorrectos');
-      }
+       
     };
     getdata()
    },[])
@@ -93,7 +152,7 @@ const Perfil = ()=>{
                       <p>Name:  </p>
                       <div>
                           <div className={styles.datauser}>{ user ? user.user.name : userInno ? userInno.nombre : null }</div>
-                          <button>Change Name</button>
+                          <button onClick={()=>setSwitchname(true)}>Change Name</button>
                       </div>
 
                       <p>Email: </p>
@@ -102,23 +161,24 @@ const Perfil = ()=>{
                           <button>Change Email</button>
                       </div>
                       <div style={{display:"flex", justifyContent:"start", alignItems:"center", gap:"1rem"}}>
-                      <button style={{ width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
-                      <Image alt="Shield_image" src={lock} width={25}/>
+                        <button onClick={()=>setChangepassword(true)} style={{ width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
+                        <Image alt="Shield_image" src={lock} width={25}/>
                       </div>
                   </div>
+                  
               </div>
               <div className={styles.containWallets}>
                   <p>Wallets Connected In account</p>
                 <div className={styles.wallet}>
                   <Image alt="Image_wallet" src={metamaskimage}  height={40}/> 
                   <div>
-                    { userInno.address_metamask ?<div onClick={()=>{setConfirmdeleted(true)}} className={styles.wallet}><h2>{userInno.address_metamask.toString()}</h2> <button>Deleted </button> </div>  : <button onClick={()=>{connectMetamask()}}> Connect Wallet</button> }
+                    { userInno.address_metamask ?<div className={styles.wallet}><h2>{userInno.address_metamask.toString()}</h2> <button onClick={()=>{setConfirmdeleted(true)}} >Deleted </button> </div>  : <button onClick={()=>{connectMetamask()}}> Connect Wallet</button> }
                     </div>  
                 </div>
-                <div className={styles.wallet}>
+                {/* <div className={styles.wallet}>
                   <Image alt="Image_wallet" src={trustimage} height={40}/>
                   
-                </div>
+                </div> */}
                 {confirmdeleted ? 
                   <div className={styles.containconfirmdelete}>
                     <div>
@@ -136,10 +196,49 @@ const Perfil = ()=>{
                   </div>
                 
                 : null}
-              </div>
-            {/* <div className={styles.wallet}>
-                <button>Change wallet</button> <ConnectButton/> 
-            </div> */}
+                { changepassword &&
+                  <div className={styles.containswitchpassword}> 
+                    <form onSubmit={switchpassword}> 
+                        <div className={styles.switchpassword}>
+                          <div style={{position:"relative"}}> 
+                            <div style={{display:"flex"}}>
+                              <p>Current password</p> { invalidpassword && <p className={styles.errortext}>Your password does not match</p> } 
+                            </div>
+                              <input required type={eye1 ? "text" : "password"} value={contraActual} onChange={req => setContraActual(req.target.value)}/><Image width={20} style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye1(!eye1)}} src={eye1? eye : noeye}/>
+                          </div>
+                          <div style={{position:"relative"}}>
+                            <p>New password</p>
+                            <input required type={eye2 ? "text" : "password"} value={newcontraseña} onChange={req=> setNewcontraseña(req.target.value)}/><Image width={20} style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye2(!eye2)}} src={eye2? eye : noeye}/>
+                          </div>
+                         <div style={{position:"relative"}}>
+                         <div style={{display:"flex"}}>
+                            <p>Repeat the new password</p> {!validationpassword && repetnewcontraseña && repetnewcontraseña.length > 0 && <p className={styles.errortext}>Passwords do not match</p>} 
+                         </div>
+                          <input required type={eye3 ? "text" : "password"} value={repetnewcontraseña} onChange={req=> setRepetnewcontraseña(req.target.value)}/> <Image width={20} style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye3(!eye3)}} src={eye3? eye : noeye}/>
+                         </div>
+                        
+                          <div className={styles.option}>
+                            {validationpassword ? <button type="submit">Acceptar</button>: <button style={{backgroundColor:"gray"}}>accept</button>}   <button onClick={()=>{setChangepassword(false); clearformpassword()}}>Cancel</button>
+                          </div>
+                        </div> 
+                    </form>
+                  </div> }
+                  {switchname && 
+                  <form className={styles.contain_switchname} onSubmit={switch_name}>
+                    <div> 
+                      <p>Seguro que quieres cambiar el nombre?</p><p>solo puedes hacerlo una vez de manera gratuita!</p>
+                    </div>
+                    <p>New email</p>
+                    <input type="text" value={newemail} onChange={req=> setNewemail(req.target.value)}/>
+                    <p>Repeat the new email</p>
+                    <input type="text" value={repetnewemail}  onChange={req=> setRepetnewemail(req.target.value)}/> 
+                    <div>
+                      <button type="submit">Accept</button>
+                      <button onClick={()=>setSwitchname(false)}>Cancel</button>
+                    </div> 
+                  </form>
+                  }
+              </div> 
     </div>
       : null  }
          
