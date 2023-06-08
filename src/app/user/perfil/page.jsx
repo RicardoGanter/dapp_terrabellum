@@ -28,14 +28,15 @@ const Perfil = ()=>{
     const [newcontraseña, setNewcontraseña] = useState(null)
     const [repetnewcontraseña, setRepetnewcontraseña ] = useState(null)
     const [validationpassword, setValidationpassword] = useState(false)
+    const [validationname, setValidationname] = useState(false)
     const [switchname ,setSwitchname] = useState(false)
-    const [newemail ,setNewemail] = useState(null)
-    const [repetnewemail,setRepetnewemail] = useState(null)
+    const [newname ,setNewname] = useState(null)
+    const [repetnewname,setRepetnewname] = useState(null)
     const [invalidpassword, setInvalidpassword] = useState(null)
     const [eye1, setEye1] = useState(false)
     const [eye2, setEye2] = useState(false)
     const [eye3, setEye3] = useState(false)
-
+    const [ registercompleted , setRegistercompleted] = useState(null)
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
     // const URI = 'http://localhost:8000/usuarios/' 
 
@@ -53,23 +54,51 @@ const Perfil = ()=>{
       if( response.status===200){ 
         return  clearformpassword()
       } 
-    } 
+    }  
+    const fregistercompleted = ()=>{
+      if(registercompleted){
+        return console.error('espere')
+      }
+      setTimeout(() => {
+        setRegistercompleted(true)
+      }, 1000); 
+      setTimeout(() => {
+        setRegistercompleted(false)
+      }, 6000);
+    }
 
     const switch_name = async (req)=>{
       req.preventDefault() 
-      if( newemail != repetnewemail){
-       return console.error('los emails no coinciden')
+      if( newname != repetnewname && !validationname){
+        return console.error('los emails no coinciden')
       }
       const token = Cookies.get('token');   
-      const response = await axios.put(`${URI}switchname`,{ id : token, newnombre: newemail }); 
-      if( response.status === 204 ){ 
+      const response = await axios.put(`${URI}switchname`,{ id : token, newnombre: newname });  
+      
+      if( response.status === 202 ){ 
+        console.log("laaaaaal")
         return  setInvalidpassword(true)
       }
-      if( response.status===200){ 
-        return  clearformpassword()
+      if( response.status === 204 ){  
+        console.log("ya cambiaste el nombre del usuario :(") 
+        return  setInvalidpassword(true)
       }
-      
+      if( response.status == 200){ 
+        const newaddresdata = {...userInno}
+        newaddresdata.nombre = response.data.newnombre 
+        newaddresdata.cont_change_name = response.data.newcont 
+        Cookies.set('userdata', JSON.stringify(newaddresdata))
+        setUserInno(newaddresdata)
+        fregistercompleted()
+        return clearname()
+      }
     } 
+
+    const clearname = ()=>{
+      setNewname(null)
+      setRepetnewname(null)
+      setSwitchname(null)
+    }
 
     const clearformpassword = ()=>{
       setChangepassword(false)
@@ -78,15 +107,26 @@ const Perfil = ()=>{
       setContraActual(null)
       setInvalidpassword(false)
     }
+    
+    useEffect(()=>{
+      if(repetnewname && repetnewname.length > 0){
+        if( newname != repetnewname ){
+          return setValidationname(false)
+        } 
+          return setValidationname(true)
+      }
+    },[newname, repetnewname])
+
     useEffect(()=>{ 
-      if(repetnewcontraseña && repetnewcontraseña.length>1){
-        if(newcontraseña!=repetnewcontraseña){
-        console.error("las contraseñas no son iguales")
+      if(repetnewcontraseña && repetnewcontraseña.length>0){
+        if(newcontraseña!=repetnewcontraseña){ 
         return setValidationpassword(false)
       }
         return setValidationpassword(true) 
       }
     },[newcontraseña, repetnewcontraseña])
+
+
 
     const DeleteAddressMetamask = async()=>{ 
       const token = Cookies.get('token');  
@@ -96,6 +136,7 @@ const Perfil = ()=>{
         newaddresdata.address_metamask = null 
         Cookies.set('userdata', JSON.stringify(newaddresdata)) 
         setUserInno(newaddresdata) 
+        fregistercompleted()
         return setConfirmdeleted(false)
       }
     }
@@ -108,6 +149,7 @@ const Perfil = ()=>{
         if(response.status===200){
           const newaddresdata = {...userInno}
           newaddresdata.address_metamask = addresss 
+          fregistercompleted()
           setUserInno(newaddresdata) 
         } 
       }
@@ -134,9 +176,7 @@ const Perfil = ()=>{
         if(userdata){ 
           const data = JSON.parse(userdata)  
           return setUserInno(data)
-        }
-        
-       
+        } 
     };
     getdata()
    },[])
@@ -152,7 +192,7 @@ const Perfil = ()=>{
                       <p>Name:  </p>
                       <div>
                           <div className={styles.datauser}>{ user ? user.user.name : userInno ? userInno.nombre : null }</div>
-                          <button onClick={()=>setSwitchname(true)}>Change Name</button>
+                         { userInno && userInno.cont_change_name >= 1 ? <button style={{backgroundColor:"gray"}} >Change Name</button> : <button onClick={()=>setSwitchname(true)}>Change Name</button>} 
                       </div>
 
                       <p>Email: </p>
@@ -228,17 +268,29 @@ const Perfil = ()=>{
                     <div> 
                       <p>Seguro que quieres cambiar el nombre?</p><p>solo puedes hacerlo una vez de manera gratuita!</p>
                     </div>
-                    <p>New email</p>
-                    <input type="text" value={newemail} onChange={req=> setNewemail(req.target.value)}/>
-                    <p>Repeat the new email</p>
-                    <input type="text" value={repetnewemail}  onChange={req=> setRepetnewemail(req.target.value)}/> 
-                    <div>
-                      <button type="submit">Accept</button>
-                      <button onClick={()=>setSwitchname(false)}>Cancel</button>
+                    <p>New name</p>
+                    <input type="text" value={newname} onChange={req=> setNewname(req.target.value)}/>
+                    <div style={{display:"flex"}}>
+                      <p>Repeat the new name</p> { !validationname && repetnewname && <p className={styles.errortext}>Your email does not match</p> }    
+                    </div>
+                    <input type="text" value={repetnewname}  onChange={req=> setRepetnewname(req.target.value)}/> 
+                    <div style={{display:"flex", justifyContent:"space-around", gap:"1rem"}}>
+                      { validationname && repetnewname ? <button type="submit">Accept</button> : <button style={{backgroundColor:"gray"}}>Accept</button> }
+                      
+                      <button onClick={()=>clearname()}>Cancel</button>
+                      
                     </div> 
                   </form>
                   }
+                  {/* <button onClick={()=>fregistercompleted()}>test</button> */}
               </div> 
+              { registercompleted &&
+                <div className={styles.popup_register}>
+               <p>  Register completed! </p>
+               <div></div>
+              </div>
+              }
+              
     </div>
       : null  }
          

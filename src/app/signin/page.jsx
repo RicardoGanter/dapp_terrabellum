@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import { signIn } from "next-auth/react"
 import back from '../../public/icon/circle-arrow-left-solid.svg'
 import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx"
+import { flat } from "../../blockchain/abi/abi";
 const Signin = () => {
   const {data: session, status} = useSession()
   const router = useRouter(); 
@@ -23,6 +24,7 @@ const Signin = () => {
   const [Nombre,setNombre] = useState('');
   const [Contraseña,setContraseña] = useState('');
   const [sigin,setSigin] = useState(false)
+  const [errorlogin, setErrorlogin] = useState(false) 
   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
   // const URI = 'http://localhost:8000/usuarios/'
   const iniciarSesion = async (req) => {
@@ -32,13 +34,14 @@ const Signin = () => {
         nombre: Nombre,
         contraseña: Contraseña
       }); 
-      if (response.status === 400) { 
-      return  alert('usuario o contraseña incorrectos')
+      if (response.status === 204) { 
+        setErrorlogin(true) 
         // Redirect to the home page
       }
       if(response.status === 200){
         const cookie = await response.data.token  
         Cookies.set('token', cookie)
+        setErrorlogin(false) 
         setTimeout(() => {
           return  router.push('/');
         }, 1000);
@@ -54,12 +57,14 @@ const Signin = () => {
     <div>
       { status==='unauthenticated'? <div className={styles.contain}>
           <div className={styles.subcontainer}>
-            <h2>account access</h2>
+            <h2 className={styles.login}>account access</h2>
           <Image onClick={()=>{router.push('/')}} className={styles.back} src={back} width={30} height={30} alt="back" />
             {/* FORMULARIO */}
             <form className={styles.containform} onSubmit={iniciarSesion}>
             <label htmlFor="name">
-                <p style={{textAlign:"start"}}>Name</p>
+              <div style={{display:"flex"}}>
+                <p style={{textAlign:"start"}}>Name</p> { errorlogin && <p style={{ position:"absolute",top:45 ,right:"20%", color:"red"}}>Nombre o contraseña incorrectos</p>} 
+              </div>
                 <input placeholder=" Name" required id="name" name="name" value={Nombre} type={'text'} onChange={req => setNombre(req.target.value)} />
             </label>
             <label htmlFor="password">

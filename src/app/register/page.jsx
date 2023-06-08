@@ -14,6 +14,8 @@ const Register = ()=>{
     const [Nombre, setNombre] = useState('')
     const [Email,setEmail] = useState('');
     const [Contraseña, setContraseña] = useState('')
+    const [errornombre, setErrornombre] = useState(false)
+    const [erroremail, setErroremail] = useState(false)
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
     // const URI = 'http://localhost:8000/usuarios/'
     const {data: session, status} = useSession()
@@ -27,15 +29,20 @@ const Register = ()=>{
         {nombre : Nombre,  contraseña : Contraseña, email : Email},
         // {withCredentials: true,credentials: 'include'}
         )
-        if(response.status == 409){
-            alert('El usuario o email ya existe')
+        if(response.status == 205){
+            setErroremail(true)
+            setErrornombre(false)
             }
-        if(response.status == 400){
-            alert('Correo electrónico inválido')
+        if(response.status == 204){
+            setErrornombre(true) 
+            setErroremail(false)
             }
+        if(response.status == 203){
+            setErroremail(true)
+            setErrornombre(true)
+        }
         if(response.status == 200){  
-            const cookie = await response.data.token   
-            console.log(response)
+            const cookie = await response.data.token    
             if(cookie){
               Cookies.set('token', cookie) 
               return  router.push('/');  
@@ -46,17 +53,17 @@ const Register = ()=>{
         <div>
         { status==='unauthenticated'? <div className={styles.contain}> 
             <div className={styles.subcontainer}>
-            <h2>Register account</h2>
+              <h2 className={styles.register}>Register account</h2>
             <Image onClick={()=>{router.push('/')}} className={styles.back} src={back} width={30} height={30} alt="back" />
               {/* FORMULARIO */}
               <form className={styles.containform} onSubmit={GuardarUsuario}>
-                <label htmlFor="name">
-                    <p style={{textAlign:"start"}}>Name</p>
+                <label htmlFor="name" style={{position:"relative"}}>
+                    <p style={{textAlign:"start"}}>Name</p> {errornombre && <p style={{ position:"absolute",top:0 ,left:"20%", color:"red"}}>Este nombre ya existe</p>} 
                     <input placeholder=" Name" required id="name" name="name" value={Nombre}  type={'text'} onChange={req=>setNombre(req.target.value)}/>
                     
                 </label>
-                <label htmlFor="password">
-                  <p style={{textAlign:"start"}}>Email</p>
+                <label htmlFor="password" style={{position:"relative"}}>
+                  <p style={{textAlign:"start"}}>Email</p> { erroremail && <p style={{ position:"absolute",top:0 ,left:"20%", color:"red"}}>Este email ya existe</p> } 
                 <input placeholder=" Email" required id="email" name="email" value={Email} type="email" onChange={(req)=> {setEmail(req.target.value)}} />
                 </label>
                 <label htmlFor="password">
@@ -66,7 +73,7 @@ const Register = ()=>{
                 <button type={"submit"}>Register</button>
               </form>
               <p className={styles.color}>Forgot password?</p>
-              <p>OR</p>
+              <p style={{fontSize:"15px"}}>OR</p>
               <div className={styles.optionsignin}>
                 <button onClick={() => {signIn('github')}}>sign in with Github</button>
                 <button onClick={() => {signIn('google')}}>sign in with Google</button> 

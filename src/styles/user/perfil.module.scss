@@ -102,9 +102,7 @@
             justify-content: space-around;
             gap: 2rem;
         }
-        .errortext{
-            color: rgb(233, 23, 23);
-        }
+        
     }
     input{
         padding: .7rem 1rem; 
@@ -122,8 +120,9 @@
         text-align: start;
     }
 }
-
-
+.errortext{
+    color: rgb(233, 23, 23);
+}
 .contain_switchname{
     position: absolute;
     top: 10%;
@@ -132,12 +131,68 @@
     flex-direction: column;
     background-color: $color_bg;
     padding: 3rem 2rem;
-    gap: 1rem;
-    border-radius: 3px;
+    gap: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), inset 0px 0px 55px 10px rgba(0, 0, 0, 0.1);
     p{
         text-align: start; 
     }
+    button{
+        width: 100%
+    }
     input{
         padding: .7rem 1rem;
+        box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.popup_register{
+    position: fixed;
+    right: 0;
+    top: 100px;
+    background-color: $color_bg_morado_oscuro2;
+    padding: 0 1rem 1rem 1rem;
+    border-radius: 7px 0 0 7px;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.45);
+    animation: lal forwards 4s;
+    @keyframes lal {
+        0%{
+            transform: translateX(0);
+            opacity: 0%;
+        }
+        20%{
+            opacity: 100%;
+        }
+        70%{
+            transform: translateX(0);
+            opacity: 100%;
+        }
+        95%{
+            opacity: 0%;
+        }
+        100%{
+            transform: translateX(400px);
+        }
+    }
+    p{
+        color: white;
+        margin: 1rem 4rem;
+
+    }
+    div{
+        width: 100%;
+        height: 7px;
+        background-color: #31942F;
+        border-radius: 5px;
+        animation: lool 3s forwards; 
+    }
+    @keyframes lool {
+        0% {
+            width: 100%;
+        }
+        100% {
+            width: 0%;
+            background-color: red;
+        }
     }
 }
