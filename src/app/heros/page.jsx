@@ -12,10 +12,12 @@ const Heros = ()=>{
             const signer = await NetworkGoerliEth();
             const address = await signer.getAddress();
             const contract = await ConnectInnomicNft();
-            const response = await axios.get( "http://localhost:8000/usuarios/Mintt" );
-            const lol = response.data.message
-            if(lol){
-                const mint = await contract._mintTokenAllowedToEarn(address,lol);
+            const URI = await axios.get( "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/Mintt" )
+            // const URI = await axios.get( "http://localhost:8000/usuarios/Mintt" );
+            const propability = URI.data.message
+            if(propability){
+                const mint = await contract._mintTokenAllowedToEarn(address,propability);
+                return mint
             }
         }
         catch(error){
