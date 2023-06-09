@@ -17,11 +17,7 @@ const Login = ()=>{
     const contenedorRef = useRef(false);
     // const [status, setStauts] = useState(null)
     const [perfil, setPerfil] = useState(false)
-    const [token,setToken] = useState(null) 
-       
-   
-    
-
+    const [token,setToken] = useState(null)  
     // const [session, setSession] = useState(null)
     const Signin = ()=> router.push('/signin')
     const Register = ()=>router.push('/register')
@@ -31,6 +27,7 @@ const Login = ()=>{
         if(token){
             setToken(token)
         }
+        
     },[])  
      const deletcookie =()=>{
         Cookies.remove('token');
@@ -50,7 +47,7 @@ const Login = ()=>{
         return(
             <div>
                 { status==="unauthenticated" && !token ? <div> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
-                    : session || token ? <div className={styles.contain}><Image src={notification} alt="notificacion" width={30} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}>INNO  66666666</div> <img  id="lol" onClick={()=>setPerfil(!perfil)} className={styles.imgheader} src={session ? session.user.image : borrar}  alt='img perfil'/></div> : null}
+                    : session || token ? <div className={styles.contain}><Image src={notification} alt="notificacion" width={30} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}>INNO  5871600</div> <img  id="lol" onClick={()=>setPerfil(!perfil)} className={styles.imgheader} src={session ? session.user.image : borrar}  alt='img perfil'/></div> : null}
                     {/* perfil autenticado */}
                     {  session || token && perfil?
                     <div   className={styles.contain_perfil}>
@@ -64,10 +61,8 @@ const Login = ()=>{
                          <Link href={'/'} onClick={()=> signOut()}> <button>Sign out</button></Link>
                          : token ? <Link href={'/'} onClick={()=> deletcookie()}> <button>Sign out</button></Link> : null
                          }
-                        </div>
-                        
-                    </div>
-                    
+                        </div> 
+                    </div> 
                 :null }
             </div>
         )

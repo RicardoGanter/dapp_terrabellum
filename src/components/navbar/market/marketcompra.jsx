@@ -195,7 +195,7 @@ const Marketcompra = ()=>{
         </div>
           
         <div className={styles2.filtros}>
-          <h2>price</h2>
+          {/* <h2>price</h2>
           <ReactSlider
             className={styles2.horizontalslider}
             thumbClassName={styles2.examplethumb}
@@ -205,7 +205,7 @@ const Marketcompra = ()=>{
             renderTrack={(props, state) => (
               <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
             )}
-            />
+            /> */}
 
           <h2>Level</h2>
           <ReactSlider
@@ -214,11 +214,14 @@ const Marketcompra = ()=>{
             min={1}
             max={3}
             defaultValue={selectedRange}
-            onChange={handleRangeChange}
-            trackClassName="slider-track"
+            onChange={handleRangeChange} 
             renderTrack={(props, state) => (
-              <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
-              )}
+              <div {...props}  >
+                {state.index > 0 && state.index < 2 && (
+                  <div className={styles2.looooooooooooool}/>
+                )}
+              </div>
+            )} 
               />
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
             <h2>1</h2> <h2>2</h2> <h2>3</h2>
@@ -234,14 +237,8 @@ const Marketcompra = ()=>{
         <label style={{ color: "white" }}>Rare</label>
         <input type="checkbox" name="a" value={"3"} onChange={handleCheckboxChange} checked={selectedRarities.includes("3")} />
         <label style={{ color: "white" }} htmlFor="a">Legendary</label>
-      </form>
-
-      </div>
-        {/* <select value={selectedCharacter} onChange={(e) => setSelectedCharacter(e.target.value)}>
-            <option>Red Spectre</option>
-            <option>Agente</option>
-            <option>Aifos</option>
-          </select> */}
+      </form> 
+      </div> 
         <div className={styles2.filtros}>
           <h2>unmerge</h2>
           <ReactSlider
@@ -253,8 +250,12 @@ const Marketcompra = ()=>{
             onChange={handleRangeChangefusion}
             trackClassName="slider-track"
             renderTrack={(props, state) => (
-              <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
-            )}
+              <div {...props}  >
+                {state.index > 0 && state.index < 2 && (
+                  <div className={styles2.looooooooooooool}/>
+                )}
+              </div>
+            )} 
             />
           {/* <input type="range" min="1" max="7"/> */}
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>

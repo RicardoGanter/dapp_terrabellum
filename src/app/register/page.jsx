@@ -1,6 +1,6 @@
 "use client"
 import styles from '../../styles/signin/signin.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
@@ -16,10 +16,21 @@ const Register = ()=>{
     const [Contraseña, setContraseña] = useState('')
     const [errornombre, setErrornombre] = useState(false)
     const [erroremail, setErroremail] = useState(false)
+    const [user, setuset] = useState(true)
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+    const router = useRouter();
     // const URI = 'http://localhost:8000/usuarios/'
     const {data: session, status} = useSession()
-    const router = useRouter();
+
+    useEffect(() => {
+    const cookies =  Cookies.get('token')
+    if (cookies) {
+      setuset(cookies)
+      router.push('/');
+    }
+    setuset(false)
+  }, []);
+
     const Login = ()=>{
         return router.push('/signin')
       }
@@ -45,13 +56,13 @@ const Register = ()=>{
             const cookie = await response.data.token    
             if(cookie){
               Cookies.set('token', cookie) 
-              return  router.push('/');  
+              return  window.location.reload();  
             } 
         }
     }
     return(
         <div>
-        { status==='unauthenticated'? <div className={styles.contain}> 
+        { status==='unauthenticated' && !user && <div className={styles.contain}> 
             <div className={styles.subcontainer}>
               <h2 className={styles.register}>Register account</h2>
             <Image onClick={()=>{router.push('/')}} className={styles.back} src={back} width={30} height={30} alt="back" />
@@ -81,7 +92,7 @@ const Register = ()=>{
               </div>
               <p>Don't have an account? <span onClick={()=>{ Login() }}>Login</span></p>
             </div>
-          </div> : null  }
+          </div> }
           
       </div> 
     )

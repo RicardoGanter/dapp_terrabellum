@@ -2,7 +2,7 @@
 import Cookies from "js-cookie";
 import styles from '../../styles/signin/signin.module.scss'
 import Image from 'next/image'
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import axios from "axios"
 import { useSession } from 'next-auth/react';
@@ -13,11 +13,15 @@ import { flat } from "../../blockchain/abi/abi";
 const Signin = () => {
   const {data: session, status} = useSession()
   const router = useRouter(); 
-  // useEffect(() => {
-  //   if (!Cookies.get('token')) {
-  //     router.push('/');
-  //   }
-  // }, []);
+  const [user, setuset] = useState(true)
+  useEffect(() => {
+    const cookies =  Cookies.get('token')
+    if (cookies) {
+      setuset(cookies)
+      router.push('/');
+    }
+    setuset(false)
+  }, []);
   const Register = ()=>{
     return router.push('/register')
   }
@@ -35,17 +39,13 @@ const Signin = () => {
         contraseña: Contraseña
       }); 
       if (response.status === 204) { 
-        setErrorlogin(true) 
-        // Redirect to the home page
+          setErrorlogin(true)
       }
       if(response.status === 200){
         const cookie = await response.data.token  
         Cookies.set('token', cookie)
-        setErrorlogin(false) 
-        setTimeout(() => {
-          return  router.push('/');
-        }, 1000);
-        
+        setErrorlogin(false)  
+        return  window.location.reload()
       }
     } catch (error) {
         // router.push('/');
@@ -55,7 +55,7 @@ const Signin = () => {
   };
   return (
     <div>
-      { status==='unauthenticated'? <div className={styles.contain}>
+      { status==='unauthenticated' && !user && <div className={styles.contain}>
           <div className={styles.subcontainer}>
             <h2 className={styles.login}>account access</h2>
           <Image onClick={()=>{router.push('/')}} className={styles.back} src={back} width={30} height={30} alt="back" />
@@ -82,7 +82,7 @@ const Signin = () => {
             </div>
             <p>Don't have an account? <span onClick={()=>{ Register() }}>Register</span></p>
           </div>
-        </div> : null  }
+        </div> }
         
     </div>
   )

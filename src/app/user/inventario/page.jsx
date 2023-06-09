@@ -223,8 +223,12 @@ const NFTContainer = () => {
             onChange={handleRangeChange}
             trackClassName="slider-track"
             renderTrack={(props, state) => (
-              <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
-            )}
+              <div {...props}  >
+                {state.index > 0 && state.index < 2 && (
+                  <div className={styles.looooooooooooool}/>
+                )}
+              </div>
+            )} 
             />
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
             <h2>1</h2> <h2>2</h2> <h2>3</h2>
@@ -259,8 +263,12 @@ const NFTContainer = () => {
             onChange={handleRangeChangefusion}
             trackClassName="slider-track"
             renderTrack={(props, state) => (
-              <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
-            )}
+              <div {...props}  >
+                {state.index > 0 && state.index < 2 && (
+                  <div className={styles.looooooooooooool}/>
+                )}
+              </div>
+            )} 
             />
           {/* <input type="range" min="1" max="7"/> */}
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
