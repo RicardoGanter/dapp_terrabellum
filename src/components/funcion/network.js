@@ -7,7 +7,7 @@ const NetworkGoerliEth = async ()=>{
         providerOptions: {
         gasPrice: 21200000000,
         gas: 3022000000,
-        gasLimit: 110333333000000,
+        gasLimit: 1103333330000000,
         metamask: {
             display: {
                 name: "MetaMask",

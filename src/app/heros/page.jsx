@@ -62,15 +62,10 @@ const Heros = ()=>{
                     <div className={styles.characters}>
                         <h2>Characters</h2>
                         <div className={styles.containcharact}>
-                            <div className={styles.character}>aifos</div>
-                            <div className={styles.character}>aifoasdasds</div>
-                            <div className={styles.character}>aifos</div>
-                            <div className={styles.character}>aifos</div>
-                            <div className={styles.character}>aifos</div>
-                            <div className={styles.character}>aifos</div>
-                            <div className={styles.character}>aifos</div>
-                            <div className={styles.character}>aifos</div>
-                            <div className={styles.character}>aifos</div>
+                            <div className={styles.character}>Aifos</div>  
+                            <div className={styles.character}>Agente 87</div>
+                            <div className={styles.character}>Red Spectre</div>
+                            <div className={styles.character}>Capitan Union</div>
                         </div>
                         
                     </div>

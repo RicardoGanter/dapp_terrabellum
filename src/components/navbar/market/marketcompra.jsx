@@ -191,7 +191,7 @@ const Marketcompra = ()=>{
               <option>noc</option>
               <option>n213123oc</option>
               <option>noc2312312</option>
-          </select> */}
+            </select> */}
         </div>
           
         <div className={styles2.filtros}>
@@ -218,8 +218,8 @@ const Marketcompra = ()=>{
             trackClassName="slider-track"
             renderTrack={(props, state) => (
               <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
-            )}
-            />
+              )}
+              />
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width: "100%"}}>
             <h2>1</h2> <h2>2</h2> <h2>3</h2>
           </div>
@@ -241,7 +241,7 @@ const Marketcompra = ()=>{
             <option>Red Spectre</option>
             <option>Agente</option>
             <option>Aifos</option>
-        </select> */}
+          </select> */}
         <div className={styles2.filtros}>
           <h2>unmerge</h2>
           <ReactSlider
@@ -265,6 +265,7 @@ const Marketcompra = ()=>{
     </div>
    
       <div className={styles.contain}>
+        <h2 className={styles.Title}>Marketplace</h2>
       {imageUrls.length > 0 && sales.length > 0 ? 
   filteredNFTs.map((data) => (
     <div className={styles.containcard}  key={data.id} >

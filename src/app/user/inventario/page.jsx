@@ -272,7 +272,7 @@ const NFTContainer = () => {
       {/* <PropsNftcartas name="a"  /> */}
 
 
-
+      <h2 className={styles2.Title}>Inventory</h2>
 
 {loading ? (
   <div className={styles2.grid} style={{display:"flex"}}>

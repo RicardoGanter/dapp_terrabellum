@@ -277,17 +277,14 @@ const removeItem = (index) => {
                    hability3={nft.metadata.hability3}/>
                 </div>
               </div>
-            )) : <> 
-                  <h1>No tienes nft</h1>
+            )) : <>  
             </> }
               </div>
               {/* NFTS */}
             </div>
 
             <div className={styles.fusionnft}>
-              <div className={styles.containfusionnft}>
-                
-                
+              <div className={styles.containfusionnft}> 
                 { nfttomerge &&  nfttomerge.length>0 && nfttomerge.length < 4 ? nfttomerge.map((nfttomerge,index) => 
                   <div onClick={ ()=> removeItem(index)}> 
                     <PropsNftcartas 

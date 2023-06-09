@@ -13,6 +13,15 @@ export default function Home() {
   // }
   // datos desde el front-end
   const [user, setUser] = useState(null)
+  // useEffect(() => {
+  //   const elemento = document.querySelector('#home');
+  //   if (elemento) {
+  //     elemento.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'; 
+  //     elemento.style.backgroundClip = 'content-box';
+  //     elemento.style.width = '100%'
+  //     // Puedes cambiar otros estilos según tus necesidades
+  //   }
+  // },[]);
   useEffect(()=>{
      (async()=>{
        const session = await getSession()

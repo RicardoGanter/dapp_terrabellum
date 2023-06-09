@@ -7,26 +7,38 @@ import scolarship from '../../public/icon/file-signature-solid.svg'
 import news from '../../public/icon/bullhorn-solid.svg'
 import glob from '../../public/icon/globe.svg'
 import shield from '../../public/icon/shield-heart-solid.svg'
-
+import { useState } from 'react';
 const Opcion = ()=>{
+    const [homee, setHome] = useState(false)
+    const [newss, setNews] = useState(false)
+    const [clan, setClan] = useState(false)
+    const [markets, setMarket] = useState(false)
+    const [heross, setHeros] = useState(false)
+    const clearstyles = ()=>{
+        setHome(false)
+        setNews(false)
+        setMarket(false)
+        setHeros(false)
+    }
     return(
         <>
             <div className={styles.contain}>
                 <div>
-                    <Link className={styles.option} href={'/'}>
+                    <Link onClick={()=>{clearstyles(); setHome(true)}} style={homee ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null}  className={styles.option} href={'/'}>
                     <Image src={home} width={30} style={{margin: " 0 1rem"}} alt='Home'/>
                         <p> Home </p>  </Link>
-                    <Link href={'/noticias'} className={styles.option}> 
+
+                    <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/noticias'} className={styles.option}> 
                     <Image src={news} width={30} style={{margin: " 0 1rem"}} alt='News'/>
                         <p> News </p> </Link>
-                    <Link href={'/cambiame'} className={styles.option}>
+                    <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null}  href={'/cambiame'} className={styles.option}>
                     <Image src={scolarship} width={30} style={{margin: " 0 1rem"}} alt='scolarships'/> 
-                        <p>ScolarShips</p>
+                        <p>Clan account</p>
                         </Link>
-                    <Link href={'/market'}className={styles.option}> 
+                    <Link onClick={()=>{clearstyles(); setMarket(true)}} style={markets ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/market'}className={styles.option}> 
                     <Image src={market} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p>Market</p></Link>
-                    <Link href={'/heros'}className={styles.option}> 
+                    <Link onClick={()=>{clearstyles(); setHeros(true)}} style={heross ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/heros'}className={styles.option}> 
                     <Image src={shield} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p>Heros</p></Link>
                 </div>
