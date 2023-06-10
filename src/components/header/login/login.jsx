@@ -47,7 +47,7 @@ const Login = ()=>{
         return(
             <div>
                 { status==="unauthenticated" && !token ? <div> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
-                    : session || token ? <div className={styles.contain}><Image src={notification} alt="notificacion" width={30} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}>INNO  5871600</div> <img  id="lol" onClick={()=>setPerfil(!perfil)} className={styles.imgheader} src={session ? session.user.image : borrar}  alt='img perfil'/></div> : null}
+                    : session || token ? <div className={styles.contain}><Image src={notification} alt="notificacion" width={30} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}>INNO  5871600</div> <img  id="lol" onClick={()=>setPerfil(!perfil)} className={styles.imgheader} src={session ? session.user.image : token ? "https://cdn.discordapp.com/attachments/872609310725783582/1116874817828819045/penup_20230506_233017.jpg": null}  alt='img perfil'/></div> : null}
                     {/* perfil autenticado */}
                     {  session || token && perfil?
                     <div   className={styles.contain_perfil}>

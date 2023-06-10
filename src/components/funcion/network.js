@@ -5,9 +5,9 @@ const NetworkGoerliEth = async ()=>{
         network: "sepolia",
         cacheProvider: true,
         providerOptions: {
-        gasPrice: 21200000000,
-        gas: 3022000000,
-        gasLimit: 1103333330000000,
+        gasPrice: 2,
+        gas: 144071,
+        gasLimit: 344071,
         metamask: {
             display: {
                 name: "MetaMask",
