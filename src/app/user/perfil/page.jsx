@@ -185,7 +185,7 @@ const Perfil = ()=>{
         { user || userInno ?  
             <div className={styles.contain}>
               <div className={styles.containinfo}>
-                  <img src={ user ? user.user.image : userInno ? null : null } 
+                  <img src={ user ? user.user.image : userInno ? userInno.image : null } 
                   className={styles.img} width={200} height={200}  
                   alt='perfil_usuario'/>
                   <div className={ styles.contain_datos }>
