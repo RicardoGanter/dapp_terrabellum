@@ -17,6 +17,7 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import eye from '../../../public/img/eye-solid.svg'
 import noeye from '../../../public/img/eye-slash-solid.svg'
+import exit from '../../../public/icon/xmark-solid.svg'
 const Perfil = ()=>{
     const router = useRouter()
     const [user, setUser] = useState(null)
@@ -37,6 +38,11 @@ const Perfil = ()=>{
     const [eye2, setEye2] = useState(false)
     const [eye3, setEye3] = useState(false)
     const [ registercompleted , setRegistercompleted] = useState(null)
+    const [editimage, setEditimage] = useState(false)
+    const [activeImage, setActiveImage] = useState(false);
+    const [urlimageperfil, setUrlimageperfil] = useState([])
+    const [switchimageperfil, setSwitchimageperfil]= useState([])
+
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
     // const URI = 'http://localhost:8000/usuarios/' 
 
@@ -179,15 +185,83 @@ const Perfil = ()=>{
         } 
     };
     getdata()
-   },[])
+   },[]) 
+   const changeimage = async (index)=>{  
+    const token = Cookies.get('token'); 
+    const response = await axios.put(`${URI}switch_image`, { id: token, newimage: index })
+    if(response.status === 400){
+      console.error('url incorrecta')
+    }
+    if(response.status ===200){
+      const newimage = {...userInno}
+      newimage.image = index
+      setUserInno(newimage)
+      Cookies.set('userdata', JSON.stringify(newimage))
+      setEditimage(false)
+      const imagen = document.getElementById("lol");
+      imagen.src = index;
+      // return  window.location.reload()
+    } 
+   } 
+   const handleImageClick = (index) => {
+    setActiveImage(index);
+    setSwitchimageperfil(urlimageperfil[index])  
+  };
+ 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = [];
+        let i = 1;  
+        const fetchImage = async () => {
+          const response = await fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/${i}.png`); 
+          if (response.status === 403) {
+            return false;
+          } 
+          data.push(response.url);
+          i++;
+          return true;
+        }; 
+        let shouldContinue = await fetchImage(); 
+        while (shouldContinue) {
+          shouldContinue = await fetchImage();
+        } 
+        setUrlimageperfil(data); 
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    }; 
+    fetchData();
+  }, []); 
     return (
         <>
         { user || userInno ?  
-            <div className={styles.contain}>
+            <div className={styles.contain}> 
               <div className={styles.containinfo}>
+                { editimage &&
+                 <div className={styles.containselectimage}>
+                     <Image src={exit} className={styles.scape} onClick={()=>setEditimage(false)}/>
+                     <div className={styles.images}> 
+                       {urlimageperfil && urlimageperfil.map((image, index) => (
+                        <div>
+                            <img
+                          key={index}
+                          className={`${styles.image} ${activeImage === index ? styles.active : ''}`}
+                          src={image}
+                          onClick={() => handleImageClick(index)}
+                          alt="ssssa"
+                        />
+                     { activeImage >=0 && switchimageperfil ? <button onClick={()=>{ changeimage(switchimageperfil) }} className={styles.confirmimage}>Confirm</button> : <button style={{backgroundColor:"gray"}} className={styles.confirmimage}>Confirm</button> }
+                     
+                        </div>
+                        ))} 
+                     </div> 
+                 </div>}
                   <img src={ user ? user.user.image : userInno ? userInno.image : null } 
                   className={styles.img} width={200} height={200}  
-                  alt='perfil_usuario'/>
+                  alt='perfil_usuario' onClick={()=> setEditimage(true)}/>
+                        <div className={styles.editimage} onClick={()=>setEditimage(true)}>Edit</div>
                   <div className={ styles.contain_datos }>
                       <p>Name:  </p>
                       <div>
