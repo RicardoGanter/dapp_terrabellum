@@ -215,7 +215,7 @@ const Perfil = ()=>{
         const data = [];
         let i = 1;  
         const fetchImage = async () => {
-          const response = await fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/${i}.png`); 
+          const response = await fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/${i}.webp`); 
           if (response.status === 403) {
             return false;
           } 
