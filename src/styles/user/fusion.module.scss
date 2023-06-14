@@ -1,4 +1,9 @@
 @import '../var.module';
+.containleft{ 
+    height: 90vh; 
+    margin: 0;
+    width: 100%;
+}
 .contain{
     display: flex;
     gap: 2rem;
@@ -10,11 +15,13 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        height: 514px;
-        background-color: $color_bg_morado_oscuro2;    
+        min-height: 40%;
+        max-height: 50%;
+        // height: 548px;
+        background-color: $color_bg_morado_oscuro;    
         ::-webkit-scrollbar {
             width: 10px;
-            background: $color_bg_morado_oscuro2;
+            background: $color_bg_morado_oscuro;
           }
           
         ::-webkit-scrollbar-thumb {
@@ -23,7 +30,7 @@
         }
           
         .filter{
-            background-color: $color_bg_morado_oscuro2;
+            background-color: $color_bg_morado_oscuro;
             box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
             width: 100%;
             .filter1{
@@ -46,7 +53,7 @@
                     input{
                         margin: .3rem;
                         height: 70%;
-                        background-color: $color_bg_morado_oscuro2;
+                        background-color: $color_bg_morado_oscuro;
                     }
                     
                     
@@ -71,7 +78,7 @@
         width: 100%;
         justify-content: center;
         border-radius: 5px;
-        background-color: $color_bg_morado_oscuro2;
+        background-color: $color_bg_morado_oscuro;
         padding: .5rem 0 1rem 0;
         .containfusionnft{
             display: flex;
@@ -87,19 +94,20 @@
         margin: 0 1rem 0 0;
         .top{
             padding: 1rem;
-            background-color: $color_bg_morado_oscuro2;
+            background-color: $color_bg_morado_oscuro;
             display: flex;
             border-radius: 5px;
             .left{
                 display:  flex;
                 flex-direction: column;
                 .fusion{
-                    margin: 1rem 0;
+                    margin: .1rem 0;
                     background-color: $color_bg;
-                    padding: .7rem 0;
+                    padding: .3rem 0;
                     border-radius: 5px;
                     cursor: pointer;
                     color: $color_text_white;
+                    font-size: 24px;
                 }
             }
             .right{
@@ -107,19 +115,20 @@
                 flex-direction: column;
                 justify-content: flex-end;
                 h1{
-                    margin: 1rem;
+                    margin: .1rem .5rem;
                     background-color: $color_bg;
-                    padding: .7rem 6rem;
+                    padding: .3rem 3rem;
                     border-radius: 5px;
                     cursor: pointer;
                     color: $color_text_white;
+                    font-size: 24px;
                 }
             }
         }
         .bottom{
             display: flex;
             justify-content: space-around;
-            background-color: $color_bg_morado_oscuro2;
+            background-color: $color_bg_morado_oscuro;
             padding: 1rem;
             border-radius: 5px;
             .containcircle{
@@ -179,4 +188,15 @@
     background-color: $color_bg_morado_oscuro2;
     color: $color_text_white;
    }
-}
+} 
+@media screen and (max-width: 1921px) {
+    .contain{  
+        position: absolute;
+        top: -50px;
+        left: 0; 
+        transform: scale(.65); 
+        .containnfts{
+            height: 60vh;
+        }
+    }
+    }

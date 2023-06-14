@@ -105,13 +105,11 @@ const Marketcompra = ()=>{
     async function fetchSales() {
       try {
         const contract = await ConnectInnomicNft();
-        const saless = await contract.fetchUnSoldMarketItems();
-        
+        const saless = await contract.fetchUnSoldMarketItems(); 
         const sortedSales = [...saless]; // Hacer una copia del array original
         const minmax = []
         if (orderprice==true){
-          sortedSales.sort((a, b) => b.price.toString() - a.price.toString());
-          
+          sortedSales.sort((a, b) => b.price.toString() - a.price.toString()); 
           return setSales(sortedSales);
         }
         if(orderprice==false){
@@ -136,8 +134,7 @@ const Marketcompra = ()=>{
   
  const fetchImageUrl = async (tokenId, ide) => {
     try {
-      const id= await ide
-      // console.log(id.price.toString(),"aaaaaaaaaaaaaaaaaa")
+      const id= await ide 
       const contract = await ConnectInnomicNft() 
       const response = await contract.tokenURI(tokenId);
       const uritokenn = await fetch(response);
@@ -185,7 +182,7 @@ const Marketcompra = ()=>{
               <option>Weapon</option>
           </select>
           <h2>Characters</h2>
-          <input type="text" value={filtercharacters} style={{backgroundColor:"#47213c", padding:".5rem 0", width:"100%"}} onChange={(e)=> setFiltercharacters(e.target.value)} />
+          <input type="text" value={filtercharacters} onChange={(e)=> setFiltercharacters(e.target.value)} />
           {/* <h2>Hability</h2>
           <select>
               <option>noc</option>

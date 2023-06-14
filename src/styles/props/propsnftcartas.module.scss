@@ -1,8 +1,8 @@
 @import '../var.module';
 .link{
-    text-decoration: none;
     margin: .3rem;
-}
+    text-decoration: none;
+  } 
 .cards{
     padding: .4rem;
     background: #7A0D69;
@@ -78,7 +78,7 @@
     // -webkit-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
     // -moz-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
     box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
-    transition: .4s;
+    transition: .2s;
 }
 .cardsblue:hover{
     box-shadow: 0px 0px 11px 8px #328aaf;
@@ -103,5 +103,4 @@
 
 .price{
     color: aliceblue;
-}
-
+}  

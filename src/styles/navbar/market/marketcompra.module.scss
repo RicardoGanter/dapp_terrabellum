@@ -20,8 +20,11 @@
     flex-direction: column;
     width: fit-content;
     margin: 1rem;
+    transition: .2s;
 }
-
+.containcard:hover{
+    transform: scale(1.05);
+}
 .containPrice{
     margin: 1rem auto;
     width: fit-content;

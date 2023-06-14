@@ -3,21 +3,63 @@
 .navbarcontainMovile, .interresolution {
     display: none;
   }
-.navbarcontain {
+  .blabla{
     position: fixed;
-    z-index: 2;
-    width: 100%;
+    top: -225px;
+    right: 25px;
+    z-index: 6;
+  }
+  .lal{
+    position: fixed;
     top: 0;
-    display: flex;
-    justify-content: flex-end;
+    width: 100%;
     background-color: $color_bg_morado_oscuro;
-    /* align-items: center; */
-    height: 80px;
-    box-sizing: border-box;
-    /* border-bottom: 5px solid rgb(123, 123, 123); */
+    z-index: 4;
+  }
+.navbarcontain { 
+    z-index: 2;
+    width: 100%; 
+    display: flex;
+    justify-content: flex-end;  
+    height: 60px;
+    box-sizing: border-box; 
     align-items: center;
-    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.15);
-
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+  }
+  .containsavedata{
+    display: flex;
+    justify-content: flex-start; 
+    box-shadow: 0px 3px 3px #5757578c;
+    padding: .2rem;
+    gap: 1rem;
+    .urlsaveimage{
+      display: flex;
+      align-items: center;
+      justify-content: center;  
+      text-decoration: none;
+      gap: .5rem;
+    }
+    p{
+      padding: .3rem 0;
+    }
+   
+  }
+  .logotb{
+    position: absolute;
+    left: 60px;
+    display: flex;
+    align-items: center;
+  }
+  .search{
+    margin: 0 4rem ;
+    padding: .7rem 3rem; 
+    border-radius: 3px;
+    background-color: $color_bg;
+  }
+  .imagesearch{
+    position: absolute;
+    left: 150px;
+    width: 20px; 
   }
   .prueba{
     position: absolute;
@@ -125,7 +167,7 @@
     }
 
  
-  
+ 
   @media (max-width: 480px){
     .interresolution, .navbarcontain{
       display: none;

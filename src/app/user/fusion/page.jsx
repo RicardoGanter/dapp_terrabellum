@@ -37,8 +37,7 @@ const Fusion = () => {
       }
       if(userId){
       return  setUser(userId)
-      }
-
+      } 
       router.push('./signin')
     })()
   },[])
@@ -229,7 +228,7 @@ const removeItem = (index) => {
     
         <div className={styles.contain}>
             {/* TOP */}
-            <div style={{width:"100%"}}>
+            <div className={styles.containleft}>
             <div className={styles.containnfts}>
               {/* FILTERS */}
               <div className={styles.filter}>
@@ -263,11 +262,13 @@ const removeItem = (index) => {
               {/* FILTERS */}
 
               {/* NFTS */}
+              <div></div>
               <div className={styles.nfts}> 
               { nfts && nfts.length > 0 ? Filter.map((nft) => (
               <div key={nft.id}>
-                <div  onClick={()=> setCharacteristics([nft.metadata,  nft.id])} >
+                <div className={styles.blabla} onClick={()=> setCharacteristics([nft.metadata,  nft.id])} >
                 <PropsNftcartas 
+                
                    level={nft.metadata.level}
                    name={nft.metadata.name}
                    image={nft.metadata.image} height={370}
@@ -286,7 +287,7 @@ const removeItem = (index) => {
             <div className={styles.fusionnft}>
               <div className={styles.containfusionnft}> 
                 { nfttomerge &&  nfttomerge.length>0 && nfttomerge.length < 4 ? nfttomerge.map((nfttomerge,index) => 
-                  <div onClick={ ()=> removeItem(index)}> 
+                  <div className={styles.blabla} onClick={ ()=> removeItem(index)}> 
                     <PropsNftcartas 
                       level={nfttomerge[0].level}
                       name={nfttomerge[0].name}
@@ -321,7 +322,7 @@ const removeItem = (index) => {
             <div className={styles.containtypemerge}>
               {/* TYPE OF MERGE ?  */}
               <div className={styles.top}>
-              <div className={styles.left}>
+              <div className={`${styles.left} ${styles.blabla}`}>
                { characteristics ?  
                <PropsNftcartas 
                 level={characteristics[0].level}
@@ -338,12 +339,12 @@ const removeItem = (index) => {
               </div>
               
               <div className={styles.right}> { characteristics ? <h1 onClick={()=> {setUnmerge(characteristics); setShowUnmergeData(true); if(unmerge && unmerge ){getchildrens(unmerge[1], unmerge[0])}}}  >unmerge</h1>
-                : <h1 style={{opacity:.7, backgroundColor:"grey"}}>unmerge</h1> }         
+                : <p style={{opacity:.7, backgroundColor:"grey"}}>unmerge</p> }         
               </div>
               {/* getParents */}
               </div>
                 {/* FUNCION FUSION */}
-              <div className={styles.bottom}>
+                <div className={`${styles.bottom} ${styles.blabla}`}> 
                 { unmerge && unmerge.length  > 0  ? 
                 <PropsNftcartas 
                   level={unmerge[0].level}

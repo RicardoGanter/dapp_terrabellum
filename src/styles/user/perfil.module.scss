@@ -6,7 +6,7 @@
    flex-direction: column;
    justify-content: flex-end;
    align-items:  center;
-   margin: -30px auto;
+   margin: 0 auto;
    width: fit-content; 
    .wallet{
     display: grid;
@@ -19,7 +19,7 @@
     display: flex;
     justify-content:  flex-start;
     align-items:  flex-start;
-    background-color: $color_bg_morado_oscuro2;
+    background-color: $color_bg_morado_oscuro;
     border-radius: 5px;
     padding: 2rem 10rem 7rem 4rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.47);
@@ -42,22 +42,22 @@
                 width: 180px;
                 border-radius: 3px;
                 color: #D9D9D9;
-                background-color: $color_bg_morado_oscuro;
+                background-color: $color_bg;
             }
         }
     }
-}
+} 
 
 .containselectimage{
     z-index: 1;
     position: absolute;
     width: 100%; 
-    height: 10px;
+    // height: 10px;
     top: 0; 
     left: 0;
     margin: 2rem 0;
     height: 140%;
-    background-color: $color_bg_morado_oscuro2;
+    background-color: $color_bg_morado_oscuro;
     border-radius: 5px;
     box-shadow: 0px 0px 7px 3px rgba(0, 0, 0, 0.5);
     .scape{
@@ -73,17 +73,17 @@
     }
     .images{
         position: absolute; 
+        margin: 1rem 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;  
         left: 80px;
         padding: .4rem;
         right: 80px;
         top: 60px;
         bottom: 80px; 
         border-radius: 5px;
-        overflow-y: scroll;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem; 
-        // width: 100%;  
+        overflow-y: scroll; 
             .image{ 
             background-color: $color_bg;
             width: 100px;
@@ -91,8 +91,7 @@
             border-radius: 5px;
             cursor: pointer; 
             }  
-            .image.active {
-                /* Estilos para el botón activo */
+            .image.active { 
                 padding: .2rem;
                 box-shadow: 0px 0px 3px 4px rgba(189, 0, 110, 0.5);
               }
@@ -102,8 +101,10 @@
         
     }
     .confirmimage{
-        position: absolute;
-        bottom: 20px;
+        position: fixed;
+        top: 640px;
+        left: 50%;
+        margin: 0 18rem;
         right: 80px;
         font-size: 24px;
     }
@@ -130,7 +131,7 @@
 }
 .containWallets{
     margin: .2rem 0;
-    background-color: $color_bg_morado_oscuro2;
+    background-color: $color_bg_morado_oscuro;
     width: 85%;
     border-radius: 3px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
@@ -225,8 +226,8 @@
 .popup_register{
     position: fixed;
     right: 0;
-    top: 100px;
-    background-color: $color_bg_morado_oscuro2;
+    top: 130px;
+    background-color: $color_bg_morado_oscuro;
     padding: 0 1rem 1rem 1rem;
     border-radius: 7px 0 0 7px;
     box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.45);
@@ -257,18 +258,17 @@
     }
     div{
         width: 100%;
-        height: 7px;
-        background-color: #31942F;
+        height: 9px;
+        background-color: $color_bg;
         border-radius: 5px;
         animation: lool 3s forwards; 
     }
     @keyframes lool {
         0% {
-            width: 100%;
+            width:  0%;
         }
         100% {
-            width: 0%;
-            background-color: red;
+            width: 100%; 
         }
     }
 }

@@ -12,6 +12,9 @@ import Cookies from 'js-cookie';
 const jwt = require('jsonwebtoken');
 import borrar from '../../../public/img/cofre.png'
 import axios from "axios"
+import glob from '../../../public/icon/globe.svg'
+import tokenicon from '../../../public/img/TOKEN_1.png'
+
 const Login = ()=>{
     const router = useRouter();
     const contenedorRef = useRef(false);
@@ -33,8 +36,7 @@ const Login = ()=>{
         }
         if(user){ 
             const imageuser = JSON.parse(user)
-            const a = imageuser.image
-            console.log(a)
+            const a = imageuser.image 
             setUserinno(a) 
         } 
         if(!user && token){ 
@@ -44,9 +46,7 @@ const Login = ()=>{
             const datauser = await Cookies.set('userdata', JSON.stringify(data))  
               const a = await data.image
               return setUserinno(a) 
-          }
-        } 
-        
+          } }  
         } 
         lol()
     },[] )   
@@ -55,6 +55,7 @@ const Login = ()=>{
         Cookies.remove('userdata') 
         setToken(null);
         setUserinno(null)
+        return  window.location.reload()
      }
     //muito importante
      if (perfil) {
@@ -64,16 +65,15 @@ const Login = ()=>{
           }
         }; 
         document.addEventListener("click", handleClick);
-      }
-      
+      } 
         return(
             <div>
-                { status==="unauthenticated" && !userinno ? <div> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
-                    : session || userinno? <div className={styles.contain}><Image src={notification} alt="notificacion" width={30} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}>INNO  5871600</div> <img  id="lol" onClick={()=>setPerfil(!perfil)} className={styles.imgheader} src={userinno ? userinno : session ? session.user.image  : null}  alt='img perfil'/></div> : null}
+                { status==="unauthenticated" && !userinno ? <div className={styles.contain}><Image className={styles.globimage} src={glob}/> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
+                    : session || userinno? <div className={styles.contain}> <Image className={styles.globimage} src={glob}/><Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={30} src={tokenicon} />  5871600</div> <img  id="lol" onClick={()=>setPerfil(!perfil)} className={styles.imgheader} src={userinno ? userinno : session ? session.user.image  : null}  alt='img perfil'/></div> : null}
                     {/* perfil autenticado */}
                     {  session || token && perfil?
-                    <div   className={styles.contain_perfil}>
-                        <div  style={{margin:'5rem 0 0 0', display:'flex', flexDirection:'column'}}>
+                    <div  style={{zIndex:"6"}} className={styles.contain_perfil}>
+                        <div  style={{margin:'3.5rem 0 0 0', display:'flex', flexDirection:'column'}}>
                         <Link href={'/user/perfil'}> <button>Profile</button> </Link>
                         <Link href={'/user/statistics'}> <button>Stats</button></Link>
                         <Link href={'/user/inventario'}> <button>Inventory</button></Link>

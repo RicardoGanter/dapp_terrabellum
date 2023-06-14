@@ -17,7 +17,9 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import eye from '../../../public/img/eye-solid.svg'
 import noeye from '../../../public/img/eye-slash-solid.svg'
-import exit from '../../../public/icon/xmark-solid.svg'
+import exit from '../../../public/icon/xmark-solid.svg' 
+import {SaveUrl} from '../../../components/header/header'
+
 const Perfil = ()=>{
     const router = useRouter()
     const [user, setUser] = useState(null)
@@ -42,7 +44,7 @@ const Perfil = ()=>{
     const [activeImage, setActiveImage] = useState(false);
     const [urlimageperfil, setUrlimageperfil] = useState([])
     const [switchimageperfil, setSwitchimageperfil]= useState([])
-
+    const [repeatname ,setRepeatname] = useState(null)
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
     // const URI = 'http://localhost:8000/usuarios/' 
 
@@ -52,7 +54,6 @@ const Perfil = ()=>{
        return console.error('contraseña erronea o menor a 8 caracteres')
       }
       const token = Cookies.get('token');  
-      console.log("qsdad")
       const response = await axios.put(`${URI}switchpassword`,{ id : token, contraseña: contraActual , newcontraseña: newcontraseña  }); 
       if( response.status === 204 ){ 
         return  setInvalidpassword(true)
@@ -186,6 +187,18 @@ const Perfil = ()=>{
     };
     getdata()
    },[]) 
+
+   useEffect(()=>{
+    if(userInno){
+      const nombreBuscado = "Profile";
+      const existeNombre = userInno.urlMarkets.find(item => item.nombre === nombreBuscado);
+      if (existeNombre) { 
+      return  setRepeatname(true)
+      } else { 
+      return  setRepeatname(false)
+      } 
+    }
+   }, [userInno])
    const changeimage = async (index)=>{  
     const token = Cookies.get('token'); 
     const response = await axios.put(`${URI}switch_image`, { id: token, newimage: index })
@@ -237,7 +250,8 @@ const Perfil = ()=>{
     return (
         <>
         { user || userInno ?  
-            <div className={styles.contain}> 
+            <div className={styles.contain}>  
+            <SaveUrl savename={repeatname} name='Profile' url="user/perfil" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/1.svg"/>
               <div className={styles.containinfo}>
                 { editimage &&
                  <div className={styles.containselectimage}>
@@ -263,23 +277,21 @@ const Perfil = ()=>{
                   alt='perfil_usuario' onClick={()=> setEditimage(true)}/>
                         <div className={styles.editimage} onClick={()=>setEditimage(true)}>Edit</div>
                   <div className={ styles.contain_datos }>
-                      <p>Name:  </p>
+                      <p>Name</p>
                       <div>
                           <div className={styles.datauser}>{ user ? user.user.name : userInno ? userInno.nombre : null }</div>
-                         { userInno && userInno.cont_change_name >= 1 ? <button style={{backgroundColor:"gray"}} >Change Name</button> : <button onClick={()=>setSwitchname(true)}>Change Name</button>} 
-                      </div>
-
-                      <p>Email: </p>
+                         { userInno && userInno.cont_change_name >= 1 ? <button style={{backgroundColor:"gray"}} >Change Name</button> : <button style={{backgroundColor:"#0E001A"}} onClick={()=>setSwitchname(true)}>Change Name</button>} 
+                      </div> 
+                      <p>Email</p>
                       <div>
                           <div className={styles.datauser}>{ user ? user.user.email: userInno ? userInno.email : null } </div>
-                          <button>Change Email</button>
+                          <button style={{backgroundColor:"#0E001A"}}>Change Email</button>
                       </div>
                       <div style={{display:"flex", justifyContent:"start", alignItems:"center", gap:"1rem"}}>
-                        <button onClick={()=>setChangepassword(true)} style={{ width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
+                        <button onClick={()=>setChangepassword(true)} style={{backgroundColor:"#0E001A", width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
                         <Image alt="Shield_image" src={lock} width={25}/>
                       </div>
-                  </div>
-                  
+                  </div> 
               </div>
               <div className={styles.containWallets}>
                   <p>Wallets Connected In account</p>
@@ -295,20 +307,17 @@ const Perfil = ()=>{
                 </div> */}
                 {confirmdeleted ? 
                   <div className={styles.containconfirmdelete}>
-                    <div>
-
+                    <div> 
                     </div>
                     <div>
                       <h2>Realmente quiere eliminar el address ?</h2>
                       <h2>Recuerda que no podras utilizar tus nfts en el metaverso de Terrabellum una vez eliminado el address</h2>
-                    </div>
-
+                    </div> 
                     <div style={{display:"flex", justifyContent:"center", gap:"1rem"}}>
                       <button onClick={()=> DeleteAddressMetamask()}>Accept</button>
                       <button onClick={()=>{setConfirmdeleted(false)}}>Cancel</button>
                     </div> 
-                  </div>
-                
+                  </div> 
                 : null}
                 { changepassword &&
                   <div className={styles.containswitchpassword}> 
