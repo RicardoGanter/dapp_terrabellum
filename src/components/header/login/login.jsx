@@ -50,12 +50,12 @@ const Login = ()=>{
         } 
         lol()
     },[] )   
-     const deletcookie =()=>{
+     const deletcookie =()=>{ 
+        window.location.reload() 
         Cookies.remove('token');
-        Cookies.remove('userdata') 
-        setToken(null);
-        setUserinno(null)
-        return  window.location.reload()
+        Cookies.remove('userdata')
+        setToken(null); 
+        return setUserinno(null)
      }
     //muito importante
      if (perfil) {
