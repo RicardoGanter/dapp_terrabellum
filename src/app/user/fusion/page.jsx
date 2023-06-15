@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 import ContentLoader, { Instagram } from "react-content-loader";
 import Cookies from 'js-cookie';
 import jwt  from 'jsonwebtoken';
+import { SaveUrl } from "../../../components/header/header";
 const Fusion = () => {
   // const [merge, setMerge] = useState(false)
   const [nfts, setNfts] = useState([]);
@@ -25,22 +26,37 @@ const Fusion = () => {
   const [showUnmergeData, setShowUnmergeData] = useState(false);
   const [user, setUser] = useState(null)
   const router = useRouter();
-  
-  useEffect(()=>{
-    (async()=>{
-      const session = await getSession()
-      const token = Cookies.get('token');
-      const decodedToken = jwt.decode(token);
-      const userId = decodedToken.id;
-      if(session){
-      return setUser(session)
-      }
-      if(userId){
-      return  setUser(userId)
-      } 
-      router.push('./signin')
-    })()
-  },[])
+  const [userInno, setUserInno] = useState(null)
+  const [repeatname ,setRepeatname] = useState(null)
+   useEffect(()=>{
+    const getdata = async()=> { 
+        const token = Cookies.get('token');  
+        const session = await getSession()
+        if(!token && !session){
+          console.error("no tienes una sesion iniciada")
+          return router.push('./signin')
+        }
+        if(session){
+          return setUser(session)
+        } 
+        const userdata = Cookies.get('userdata') 
+        if(!userdata){ 
+          const response = await axios.post(`${URI}getuser`,{id : token});
+          if(response.data){
+          const datauser = await Cookies.set('userdata', JSON.stringify(response.data))   
+          return setUserInno(response.data)
+          }
+        }
+        if(userdata){ 
+          const data = JSON.parse(userdata)  
+          return setUserInno(data)
+        } 
+    };
+    setTimeout(() => {
+      getdata()
+      
+    }, 2000);
+   }) 
 
 
   function norepeatlvl(value){
@@ -223,10 +239,22 @@ const removeItem = (index) => {
     
     fetchNFTs();
     }, []);
+    useEffect(()=>{
+      if(userInno){
+        const nombreBuscado = "Fusion";
+        const existeNombre = userInno.urlMarkets.find(item => item.nombre === nombreBuscado);
+        if (existeNombre) { 
+        return  setRepeatname(true)
+        } else { 
+        return  setRepeatname(false)
+        } 
+      }
+     }, [userInno])
   return (
-    <>  {user ?
+    <>  {user || userInno?
     
         <div className={styles.contain}>
+          <SaveUrl savename={repeatname} name='Fusion' url="user/fusion" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/3.svg"/>
             {/* TOP */}
             <div className={styles.containleft}>
             <div className={styles.containnfts}>

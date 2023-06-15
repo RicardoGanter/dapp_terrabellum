@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation"
 import ContentLoader, { Instagram } from "react-content-loader";
 import Cookies from 'js-cookie';
 import jwt  from 'jsonwebtoken';
+import { SaveUrl } from "../../../components/header/header";
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,23 +29,37 @@ const NFTContainer = () => {
   const [orderprice, setOrderprice] = useState(false)
   const [user, setUser] = useState(null)
   const router = useRouter();
-
+  const [userInno, setUserInno] = useState(null)
+  const [repeatname ,setRepeatname] = useState(null)
   useEffect(()=>{
-    (async()=>{
-      const session = await getSession()
-      const token = Cookies.get('token');
-      const decodedToken = jwt.decode(token);
-      const userId = decodedToken.id;
-      if(session){
-      return setUser(session)
-      }
-      if(userId){
-      return  setUser(userId)
-      }
-
-      router.push('./signin')
-    })()
-  },[])
+    const getdata = async()=> { 
+        const token = Cookies.get('token');  
+        const session = await getSession()
+        if(!token && !session){
+          console.error("no tienes una sesion iniciada")
+          return router.push('./signin')
+        }
+        if(session){
+          return setUser(session)
+        } 
+        const userdata = Cookies.get('userdata') 
+        if(!userdata){ 
+          const response = await axios.post(`${URI}getuser`,{id : token});
+          if(response.data){
+          const datauser = await Cookies.set('userdata', JSON.stringify(response.data))   
+          return setUserInno(response.data)
+          }
+        }
+        if(userdata){ 
+          const data = JSON.parse(userdata)  
+          return setUserInno(data)
+        } 
+    };
+    setTimeout(() => {
+      getdata()
+      
+    }, 2000);
+   }) 
 
 
    const filteredNFTs = nfts.filter((nft) => 
@@ -88,9 +103,7 @@ const NFTContainer = () => {
   // const handleRangeChangeprice = (value) => {
   //   setMinprice(value);
   // };
-
-
-
+ 
   useEffect(() => {
     const filtered = [];
     for (let i = selectedRangedefusion[0]; i <= selectedRangedefusion[1]; i++) {
@@ -161,25 +174,38 @@ const NFTContainer = () => {
     fetchNFTs();
     }, []);
 
-//  Función para vender un NFT
- const venderNFT = async (Id) => {
-   try {
-     const contract = await ConnectInnomicNft(); // CONTRATO INNOMIC
-      await contract.createMarketItem( 
-       Id,
-       price *10**9 ,{
-       gasLimit: 1000000,
-     } );
-   } catch (error) {
-     console.error(error);
-   }
- };
+// Función para vender un NFT
+const { ethers } = require('ethers');
 
+const venderNFT = async (Id) => {
+  try {
+    const contract = await ConnectInnomicNft(); // CONTRATO INNOMIC
+    if (price) {
+      const newprice = ethers.BigNumber.from(price).mul(ethers.BigNumber.from(10).pow(18));
+      const sell = await contract.createMarketItem(Id, newprice, {
+        gasLimit: 1000000,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}; 
+ useEffect(()=>{
+  if(userInno){
+    const nombreBuscado = "Inventory";
+    const existeNombre = userInno.urlMarkets.find(item => item.nombre === nombreBuscado);
+    if (existeNombre) { 
+    return  setRepeatname(true)
+    } else { 
+    return  setRepeatname(false)
+    } 
+  }
+ }, [userInno])
   return (
     <>
-    {user ?
+    {userInno ?
     <div style={{display:"flex", gap: "1rem"}}>
-      
+      <SaveUrl savename={repeatname} name='Inventory' url='user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
       {/* <Barrafiltros/> */}
       <div className={styles.container}>
       <div className={styles.subContainer}>
@@ -191,15 +217,8 @@ const NFTContainer = () => {
               <option>Weapon</option>
           </select>
           <h2>Characters</h2>
-          <input type="text" value={filtercharacters} style={{backgroundColor:"#47213c", padding:".5rem 0", width:"100%"}} onChange={(e)=> setFiltercharacters(e.target.value)} />
-          {/* <h2>Hability</h2>
-          <select>
-              <option>noc</option>
-              <option>n213123oc</option>
-              <option>noc2312312</option>
-          </select> */}
-        </div>
-          
+          <input type="text" value={filtercharacters} style={{backgroundColor:"#0E001A", padding:".5rem 0", width:"100%"}} onChange={(e)=> setFiltercharacters(e.target.value)} />
+        </div> 
         <div className={styles.filtros}>
           {/* <h2>price</h2>
           <ReactSlider
@@ -391,8 +410,10 @@ const NFTContainer = () => {
           placeholder="Precio en Wei"
           value={price[nft]}
           onChange={(e) => setPrice(e.target.value)}
+          min={-1}
           max={99999999999}
         />
+        <span>{Number(price[nft]).toLocaleString()}</span>
         <button className={styles2.sell} type="submit">
           vender
         </button>

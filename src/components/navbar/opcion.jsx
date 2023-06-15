@@ -31,21 +31,21 @@ const Opcion = ()=>{
             <div className={styles.contain}>
                 <div>
                     <Link onClick={()=>{clearstyles(); setHome(true)}} style={homee ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null}  className={styles.option} href={'/'}>
-                    <Image src={ homee ? homefacha : homefacha} width={30} style={{margin: " 0 1rem"}} alt='Home'/>
+                    <Image className={styles.test} src={ homee ? homefacha : homefacha} width={30} style={{margin: " 0 1rem"}} alt='Home'/>
                         <p className={styles.rutes}> Home </p>  </Link>
 
                     <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/noticias'} className={styles.option}> 
-                    <Image src={news ? newsfacha : newsfacha} width={30} style={{margin: " 0 1rem"}} alt='News'/>
+                    <Image className={styles.test} src={news ? newsfacha : newsfacha} width={30} style={{margin: " 0 1rem"}} alt='News'/>
                         <p className={styles.rutes}> News </p> </Link>
                     <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null}  href={'/cambiame'} className={styles.option}>
-                    <Image src={newss ? scfacha : scfacha} width={30} style={{margin: " 0 1rem"}} alt='scolarships'/> 
+                    <Image className={styles.test} src={newss ? scfacha : scfacha} width={30} style={{margin: " 0 1rem"}} alt='scolarships'/> 
                         <p className={styles.rutes}>Clan</p>
                         </Link>
                     <Link onClick={()=>{clearstyles(); setMarket(true)}} style={markets ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/market'}className={styles.option}> 
-                    <Image className={styles.markett} src={markets ? marketfacha : marketfacha} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
+                    <Image className={styles.test} src={markets ? marketfacha : marketfacha} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p className={styles.rutes}>Market</p></Link>
                     <Link onClick={()=>{clearstyles(); setHeros(true)}} style={heross ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/heros'}className={styles.option}> 
-                    <Image src={shield} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
+                    <Image className={styles.test} src={shield} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p className={styles.rutes}>Heros</p></Link> 
                 </div>
                 {/* potencial actualizacion */}

@@ -19,11 +19,13 @@ import { useState,useEffect, createContext } from "react";
 export  const SaveUrl = ({name, url, imagen, savename})=>{ 
   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
   const id_user = Cookies.get('token') 
-  const [saved, setSaved ] = useState(null)
+  const [saved, setSaved ] = useState(false)
  const [image, setImage] = useState(star) 
- useEffect(()=>{
-  setSaved(savename)
- },[])
+ useEffect(()=>{ 
+  setTimeout(() => {
+    setSaved(savename) 
+  }, 100);
+ })
   const hoverstar = ()=>{
       setImage(starsolid)
   }
@@ -59,7 +61,7 @@ export  const SaveUrl = ({name, url, imagen, savename})=>{
         const objdatauser = JSON.parse(datauser);
         const datau = { ...objdatauser }; 
         // Eliminar el array con nombre "Profile"
-        datau.urlMarkets = datau.urlMarkets.filter((profile) => profile.nombre !== 'Profile'); 
+        datau.urlMarkets = datau.urlMarkets.filter((profile) => profile.nombre !== name); 
         Cookies.set('userdata', JSON.stringify(datau));
         setSaved(false)
       }
@@ -70,7 +72,7 @@ export  const SaveUrl = ({name, url, imagen, savename})=>{
           <div  className={styles2.contain}>
               <img alt={`${name} Icon`} src={imagen} height={20}/>
               <p>{name}</p>
-           { saved ?<Image alt='Star Icon' onClick={()=>deletedurl()} className={styles2.star} src={starsolid} height={20} width={20}/> 
+           { saved===true ?<Image alt='Star Icon' onClick={()=>deletedurl()} className={styles2.star} src={starsolid} height={20} width={20}/> 
            : <Image alt='Star Icon' onClick={()=>saveurl()} id='starsolid' className={styles2.star} src={image} onMouseLeave={unhoverstar} onMouseEnter={hoverstar} height={20} width={20}/>}   
           </div> 
   )
@@ -109,7 +111,7 @@ const Header = () => {
           return setUserInno(false)
         }
       };  
-      setTimeout(getdata, 2000); 
+      setTimeout(getdata, 2500); 
   } );
    
   return (
@@ -179,11 +181,15 @@ const Header = () => {
           </div>
         </nav> 
         <div className={styles.containsavedata}> 
-          <p>Download</p>
+        <div style={{display:"flex"}}> 
+          <p style={{margin:".4rem 1rem"}}>Download</p>
+          <div className={styles.separador}/>
+        </div>
           { userinno && userinno.urlMarkets.map((data) => (
             <Link href={data.url} className={styles.urlsaveimage} key={data.id}>
               <img src={data.imagen} height={20}/> 
               <p>{data.nombre}</p>
+              <div className={styles.separador}/>
             </Link>
           ))} 
         </div>  

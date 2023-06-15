@@ -31,10 +31,24 @@
         .option:hover{
             background: rgba(255, 255, 255, 0.08);
             background-clip: content-box;
+            .test{
+                animation: blabla infinite 1.5s;
             
+               }
         }
     }
    
+   @keyframes blabla { 
+    33%{
+        transform: rotate(20deg);
+    }
+    66%{
+        transform: rotate(-20deg);
+    }
+    99%{
+        transform: rotate(0deg);
+    }
+   }
     *{
         text-decoration: none;
     }
@@ -66,8 +80,4 @@
 }
 .rutes {
   opacity: 0;  
-} 
-
-.markett{
-    z-index: 3;
-}
+}  

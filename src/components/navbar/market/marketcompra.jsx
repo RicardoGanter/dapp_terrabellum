@@ -21,10 +21,11 @@ const Marketcompra = ()=>{
   const [selectedRangedefusion, setSelectedRangedefusion] = useState([0, 5]);
   const [filteredItemsdefusion, setFilteredItemsdefusion] = useState([]);
   const [orderprice, setOrderprice] = useState(false)
-  const [minprice, setMinprice] = useState([])
+  const [minprice, setMinprice] = useState([0, 10**8])
   const [filteredItemsprice, setFilteredItemsprice] = useState([])
  
   const filteredNFTs = imageUrls.filter((nft) => 
+  // filteredItemsprice.includes(nft.id.price.toString()/ 10*18) &&
   filteredItemsdefusion.includes(nft.unfusioned) &&
   filteredItems.includes(nft.level) && 
   nft.name.toLowerCase().includes(filtercharacters.toLowerCase()) &&
@@ -108,13 +109,16 @@ const Marketcompra = ()=>{
         const saless = await contract.fetchUnSoldMarketItems(); 
         const sortedSales = [...saless]; // Hacer una copia del array original
         const minmax = []
+        const dividir = [sortedSales[sortedSales[0].price.toString() , sortedSales.length - 1].price.toString()]
+
+        // setMinprice(dividir/ 10**18)
         if (orderprice==true){
           sortedSales.sort((a, b) => b.price.toString() - a.price.toString()); 
           return setSales(sortedSales);
         }
         if(orderprice==false){
           sortedSales.sort((a, b) => a.price.toString() - b.price.toString());
-          setMinprice([sortedSales[sortedSales[0].price.toString() , sortedSales.length - 1].price.toString()])
+          // setMinprice([sortedSales[sortedSales[0].price.toString() , sortedSales.length - 1].price.toString()])
           // setMinprice(minmax)
           return setSales(sortedSales); 
         }
@@ -124,8 +128,7 @@ const Marketcompra = ()=>{
       }
     }
     fetchSales();
-  }, [orderprice]);
-
+  }, [orderprice]); 
   // useEffect(async ()=>{
   //   const urls = await Promise.all(sales.map((sale)=> contract.getUnFusioned(Number(sale.tokenId))))
   //   setUnfusioned(unf)
@@ -147,20 +150,26 @@ const Marketcompra = ()=>{
     }}
 
     // COMPRA 
-    const compra =async (Id,values)=>{
+    const compra = async (Id, values) => {
       try {
-        const contract = await ConnectInnomicNft() // conectar a el smart contract Market
+        const contract = await ConnectInnomicNft(); // Conectar al smart contract Market
+        const weiValue = ethers.utils.parseUnits(String(values), 0); // Convertir a WEI sin decimales
+        const ethValue = ethers.utils.formatUnits(weiValue, 'ether'); // Convertir de WEI a ETH
+        
         const options = {
-          value: ethers.utils.parseUnits(String(values),0), // Convertir a WEI sin decimales
+          value: weiValue,
           gasLimit: 5000000
         };
-        console.log(options.value.toString(),"aaaaaaaaaaa")
-        const compra = await contract.createMarketSale(Number(Id),options);
+        
+        console.log(ethValue, "ETH"); // Mostrar el valor en ETH en la consola
+        
+        const compra = await contract.createMarketSale(Number(Id), options);
       } catch (error) {
-        console.error(error); 
+        console.error(error);
       }
     };
-
+    
+    
   useEffect(() => {
     const getImageUrls = async () => {
       const urls = await Promise.all(sales.map(async (sale) => await fetchImageUrl(sale.tokenId, sale)));
@@ -182,28 +191,27 @@ const Marketcompra = ()=>{
               <option>Weapon</option>
           </select>
           <h2>Characters</h2>
-          <input type="text" value={filtercharacters} onChange={(e)=> setFiltercharacters(e.target.value)} />
-          {/* <h2>Hability</h2>
-          <select>
-              <option>noc</option>
-              <option>n213123oc</option>
-              <option>noc2312312</option>
-            </select> */}
+          <input type="text" value={filtercharacters} onChange={(e)=> setFiltercharacters(e.target.value)} /> 
         </div>
           
         <div className={styles2.filtros}>
-          {/* <h2>price</h2>
-          <ReactSlider
+          {/* <h2>price</h2> */}
+          {/* <ReactSlider
             className={styles2.horizontalslider}
             thumbClassName={styles2.examplethumb}
+            min={0}
+            max={1*10**6}
             defaultValue={minprice}
             onChange={handleRangeChangeprice}
             trackClassName="slider-track"
             renderTrack={(props, state) => (
-              <div {...props} className={`${props.className} ${state.index === 1 ? 'active' : ''}`} />
-            )}
-            /> */}
-
+              <div {...props}  >
+                {state.index > 0 && state.index < 2 && (
+                  <div className={styles2.looooooooooooool}/>
+                )}
+              </div>
+            )} 
+            /> */} 
           <h2>Level</h2>
           <ReactSlider
             className={styles2.horizontalslider}
@@ -283,7 +291,7 @@ const Marketcompra = ()=>{
         )}
       </div>
       <div className={styles.containPrice}>
-        Price: {(data.id.price/10**14).toString()} <Image src={iconeth} width={40} height={40} alt='Icon ETH' />
+        Price: {(data.id.price/10**18).toString()} <Image src={iconeth} width={40} height={40} alt='Icon ETH' />
       </div>
       <button onClick={() => compra(data.id.itemId, data.id.price)} className={styles.btnbuy}>
         Comprar

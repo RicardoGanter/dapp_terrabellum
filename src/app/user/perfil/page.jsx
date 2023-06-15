@@ -185,8 +185,11 @@ const Perfil = ()=>{
           return setUserInno(data)
         } 
     };
-    getdata()
-   },[]) 
+    setTimeout(() => {
+      getdata()
+      
+    }, 2000);
+   }) 
 
    useEffect(()=>{
     if(userInno){
