@@ -1,7 +1,11 @@
 @import '../var.module';
 .link{
     margin: .3rem;
-    text-decoration: none;
+    text-decoration: none; 
+        // transform: scale(.4); 
+        // margin: -1rem * 4 ;
+        // margin-top: -7rem;
+        // margin-bottom: -7rem;
   } 
 .cards{
     padding: .4rem;

@@ -16,6 +16,8 @@ import ContentLoader, { Instagram } from "react-content-loader";
 import Cookies from 'js-cookie';
 import jwt  from 'jsonwebtoken';
 import { SaveUrl } from "../../../components/header/header";
+import questionicon from '../../../public/circle-question-regular.svg'
+import Image from "next/image";
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,8 +31,10 @@ const NFTContainer = () => {
   const [orderprice, setOrderprice] = useState(false)
   const [user, setUser] = useState(null)
   const router = useRouter();
-  const [userInno, setUserInno] = useState(null)
-  const [repeatname ,setRepeatname] = useState(null)
+  const [userInno, setUserInno] = useState(null) 
+  const [countnft, setCountnft] =useState(null)
+  const [noOwner, setnoOwner] = useState(null)
+
   useEffect(()=>{
     const getdata = async()=> { 
         const token = Cookies.get('token');  
@@ -143,17 +147,27 @@ const NFTContainer = () => {
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
+        const wallet = Cookies.get('userdata') 
+        const getaddres = JSON.parse(wallet).address_metamask
+        if(!getaddres){
+          alert("no tienes una wallet, conectala")
+        } 
+
+
         const signer = await NetworkGoerliEth();
-        const address = await signer.getAddress();
-        const contract = await ConnectInnomicNft();
+        const address = await signer.getAddress();  
+        if(address !=getaddres){ 
+          setnoOwner(true)
+        }
         
+        const contract = await ConnectInnomicNft();
          // Obtiene el número total de tokens del usuario
-        const tokenCount = await contract.balanceOf(address);
-       
+        const tokenCount = await contract.balanceOf(getaddres);
+        setCountnft(tokenCount.toString())
         // Crea un arreglo con los NFTs del usuario
         const nftPromises = [];
         for (let i = 0; i < tokenCount; i++) {
-          const tokenId = await contract.tokenOfOwnerByIndex(address, i);
+          const tokenId = await contract.tokenOfOwnerByIndex(getaddres, i);
           const tokenURI = await contract.tokenURI(tokenId);
           if (tokenId) {
             const metadata = await fetch(tokenURI).then((res) => res.json());
@@ -187,25 +201,15 @@ const venderNFT = async (Id) => {
       });
     }
   } catch (error) {
+    console.log('loooooooooooooooooooool')
     console.error(error);
   }
-}; 
- useEffect(()=>{
-  if(userInno){
-    const nombreBuscado = "Inventory";
-    const existeNombre = userInno.urlMarkets.find(item => item.nombre === nombreBuscado);
-    if (existeNombre) { 
-    return  setRepeatname(true)
-    } else { 
-    return  setRepeatname(false)
-    } 
-  }
- }, [userInno])
+};  
   return (
     <>
     {userInno ?
     <div style={{display:"flex", gap: "1rem"}}>
-      <SaveUrl savename={repeatname} name='Inventory' url='user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
+      <SaveUrl name='Inventory' url='user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
       {/* <Barrafiltros/> */}
       <div className={styles.container}>
       <div className={styles.subContainer}>
@@ -296,11 +300,21 @@ const venderNFT = async (Id) => {
         </div>
       </div>
     </div>
-      {/* <PropsNftcartas name="a"  /> */}
-
+      {/* <PropsNftcartas name="a"  /> */} 
 
       <h2 className={styles2.Title}>Inventory</h2>
-
+      {noOwner &&
+        <div className={styles2.contain_warning_addres}> 
+          <p>Propietario de billetera no coincide con el inventario.</p> 
+          <div className={styles2.hoverquestionicon}>
+            <Image className={styles2.questionicon} src={questionicon} width={30} alt={"question icon"}/>
+            <div>
+              <p> Para vender o cancelar tus NFTs,
+                 necesitas una billetera conectada que te permita firmar las transacciones.
+                  Sin una billetera compatible, no podrás realizar estas acciones en tu inventario actual.</p> 
+            </div>
+          </div>
+        </div>}
 {loading ? (
   <div className={styles2.grid} style={{display:"flex"}}>
   <Instagram
@@ -397,7 +411,7 @@ const venderNFT = async (Id) => {
                    hability2={nft.metadata.hability2}
                    hability3={nft.metadata.hability3}/></Link>
                    
-
+                   { !noOwner && 
       <form
         className={styles2.form}
         onSubmit={(e) => {
@@ -412,12 +426,11 @@ const venderNFT = async (Id) => {
           onChange={(e) => setPrice(e.target.value)}
           min={-1}
           max={99999999999}
-        />
-        <span>{Number(price[nft]).toLocaleString()}</span>
-        <button className={styles2.sell} type="submit">
+        />  
+         <button className={styles2.sell} type="submit">
           vender
-        </button>
-      </form>
+         </button> 
+      </form> }
     </div>
   ))}
   </div>

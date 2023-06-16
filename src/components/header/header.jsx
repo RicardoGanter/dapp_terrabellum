@@ -15,17 +15,36 @@ import star from '../../public/🦆 icon _star outline_.svg'
 import styles2 from '../../styles/utils/saveurl/saveurl.module.scss' 
 // import Perfil from '../../public/🦆 icon _profile circled_.svg' 
 import starsolid from  '../../public/star-solid 1.svg'     
-import { useState,useEffect, createContext } from "react";
-export  const SaveUrl = ({name, url, imagen, savename})=>{ 
+import { useState,useEffect, useContext } from "react";
+
+import { MyContext } from "../../app/layout";
+
+export  const SaveUrl = ({name, url, imagen})=>{ 
+  const { sharedVariable, updateSharedVariable } = useContext(MyContext);
+  // console.log(sharedVariable)
   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
   const id_user = Cookies.get('token') 
   const [saved, setSaved ] = useState(false)
  const [image, setImage] = useState(star) 
- useEffect(()=>{ 
-  setTimeout(() => {
-    setSaved(savename) 
-  }, 100);
- })
+
+  useEffect(()=>{
+    const datauser = Cookies.get('userdata')
+    const newdatauser = JSON.parse(datauser) 
+    const nombreBuscado = name;
+    const existeNombre = newdatauser.urlMarkets.find(item => item.nombre === nombreBuscado);
+    console.log(existeNombre, "lool")
+    if (existeNombre) { 
+    return  setSaved(true)
+    } else { 
+    return  setSaved(false)
+    } 
+  },[saved]) 
+
+//  useEffect(()=>{ 
+//   setTimeout(() => {
+//     setSaved(savename) 
+//   } );
+//  },[])
   const hoverstar = ()=>{
       setImage(starsolid)
   }
@@ -45,6 +64,7 @@ export  const SaveUrl = ({name, url, imagen, savename})=>{
         datau.urlMarkets.push(data.newUrl) 
         Cookies.set('userdata', JSON.stringify(datau))   
         setSaved(true)
+        return updateSharedVariable("blabla")
           }
       }
   }
@@ -64,6 +84,7 @@ export  const SaveUrl = ({name, url, imagen, savename})=>{
         datau.urlMarkets = datau.urlMarkets.filter((profile) => profile.nombre !== name); 
         Cookies.set('userdata', JSON.stringify(datau));
         setSaved(false)
+        return updateSharedVariable("bloblo")
       }
     }
   };
@@ -79,11 +100,13 @@ export  const SaveUrl = ({name, url, imagen, savename})=>{
 } 
 
 const Header = () => {
+
   //media Query
   // const [navbarcontainMovile, setNavbarcontainMovile] = useState(false);
   // const [interresolution, setInterresolution] = useState(false);
   const [user, setUser] = useState(null)
   const [userinno, setUserInno] = useState(null) 
+    const { sharedVariable, updateSharedVariable } = useContext(MyContext);  
   useEffect(() => { 
       const getdata = async () => {
         const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
@@ -111,8 +134,8 @@ const Header = () => {
           return setUserInno(false)
         }
       };  
-      setTimeout(getdata, 2500); 
-  } );
+      getdata()
+  },[sharedVariable]);
    
   return (
     <>

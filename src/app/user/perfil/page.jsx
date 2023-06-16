@@ -3,7 +3,7 @@ import Image from "next/image";
 import yoxd from '../../../public/img/lal.webp'
 import styles from '../../../styles/user/perfil.module.scss'
 import ConnectButton from "../../../components/header/loginmetamask/loginmetamask";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Cookies from 'js-cookie';
@@ -43,8 +43,7 @@ const Perfil = ()=>{
     const [editimage, setEditimage] = useState(false)
     const [activeImage, setActiveImage] = useState(false);
     const [urlimageperfil, setUrlimageperfil] = useState([])
-    const [switchimageperfil, setSwitchimageperfil]= useState([])
-    const [repeatname ,setRepeatname] = useState(null)
+    const [switchimageperfil, setSwitchimageperfil]= useState([]) 
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
     // const URI = 'http://localhost:8000/usuarios/' 
 
@@ -153,11 +152,12 @@ const Perfil = ()=>{
         const addresss = await signer.getAddress();
         const token = Cookies.get('token');  
         const response = await axios.post(`${URI}sendaddres`,{id : token, address_metamask: addresss});
-        if(response.status===200){
+        if(response.status===200){ 
           const newaddresdata = {...userInno}
-          newaddresdata.address_metamask = addresss 
+          newaddresdata.address_metamask = addresss  
           fregistercompleted()
           setUserInno(newaddresdata) 
+          return Cookies.set('userdata', JSON.stringify(newaddresdata)) 
         } 
       }
     } 
@@ -189,19 +189,7 @@ const Perfil = ()=>{
       getdata()
       
     }, 2000);
-   }) 
-
-   useEffect(()=>{
-    if(userInno){
-      const nombreBuscado = "Profile";
-      const existeNombre = userInno.urlMarkets.find(item => item.nombre === nombreBuscado);
-      if (existeNombre) { 
-      return  setRepeatname(true)
-      } else { 
-      return  setRepeatname(false)
-      } 
-    }
-   }, [userInno])
+   })  
    const changeimage = async (index)=>{  
     const token = Cookies.get('token'); 
     const response = await axios.put(`${URI}switch_image`, { id: token, newimage: index })
@@ -254,7 +242,7 @@ const Perfil = ()=>{
         <>
         { user || userInno ?  
             <div className={styles.contain}>  
-            <SaveUrl savename={repeatname} name='Profile' url="user/perfil" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/1.svg"/>
+            <SaveUrl name='Profile' url="user/perfil" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/1.svg"/>
               <div className={styles.containinfo}>
                 { editimage &&
                  <div className={styles.containselectimage}>
