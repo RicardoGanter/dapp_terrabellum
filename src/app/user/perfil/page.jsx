@@ -19,6 +19,7 @@ import eye from '../../../public/img/eye-solid.svg'
 import noeye from '../../../public/img/eye-slash-solid.svg'
 import exit from '../../../public/icon/xmark-solid.svg' 
 import {SaveUrl} from '../../../components/header/header'
+import { flat } from "../../../blockchain/abi/abi";
 // import sgMail from '@sendgrid/mail';
 // sgMail.setApiKey("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");
 const Perfil = ()=>{
@@ -49,8 +50,11 @@ const Perfil = ()=>{
     const [emailnew, setemailnew] = useState(false)
     const [newemail,setNewemail] = useState(null)
     const [repeatnewemail,setRepeatewemail] = useState(null)
-    // const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
-    const URI = 'http://localhost:8000/usuarios/' 
+    const [ envioemail , setEnvioemail] = useState(false)
+    const [ timereenviar, setTimereenviar] = useState(false)
+
+    const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+    // const URI = 'http://localhost:8000/usuarios/' 
 
     const switchpassword = async (req)=>{
       req.preventDefault() 
@@ -105,33 +109,34 @@ const Perfil = ()=>{
       }
     } 
     const switch_email = async (req)=>{
-      req.preventDefault() 
+       req.preventDefault()  
       if( newemail != repeatnewemail && !validationemail){
         return console.error('los emails no coinciden')
       }
-      const token = Cookies.get('token');   
-      console.log(token)
-      const response = await axios.put(`${URI}switch_email`,{ id : token, newemail: newemail });   
-      await console.log(response)
-      if( response.status === 202 ){ 
-        console.log("laaaaaal")
-        return  setInvalidpassword(true)
+      const token = Cookies.get('token');  
+      if(token && newemail)  {
+        const response = await axios.put(`${URI}switch_email`,{ id : token, newemail: newemail });    
+        // if( response.status === 202 ){  
+        //   return  setInvalidpassword(true)
+        // }
+        // if( response.status === 204 ){  
+        //   console.log("ya cambiaste el nombre del usuario :(") 
+        //   return  setInvalidpassword(true)
+        // }
+        if( response.status == 200){  
+          setEnvioemail(true)
+          // const newaddresdata = {...userInno}
+          // newaddresdata.nombre = response.data.newnombre 
+          // newaddresdata.cont_change_name = response.data.newcont 
+          // Cookies.set('userdata', JSON.stringify(newaddresdata))
+          // setUserInno(newaddresdata)
+          // fregistercompleted()
+          return clearname()
+        }
       }
-      if( response.status === 204 ){  
-        console.log("ya cambiaste el nombre del usuario :(") 
-        return  setInvalidpassword(true)
-      }
-      if( response.status == 200){ 
-        alert("lol")
-        // const newaddresdata = {...userInno}
-        // newaddresdata.nombre = response.data.newnombre 
-        // newaddresdata.cont_change_name = response.data.newcont 
-        // Cookies.set('userdata', JSON.stringify(newaddresdata))
-        // setUserInno(newaddresdata)
-        // fregistercompleted()
-        // return clearname()
-      }
+     
     } 
+
 
     const clearname = ()=>{
       setNewname(null)
@@ -279,6 +284,22 @@ const Perfil = ()=>{
     }; 
     fetchData();
   }, []); 
+
+  const reenviaremail =  ()=>{
+    if(!timereenviar){ 
+      console.log("a")
+    setTimeout(async() => {
+      if( newemail != repeatnewemail && !validationemail){
+        return console.error('los emails no coinciden')
+      }
+      const token = Cookies.get('token');  
+      if(token && newemail)  {
+        const response = await axios.put(`${URI}switch_email`,{ id : token, newemail: newemail });   
+        return setTimereenviar(true)
+       }
+    }, 1*1000*60*3);
+  }
+  }
     return (
         <>
         { user || userInno ?  
@@ -338,6 +359,7 @@ const Perfil = ()=>{
                   <Image alt="Image_wallet" src={trustimage} height={40}/>
                   
                 </div> */}
+                
                 {confirmdeleted ? 
                   <div className={styles.containconfirmdelete}> 
                     <div>
@@ -365,6 +387,11 @@ const Perfil = ()=>{
                     </div>  
                   </form> 
                 }
+                {envioemail &&
+                <div className={styles.containswitchpassword}>
+                  <h2>se a enviado un correo electronico de verificacion a { user ? user.user.email: userInno ? userInno.email : null }</h2>
+                  <p>si no te a llegado el correo pincha aqui</p> <p style={{cursor:"pointer", color:"blueviolet", width:"fint-content"}} onClick={()=>reenviaremail()}> Reenviar </p> {timereenviar && <p>tienes que espera 3 min para reenviar el correo</p>}
+                  </div>}
                 { changepassword &&
                   <div className={styles.containswitchpassword}> 
                     <form onSubmit={switchpassword}> 

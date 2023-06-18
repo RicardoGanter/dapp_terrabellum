@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 const Completedregister = ({params})=>{
     const [user, setuset] = useState(true)
     const { id } = params; 
-    const URI = "http://localhost:8000/usuarios/"
+    const URI = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/"
     const router = useRouter()
     useEffect(() => {
         const cookies =  Cookies.get('token')

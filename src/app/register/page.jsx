@@ -18,9 +18,9 @@ const Register = ()=>{
     const [erroremail, setErroremail] = useState(false)
     const [user, setuset] = useState(true)
     const [registersemicompleted, setRegistersemicompleted] = useState(false)
-    // const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
     const router = useRouter();
-    const URI = 'http://localhost:8000/usuarios/'
+    // const URI = 'http://localhost:8000/usuarios/'
     const {data: session, status} = useSession()
 
     useEffect(() => {

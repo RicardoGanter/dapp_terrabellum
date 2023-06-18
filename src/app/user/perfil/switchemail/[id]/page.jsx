@@ -2,7 +2,7 @@
 import axios from "axios"; 
 const Switchemail = ({params})=>{ 
     const { id } = params; 
-    const URI = "http://localhost:8000/usuarios/" 
+    const URI = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/" 
     const createuser = async () =>{ 
         try {  
         const response = await axios.get(`${URI}verifynewemail?token=${id}`)
