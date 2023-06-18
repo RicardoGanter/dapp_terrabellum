@@ -387,7 +387,7 @@
 //                   hability2={nfttomerge[0][0].hability2}
 //                   hability3={nfttomerge[0][0].hability3}/> 
                  
-                 
+                  
 //                   : <PropsNftcartas Rare="normal" height={320} name={"null"}/>
 //                 //  CAMBIOS
 //                 }
@@ -406,7 +406,7 @@
 //                     : null}
 //                   {/* MERGE */}
 //                   { nfttomerge.length === 3 ?
-//                   <button onClick={()=> upgradenft(nfttomerge)}>Complete Merge</button>
+//                   <button onClick={()=> upgradenft(nfttomerge)}>Complete  unmergechildrens Merge</button>
 //                   : aw && aw.length == 3 && !nfttomerge.length > 0  ?
 //                   <button onClick={()=> downgradenft(unmerge[1])}>Complete Unmerge</button>
 //                   : <button  style={{opacity:.7, backgroundColor:"grey"}}>Complete</button>

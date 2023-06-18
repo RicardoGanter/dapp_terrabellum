@@ -1,10 +1,19 @@
 @import '../var.module';
+.registrocasicompleto{
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    h2{
+        font-size: 35px;
+    }
+}
 .contain{
     position: relative;
     display: flex;
     flex-direction: row;
     align-items:  flex-start;
-    justify-content: center;
+    justify-content: center; 
     button{
         background-color: $color_bg;
     }
@@ -34,6 +43,7 @@
             padding: 5rem;
             border-radius: 5px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), inset 0px 0px 20px rgba(0, 0, 0, 0.1);
+                
                 .back{
                     cursor: pointer;
                     position: absolute;

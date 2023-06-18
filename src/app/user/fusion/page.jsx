@@ -391,7 +391,7 @@ const removeItem = (index) => {
               </div>
 
               <Image src={arrowiconleft} height={70} />
-              { nfttomerge.length ===1 && nfttomerge[0][0].level >= 2 &&
+              {/* { nfttomerge.length ===1 && nfttomerge[0][0].level >= 2 &&
                 <div className={styles.containdefusionnft}> 
                 <div className={styles.containinfo} >
                   { unmergechildrens && unmergechildrens.map((a) => 
@@ -405,8 +405,8 @@ const removeItem = (index) => {
                       hability3={a.metadata.hability3}/> )}
                 </div> 
                 <button onClick={()=> downgradenft(nfttomerge[0][1])}>Defusion</button>
-              </div>}
-              { nfttomerge.length === 3 &&  
+              </div>} */}
+              { nfttomerge.length === 3 ?  
                   <div className={styles.containprobabilidadfusion} > 
                   {/* <h1>To</h1> */}
                     <div className={styles.infoprobabilidadfusion}>
@@ -420,7 +420,7 @@ const removeItem = (index) => {
                       hability3={nfttomerge[0][0].hability3}/> 
                       <div>
                         <h2>Most probability</h2>
-                        <Image src={borrar} height={260} />
+                        <Image src={borrar} height={130} />
                       {/* { probability && <h2>{probability[0]}</h2> } 
                       { probability && <h2>{probability[1]}</h2> }  */}
                       </div> 
@@ -428,13 +428,38 @@ const removeItem = (index) => {
                     
                      <button onClick={()=> upgradenft(nfttomerge)}>Fusion</button>
                   </div>
+                  : nfttomerge.length ===1 && nfttomerge[0][0].level >= 2 ?
+                  <div className={styles.containdefusionnft}> 
+                  <div className={styles.containinfo} >
+                    { unmergechildrens && unmergechildrens.map((a) => 
+                   <PropsNftcartas 
+                        level={a.metadata.level}
+                        name={a.metadata.name}
+                        image={a.metadata.image}
+                        Rare={a.metadata.rarity}
+                        hability1={a.metadata.hability1}
+                        hability2={a.metadata.hability2}
+                        hability3={a.metadata.hability3}/> )}
+                  </div> 
+                  <button onClick={()=> downgradenft(nfttomerge[0][1])}>Defusion</button>
+                </div> :  
+                   <div className={styles.nonfts}>
+                  <div className={styles.containnonft}></div>
+                    <div> 
+                      <button>Defusion</button>
+                      <button>Fusion</button>
+                    </div>
+                </div>
                   }
-                  {nfttomerge.length === 0 && 
+                  {/* {nfttomerge.length === 0 || nfttomerge.length && 
                   <div className={styles.nonfts}>
-                    <button>Defusion</button>
-                    <button>Fusion</button>
+                    <div className={styles.containnonft}></div>
+                      <div> 
+                        <button>Defusion</button>
+                        <button>Fusion</button>
+                      </div>
                   </div>
-                  }
+                  } */}
             </div> 
             </div>
             {/* TOP */} 

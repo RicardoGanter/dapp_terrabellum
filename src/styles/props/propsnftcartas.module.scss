@@ -2,10 +2,10 @@
 .link{
     margin: .3rem;
     text-decoration: none; 
-        // transform: scale(.4); 
-        // margin: -1rem * 4 ;
-        // margin-top: -7rem;
-        // margin-bottom: -7rem;
+        //  transform: scale(.4); 
+        //  margin: -1rem * 4 ;
+        //  margin-top: -7rem;
+        //  margin-bottom: -7rem;
   } 
 .cards{
     padding: .4rem;
@@ -78,18 +78,18 @@
         }
     }
 } 
-.cards:hover{
-    // -webkit-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
-    // -moz-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
-    box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
-    transition: .2s;
-}
-.cardsblue:hover{
-    box-shadow: 0px 0px 11px 8px #328aaf;
-}
-.cardsgold:hover{
-    box-shadow: 0px 0px 11px 8px #a38f2b;
-}
+    // .cards:hover{
+    //     // -webkit-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
+    //     // -moz-box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
+    //     box-shadow: 0px 0px 11px 8px rgba(204,53,204,1);
+    //     transition: .2s;
+    // }
+    // .cardsblue:hover{
+    //     box-shadow: 0px 0px 11px 8px #328aaf;
+    // }
+    // .cardsgold:hover{
+    //     box-shadow: 0px 0px 11px 8px #a38f2b;
+    // }
 
 .power{
     margin: 1rem;

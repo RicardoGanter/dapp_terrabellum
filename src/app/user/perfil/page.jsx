@@ -19,7 +19,8 @@ import eye from '../../../public/img/eye-solid.svg'
 import noeye from '../../../public/img/eye-slash-solid.svg'
 import exit from '../../../public/icon/xmark-solid.svg' 
 import {SaveUrl} from '../../../components/header/header'
-
+// import sgMail from '@sendgrid/mail';
+// sgMail.setApiKey("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");
 const Perfil = ()=>{
     const router = useRouter()
     const [user, setUser] = useState(null)
@@ -31,6 +32,7 @@ const Perfil = ()=>{
     const [newcontraseña, setNewcontraseña] = useState(null)
     const [repetnewcontraseña, setRepetnewcontraseña ] = useState(null)
     const [validationpassword, setValidationpassword] = useState(false)
+    const [validationemail, setValidationemail] = useState(false)
     const [validationname, setValidationname] = useState(false)
     const [switchname ,setSwitchname] = useState(false)
     const [newname ,setNewname] = useState(null)
@@ -44,8 +46,11 @@ const Perfil = ()=>{
     const [activeImage, setActiveImage] = useState(false);
     const [urlimageperfil, setUrlimageperfil] = useState([])
     const [switchimageperfil, setSwitchimageperfil]= useState([]) 
-    const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
-    // const URI = 'http://localhost:8000/usuarios/' 
+    const [emailnew, setemailnew] = useState(false)
+    const [newemail,setNewemail] = useState(null)
+    const [repeatnewemail,setRepeatewemail] = useState(null)
+    // const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+    const URI = 'http://localhost:8000/usuarios/' 
 
     const switchpassword = async (req)=>{
       req.preventDefault() 
@@ -99,11 +104,40 @@ const Perfil = ()=>{
         return clearname()
       }
     } 
+    const switch_email = async (req)=>{
+      req.preventDefault() 
+      if( newemail != repeatnewemail && !validationemail){
+        return console.error('los emails no coinciden')
+      }
+      const token = Cookies.get('token');   
+      console.log(token)
+      const response = await axios.put(`${URI}switch_email`,{ id : token, newemail: newemail });   
+      await console.log(response)
+      if( response.status === 202 ){ 
+        console.log("laaaaaal")
+        return  setInvalidpassword(true)
+      }
+      if( response.status === 204 ){  
+        console.log("ya cambiaste el nombre del usuario :(") 
+        return  setInvalidpassword(true)
+      }
+      if( response.status == 200){ 
+        alert("lol")
+        // const newaddresdata = {...userInno}
+        // newaddresdata.nombre = response.data.newnombre 
+        // newaddresdata.cont_change_name = response.data.newcont 
+        // Cookies.set('userdata', JSON.stringify(newaddresdata))
+        // setUserInno(newaddresdata)
+        // fregistercompleted()
+        // return clearname()
+      }
+    } 
 
     const clearname = ()=>{
       setNewname(null)
       setRepetnewname(null)
       setSwitchname(null)
+      setemailnew(false)
     }
 
     const clearformpassword = ()=>{
@@ -122,7 +156,14 @@ const Perfil = ()=>{
           return setValidationname(true)
       }
     },[newname, repetnewname])
-
+    useEffect(()=>{ 
+      if(repeatnewemail && repeatnewemail.length>0){
+        if(newemail!=repeatnewemail){ 
+        return setValidationemail(false)
+      }
+        return setValidationemail(true) 
+      }
+    },[newemail, repeatnewemail])
     useEffect(()=>{ 
       if(repetnewcontraseña && repetnewcontraseña.length>0){
         if(newcontraseña!=repetnewcontraseña){ 
@@ -276,7 +317,7 @@ const Perfil = ()=>{
                       <p>Email</p>
                       <div>
                           <div className={styles.datauser}>{ user ? user.user.email: userInno ? userInno.email : null } </div>
-                          <button style={{backgroundColor:"#0E001A"}}>Change Email</button>
+                          <button style={{backgroundColor:"#0E001A"}} onClick={()=>setemailnew(true)}>Change Email</button>
                       </div>
                       <div style={{display:"flex", justifyContent:"start", alignItems:"center", gap:"1rem"}}>
                         <button onClick={()=>setChangepassword(true)} style={{backgroundColor:"#0E001A", width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
@@ -289,7 +330,8 @@ const Perfil = ()=>{
                 <div className={styles.wallet}>
                   <Image alt="Image_wallet" src={metamaskimage}  height={40}/> 
                   <div>
-                    { userInno.address_metamask ?<div className={styles.wallet}><h2>{userInno.address_metamask.toString()}</h2> <button onClick={()=>{setConfirmdeleted(true)}} >Deleted </button> </div>  : <button onClick={()=>{connectMetamask()}}> Connect Wallet</button> }
+                    { userInno.address_metamask ?<div className={styles.wallet}><h2>{userInno.address_metamask.toString()}</h2> <button onClick={()=>{setConfirmdeleted(true)}} >Deleted </button> </div>  
+                    : <button onClick={()=>{connectMetamask()}}> Connect Wallet</button> }
                     </div>  
                 </div>
                 {/* <div className={styles.wallet}>
@@ -297,9 +339,7 @@ const Perfil = ()=>{
                   
                 </div> */}
                 {confirmdeleted ? 
-                  <div className={styles.containconfirmdelete}>
-                    <div> 
-                    </div>
+                  <div className={styles.containconfirmdelete}> 
                     <div>
                       <h2>Realmente quiere eliminar el address ?</h2>
                       <h2>Recuerda que no podras utilizar tus nfts en el metaverso de Terrabellum una vez eliminado el address</h2>
@@ -310,6 +350,21 @@ const Perfil = ()=>{
                     </div> 
                   </div> 
                 : null}
+                { emailnew && 
+                   <form className={styles.contain_switchname} onSubmit={switch_email}> 
+                    <p>New email</p>
+                    <input type="email" value={newemail} onChange={req=> setNewemail(req.target.value)}/>
+                    <div style={{display:"flex"}}>
+                      <p>Repeat the new email</p> { !validationemail && repeatnewemail && <p className={styles.errortext}>Your email does not match</p> }    
+                    </div>
+                    <input type="email" value={repeatnewemail}  onChange={req=> setRepeatewemail(req.target.value)}/> 
+                    <div style={{display:"flex", justifyContent:"space-around", gap:"1rem"}}>
+                      { validationemail && repeatnewemail ? <button type="submit">Accept</button> : <button style={{backgroundColor:"gray"}}>Accept</button> }
+                      
+                      <button onClick={()=>clearname()}>Cancel</button> 
+                    </div>  
+                  </form> 
+                }
                 { changepassword &&
                   <div className={styles.containswitchpassword}> 
                     <form onSubmit={switchpassword}> 
@@ -345,7 +400,7 @@ const Perfil = ()=>{
                     <p>New name</p>
                     <input type="text" value={newname} onChange={req=> setNewname(req.target.value)}/>
                     <div style={{display:"flex"}}>
-                      <p>Repeat the new name</p> { !validationname && repetnewname && <p className={styles.errortext}>Your email does not match</p> }    
+                      <p>Repeat the new name</p> { !validationname && repetnewname && <p className={styles.errortext}>Your name does not match</p> }    
                     </div>
                     <input type="text" value={repetnewname}  onChange={req=> setRepetnewname(req.target.value)}/> 
                     <div style={{display:"flex", justifyContent:"space-around", gap:"1rem"}}>
@@ -353,7 +408,7 @@ const Perfil = ()=>{
                       
                       <button onClick={()=>clearname()}>Cancel</button>
                       
-                    </div> 
+                    </div>  
                   </form>
                   }
                   {/* <button onClick={()=>fregistercompleted()}>test</button> */}
