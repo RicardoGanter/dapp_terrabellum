@@ -41,7 +41,7 @@ const Security = ()=>{
         
     const deletedgoogleauth = async ()=>{
         const token = Cookies.get('token');   
-        const URIr  = "http://localhost:8000/usuarios/"
+        const URIr  = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/"
         const response = await axios.put(`${URIr}deletetwofactor`,{ id: token })
         if(response.status == 200){ 
             const newimage = {...userdataglobal}
