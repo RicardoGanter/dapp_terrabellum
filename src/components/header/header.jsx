@@ -32,7 +32,7 @@ export  const SaveUrl = ({name, url, imagen})=>{
     const newdatauser = JSON.parse(datauser) 
     const nombreBuscado = name;
     const existeNombre = newdatauser.urlMarkets.find(item => item.nombre === nombreBuscado);
-    console.log(existeNombre, "lool")
+    console.log(existeNombre, "logol")
     if (existeNombre) { 
     return  setSaved(true)
     } else { 

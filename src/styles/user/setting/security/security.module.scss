@@ -1,0 +1,28 @@
+@import '../../../var.module';
+
+.containsecurityoption{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    align-items: flex-start;
+    input{
+        background-color: $color_bg_morado_oscuro;
+        margin: 0 1rem;
+        padding: .6rem;
+    }
+    .securityoption{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        h2{
+            font-size: 26px
+        }
+    }
+    // .savesecurity{
+        // background-color: $color_bg_morado_oscuro;
+        // position: fixed;
+        // top:240px;
+        // left: 50%;
+    // }
+}

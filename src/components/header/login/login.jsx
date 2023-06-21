@@ -28,19 +28,20 @@ const Login = ()=>{
     const { data: session, status } = useSession()  
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
     useEffect( ()=>{
-        const lol =async ()=>{
+      const lol =async ()=>{
         const token = Cookies.get('token'); 
         const user = Cookies.get('userdata') 
         if(token){ 
-            setToken(token)
-        }
+          setToken(token)
+        } 
         if(user){ 
             const imageuser = JSON.parse(user)
             const a = imageuser.image 
             setUserinno(a) 
-        } 
+        }  
         if(!user && token){ 
-          const response = await axios.post(`${URI}getuser`,{id : token});
+          console.log("lal")
+          const response = await axios.post(`${URI}getuser`,{id : token}); 
           if(response && response.data){
             const data = await response.data
             const datauser = await Cookies.set('userdata', JSON.stringify(data))  
@@ -51,11 +52,12 @@ const Login = ()=>{
         lol()
     },[] )   
      const deletcookie =()=>{ 
-        window.location.reload() 
-        Cookies.remove('token');
-        Cookies.remove('userdata')
-        setToken(null); 
-        return setUserinno(null)
+       Cookies.remove('token');
+       Cookies.remove('userdata')
+       setToken(null); 
+       setUserinno(null)
+       return  window.location.reload() 
+        
      }
     //muito importante
      if (perfil) {
@@ -73,11 +75,11 @@ const Login = ()=>{
                     {/* perfil autenticado */}
                     {  session || token && perfil?
                     <div  style={{zIndex:"6"}} className={styles.contain_perfil}>
-                        <div  style={{margin:'3.5rem 0 0 0', display:'flex', flexDirection:'column'}}>
-                        <Link href={'/user/perfil'}> <button>Profile</button> </Link>
+                        <div  style={{margin:'3.5rem 0 0 0', display:'flex', flexDirection:'column'}}> 
                         <Link href={'/user/statistics'}> <button>Stats</button></Link>
                         <Link href={'/user/inventario'}> <button>Inventory</button></Link>
                         <Link href={'/user/fusion'}> <button>Fusion</button></Link>
+                        <Link href={'user/setting/account'}> <button>Setting</button> </Link>
                          {
                             session?
                          <Link href={'/'} onClick={()=> signOut()}> <button>Sign out</button></Link>

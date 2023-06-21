@@ -14,6 +14,7 @@ const Signin = () => {
   const {data: session, status} = useSession()
   const router = useRouter(); 
   const [user, setuset] = useState(true)
+   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
   useEffect(() => {
     const cookies =  Cookies.get('token')
     if (cookies) {
@@ -29,8 +30,40 @@ const Signin = () => {
   const [Contraseña,setContraseña] = useState('');
   const [sigin,setSigin] = useState(false)
   const [errorlogin, setErrorlogin] = useState(false) 
-  const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
-  // const URI = 'http://localhost:8000/usuarios/'
+  const [twofactor, setTwofactor] = useState(false)
+  const [tokengoogle, setTokengoogle] = useState(false)
+
+
+  const sendauthgoogle = async()=>{
+    try {
+      console.log(Nombre,Contraseña,tokengoogle)
+      const response = await axios.post(`${URI}signinauth`,{
+        nombre: Nombre,
+        contraseña: Contraseña,
+        token: tokengoogle
+      }); 
+      if(response){
+        const a = await response.data
+        console.log(a)
+      }
+      console.log("lol")
+      if (response.status === 204) { 
+          setErrorlogin(true)
+      }
+      if(response.status === 200 && response.data.token){
+        const cookie = await response.data.token  
+        Cookies.set('token', cookie)
+        setErrorlogin(false)  
+        return  window.location.reload()
+      } 
+    } catch (error) {
+        // router.push('/');
+      console.error(error);
+      alert('Error al iniciar sesión, Nombre o contraseña incorrectos');
+    }
+  }
+  // const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+  
   const iniciarSesion = async (req) => {
     req.preventDefault()
     try {
@@ -41,11 +74,15 @@ const Signin = () => {
       if (response.status === 204) { 
           setErrorlogin(true)
       }
-      if(response.status === 200){
+      if(response.status === 200 && response.data.token){
         const cookie = await response.data.token  
         Cookies.set('token', cookie)
         setErrorlogin(false)  
         return  window.location.reload()
+      }
+      if(response.status === 200 && response.data.twofactor){
+        console.log(response.data.twofactor)
+        setTwofactor(response.data.twofactor)
       }
     } catch (error) {
         // router.push('/');
@@ -55,7 +92,7 @@ const Signin = () => {
   };
   return (
     <div>
-      { status==='unauthenticated' && !user && <div className={styles.contain}>
+      { status==='unauthenticated' && !user && !twofactor ? <div className={styles.contain}>
           <div className={styles.subcontainer}>
             <h2 className={styles.login}>account access</h2>
           <Image onClick={()=>{router.push('/')}} className={styles.back} src={back} width={30} height={30} alt="back" />
@@ -82,7 +119,17 @@ const Signin = () => {
             </div>
             <p>Don't have an account? <span onClick={()=>{ Register() }}>Register</span></p>
           </div>
-        </div> }
+        </div> : twofactor ?
+        <div  className={styles.contain}>
+          <div className={styles.subcontainer}>
+
+          <h2>Auth Google</h2>
+          <div> 
+          <input type="number" onChange={e => setTokengoogle(e.target.value)} />
+          <button onClick={()=> sendauthgoogle()}>Send</button>
+          </div>
+          </div>
+        </div> : null  }
         
     </div>
   )

@@ -1,7 +1,5 @@
-"use client"
-import Web3Modal from "web3modal";
-import { ethers } from "ethers";
-import { useState, useEffect } from "react";
+"use client" 
+import { useState, useEffect, useContext } from "react";
 import styles2 from "../../../styles/user/inventario/inventario.module.scss";
 import styles from '../../../styles/navbar/market/opcmarket.module.scss'
 import PropsNftcartas from "../../../components/props/propsnftcartas";
@@ -18,6 +16,8 @@ import jwt  from 'jsonwebtoken';
 import { SaveUrl } from "../../../components/header/header";
 import questionicon from '../../../public/circle-question-regular.svg'
 import Image from "next/image";
+import User from '../page.jsx'
+import { User_data } from "../../layout";
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,37 +34,8 @@ const NFTContainer = () => {
   const [userInno, setUserInno] = useState(null) 
   const [countnft, setCountnft] =useState(null)
   const [noOwner, setnoOwner] = useState(null)
-
-  useEffect(()=>{
-    const getdata = async()=> { 
-        const token = Cookies.get('token');  
-        const session = await getSession()
-        if(!token && !session){
-          console.error("no tienes una sesion iniciada")
-          return router.push('./signin')
-        }
-        if(session){
-          return setUser(session)
-        } 
-        const userdata = Cookies.get('userdata') 
-        if(!userdata){ 
-          const response = await axios.post(`${URI}getuser`,{id : token});
-          if(response.data){
-          const datauser = await Cookies.set('userdata', JSON.stringify(response.data))   
-          return setUserInno(response.data)
-          }
-        }
-        if(userdata){ 
-          const data = JSON.parse(userdata)  
-          return setUserInno(data)
-        } 
-    };
-    setTimeout(() => {
-      getdata()
-      
-    }, 2000);
-   }) 
-
+  const { userdataglobal, updateSharedVariable } = useContext(User_data);
+  console.log(userdataglobal)
 
    const filteredNFTs = nfts.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&
@@ -206,7 +177,7 @@ const venderNFT = async (Id) => {
   }
 };  
   return (
-    <>
+    <User>
     {userInno ?
     <div style={{display:"flex", gap: "1rem"}}>
       <SaveUrl name='Inventory' url='user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
@@ -443,7 +414,7 @@ const venderNFT = async (Id) => {
       </div>
 {/* </div> */}
     </div>
-    : null}</>
+    : null}</User>
   );
 };
 export default NFTContainer;
