@@ -8,8 +8,7 @@ import NetworkGoerliEth from "../../../components/funcion/network";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation"
 import ContentLoader, { Instagram } from "react-content-loader";
-import Cookies from 'js-cookie';
-import jwt  from 'jsonwebtoken';
+import Cookies from 'js-cookie'; 
 import { SaveUrl } from "../../../components/header/header";
 import Image from "next/image";
 import arrowiconleft from '../../../public/🦆 icon _fast arrow left_.svg'

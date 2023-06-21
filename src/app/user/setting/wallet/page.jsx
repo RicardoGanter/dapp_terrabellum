@@ -9,6 +9,7 @@ import NetworkGoerliEth from '../../../../components/funcion/network.js'
 import Cookies from 'js-cookie'
 import axios from 'axios' 
 import Completed from '../../../../utils/competed/completed.jsx'
+import { SaveUrl } from '../../../../components/header/header.jsx'
 const Wallet = () =>{
     const { userdataglobal, updateuserdataglobal } = useContext(User_data); 
     const [confirmdeleted, setConfirmdeleted] = useState(null)
@@ -59,6 +60,7 @@ const Wallet = () =>{
         )} 
     return( 
         <Setting>
+          <SaveUrl name='Wallet' url="user/setting/wallet" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/5.svg"/>
             <Title title={"Wallets"}/> 
             <div className={styles.contain}>   
               { registercompleted &&

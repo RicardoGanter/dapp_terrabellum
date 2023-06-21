@@ -8,8 +8,7 @@ import { useRouter } from 'next/navigation';
 import { signOut } from "next-auth/react"
 import imagenperfil from '../../../public/img/lal.webp'
 import notification from '../../../public/icon/bell-regular.svg'
-import Cookies from 'js-cookie';
-const jwt = require('jsonwebtoken');
+import Cookies from 'js-cookie'; 
 import borrar from '../../../public/img/cofre.png'
 import axios from "axios"
 import glob from '../../../public/icon/globe.svg'

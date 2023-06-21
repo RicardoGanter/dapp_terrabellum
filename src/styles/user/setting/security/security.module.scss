@@ -1,6 +1,7 @@
 @import '../../../var.module';
 
 .containsecurityoption{
+    position: relative;
     display: flex;
     flex-direction: column;
     margin: 2rem;
@@ -15,6 +16,13 @@
         align-items: center;
         justify-content: flex-start;
         gap: 2rem;
+        .confirmdeleted{
+            position: fixed;
+            top: 200px;
+            background-color: red;
+            padding: 2rem;
+            border-radius: 3px;
+        }
         h2{
             font-size: 26px
         }

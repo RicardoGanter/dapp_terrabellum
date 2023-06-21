@@ -222,7 +222,7 @@ const Account = ()=>{
             { registercompleted &&
                 <Completed/>
               } 
-            <SaveUrl name='Profile' url="user/perfil" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/1.svg"/>
+            <SaveUrl name='Profile' url="user/setting/account" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/1.svg"/>
             <div className={styles.contain}>
                 <Title title={"Public account"} />
             </div>

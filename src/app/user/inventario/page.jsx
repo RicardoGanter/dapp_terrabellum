@@ -12,7 +12,7 @@ import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation"
 import ContentLoader, { Instagram } from "react-content-loader";
 import Cookies from 'js-cookie';
-import jwt  from 'jsonwebtoken';
+const { ethers } = require('ethers');
 import { SaveUrl } from "../../../components/header/header";
 import questionicon from '../../../public/circle-question-regular.svg'
 import Image from "next/image";
@@ -30,12 +30,10 @@ const NFTContainer = () => {
   const [filteredItemsdefusion, setFilteredItemsdefusion] = useState([]);
   const [orderprice, setOrderprice] = useState(false)
   const [user, setUser] = useState(null)
-  const router = useRouter();
-  const [userInno, setUserInno] = useState(null) 
+  const router = useRouter(); 
   const [countnft, setCountnft] =useState(null)
   const [noOwner, setnoOwner] = useState(null)
-  const { userdataglobal, updateSharedVariable } = useContext(User_data);
-  console.log(userdataglobal)
+  const { userdataglobal, updateSharedVariable } = useContext(User_data); 
 
    const filteredNFTs = nfts.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&
@@ -119,18 +117,9 @@ const NFTContainer = () => {
     const fetchNFTs = async () => {
       try {
         const wallet = Cookies.get('userdata') 
-        const getaddres = JSON.parse(wallet).address_metamask
-        if(!getaddres){
-          alert("no tienes una wallet, conectala")
-        } 
-
-
+        const getaddres = JSON.parse(wallet).address_metamask 
         const signer = await NetworkGoerliEth();
-        const address = await signer.getAddress();  
-        if(address !=getaddres){ 
-          setnoOwner(true)
-        }
-        
+        const address = await signer.getAddress();   
         const contract = await ConnectInnomicNft();
          // Obtiene el número total de tokens del usuario
         const tokenCount = await contract.balanceOf(getaddres);
@@ -148,6 +137,12 @@ const NFTContainer = () => {
             });
         }
       }
+      if(!getaddres){ 
+        return console.error("no tienes wallet conectada")
+      } 
+      if(address !=getaddres){ 
+        setnoOwner(true)
+      }
         setNfts(nftPromises);
         setLoading(false);
       } catch (error) {
@@ -159,9 +154,7 @@ const NFTContainer = () => {
     fetchNFTs();
     }, []);
 
-// Función para vender un NFT
-const { ethers } = require('ethers');
-
+// Función para vender un NFT 
 const venderNFT = async (Id) => {
   try {
     const contract = await ConnectInnomicNft(); // CONTRATO INNOMIC
@@ -171,14 +164,13 @@ const venderNFT = async (Id) => {
         gasLimit: 1000000,
       });
     }
-  } catch (error) {
-    console.log('loooooooooooooooooooool')
+  } catch (error) { 
     console.error(error);
   }
 };  
   return (
     <User>
-    {userInno ?
+    {userdataglobal ?
     <div style={{display:"flex", gap: "1rem"}}>
       <SaveUrl name='Inventory' url='user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
       {/* <Barrafiltros/> */}
