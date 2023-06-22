@@ -1,4 +1,3 @@
-"use client"
 import styles from '../../../styles/user/setting/setting.module.scss'
 import Link from 'next/link'  
 import User from '../page'

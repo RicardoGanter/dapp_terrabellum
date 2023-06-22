@@ -10,6 +10,7 @@ const User = ( {children}) => {
     const router = useRouter()
     useEffect(()=>{ 
     const getdata = async()=> {  
+       const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
         const token = Cookies.get('token');  
         const session = await getSession()
         if(!token && !session){
@@ -36,15 +37,11 @@ const User = ( {children}) => {
   },[]) 
     return(
         <>
-        { userdataglobal && 
-          <div>
-            {  children }
-          </div>
+        { userdataglobal &&  
+             children  
         } 
         </>
-    )
-
-}
-
+    ) 
+} 
 export default User
 

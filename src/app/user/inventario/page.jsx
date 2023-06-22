@@ -16,7 +16,7 @@ const { ethers } = require('ethers');
 import { SaveUrl } from "../../../components/header/header";
 import questionicon from '../../../public/circle-question-regular.svg'
 import Image from "next/image";
-import User from '../page.jsx'
+import User from '../page'
 import { User_data } from "../../layout";
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
