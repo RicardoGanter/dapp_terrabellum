@@ -3,9 +3,11 @@ import styles from '../../../styles/admin_mint/mint.module.scss'
 import { useState,useEffect } from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie' 
+import Completed from 'utils/competed/completed' 
 const Createnextmint = ()=>{
     const [Nftdataventa, setNftdataventa] = useState([])
     const [dataname, setDataname] = useState([]) 
+    const [ completed, setCompleted] = useState(false)
     useEffect( ()=>{
         const fetchData = async () => {
             try {
@@ -56,18 +58,17 @@ const Createnextmint = ()=>{
       setNftdataventa(newdata)
     } 
     const mintnft =async ()=>{ 
-            const token = Cookies.get('token_admin_mint') 
-            console.log(Nftdataventa)
+            const token = Cookies.get('token_admin_mint')  
             const response =await axios.post('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/insertnfttanda', { id: token, data: Nftdataventa })
-            if(response){
-                console.log(response.data.data)
+            if(response.status == 200){ 
+                console.log(response)
+                setNftdataventa([])
+                setCompleted(true)
             } 
-    } 
-    if(dataname){
-        console.log(dataname)
-    }
+    }  
     return (
         <div className={styles.contain}>
+            { completed && <Completed/> }
             <div className={styles.leftcontain}>
                 <h2> cantidad de NFT Actual {dataname && dataname.length}</h2>
                 {/* <p> Type rarity :   L -- R -- C</p> */}

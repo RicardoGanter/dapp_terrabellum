@@ -35,6 +35,9 @@ const NFTContainer = () => {
   const [noOwner, setnoOwner] = useState(null)
   const { userdataglobal, updateSharedVariable } = useContext(User_data); 
 
+  const [confirmdeletednft, setConfirmdeletednft ] = useState(false)
+  const [textdeleted , setTextdeleted] = useState("")
+
    const filteredNFTs = nfts.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&
     // filteredItemsdefusion
@@ -112,6 +115,14 @@ const NFTContainer = () => {
     }
   };
 
+  const deletednft = async()=>{  
+      const contract = await ConnectInnomicNft()
+      const deletednft = await contract.burn(confirmdeletednft)
+      if(deletednft){
+        setConfirmdeletednft(false)
+        return textdeleted(false)
+      } 
+  }
 
   useEffect(() => {
     const fetchNFTs = async () => {
@@ -390,9 +401,22 @@ const venderNFT = async (Id) => {
           min={-1}
           max={99999999999}
         />  
-         <button className={styles2.sell} type="submit">
-          vender
-         </button> 
+         <div>
+          <button className={styles2.sell} type="submit">
+            vender
+          </button> 
+          <button className={styles2.deleted} onClick={()=>setConfirmdeletednft(nft.id)} >Deleted  </button>
+          { confirmdeletednft && 
+          <div className={styles2.confirmdeleted}>
+            Realmente quieres eliminar el nft {confirmdeletednft} ?
+            <p>para confirmar escribe quiero eliminar el nft</p>
+            <input placeholder="quiero eliminar el nft" onChange={e=>setTextdeleted(e.target.value)} />
+            <div>
+            {textdeleted == "quiero eliminar el nft" ? <button onClick={()=> deletednft()}>Deleted</button> : <button style={{backgroundColor:"gray"}}>Deleted</button>} <button onClick={()=>{setTextdeleted(null); setConfirmdeletednft(false)}}>Cancel</button>
+
+            </div>
+          </div>}
+         </div>
       </form> }
     </div>
   ))}

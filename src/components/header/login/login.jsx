@@ -78,7 +78,7 @@ const Login = ()=>{
                         <Link href={'/user/statistics'}> <button>Stats</button></Link>
                         <Link href={'/user/inventario'}> <button>Inventory</button></Link>
                         <Link href={'/user/fusion'}> <button>Fusion</button></Link>
-                        <Link href={'user/setting/account'}> <button>Setting</button> </Link>
+                        <Link href={'/user/setting/account'}> <button>Setting</button> </Link>
                          {
                             session?
                          <Link href={'/'} onClick={()=> signOut()}> <button>Sign out</button></Link>

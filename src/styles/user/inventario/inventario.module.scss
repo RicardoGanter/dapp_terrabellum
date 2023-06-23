@@ -5,7 +5,7 @@
 //     justify-content: center;
 //     text-align: center;
 // }
-
+ 
 .filter{
     border-radius: 1rem;
     margin: 22rem auto 2rem auto;
@@ -43,6 +43,33 @@
             padding: 1rem 0;
             text-align: center;
         }
+        div{
+            display: flex;
+            gap: 1rem;
+            .deleted{
+                background-color: rgb(136, 0, 0);
+            }
+        }
+    }
+}
+.confirmdeleted{
+    background-color: $color_bg_morado_oscuro;
+    position: fixed;
+    top: 300px;
+    right: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    z-index: 3;
+    border-radius: 6px;
+    color: white;
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    button{
+        background-color: $color_bg;
     }
 }
 

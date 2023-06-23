@@ -54,7 +54,7 @@ const Account = ()=>{
          if( newcontraseña.lenght< 8 || repetnewcontraseña.lenght< 8 || newcontraseña !=repetnewcontraseña){
           return console.error('contraseña erronea o menor a 8 caracteres')
          }
-         const token = Cookies.get('token');  
+         const token = Cookies.get('token');   
          const response = await axios.put(`${URI}switchpassword`,{ id : token, contraseña: contraActual , newcontraseña: newcontraseña  }); 
          if( response.status === 204 ){ 
            return  setInvalidpassword(true)
@@ -97,22 +97,9 @@ const Account = ()=>{
         }
         const token = Cookies.get('token');  
         if(token && newemail)  {
-          const response = await axios.put(`${URI}switch_email`,{ id : token, newemail: newemail });    
-          // if( response.status === 202 ){  
-          //   return  setInvalidpassword(true)
-          // }
-          // if( response.status === 204 ){  
-          //   console.log("ya cambiaste el nombre del usuario :(") 
-          //   return  setInvalidpassword(true)
-          // }
+          const response = await axios.put(`${URI}switch_email`,{ id : token, newemail: newemail });     
           if( response.status == 200){  
-            setEnvioemail(true)
-            // const newaddresdata = {...userInno}
-            // newaddresdata.nombre = response.data.newnombre 
-            // newaddresdata.cont_change_name = response.data.newcont 
-            // Cookies.set('userdata', JSON.stringify(newaddresdata))
-            // setUserInno(newaddresdata)
-            // fregistercompleted()
+            setEnvioemail(true) 
             return clearname()
           }
         }
@@ -194,7 +181,9 @@ const Account = ()=>{
              let shouldContinue = await fetchImage(); 
              while (shouldContinue) {
                shouldContinue = await fetchImage();
-               setUrlimageperfil(data); 
+               if(data){
+                 setUrlimageperfil(data); 
+               }
              } 
            } catch (error) {
              console.error('Error al obtener los datos:', error);
@@ -253,16 +242,16 @@ const Account = ()=>{
                   <div className={ styles.contain_datos }>
                       <p>Name</p>
                       <div>
-                          <div className={styles.datauser}>{ userdataglobal.nombre }</div>
-                         { userdataglobal.cont_change_name >= 1 ? <button style={{backgroundColor:"gray"}} >Change Name</button> : <button style={{backgroundColor:"#0E001A"}} onClick={()=>setSwitchname(true)}>Change Name</button>} 
+                          <input className={styles.datauser} value={ userdataglobal.nombre }/>
+                         { userdataglobal.cont_change_name >= 1 ? <button style={{backgroundColor:"gray"}} >Change Name</button> : <button  onClick={()=>setSwitchname(true)}>Change Name</button>} 
                       </div> 
                       <p>Email</p>
                       <div>
-                          <div className={styles.datauser}>{ userdataglobal.email } </div>
-                          <button style={{backgroundColor:"#0E001A"}} onClick={()=>setemailnew(true)}>Change Email</button>
+                          <input value={ userdataglobal.email } className={styles.datauser}/>
+                          <button  onClick={()=>setemailnew(true)}>Change Email</button>
                       </div>
                       <div style={{display:"flex", justifyContent:"start", alignItems:"center", gap:"1rem"}}>
-                        <button onClick={()=>setChangepassword(true)} style={{backgroundColor:"#0E001A", width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
+                        <button onClick={()=>setChangepassword(true)} style={{ width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
                         <Image alt="Shield_image" src={lock} width={25}/>
                       </div>
                   </div>  
@@ -288,7 +277,7 @@ const Account = ()=>{
                 }
                 {envioemail &&
                 <div className={styles.containswitchpassword}>
-                  <h2>se a enviado un correo electronico de verificacion a { user ? user.user.email: userInno ? userInno.email : null }</h2>
+                  <h2>se a enviado un correo electronico de verificacion a {userdataglobal && userdataglobal.email }</h2>
                   <p>si no te a llegado el correo pincha aqui</p> <p style={{cursor:"pointer", color:"blueviolet", width:"fint-content"}} onClick={()=>reenviaremail()}> Reenviar </p> {timereenviar && <p>tienes que espera 3 min para reenviar el correo</p>}
                   </div>}
                 { changepassword &&

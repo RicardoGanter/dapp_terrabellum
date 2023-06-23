@@ -102,7 +102,7 @@ const Heros = ()=>{
                         </div>
                         <div>
                         <div className={styles.rarity} style={{background:"#670B59"}}><div className={styles.circlesimbol} style={{top:3, left:3}}/> <div className={styles.circlesimbol} style={{top:3, right:3}}/> Rare { probabilitynft && probabilitynft[1]}% </div>
-                            <div className={styles.characters}>
+                            <div className={styles.characters} style={{backgroundColor:"#670B59"}}>
                             <h2>Characters</h2>
                             <div className={styles.containcharact}>
                                     { arraynftmint && arraynftmint.map(data => 
@@ -116,7 +116,7 @@ const Heros = ()=>{
 
                         <div>
                             <div className={styles.rarity} style={{background:"#E0C11F"}}><div className={styles.circlesimbol} style={{top:3, left:3}}/> <div className={styles.circlesimbol} style={{top:3, right:3}}/> Legendary { probabilitynft && probabilitynft[2]}% </div>
-                            <div className={styles.characters}>
+                            <div className={styles.characters} style={{backgroundColor:"#E0C11F"}}>
                                 <h2>Characters</h2>
                                 <div className={styles.containcharact}>
                                     { arraynftmint && arraynftmint.map(data => 
