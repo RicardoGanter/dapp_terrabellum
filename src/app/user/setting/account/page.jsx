@@ -48,6 +48,7 @@ const Account = ()=>{
     }
      const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/' 
        // const URI = 'http://localhost:8000/usuarios/'  
+       
      //PASSWORD
      const switchpassword = async (req)=>{
          req.preventDefault() 
