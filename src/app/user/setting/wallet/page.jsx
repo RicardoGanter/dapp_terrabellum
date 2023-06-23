@@ -60,7 +60,7 @@ const Wallet = () =>{
         )} 
     return( 
         <Setting>
-          <SaveUrl name='Wallet' url="user/setting/wallet" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/5.svg"/>
+          <SaveUrl name='Wallet' url="/user/setting/wallet" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/5.svg"/>
             <Title title={"Wallets"}/> 
             <div className={styles.contain}>   
               { registercompleted &&

@@ -273,7 +273,7 @@ const removeItem = (index) => {
   return (
     <>  { 1==1? 
         <div className={styles.contain}>
-          <SaveUrl name='Fusion' url="user/fusion" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/3.svg"/>
+          <SaveUrl name='Fusion' url="/user/fusion" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/3.svg"/>
             {/* TOP */}
             <div className={styles.containleft}>
             <div className={styles.containnfts}>

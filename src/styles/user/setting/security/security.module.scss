@@ -19,9 +19,12 @@
         .confirmdeleted{
             position: fixed;
             top: 200px;
-            background-color: red;
+            background-color: $color_bg_morado_oscuro;
             padding: 2rem;
             border-radius: 3px;
+            button{
+                background-color: $color_bg;
+            }
         }
         h2{
             font-size: 26px

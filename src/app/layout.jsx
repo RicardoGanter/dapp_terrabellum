@@ -45,8 +45,7 @@ export default function RootLayout({
           </div>
           <Option/>
           </body>
-        </SessionProvider>
-
+        </SessionProvider> 
         </User_data.Provider>
       </MyContext.Provider>
     </html>

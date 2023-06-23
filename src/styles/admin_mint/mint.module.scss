@@ -1,0 +1,45 @@
+@import '../var.module';
+
+.contain{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    .leftcontain{
+        background-color: $color_bg_morado_oscuro;
+        padding: 1rem;
+        h2{
+            margin: 0 0 3rem 0;
+        }
+        .containnftdata{
+            display: flex;
+            margin: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            .containtanda{
+                display: flex;
+                margin: 0 0 0 2rem;
+                .tanda{ 
+                    padding: .3rem .6rem; 
+                    border-radius: 2px;
+                }
+                .tandalegendary{
+                    background-color: rgb(152, 155, 0);
+                }
+                .tandarare{
+                    background-color: rgb(73, 0, 49);
+                }
+                .tandacommon{
+                    background-color: rgb(0, 38, 95);
+                }
+            } 
+        }
+        .containnftdata:hover{
+            background-color: red;
+            cursor: pointer;
+        }
+    }
+    .rigthcontain{
+        background-color: $color_bg_morado_oscuro;
+        padding: 1rem;
+    }
+}

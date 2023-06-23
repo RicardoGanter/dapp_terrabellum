@@ -172,7 +172,7 @@ const venderNFT = async (Id) => {
     <User>
     {userdataglobal ?
     <div style={{display:"flex", gap: "1rem"}}>
-      <SaveUrl name='Inventory' url='user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
+      <SaveUrl name='Inventory' url='/user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
       {/* <Barrafiltros/> */}
       <div className={styles.container}>
       <div className={styles.subContainer}>
