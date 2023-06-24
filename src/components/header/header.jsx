@@ -31,8 +31,7 @@ export  const SaveUrl = ({name, url, imagen})=>{
     const datauser = Cookies.get('userdata')
     const newdatauser = JSON.parse(datauser) 
     const nombreBuscado = name;
-    const existeNombre = newdatauser.urlMarkets.find(item => item.nombre === nombreBuscado);
-    console.log(existeNombre, "logol")
+    const existeNombre = newdatauser.urlMarkets.find(item => item.nombre === nombreBuscado); 
     if (existeNombre) { 
     return  setSaved(true)
     } else { 

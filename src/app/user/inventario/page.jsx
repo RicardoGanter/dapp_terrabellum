@@ -120,7 +120,7 @@ const NFTContainer = () => {
       const deletednft = await contract.burn(confirmdeletednft)
       if(deletednft){
         setConfirmdeletednft(false)
-        return textdeleted(false)
+        return setTextdeleted(false)
       } 
   }
 
@@ -320,56 +320,7 @@ const venderNFT = async (Id) => {
                     backgroundColor={'#333'}
                     foregroundColor={'#999'}
                     width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
+                  />  
   </div>
 ) : nfts ? (
   <div className={styles2.grid} style={{display:"flex"}}>

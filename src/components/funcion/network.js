@@ -4,10 +4,8 @@ const NetworkGoerliEth = async ()=>{
     const web3Modal = new Web3Modal({
         network: "sepolia",
         cacheProvider: true,
-        providerOptions: {
-        gasPrice: 2,
-        gas: 144071,
-        gasLimit: 344071,
+        providerOptions: { 
+        gasLimit: 22344071,
         metamask: {
             display: {
                 name: "MetaMask",

@@ -37,22 +37,19 @@ const Createnextmint = ()=>{
           fetchData();
     },[]) 
 
-    const arraydatanft = (nft)=>{ 
-        console.log(nft)
+    const arraydatanft = (nft)=>{  
         if(Nftdataventa.length>0){ 
             const lolsito = Nftdataventa.find(x=> x.name   == nft.name )
             if(lolsito){ 
                 const a = Nftdataventa.filter( x =>  x  != nft ) 
                 return setNftdataventa(a)
-            }
-
+            } 
             const newdata =  [...Nftdataventa]
             newdata.push(nft) 
             return  setNftdataventa(newdata)
         }
         setNftdataventa([nft])
-    }
-
+    } 
     const deleted = (data)=>{ 
         const newdata = Nftdataventa.filter( x =>  x != data ) 
       setNftdataventa(newdata)

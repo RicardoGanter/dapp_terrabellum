@@ -226,10 +226,13 @@ const removeItem = (index) => {
       })
     }
     // const array = []
-    if(data.length>2){
-      const probabilidad = (seleccionarNumeroConProbabilidad(id[0][0].hability1,id[1][0].hability1,id[2][0].hability1))
-      const contract = await ConnectInnomicNft()
-      await  contract.upgrade(data[0],data[1],data[2], probabilidad ) 
+    if(data.length>2){ 
+      const probabilidad = (seleccionarNumeroConProbabilidad(id[0][0].hability1,id[1][0].hability1,id[2][0].hability1)) 
+      if(probabilidad){
+        const randomNumber = Math.floor(Math.random() * 3); 
+        const contract = await ConnectInnomicNft()
+        await  contract.upgrade(data[0],data[1],data[2], randomNumber ) 
+      } 
     }
   }
   function seleccionarNumeroConProbabilidad(...valores) {

@@ -194,7 +194,7 @@ height: 100%;
     align-items: center;
     border-radius: 5px;
     background-color: $color_bg_morado_oscuro;
-    height:193px;
+    height:32vh;
     padding: .5rem 0 1rem 0; 
     .containfusionnft{
         display: flex;
@@ -259,14 +259,10 @@ height: 100%;
         padding: .7rem;
         font-size: 20px;
     }
-}
-
-
-
+} 
 .noseee{
     z-index: 5;
-    background-color: green;
-    padding: 0;
-    border: solid 1px red;
+    background-color: rgb(157, 84, 0);
+    padding: 1px 0; 
     border-radius: 3px;
 }

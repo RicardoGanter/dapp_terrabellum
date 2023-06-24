@@ -1,11 +1,7 @@
 @import '../var.module';
 .link{
     margin: .3rem;
-    text-decoration: none; 
-        //  transform: scale(.4); 
-        //  margin: -1rem * 4 ;
-        //  margin-top: -7rem;
-        //  margin-bottom: -7rem;
+    text-decoration: none;  
   } 
 .cards{
     padding: .4rem;
@@ -107,4 +103,45 @@
 
 .price{
     color: aliceblue;
-}  
+}   
+@media (max-width: 2400px) {
+    .cards{  
+        .contain{
+            .absotule{
+                position: absolute;
+                bottom: 53px;
+                width: 100%;
+                height: 26px;
+                background: rgba(133, 17, 135, 0.7);
+                box-shadow: 0px 1px 2px rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center; 
+              
+                .containlvlnft{ 
+                    top: -5px; 
+                    .energi{ 
+                        height: 3px; 
+                        top: 4px; 
+                    }
+                    .lvlnft{ 
+                        width: 10px;
+                        height: 10px; 
+                    }
+                }
+                
+            }
+            .nft{
+                width: 160px;
+                height: 190px;
+            }
+            .habilitys{
+                padding: .2rem;
+                gap: .3rem;
+                .hability{
+                    width: 45px;
+                    height: auto;
+                }
+            }
+        }
+    }
+}

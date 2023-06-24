@@ -40,8 +40,9 @@
         gap: .4rem;
         width: min-content;
         input{
-            padding: 1rem 0;
+            padding: .7rem 0; 
             text-align: center;
+            background-color: $color_bg_morado_oscuro;
         }
         div{
             display: flex;

@@ -2,9 +2,7 @@ import styles from "../../styles/props/propsnftcartas.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import ha from '../../public/borrar/HABILIDAD3.webp'
-import lvls from '../../public/borrar/Group 157.png'
-import rdsp from '../../public/borrar/spectre_plus1.jpg'
+import ha from '../../public/borrar/HABILIDAD3.webp' 
 const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, hability2, hability3 }) => {
   const width = height * 0.7
   const [size_pre , setsize_pre] = useState();
@@ -19,8 +17,7 @@ const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, habi
         setsize_pre( a + lal)
       }
       //  400 = 50   800 = 60   200 = 45  100 = 42.5 0 = 40 
-  },[])
-   
+  },[]) 
   // <Link className={styles.link} href={`/market/${Href}`}>
   return (
     <div className={styles.link}>
