@@ -172,7 +172,7 @@ const Account = ()=>{
              let i = 1;  
              const fetchImage = async () => {
                const response = await fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/${i}.webp`); 
-               if (response.status === 403) {
+               if (response && response.status === 403) {
                  return false;
                } 
                data.push(response.url);
@@ -181,11 +181,9 @@ const Account = ()=>{
              }; 
              let shouldContinue = await fetchImage(); 
              while (shouldContinue) {
-               shouldContinue = await fetchImage();
-               if(data){
-                 setUrlimageperfil(data); 
-               }
-             } 
+               shouldContinue = await fetchImage(); 
+               setUrlimageperfil(data);  
+              } 
            } catch (error) {
              console.error('Error al obtener los datos:', error);
            }
