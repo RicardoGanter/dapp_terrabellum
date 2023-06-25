@@ -2,21 +2,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/img/logo.webp";
-import styles from "../../styles/header/header.module.scss"
-import global from "../../public/globe.svg";
-import toggle from "../../public/toggle.svg"; 
-import bar from "../../public/icon/bar.svg";
+import styles from "../../styles/header/header.module.scss" 
 import Login from "./login/login.jsx";
 import search from '../../public/icon/magnifying-glass-solid.svg'
 import Cookies from 'js-cookie'
 import { getSession } from "next-auth/react";
 import axios from "axios"; 
 import star from '../../public/🦆 icon _star outline_.svg' 
-import styles2 from '../../styles/utils/saveurl/saveurl.module.scss' 
-// import Perfil from '../../public/🦆 icon _profile circled_.svg' 
+import styles2 from '../../styles/utils/saveurl/saveurl.module.scss'  
 import starsolid from  '../../public/star-solid 1.svg'     
-import { useState,useEffect, useContext } from "react";
-
+import { useState,useEffect, useContext } from "react"; 
 import { MyContext } from "../../app/layout";
 
 export  const SaveUrl = ({name, url, imagen})=>{ 
@@ -25,7 +20,7 @@ export  const SaveUrl = ({name, url, imagen})=>{
   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
   const id_user = Cookies.get('token') 
   const [saved, setSaved ] = useState(false)
- const [image, setImage] = useState(star) 
+  const [image, setImage] = useState(star) 
 
   useEffect(()=>{
     const datauser = Cookies.get('userdata')

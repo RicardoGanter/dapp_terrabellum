@@ -1,6 +1,5 @@
 "use client"
-import styles from "../../../styles/user/fusion.module.scss";
-// import { ethers } from "ethers";
+import styles from "../../../styles/user/fusion.module.scss"; 
 import { useEffect,useState } from "react";
 import PropsNftcartas from "../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
@@ -272,7 +271,7 @@ const removeItem = (index) => {
        setlal(true)
        return getchildrens(nfttomerge[0][1], nfttomerge[0][0])
     }   
-
+    console.log( Math.floor(Math.random() * 3))
   return (
     <>  { 1==1? 
         <div className={styles.contain}>

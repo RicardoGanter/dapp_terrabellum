@@ -2,7 +2,7 @@
 import Setting,{Title} from "../page"
 import styles from '../../../../styles/user/setting/security/security.module.scss'
 import QRCode from 'qrcode.react';
-import { useState,useEffect,useContext } from "react";
+import { useState,useContext } from "react";
 import Cookies from 'js-cookie'
 import { User_data } from '../../../layout.jsx'
 import axios from "axios";

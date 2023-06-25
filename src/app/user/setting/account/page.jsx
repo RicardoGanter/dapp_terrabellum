@@ -191,7 +191,7 @@ const Account = ()=>{
            }
          }; 
          fetchData();
-       }, []); 
+       }, [editimage]); 
        const reenviaremail =  ()=>{
          if(!timereenviar){ 
            console.log("a")
