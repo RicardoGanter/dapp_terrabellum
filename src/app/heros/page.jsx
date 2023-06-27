@@ -17,8 +17,7 @@ const Heros = ()=>{
         const total = datos.reduce((sum, dato) => sum + dato, 0);
         const probabilidades = datos.map((dato) => ((dato / total) * 100).toFixed(1));
         return probabilidades;
-      }
-      
+      } 
     const Mint = async ()=>{
         try{
             const signer = await NetworkGoerliEth();
@@ -88,7 +87,7 @@ const Heros = ()=>{
                     </div>
                     <div className={styles.raritys}>
                         <div>
-                            <div className={styles.rarity} style={{background:"#4085B7"}}><div className={styles.circlesimbol} style={{top:3, left:3}}/> <div className={styles.circlesimbol} style={{top:3, right:3}}/> Common { probabilitynft && probabilitynft[0]}%  </div>
+                            <div className={styles.rarity} style={{background:"#032C68"}}><div className={styles.circlesimbol} style={{top:3, left:3}}/> <div className={styles.circlesimbol} style={{top:3, right:3}}/> Common { probabilitynft && probabilitynft[0]}%  </div>
                             <div className={styles.characters}>
                             <h2>Characters</h2>
                             <div className={styles.containcharact}>
@@ -101,22 +100,22 @@ const Heros = ()=>{
                             </div>
                         </div>
                         <div>
-                        <div className={styles.rarity} style={{background:"#670B59"}}><div className={styles.circlesimbol} style={{top:3, left:3}}/> <div className={styles.circlesimbol} style={{top:3, right:3}}/> Rare { probabilitynft && probabilitynft[1]}% </div>
-                            <div className={styles.characters} style={{backgroundColor:"#670B59"}}>
-                            <h2>Characters</h2>
-                            <div className={styles.containcharact}>
-                                    { arraynftmint && arraynftmint.map(data => 
-                                    <div> 
-                                    {  data.tanda >3 && data.tanda <=6 && <div className={styles.character}> {data.nombre} </div>   } 
+                            <div className={styles.rarity} style={{background:"#5B014E"}}><div className={styles.circlesimbol} style={{top:3, left:3}}/> <div className={styles.circlesimbol} style={{top:3, right:3}}/> Rare { probabilitynft && probabilitynft[1]}% </div>
+                                <div className={styles.characters} style={{backgroundColor:"#5B014E"}}>
+                                <h2>Characters</h2>
+                                <div className={styles.containcharact}>
+                                        { arraynftmint && arraynftmint.map(data => 
+                                        <div> 
+                                        {  data.tanda >3 && data.tanda <=6 && <div className={styles.character}> {data.nombre} </div>   } 
+                                        </div> 
+                                            )}
                                     </div> 
-                                        )}
-                                </div> 
                             </div>
                         </div>
 
                         <div>
-                            <div className={styles.rarity} style={{background:"#E0C11F"}}><div className={styles.circlesimbol} style={{top:3, left:3}}/> <div className={styles.circlesimbol} style={{top:3, right:3}}/> Legendary { probabilitynft && probabilitynft[2]}% </div>
-                            <div className={styles.characters} style={{backgroundColor:"#E0C11F"}}>
+                            <div className={styles.rarity} style={{background:"#BA9C00", stroke:"black"}}><div className={styles.circlesimbol} style={{top:3, left:3}}/> <div className={styles.circlesimbol} style={{top:3, right:3}}/> Legendary { probabilitynft && probabilitynft[2]}% </div>
+                            <div className={styles.characters} style={{backgroundColor:"#BA9C00"}}>
                                 <h2>Characters</h2>
                                 <div className={styles.containcharact}>
                                     { arraynftmint && arraynftmint.map(data => 

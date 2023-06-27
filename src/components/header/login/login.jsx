@@ -5,19 +5,15 @@ import styles from '../../../styles/header/login/login.module.scss'
 import { useState, useEffect, useRef } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
-import { signOut } from "next-auth/react"
-import imagenperfil from '../../../public/img/lal.webp'
-import notification from '../../../public/icon/bell-regular.svg'
-import Cookies from 'js-cookie'; 
-import borrar from '../../../public/img/cofre.png'
+import { signOut } from "next-auth/react" 
+import notification from '../../../public/bell-solid 6.svg'
+import Cookies from 'js-cookie';  
 import axios from "axios"
-import glob from '../../../public/icon/globe.svg'
+import glob from '../../../public/Vector 13.svg'
 import tokenicon from '../../../public/img/TOKEN_1.png'
 
 const Login = ()=>{
-    const router = useRouter();
-    const contenedorRef = useRef(false);
-    // const [status, setStauts] = useState(null)
+    const router = useRouter(); 
     const [perfil, setPerfil] = useState(false)
     const [token,setToken] = useState(null)  
     const [userinno, setUserinno] = useState(false)
@@ -35,7 +31,7 @@ const Login = ()=>{
         } 
         if(user){ 
             const imageuser = JSON.parse(user)
-            const a = imageuser.image 
+            const a = imageuser 
             setUserinno(a) 
         }  
         if(!user && token){ 
@@ -44,7 +40,8 @@ const Login = ()=>{
           if(response && response.data){
             const data = await response.data
             const datauser = await Cookies.set('userdata', JSON.stringify(data))  
-              const a = await data.image
+              console.log(datauser)
+              const a = await data
               return setUserinno(a) 
           } }  
         } 
@@ -59,34 +56,34 @@ const Login = ()=>{
         
      }
     //muito importante
-     if (perfil) {
-        const handleClick = (event) => {
-          if (!event.target.matches("#lol")) {
-            setPerfil(false)
-          }
-        }; 
-        document.addEventListener("click", handleClick);
-      } 
+    //  if (perfil) {
+    //     const handleClick = (event) => {
+    //       if (!event.target.matches("#lol")) {
+    //         setPerfil(false)
+    //       }
+    //     }; 
+    //     document.addEventListener("click", handleClick);
+    //   } 
         return(
             <div>
                 { status==="unauthenticated" && !userinno ? <div className={styles.contain}><Image className={styles.globimage} src={glob}/> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
-                    : session || userinno? <div className={styles.contain}> <Image className={styles.globimage} src={glob}/><Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={30} src={tokenicon} />  5871600</div> <img  id="lol" onClick={()=>setPerfil(!perfil)} className={styles.imgheader} src={userinno ? userinno : session ? session.user.image  : null}  alt='img perfil'/></div> : null}
+                    : session || userinno? <div className={styles.contain}> <Image className={styles.globimage} src={glob}/><Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={35} style={{margin:"0 .4rem"}} src={tokenicon} /> INNO <p> 10000 </p></div>  <div  className={styles.containdatauser}   id="lol" onMouseEnter={()=>setPerfil(true)} onMouseLeave={()=>setPerfil(false)} > {userinno && <p>{userinno.nombre}</p>}  <img className={styles.imgheader} src={userinno ? userinno.image : session ? session.user.image  : null}  alt='img perfil'/>  {  session || token && perfil?
+                      <div className={styles.contain_perfil}>
+                          <div  > 
+                          <Link className={styles.containtext} href={'/user/statistics'}> <p>Stats</p></Link>
+                          <Link className={styles.containtext} href={'/user/inventario'}> <p>Inventory</p></Link>
+                          <Link className={styles.containtext} href={'/user/fusion'}> <p>Fusion</p></Link>
+                          <Link className={styles.containtext} href={'/user/setting/account'}> <p>Setting</p> </Link>
+                           {
+                              session?
+                           <Link href={'/'} className={styles.containtext} onClick={()=> signOut()}> <p>Sign out</p></Link>
+                           : token || userinno? <Link href={'/'} onClick={()=> deletcookie()} className={styles.containtext}> <p>Sign out</p></Link> : null
+                           }
+                          </div> 
+                      </div> 
+                  :null }</div> </div> : null}
                     {/* perfil autenticado */}
-                    {  session || token && perfil?
-                    <div  style={{zIndex:"6"}} className={styles.contain_perfil}>
-                        <div  style={{margin:'3.5rem 0 0 0', display:'flex', flexDirection:'column'}}> 
-                        <Link href={'/user/statistics'}> <button>Stats</button></Link>
-                        <Link href={'/user/inventario'}> <button>Inventory</button></Link>
-                        <Link href={'/user/fusion'}> <button>Fusion</button></Link>
-                        <Link href={'/user/setting/account'}> <button>Setting</button> </Link>
-                         {
-                            session?
-                         <Link href={'/'} onClick={()=> signOut()}> <button>Sign out</button></Link>
-                         : token || userinno? <Link href={'/'} onClick={()=> deletcookie()}> <button>Sign out</button></Link> : null
-                         }
-                        </div> 
-                    </div> 
-                :null }
+                   
             </div>
         )
 }

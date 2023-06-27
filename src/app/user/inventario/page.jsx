@@ -15,8 +15,7 @@ import Cookies from 'js-cookie';
 const { ethers } = require('ethers');
 import { SaveUrl } from "../../../components/header/header";
 import questionicon from '../../../public/circle-question-regular.svg'
-import Image from "next/image";
-import User from '../page'
+import Image from "next/image"; 
 import { User_data } from "../../layout";
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
@@ -29,12 +28,11 @@ const NFTContainer = () => {
   const [selectedRangedefusion, setSelectedRangedefusion] = useState([0, 5]);
   const [filteredItemsdefusion, setFilteredItemsdefusion] = useState([]);
   const [orderprice, setOrderprice] = useState(false)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(false)
   const router = useRouter(); 
   const [countnft, setCountnft] =useState(null)
   const [noOwner, setnoOwner] = useState(null)
-  const { userdataglobal, updateSharedVariable } = useContext(User_data); 
-
+  const { userdataglobal, updateSharedVariable } = useContext(User_data);  
   const [confirmdeletednft, setConfirmdeletednft ] = useState(false)
   const [textdeleted , setTextdeleted] = useState("")
 
@@ -179,9 +177,14 @@ const venderNFT = async (Id) => {
     console.error(error);
   }
 };  
+useEffect(()=>{
+  if(userdataglobal){
+    setUser(userdataglobal)
+  }
+},[])
   return (
-    <User>
-    {userdataglobal ?
+    <div>
+    { user &&
     <div style={{display:"flex", gap: "1rem"}}>
       <SaveUrl name='Inventory' url='/user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
       {/* <Barrafiltros/> */}
@@ -381,7 +384,7 @@ const venderNFT = async (Id) => {
       </div>
 {/* </div> */}
     </div>
-    : null}</User>
+     }</div>
   );
 };
 export default NFTContainer;

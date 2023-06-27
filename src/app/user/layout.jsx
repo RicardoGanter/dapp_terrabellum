@@ -15,7 +15,7 @@ const User = ( {children}) => {
         const session = await getSession()
         if(!token && !session){
           console.error("no tienes una sesion iniciada")
-          return router.push('./signin')
+          return router.push('/signin')
         }
         if(session){
           return setUser(session)
@@ -24,7 +24,7 @@ const User = ( {children}) => {
         if(!userdata){ 
           const response = await axios.post(`${URI}getuser`,{id : token});
           if(response.data){
-          const datauser = await Cookies.set('userdata', JSON.stringify(response.data))   
+          const datauser = Cookies.set('userdata', JSON.stringify(response.data))   
           return updateuserdataglobal(response.data)
           }
         }
@@ -43,5 +43,4 @@ const User = ( {children}) => {
         </>
     ) 
 } 
-export default User
-
+export default User 

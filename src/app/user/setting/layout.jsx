@@ -1,6 +1,6 @@
 import styles from '../../../styles/user/setting/setting.module.scss'
 import Link from 'next/link'  
-import User from '../page'
+import User from '../layout'
 const Setting = ({children})=>{  
     return (
         <User> 

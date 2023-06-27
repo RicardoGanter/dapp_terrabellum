@@ -24,6 +24,7 @@ export  const SaveUrl = ({name, url, imagen})=>{
 
   useEffect(()=>{
     const datauser = Cookies.get('userdata')
+   if(datauser){
     const newdatauser = JSON.parse(datauser) 
     const nombreBuscado = name;
     const existeNombre = newdatauser.urlMarkets.find(item => item.nombre === nombreBuscado); 
@@ -32,6 +33,7 @@ export  const SaveUrl = ({name, url, imagen})=>{
     } else { 
     return  setSaved(false)
     } 
+   }
   },[saved]) 
 
 //  useEffect(()=>{ 

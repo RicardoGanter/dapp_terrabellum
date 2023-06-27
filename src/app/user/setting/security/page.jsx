@@ -1,5 +1,5 @@
 "use client"
-import Setting,{Title} from "../page"
+import {Title} from "../layout"
 import styles from '../../../../styles/user/setting/security/security.module.scss'
 import QRCode from 'qrcode.react';
 import { useState,useContext } from "react";
@@ -51,7 +51,7 @@ const Security = ()=>{
         } 
     }
     return(
-        <Setting>
+        <div>
             <SaveUrl name='Security' url="/user/setting/security" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/9.svg"/>
             <Title title={"Security account"}/>
             <div className={styles.containsecurityoption}> 
@@ -84,7 +84,7 @@ const Security = ()=>{
                  </div>
             }    
             </div>
-        </Setting>
+        </div>
     )
 } 
 export default Security

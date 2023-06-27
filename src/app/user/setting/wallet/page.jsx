@@ -1,6 +1,6 @@
 "use client"
 import { useState,useContext } from 'react'
-import Setting, {Title} from '../page.jsx'
+import  {Title} from '../layout.jsx'
 import { User_data } from '../../../layout.jsx'
 import styles from '../../../../styles/user/setting/wallet/wallet.module.scss'
 import Image from 'next/image.js'
@@ -59,7 +59,7 @@ const Wallet = () =>{
             </div> 
         )} 
     return( 
-        <Setting>
+        <div>
           <SaveUrl name='Wallet' url="/user/setting/wallet" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/5.svg"/>
             <Title title={"Wallets"}/> 
             <div className={styles.contain}>   
@@ -85,7 +85,7 @@ const Wallet = () =>{
                 : null}
                 </div>
             </div>
-        </Setting>
+        </div>
     )
 }
 

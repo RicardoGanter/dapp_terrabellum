@@ -1,5 +1,5 @@
 "use client"
-import Setting, {Title} from "../page.jsx"
+import  {Title} from "../layout.jsx"
 import styles from '../../../../styles/user/setting/account/account.module.scss' 
 import {SaveUrl} from '../../../../components/header/header.jsx' 
 import { useState, useEffect, useContext } from "react"
@@ -169,7 +169,7 @@ const Account = ()=>{
          const fetchData = async () => {
            try {
              const data = [];
-             let i = 1;  
+             let i = 3;  
              const fetchImage = async () => {
                const response = await fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/${i}.webp`); 
                if (response && response.status === 403) {
@@ -182,8 +182,8 @@ const Account = ()=>{
              let shouldContinue = await fetchImage(); 
              while (shouldContinue) {
                shouldContinue = await fetchImage(); 
-               setUrlimageperfil(data);  
               } 
+              setUrlimageperfil(data);  
            } catch (error) {
              console.error('Error al obtener los datos:', error);
            }
@@ -206,7 +206,7 @@ const Account = ()=>{
        }
        }
     return (
-        <Setting>
+        <div>
             { registercompleted &&
                 <Completed/>
               } 
@@ -217,7 +217,7 @@ const Account = ()=>{
             <div className={styles.containinfo}>
                 { editimage &&
                  <div className={styles.containselectimage}>
-                     <Image src={exit} className={styles.scape} onClick={()=>setEditimage(false)}/>
+                     <Image src={exit} className={styles.scape}  alt="button exit" onClick={()=>setEditimage(false)}/>
                      <div className={styles.images}> 
                        {urlimageperfil && urlimageperfil.map((image, index) => (
                         <div>
@@ -325,7 +325,7 @@ const Account = ()=>{
                     </div>  
                   </form>
                   }
-        </Setting>
+        </div>
     )
 }
 export default Account

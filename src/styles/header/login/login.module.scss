@@ -8,52 +8,90 @@
     z-index: 7;
     .imgheader{
         position: relative;
+        margin: 0 -.3rem;
         z-index: 7;
         right: 13px;
-        width: 50px;
-        height:50px;
-        border-radius: 50%;
-        margin: 0  0 0 3rem;
+        width: 40px;
+        height:40px;
+        border-radius: 50%; 
         cursor: pointer;
         background-color: $color_text_white;
     }
     
+}.containdatauser{
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    background-color: $color_bg;
+    padding: .4rem 0;
+    gap: 1.3rem;
+    min-width: 170px;
+    color: $color_text_white;
+    box-shadow: inset -3px 3px 6px rgba(81, 0, 152, 0.20), -3px 3px 6px rgba(0, 0, 0, 0.50);
+    border-radius: 40px;
+    margin: 0 1rem;
+    p{
+        margin: 0 1.3rem 
+    }
 }
 .globimage{
-    width: 35px;
+    width: 40px;
     margin: 0 .3rem;
-    height: 35px;
+    height: 40px;
 }
 .moneyinno{
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: .4rem;
     margin: 0 0 0 1rem ;
-    padding: .5rem 1rem;
-    width: 140px;
+    padding: .4rem;
+    width: 220px;
     background-color: $color_bg;
-    border-radius: 3px;
+    border-radius: 40px;
     color: $color_text_white;
     text-align: start;
+    box-shadow: inset -3px 3px 6px rgba(81, 0, 152, 0.20), -3px 3px 6px rgba(0, 0, 0, 0.50);
+    p{
+        background-color:  $color_bg_morado_oscuro;
+        border-radius: 40px;
+        padding: .7rem 0;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        box-shadow: inset -3px 3px 4px  rgba(0, 0, 0, 0.45);
+    }
 }
 .btnopc{ 
     margin: 0 .6rem;
 }
 .contain_perfil{ 
-    position: fixed;
-    background-color: rgb(34, 34, 34);
-    padding: 0 .4rem;
-    right:  .3rem;
-    top: 2px;
-    display: flex;  
-    justify-content: center;
-    align-items: center; 
-    flex-direction: column;
-    border-radius: 5rem 5rem 1rem 1rem;
-    button{
-            margin: .4rem auto;
-            color: aliceblue;
-            width:70px;
-            padding: .5rem 0;
+    z-index: -1;
+    position: absolute;
+    margin: 0 auto; 
+    left: 0;
+    right: 0;
+    width: calc(100% - 45px);
+    background-color: $color_bg_morado_oscuro;  
+    top:45px;  
+    border-radius: 10px;
+    box-shadow:  0px 4px 5px 5px rgba(0, 0, 0, 0.50);
+    div{  
+        display: flex;  
+        flex-direction: column;  
+        gap: 1.5rem; 
+        color: aliceblue;  
+        width: 100%;  
+        padding: 1rem 0;
+      .containtext{
+        padding: .4rem 0;
+        text-decoration: none;
+        text-decoration-line: none;
+       }
+       .containtext:hover{
+       background-color: $color_bg; 
+       box-shadow:  0px 0px 3px  rgba(255, 255, 255, 0.327);
+       }
     }
 } 
