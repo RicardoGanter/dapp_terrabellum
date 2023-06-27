@@ -34,8 +34,12 @@ contract InnomicNFT is ERC721Enumerable {
     mapping(uint256 => bool) private _blocked;
 
     mapping(uint256 => uint8) private _unFusioned;
+
+    mapping(uint256 => uint256) private _priceMint;
+
+    uint256 private priceMint = 10000000000000000;
     
-    address private poolNFTaddress;
+    address payable private poolNFTaddress;
 
     PoolNFT public poolNFT;
 
@@ -195,6 +199,29 @@ contract InnomicNFT is ERC721Enumerable {
         }
         return items;
     }
+
+    function fetchMyUnSoldMarketItems() public view returns (MarketItem[] memory) {
+        uint itemCount = _itemIds.current();
+        uint unsoldItemCount = 0;
+        uint itemId = 0;
+
+        for (uint i = 0; i < itemCount; i++) {
+          if (!idToMarketItem[i + 1].sold && idToMarketItem[i + 1].owner == poolNFTaddress && idToMarketItem[i + 1].seller == msg.sender) {
+            unsoldItemCount += 1;
+          }
+        }
+
+        MarketItem[] memory items = new MarketItem[](unsoldItemCount);
+        for (uint i = 0; i < itemCount; i++) {
+          uint currentId = i + 1;
+          if (!idToMarketItem[currentId].sold && idToMarketItem[currentId].owner == poolNFTaddress && idToMarketItem[currentId].seller == msg.sender) {
+            MarketItem storage currentItem = idToMarketItem[currentId];
+            items[itemId] = currentItem;
+            itemId += 1;
+          }
+        }
+        return items;
+    }
     /////////////////////////////////////////////////////////////////////////
 
     /**
@@ -251,8 +278,8 @@ contract InnomicNFT is ERC721Enumerable {
         return nC;
     }
 
-    function setPoolNFT(address poola, PoolNFT pool) public virtual {
-        poolNFTaddress = poola;
+    function setPoolNFT(address payable poola, PoolNFT pool) public virtual {
+        poolNFTaddress = payable(poola);
         poolNFT = pool;
     }
 
@@ -270,7 +297,12 @@ contract InnomicNFT is ERC721Enumerable {
         return num;
     }
 
-    function _mintTokenAllowedToEarn(address to, uint256 URInum) public virtual {
+    function setPriceMint(uint256 priceMint_) public virtual {
+        priceMint = priceMint_;
+    }
+
+    function _mintTokenAllowedToEarn(address to, uint256 URInum) public payable virtual {
+        require(msg.value == priceMint, "ERR_PRICE");
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
 
@@ -285,12 +317,19 @@ contract InnomicNFT is ERC721Enumerable {
         _lvl[tokenId] = 1;
 
         _unFusioned[tokenId] = 0;
+
+        _priceMint[tokenId] = priceMint;
+
+        owner.transfer(msg.value - (msg.value*75)/100);
+        (bool sent, bytes memory data) = poolNFTaddress.call{value: (msg.value*75)/100}("");
+        require(sent, "Failed to send Ether");
 
         tokenCount++;
         _allowToEarn[tokenId] = true;
     }
 
-    function _mintTokenNotAllowedToEarn(address to, uint256 URInum) public virtual {
+    function _mintTokenNotAllowedToEarn(address to, uint256 URInum) public payable virtual {
+        require(msg.value == priceMint, "ERR_VALUE");
         uint256 tokenId = tokenCount + 1;
         _safeMint(to, tokenId);
 
@@ -305,6 +344,12 @@ contract InnomicNFT is ERC721Enumerable {
         _lvl[tokenId] = 1;
 
         _unFusioned[tokenId] = 0;
+
+        _priceMint[tokenId] = priceMint;
+
+        owner.transfer(msg.value - (msg.value*75)/100);
+        (bool sent, bytes memory data) = poolNFTaddress.call{value: (msg.value*75)/100}("");
+        require(sent, "Failed to send Ether");
 
         tokenCount++;
         _allowToEarn[tokenId] = false;
@@ -363,6 +408,14 @@ contract InnomicNFT is ERC721Enumerable {
         if (bytes(_tokenURIs[tokenId]).length != 0) {
             delete _tokenURIs[tokenId];
         }
+    }
+
+    function repay(uint256 tokenId) public virtual {
+        require(ownerOf(tokenId) == msg.sender, "ERR_OW");
+        address payable owner_ = payable(msg.sender);
+        uint256 money = _priceMint[tokenId]*75/100;
+        poolNFT.sacarDinero(money, owner_);
+        burn(tokenId);
     }
 
     function _setlimite(uint256 newlimite) public virtual {

@@ -35,6 +35,8 @@ const NFTContainer = () => {
   const { userdataglobal, updateSharedVariable } = useContext(User_data);  
   const [confirmdeletednft, setConfirmdeletednft ] = useState(false)
   const [textdeleted , setTextdeleted] = useState("")
+  const [nftsellers, setNftseller] = useState([])
+
 
    const filteredNFTs = nfts.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&
@@ -115,7 +117,7 @@ const NFTContainer = () => {
 
   const deletednft = async()=>{  
       const contract = await ConnectInnomicNft()
-      const deletednft = await contract.burn(confirmdeletednft)
+      const deletednft = await contract.repay(confirmdeletednft)
       if(deletednft){
         setConfirmdeletednft(false)
         return setTextdeleted(false)
@@ -135,8 +137,26 @@ const NFTContainer = () => {
         setCountnft(tokenCount.toString())
         // Crea un arreglo con los NFTs del usuario
         const nftPromises = [];
+        const nftsellerPromises = [];
+        const lolsitofeo= await  contract.fetchMyUnSoldMarketItems()   
+        for (let i = 0; i < lolsitofeo.length; i++) { 
+          const tokenid = lolsitofeo[i].tokenId 
+          const itemid = lolsitofeo[i].itemId
+          console.log(itemid.toString(),"looooooooooooooool")
+          const tokenURI = await contract.tokenURI(tokenid);  
+          if (tokenid) {
+            const metadata = await fetch(tokenURI).then((res) => res.json());
+            nftsellerPromises.push({
+              id: itemid.toNumber(),
+              metadata
+            });
+        }
+      }
+
+
         for (let i = 0; i < tokenCount; i++) {
           const tokenId = await contract.tokenOfOwnerByIndex(getaddres, i);
+          console.log(tokenId.toString())
           const tokenURI = await contract.tokenURI(tokenId);
           if (tokenId) {
             const metadata = await fetch(tokenURI).then((res) => res.json());
@@ -153,6 +173,7 @@ const NFTContainer = () => {
         setnoOwner(true)
       }
         setNfts(nftPromises);
+        setNftseller(nftsellerPromises)
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -182,6 +203,13 @@ useEffect(()=>{
     setUser(userdataglobal)
   }
 },[])
+const Cancelmarketseller =async (itemid)=>{ 
+  const contract = await ConnectInnomicNft()  
+  const cancel = await contract.unListMarketItem(itemid,{ 
+    gasLimit: 120001 
+  })
+  console.log("mondongo")
+}
   return (
     <div>
     { user &&
@@ -327,6 +355,20 @@ useEffect(()=>{
   </div>
 ) : nfts ? (
   <div className={styles2.grid} style={{display:"flex"}}>
+    {nftsellers && nftsellers.map((nft )=>(
+       <div key={nft.id}> 
+            <PropsNftcartas 
+                   level={nft.metadata.level}
+                   name={nft.metadata.name}
+                   image={nft.metadata.image} height={370}
+                   Rare={nft.metadata.rarity}
+                   hability1={nft.metadata.hability1}
+                   hability2={nft.metadata.hability2}
+                   hability3={nft.metadata.hability3}/>
+                   {nft.id}
+                   <button onClick={()=> Cancelmarketseller(nft.id)}>Cancel</button>
+      </div>
+    )) }
     {filteredNFTs.map((nft) => (
     <div key={nft.id}>
       <Link href={`/market/${nft.id}`}>

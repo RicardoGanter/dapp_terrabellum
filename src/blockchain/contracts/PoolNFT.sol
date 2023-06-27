@@ -26,4 +26,11 @@ contract PoolNFT is ERC721Holder {
             delete _owners[tokenId];
         }
     }
+
+    function sacarDinero(uint256 money, address payable owner) external virtual {
+        owner.transfer(money);
+    }
+
+    receive() external payable {}
+    fallback() external payable {}
 }

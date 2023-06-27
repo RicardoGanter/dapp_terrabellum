@@ -32,23 +32,23 @@ module.exports = {
     }
   },
   paths:{
-    artifacts: "./blockchain/artifacts",
-    sources: "./blockchain/contracts",
-    cache: "./blockchain/cache",
-    tests :"./blockchain/tests"
+    artifacts: "./src/blockchain/artifacts",
+    sources: "./src/blockchain/contracts",
+    cache: "./src/blockchain/cache",
+    tests :"./src/blockchain/tests"
   },
   networks: {
     // ganache:{
     //   url: "HTTP://127.0.0.1:7545"
     // },
-    maticmumbaiAlchemy:{
-      url: `https://polygon-mumbai.g.alchemy.com/v2/${MUMBAI_API_KEY}`,
-      accounts: [SEPOLIA_PRIVATE_KEY],
-      gasPrice: 40000000000,
-      gas: 1000000000,
-      gasLimit:100000000000,
-      chainId: 5,
-    },
+    // maticmumbaiAlchemy:{
+    //   url: `https://polygon-mumbai.g.alchemy.com/v2/${MUMBAI_API_KEY}`,
+    //   accounts: [SEPOLIA_PRIVATE_KEY],
+    //   gasPrice: 40000000000,
+    //   gas: 1000000000,
+    //   gasLimit:100000000000,
+    //   chainId: 5,
+    // },
     goerliAlchemy: {
       url: `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
       accounts: [GOERLI_PRIVATE_KEY],

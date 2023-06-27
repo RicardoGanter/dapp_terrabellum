@@ -27,7 +27,13 @@ const Heros = ()=>{
             // const URI = await axios.get( "http://localhost:8000/usuarios/Mintt" );
             const propability = URI.data.message
             if(propability){
-                const mint = await contract._mintTokenAllowedToEarn(address,propability);
+
+
+
+                const mint = await contract._mintTokenAllowedToEarn(address,propability,{
+                    value: BigInt(10000000000000000),
+                    gasLimit: 5000000
+                  });
                 return mint
             }
         }

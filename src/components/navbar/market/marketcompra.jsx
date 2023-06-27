@@ -159,10 +159,8 @@ const Marketcompra = ()=>{
         const options = {
           value: weiValue,
           gasLimit: 5000000
-        };
-        
-        console.log(ethValue, "ETH"); // Mostrar el valor en ETH en la consola
-        
+        }; 
+        console.log(ethValue, "ETH"); // Mostrar el valor en ETH en la consola 
         const compra = await contract.createMarketSale(Number(Id), options);
       } catch (error) {
         console.error(error);

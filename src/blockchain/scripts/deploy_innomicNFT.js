@@ -11,6 +11,6 @@ async function main() {
     console.log("fue deployado :o")
   }
 
-  // address : NEW 0x7751611Ef1581b7487AC92a5d3450233cB1B7007 || SEPOLIA 0x8bfB2836697F6D2bb4e2133fF876A24e693B4e2d
+  // address : NEW 0x436Af34eBF3085cE92780c853e429d29A2CE4AA1 || SEPOLIA 0x8bfB2836697F6D2bb4e2133fF876A24e693B4e2d
 
   main()
