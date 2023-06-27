@@ -1,4 +1,4 @@
-@import '../var.module';
+@import '../../var.module';
 .containleft{ 
 height: 100%;
     width: 100%; 
@@ -15,7 +15,7 @@ height: 100%;
         display: flex;
         flex-direction: column;
         width: 100%;  
-        height: 50vh;
+        height: 47vh;
         // height: 548px;
         background-color: $color_bg_morado_oscuro;    
         ::-webkit-scrollbar {
@@ -194,14 +194,24 @@ height: 100%;
     align-items: center;
     border-radius: 5px;
     background-color: $color_bg_morado_oscuro;
-    height:32vh;
+    height:33vh;
     padding: .5rem 0 1rem 0; 
     .containfusionnft{
         display: flex;
         gap: .7rem;
+        margin: 1rem;
         flex-direction: column;
     }
 }  
+.fusionreadyarrow{ 
+    position: absolute;
+    left: calc(50% + 20px);
+    margin: 0;
+    background-color: rgba(31, 1, 25, 0.178);
+    padding: 1.5rem 1rem ;
+    border-radius: 50%;
+    box-shadow: 0 0 7px 3px rgba(255, 255, 255, 0.129);
+}
 .containdefusionnft{ 
     display: flex;
     flex-direction: column;

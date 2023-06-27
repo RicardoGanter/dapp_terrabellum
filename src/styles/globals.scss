@@ -11,6 +11,31 @@ body{
   text-align: center;
   align-items: center;
 }
+@keyframes totop {
+  0% { 
+    opacity: 1;
+    transform: translateX( 0%);
+  }
+  100%{ 
+    opacity: 0;
+    transform: translateX( 120%);
+  }
+}
+@keyframes tobottom {
+  0% { 
+    opacity: 0; 
+  }
+  100%{ 
+    opacity: 1; 
+  }
+} 
+::view-transition-old(full-embed){ 
+  animation: totop  1s;  
+  animation-delay:  .4s;
+}
+::view-transition-new(full-embed) { 
+  animation: tobottom  1.5s;   
+}
 button{
     width: fit-content;
     background-color: $color_bg_morado_oscuro;

@@ -1,5 +1,5 @@
 "use client"
-import styles from "../../../styles/user/fusion.module.scss"; 
+import styles from "../../../styles/user/fusion/fusion.module.scss"; 
 import { useEffect,useState } from "react";
 import PropsNftcartas from "../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
@@ -217,7 +217,7 @@ const removeItem = (index) => {
   const contract = await ConnectInnomicNft()
   contract.downgrade(id)
   }
-  const upgradenft = async ( id ) =>{
+  const upgradenft = async ( id ) =>{ 
     const data = []
     if (id.length === 3){
       id.map((a)=>{
@@ -231,6 +231,7 @@ const removeItem = (index) => {
         const randomNumber = Math.floor(Math.random() * 3); 
         const contract = await ConnectInnomicNft()
         await  contract.upgrade(data[0],data[1],data[2], randomNumber ) 
+        setNfttomerge([]) 
       } 
     }
   }
@@ -270,8 +271,7 @@ const removeItem = (index) => {
   if( nfttomerge.length ===1 && nfttomerge[0][0].level >= 2 && !lal){  
        setlal(true)
        return getchildrens(nfttomerge[0][1], nfttomerge[0][0])
-    }   
-    console.log( Math.floor(Math.random() * 3))
+    }    
   return (
     <>  { 1==1? 
         <div className={styles.contain}>
@@ -391,7 +391,7 @@ const removeItem = (index) => {
 </div>
               </div>
 
-              <Image src={arrowiconleft} height={70} />
+             { nfttomerge.length ===3 ?  <Image src={arrowiconleft} height={70} className={styles.fusionreadyarrow} /> :  <Image className={styles.fusionreadyarrow} src={arrowiconleft} height={70} />  }
               {/* { nfttomerge.length ===1 && nfttomerge[0][0].level >= 2 &&
                 <div className={styles.containdefusionnft}> 
                 <div className={styles.containinfo} >

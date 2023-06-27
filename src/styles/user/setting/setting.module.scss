@@ -10,7 +10,21 @@
         gap: 3rem;
         position: fixed;
         height: 100%; 
-        margin: 5rem 0;
+        margin:  -1rem ; 
+        background-color: $color_bg;
+        padding: 2rem 0;
+        box-shadow: inset 0 0 20px 3px #1f17266a, 0 0 5px 4px #1f17268d; 
+        width: 170px;
+        p{
+            margin: 0 auto;
+            cursor: pointer;
+            width: 100%;
+            padding: .7rem 0;
+        }
+        p:hover{
+            background-color: $color_bg_morado_oscuro; 
+            box-shadow: inset 0 0 8px 1px $color_bg; 
+        }
     }
     .links{
         margin: 0 3rem;
@@ -33,7 +47,8 @@
     .linearhorizontal{
         background-color: $color_bg_morado_oscuro;
         width: 100%;
-        height: 8px;
-        border-radius: 3px;
+        height: 6px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 20px 1px $color_bg , 0 0 8px $color_bg_morado_oscuro;
     }
 }

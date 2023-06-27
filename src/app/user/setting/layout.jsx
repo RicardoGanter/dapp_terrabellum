@@ -1,16 +1,34 @@
+"use client"
 import styles from '../../../styles/user/setting/setting.module.scss'
 import Link from 'next/link'  
 import User from '../layout'
+import { useRouter } from 'next/navigation'
+import '../../../styles/globals.scss'
 const Setting = ({children})=>{  
+    const asdasd= "/user/setting/account"
+    const router = useRouter()
+    const mondongo = ( link )=>{ 
+        const nocxd = document.getElementById('blablalbalblabla')
+        nocxd.style.viewTransitionName = 'full-embed';
+        function updateTheDOMSomehow(){ 
+            router.push( `${link}` )
+            setTimeout(() => {
+                nocxd.style.viewTransitionName = '';
+            }, 100);
+        }
+        document.startViewTransition(()=>{  
+            updateTheDOMSomehow()
+        }) 
+      }
     return (
         <User> 
         <div className={styles.contain}>
             <div className={styles.containlinks}>  
-                <Link  className={styles.links} href={'/user/setting/account'}><p>Account</p>  </Link>
-                <Link  className={styles.links} href={'/user/setting/security'}><p>Security</p></Link>
-                <Link  className={styles.links} href={'/user/setting/wallet'}><p>Wallet</p> </Link> 
+                 <p onClick={()=> mondongo( "/user/setting/account" )}>Account</p>  
+                 <p onClick={()=> mondongo( "/user/setting/security" )}>Security</p> 
+                 <p onClick={()=> mondongo( "/user/setting/wallet" )}>Wallet</p> 
             </div> 
-            <div className={styles.childrens}>
+            <div id='blablalbalblabla' className={styles.childrens}>
                 { children } 
             </div>
         </div> 
