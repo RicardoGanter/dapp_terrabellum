@@ -11,12 +11,13 @@ const Setting = ({children})=>{
         const nocxd = document.getElementById('blablalbalblabla')
         nocxd.style.viewTransitionName = 'full-embed';
         function updateTheDOMSomehow(){ 
-            router.push( `${link}` )
+            router.push( `${link}` )  
             setTimeout(() => {
                 nocxd.style.viewTransitionName = '';
-            }, 100);
+            }, 1600); 
         }
-        document.startViewTransition(()=>{  
+        document.startViewTransition(()=>{   
+           
             updateTheDOMSomehow()
         }) 
       }

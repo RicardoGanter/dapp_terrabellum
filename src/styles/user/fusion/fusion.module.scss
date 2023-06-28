@@ -212,6 +212,24 @@ height: 100%;
     border-radius: 50%;
     box-shadow: 0 0 7px 3px rgba(255, 255, 255, 0.129);
 }
+.activefusionarrow{
+    background-color: rgba(43, 0, 34, 0.757);
+    box-shadow: 0 0 14px 5px rgba(109, 0, 83, 0.83);
+    animation: resarrow 2s infinite;
+}
+@keyframes resarrow{
+    0%{
+        opacity: .8;
+    }
+    50%{
+        opacity: 1;
+        background-color: rgb(54, 0, 43);
+        box-shadow: 0 0 14px 5px rgb(166, 0, 127);
+    }
+    100%{
+        opacity: .8;
+    }
+}
 .containdefusionnft{ 
     display: flex;
     flex-direction: column;

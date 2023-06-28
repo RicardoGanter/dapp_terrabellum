@@ -215,8 +215,10 @@ const removeItem = (index) => {
 
   const downgradenft = async ( id ) =>{
   const contract = await ConnectInnomicNft()
-  contract.downgrade(id)
+  await contract.downgrade(id)
+  setNfttomerge([]) 
   }
+
   const upgradenft = async ( id ) =>{ 
     const data = []
     if (id.length === 3){
@@ -391,7 +393,7 @@ const removeItem = (index) => {
 </div>
               </div>
 
-             { nfttomerge.length ===3 ?  <Image src={arrowiconleft} height={70} className={styles.fusionreadyarrow} /> :  <Image className={styles.fusionreadyarrow} src={arrowiconleft} height={70} />  }
+             {  nfttomerge.length ===3 ||  nfttomerge.length ===1 && nfttomerge[0][0].level >= 2? <Image src={arrowiconleft} height={70} className={`${styles.fusionreadyarrow} ${styles.activefusionarrow}`} /> :  <Image className={styles.fusionreadyarrow} src={arrowiconleft} height={70} />  }
               {/* { nfttomerge.length ===1 && nfttomerge[0][0].level >= 2 &&
                 <div className={styles.containdefusionnft}> 
                 <div className={styles.containinfo} >
