@@ -7,7 +7,7 @@
     h2{
         font-size: 35px;
     }
-}
+} 
 .contain{
     position: relative;
     display: flex;
@@ -43,7 +43,27 @@
             padding: 5rem;
             border-radius: 5px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), inset 0px 0px 20px rgba(0, 0, 0, 0.1);
-                
+                .containtwofactor{
+                    display: flex;
+                    gap: 1rem;
+                    justify-content: flex-start;
+                    align-items: center;  
+                }
+                .sendauth{ 
+                    display: flex;
+                    gap: 1rem;
+                    margin: 4rem 0 0 0;
+                    input{
+                        // padding:.7rem;
+                        box-shadow: inset 0 0 10px $color_bg_morado_oscuro;
+                    }
+                }
+                .errorauth{
+                    position: absolute;
+                    top: 50%;
+                    font-size: 20px;
+                     color: rgb(228, 0, 0);
+                }
                 .back{
                     cursor: pointer;
                     position: absolute;

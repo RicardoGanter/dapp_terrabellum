@@ -59,7 +59,7 @@ const Security = ()=>{
                 {  !userdataglobal.two_factor_google ?
                     <div>
                         <div className={styles.securityoption}> 
-                        <Image src={googleauth} width={60}  alt="icongoogle"/> <h2>Google Authenticator</h2> <button onClick={()=>{setActivateauth(!activateauth); sas()}}> Activate </button>
+                        <Image src={googleauth} height={40}  alt="icongoogle"/> <h2>Google Authenticator</h2> <button onClick={()=>{setActivateauth(!activateauth); sas()}}> Activate </button>
                         </div>
                         {
                         activateauth &&
@@ -74,7 +74,7 @@ const Security = ()=>{
                     </div>
                  : 
                  <div className={styles.securityoption}> 
-                    <Image src={googleauth} width={60}  alt="icongoogle"/> <h2>Google Authenticator</h2> <button onClick={()=>setConfirmdeletedgoogleauth(true)}> Deleted </button>
+                    <Image src={googleauth} height={40}  alt="icongoogle"/> <h2>Google Authenticator</h2> <button onClick={()=>setConfirmdeletedgoogleauth(true)}> Deleted </button>
                     { confirmdeletedgoogleauth &&
                     <div className={styles.confirmdeleted}>
                         <h2>Realmente quieres eliminar el two factor de google ?</h2>

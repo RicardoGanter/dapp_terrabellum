@@ -2,14 +2,14 @@
 import Cookies from "js-cookie";
 import styles from '../../styles/signin/signin.module.scss'
 import Image from 'next/image'
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import axios from "axios"
 import { useSession } from 'next-auth/react';
 import { signIn } from "next-auth/react"
 import back from '../../public/icon/circle-arrow-left-solid.svg'
 import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx"
-import { flat } from "../../blockchain/abi/abi";
+import googleauth from '../../public/google-authenticator-logo-1.webp'
 const Signin = () => {
   const {data: session, status} = useSession()
   const router = useRouter(); 
@@ -35,8 +35,7 @@ const Signin = () => {
 
 
   const sendauthgoogle = async()=>{
-    try {
-      console.log(Nombre,Contraseña,tokengoogle)
+    try { 
       const response = await axios.post(`${URI}signinauth`,{
         nombre: Nombre,
         contraseña: Contraseña,
@@ -120,15 +119,21 @@ const Signin = () => {
             <p>Don't have an account? <span onClick={()=>{ Register() }}>Register</span></p>
             <p onClick={()=> router.push('/adminmint_temporalurl')}>Admin auth</p>
           </div>
-        </div> : twofactor ?
+        </div> 
+        
+        
+        : twofactor ?
         <div  className={styles.contain}>
           <div className={styles.subcontainer}>
-
-          <h2>Auth Google</h2>
-          <div> 
-          <input type="number" onChange={e => setTokengoogle(e.target.value)} />
-          <button onClick={()=> sendauthgoogle()}>Send</button>
-          </div>
+            <div className={styles.containtwofactor}>
+                <Image src={googleauth} height={60} />
+              <h2>Two Factor Google auth</h2>
+            </div>
+              <p className={styles.errorauth}>Numero incorrecto!</p>
+            <div className={styles.sendauth}> 
+              <input type="number" onChange={e => setTokengoogle(e.target.value)} />
+              <button onClick={()=> sendauthgoogle()}>Send</button>
+            </div>
           </div>
         </div> : null  }
         

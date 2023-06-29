@@ -50,7 +50,11 @@
         border-radius: 3px;
         padding: 3rem 0;
         width: 100%;
-        background-color: $color_bg_morado_oscuro;
+        .card{
+            width: fit-content;
+            margin: 0 auto;
+        }
+        // background-color: $color_bg_morado_oscuro;
         img{
             height: 350px;
         }
@@ -74,7 +78,7 @@
             gap: .5rem;
             .hability{
                 z-index: 2;
-                background-color: $color_bg_morado_oscuro2;
+                background-color: $color_bg;
                 padding: .7rem;
                 border-radius: 3px;
                 width: 125px;
@@ -88,9 +92,10 @@
             gap: 1.6rem;
             button{
                 border-radius: 2px;
-                background-color: $color_btn_morado;
+                background-color: $color_bg;
                 padding: .7rem 0;
                 width: 130px;
+                border-radius: 5px;
                 box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.4);
             }
         }
@@ -98,25 +103,25 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            background-color: $color_bg;
+            border-radius: 12px;
         }
         .containhabilityinfo{
             margin-left: .4rem;
-            display: flex;
-            justify-content:  flex-start;
-            gap: .5rem;
-            background-color: black;
-            width: fit-content;
-            padding: 0 .2rem;
-            border-radius: 3px;
+            display: flex; 
+            justify-content:  flex-start; 
+            background-color: $color_bg_morado_oscuro; 
+            margin: 1rem auto;
+            width: calc(100% - 15px);
+            padding: 0 .2rem; 
             p{
-                padding: .5rem .7rem;
-                background-color: $color_btn_morado;
-                border-radius: 3px;
+                padding: .7rem .7rem;
+                margin: .1rem 0 .1rem 1.5rem;
+               background-color: $color_bg; 
                 color: $color_text_white;
             }
         }
-        .description{
-            background-color: #47213C;
+        .description{ 
             width: 470px;
             height: 200px;
             border-radius: 5px;
@@ -132,7 +137,7 @@
 }
 
 .sell{
-    margin: .5rem 0;
+    margin: .5rem auto;
     display: flex;
     width: 200px;
     gap: 1rem;

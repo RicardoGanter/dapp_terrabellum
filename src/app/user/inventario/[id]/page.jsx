@@ -2,15 +2,15 @@
 import { React } from 'react';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../../../styles/idmarket/idmarket.module.scss'
-import personaje from '../../../public/borrar/Ejemplo1..png'
-import habilidad1 from '../../../public/borrar/HABILIDAD1.webp'
-import tb from '../../../public/img/logo.webp'
+import styles from '../../../../styles/idmarket/idmarket.module.scss'
+import personaje from '../../../../public/borrar/Ejemplo1..png'
+import habilidad1 from '../../../../public/borrar/HABILIDAD1.webp'
+import tb from '../../../../public/img/logo.webp'
 import Image from 'next/image'
-import ConnectInnomicNft from '../../../components/funcion/connectinnomicnft';
-import ha from '../../../public/borrar/HABILIDAD3.webp'
-
-
+import ConnectInnomicNft from '../../../../components/funcion/connectinnomicnft';
+import ha from '../../../../public/borrar/HABILIDAD3.webp'
+import PropsNftcartas from 'components/props/propsnftcartas';
+import '../../../../styles/globals.scss' 
 function DestinationPage({params}) {
   // const { id } = router.query;
   const [Sales, setSales] = useState();
@@ -66,8 +66,8 @@ function DestinationPage({params}) {
     }
   };
 
-  return (
-    <div style={{display:"flex", flexDirection:"column", margin:"180px 120px 0 20px", position:"relative"}}>
+  return ( 
+    <div   style={{display:"flex", flexDirection:"column", position:"relative"}}>
 
       <div className={styles.typegame}>
           <h2>Type Game</h2>
@@ -84,9 +84,32 @@ function DestinationPage({params}) {
 
       <div   className={styles.containcharacterinfo} >
         <div className={styles.Character}>
-          { Sales && Sales.name == "Aifos" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/AIFOS_prot_a.png"}/> }
+          {/* { Sales && Sales.name == "Aifos" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/AIFOS_prot_a.png"}/> }
           { Sales && Sales.name == "Capitan Union" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/capitan_Tango_D.png"}/> }
-          { Sales && Sales.name == "Red Spectre" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/Ejemplo1..png"}/> }
+          { Sales && Sales.name == "Red Spectre" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/Ejemplo1..png"}/> } */}
+         <div className={styles.card}>
+          <div> 
+      { Sales && 
+         <PropsNftcartas
+         level={Sales.level}
+         name={Sales.name}
+         image={Sales.image} height={370}
+         Rare={Sales.rarity}
+         hability1={Sales.hability1}
+         hability2={Sales.hability2}
+         hability3={Sales.hability3}/>}
+          <form className={styles.sell}>
+        <input type="number" className={styles.priceinput}/> 
+        <div className={styles.sellbuttons}>
+          <button onClick={()=>venderNFT(id)} >Sell</button>
+          {/* <button>Auction</button> */}
+        </div>
+      </form> 
+          </div>
+        
+         
+         </div>
+            
         </div>
 
         <div className={styles.containhabilitys}>
@@ -112,26 +135,20 @@ function DestinationPage({params}) {
             </div>
             <div className={styles.description}>
               <p className={styles.descriptiontext}> 
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+               Description: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
               </p>
             </div>
           </div>
         </div>
       </div>
-      <form className={styles.sell}>
-        <input type="number" className={styles.priceinput}/> 
-        <div className={styles.sellbuttons}>
-          <button onClick={()=>venderNFT(id)} >Sell</button>
-          {/* <button>Auction</button> */}
-        </div>
-      </form>
+   
       {/* fixed scroll */}
       <div className={styles.scrollfixed}>
         <div className={styles.rutescroll}/>
         <div className={styles.rutescroll}/>
         <div className={styles.rutescroll}/>
       </div>
-    </div>
+    </div> 
   );
 }
 

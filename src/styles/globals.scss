@@ -12,12 +12,31 @@ body{
   align-items: center;
 }
 
-::view-transition-new(full-embed) { 
-  animation: tobottom  1.8s normal;   
+// ::view-transition-new(full-embed) { 
+//   animation: tobottom  1.8s normal;   
+// }
+// ::view-transition-old(full-embed){ 
+//   animation: totop 1.8s normal; 
+// }
+
+::view-transition-new(mondongoss) {   
+  animation: tobottomm  1.8s normal;   
 }
-::view-transition-old(full-embed){ 
-  animation: totop 1.8s normal; 
+::view-transition-old(mondongoss){  
+  animation: lolsito 1.8s normal;   
+} 
+@keyframes lolsito {
+  0% {   
+    opacity: 1;
+  }
+ 50%{
+    opacity: 1;
+  }
+  100% {   
+    opacity: 0;
+  }
 }
+
 @keyframes totop {
   0% { 
     opacity: 1;
@@ -28,6 +47,17 @@ body{
     transform: translateX( 120%);
   }
 }
+@keyframes tobottomm {
+  0% { 
+    opacity: 0; 
+  }
+  40%{
+    opacity: 0;
+  }
+  100%{ 
+    opacity: 1; 
+  }
+} 
 @keyframes tobottom {
   0% { 
     opacity: 0; 

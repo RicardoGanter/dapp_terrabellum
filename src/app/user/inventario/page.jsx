@@ -17,6 +17,7 @@ import { SaveUrl } from "../../../components/header/header";
 import questionicon from '../../../public/circle-question-regular.svg'
 import Image from "next/image"; 
 import { User_data } from "../../layout";
+import '../../../styles/globals.scss'
 const NFTContainer = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,9 +37,16 @@ const NFTContainer = () => {
   const [confirmdeletednft, setConfirmdeletednft ] = useState(false)
   const [textdeleted , setTextdeleted] = useState("")
   const [nftsellers, setNftseller] = useState([])
-
+  const [topp, setTop] = useState(false)
+  const [leftt, setLeft] = useState()
 
    const filteredNFTs = nfts.filter((nft) => 
+   filteredItems.includes(nft.metadata.level) &&
+    // filteredItemsdefusion
+    ( selectedRarities.length > 0 ? nft.metadata.rarity == selectedRarities[0] || selectedRarities[1] || selectedRarities[2] : true) &&
+    nft.metadata.name.toLowerCase().includes(filtercharacters.toLowerCase())
+   )
+   const filteredNFTsseller = nftsellers.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&
     // filteredItemsdefusion
     ( selectedRarities.length > 0 ? nft.metadata.rarity == selectedRarities[0] || selectedRarities[1] || selectedRarities[2] : true) &&
@@ -141,8 +149,7 @@ const NFTContainer = () => {
         const lolsitofeo= await  contract.fetchMyUnSoldMarketItems()   
         for (let i = 0; i < lolsitofeo.length; i++) { 
           const tokenid = lolsitofeo[i].tokenId 
-          const itemid = lolsitofeo[i].itemId
-          console.log(itemid.toString(),"looooooooooooooool")
+          const itemid = lolsitofeo[i].itemId 
           const tokenURI = await contract.tokenURI(tokenid);  
           if (tokenid) {
             const metadata = await fetch(tokenURI).then((res) => res.json());
@@ -155,8 +162,7 @@ const NFTContainer = () => {
 
 
         for (let i = 0; i < tokenCount; i++) {
-          const tokenId = await contract.tokenOfOwnerByIndex(getaddres, i);
-          console.log(tokenId.toString())
+          const tokenId = await contract.tokenOfOwnerByIndex(getaddres, i); 
           const tokenURI = await contract.tokenURI(tokenId);
           if (tokenId) {
             const metadata = await fetch(tokenURI).then((res) => res.json());
@@ -210,14 +216,96 @@ const Cancelmarketseller =async (itemid)=>{
   })
   console.log("mondongo")
 }
+
+const mondongo = ( link, id )=>{ 
+  const elements = document.querySelectorAll('.oculto');
+  const nocxdd = document.getElementById(`animasoooos${id}`);
+
+  if (elements.length > 0) {
+    elements.forEach((element) => {
+      element.style.opacity = 1;
+   nocxdd.style.opacity = 1;
+      const animation = element.animate(
+        { opacity: [1, 0] },
+        { duration: 300 }
+      );
+  
+      animation.addEventListener('finish', () => {
+        element.style.opacity = 0; // Establecer la opacidad en 0 una vez que la animación haya finalizado
+        nocxdd.style.opacity = 1;
+      });
+    });
+  } 
+var coordenadas = {
+  top: nocxdd.offsetTop,
+  left: nocxdd.offsetLeft,
+  width: nocxdd.offsetWidth,
+  height: nocxdd.offsetHeight
+};
+let top = coordenadas.top - 312;
+let left = coordenadas.left - 190;
+if (top > 300) {
+  setTop(top * -1);
+  console.log(top);
+} else if (top < 300) {
+  setTop(Math.abs(top));
+  console.log(top);
+}
+if (left > 300) {
+  left = left * -1;
+  setLeft(left);
+  console.log(left);
+}
+else if (left < 300) {
+  const posi = Math.abs(left);
+  console.log(posi);
+  setLeft(posi);
+}
+if (nocxdd) {
+  console.log(top, left); 
+  nocxdd.style.opacity = 1;
+  const animation = nocxdd.animate(
+    [
+      { transform: 'translate(0, 0)' },
+      { transform: `translate(${left}px, ${top}px)` }, // Desplazamiento utilizando los valores de top y left
+    ],
+    {
+      duration: 1000, // Duración de la animación en milisegundos
+      easing: 'ease-in-out', // Tipo de aceleración de la animación
+      iterations: 1, // Número de veces que se repetirá la animación (1 para una sola vez)
+      fill: 'forwards',
+    }
+  );
+  setTimeout(() => {
+    const asdasd = document.getElementById('nosemequieromatar')
+if(asdasd){
+    asdasd.style.viewTransitionName = 'mondongoss';
+function updateTheDOMSomehow(){  
+  router.push(`${link}`) 
+  setTimeout(() => {
+    asdasd.style.viewTransitionName = '';
+}, 1800); 
+}
+document.startViewTransition(()=>{   
+   
+    updateTheDOMSomehow()
+}) 
+} 
+  }, 1000);
+} 
+
+
+}
+
+
   return (
     <div>
     { user &&
     <div style={{display:"flex", gap: "1rem"}}>
-      <SaveUrl name='Inventory' url='/user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
+      <SaveUrl  name='Inventory' url='/user/inventario' imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/2.png"/>
       {/* <Barrafiltros/> */}
-      <div className={styles.container}>
-      <div className={styles.subContainer}>
+      <div   className={`${styles.container} oculto` }>
+      <div  className={styles.subContainer}>
         <div className={styles.filtros}>
         <h2>Type NFT</h2>
           <select>
@@ -307,7 +395,7 @@ const Cancelmarketseller =async (itemid)=>{
     </div>
       {/* <PropsNftcartas name="a"  /> */} 
 
-      <h2 className={styles2.Title}>Inventory</h2>
+      <h2   className={`${styles2.Title} oculto`}>Inventory</h2>
       {noOwner &&
         <div className={styles2.contain_warning_addres}> 
           <p>Propietario de billetera no coincide con el inventario.</p> 
@@ -355,8 +443,8 @@ const Cancelmarketseller =async (itemid)=>{
   </div>
 ) : nfts ? (
   <div className={styles2.grid} style={{display:"flex"}}>
-    {nftsellers && nftsellers.map((nft )=>(
-       <div key={nft.id}> 
+    {nftsellers && filteredNFTsseller.map((nft )=>(
+       <div className="oculto"  key={nft.id}> 
             <PropsNftcartas 
                    level={nft.metadata.level}
                    name={nft.metadata.name}
@@ -366,12 +454,12 @@ const Cancelmarketseller =async (itemid)=>{
                    hability2={nft.metadata.hability2}
                    hability3={nft.metadata.hability3}/>
                    {nft.id}
-                   <button onClick={()=> Cancelmarketseller(nft.id)}>Cancel</button>
+                   <button className="oculto"  onClick={()=> Cancelmarketseller(nft.id)}>Cancel</button>
       </div>
     )) }
     {filteredNFTs.map((nft) => (
     <div key={nft.id}>
-      <Link href={`/market/${nft.id}`}>
+      <div className="oculto"   onClick={()=> mondongo(`/user/inventario/${nft.id}`, nft.id)} id={`animasoooos${nft.id}`} >
       <PropsNftcartas 
                    level={nft.metadata.level}
                    name={nft.metadata.name}
@@ -379,7 +467,7 @@ const Cancelmarketseller =async (itemid)=>{
                    Rare={nft.metadata.rarity}
                    hability1={nft.metadata.hability1}
                    hability2={nft.metadata.hability2}
-                   hability3={nft.metadata.hability3}/></Link>
+                   hability3={nft.metadata.hability3}/></div>
                    
                    { !noOwner && 
       <form
@@ -389,19 +477,19 @@ const Cancelmarketseller =async (itemid)=>{
           venderNFT(nft.id);
         }}
       >
-        <input
+        <input className="oculto" 
           type="number"
-          placeholder="Precio en Wei"
+          placeholder="Precio en ETH"
           value={price[nft]}
           onChange={(e) => setPrice(e.target.value)}
           min={-1}
           max={99999999999}
         />  
          <div>
-          <button className={styles2.sell} type="submit">
+          <button className={`${styles2.sell} oculto` } type="submit">
             vender
           </button> 
-          <button className={styles2.deleted} onClick={()=>setConfirmdeletednft(nft.id)} >Deleted  </button>
+          <button className={`${styles2.deleted} oculto`} onClick={()=>setConfirmdeletednft(nft.id)} >Deleted  </button>
           { confirmdeletednft && 
           <div className={styles2.confirmdeleted}>
             Realmente quieres eliminar el nft {confirmdeletednft} ?
@@ -418,7 +506,7 @@ const Cancelmarketseller =async (itemid)=>{
   ))}
   </div>
 ) : null }
-  <div className={styles.contain}>
+  <div className={`${styles.contain} oculto`}>
       <select onChange={handleOrderChange}>
         <option value="lowest">Lowest Price</option>
         <option value="highest">Highest Price</option>
