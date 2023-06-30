@@ -130,11 +130,17 @@ const NFTContainer = () => {
         setConfirmdeletednft(false)
         return setTextdeleted(false)
       } 
-  }
-
+  } 
   useEffect(() => {
     const fetchNFTs = async () => {
-      try {
+      try {  
+        const datanft = JSON.parse(localStorage.getItem("nftdata"))
+        const datanftseller = JSON.parse(localStorage.getItem("nftdataseller"))
+        if(datanft && datanftseller){ 
+          setNfts(datanft) 
+          setNftseller(datanftseller) 
+          return  setLoading(false);
+        } 
         const wallet = Cookies.get('userdata') 
         const getaddres = JSON.parse(wallet).address_metamask 
         const signer = await NetworkGoerliEth();
@@ -179,7 +185,9 @@ const NFTContainer = () => {
         setnoOwner(true)
       }
         setNfts(nftPromises);
+        localStorage.setItem('nftdata', JSON.stringify(nftPromises)); 
         setNftseller(nftsellerPromises)
+        localStorage.setItem('nftdataseller', JSON.stringify(nftsellerPromises)); 
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -217,10 +225,10 @@ const Cancelmarketseller =async (itemid)=>{
   console.log("mondongo")
 }
 
-const mondongo = ( link, id )=>{ 
+const mondongo = ( link, id, array )=>{
   const elements = document.querySelectorAll('.oculto');
-  const nocxdd = document.getElementById(`animasoooos${id}`);
-
+  const nocxdd = document.getElementById(`animasoooos${id}`); 
+  // sessionStorage.setItem('temporalnftdata',  JSON.stringify(nfts[array]) 
   if (elements.length > 0) {
     elements.forEach((element) => {
       element.style.opacity = 1;
@@ -235,63 +243,42 @@ const mondongo = ( link, id )=>{
         nocxdd.style.opacity = 1;
       });
     });
-  } 
-var coordenadas = {
-  top: nocxdd.offsetTop,
-  left: nocxdd.offsetLeft,
-  width: nocxdd.offsetWidth,
-  height: nocxdd.offsetHeight
-};
-let top = coordenadas.top - 312;
-let left = coordenadas.left - 190;
-if (top > 300) {
-  setTop(top * -1);
-  console.log(top);
-} else if (top < 300) {
-  setTop(Math.abs(top));
-  console.log(top);
-}
-if (left > 300) {
-  left = left * -1;
-  setLeft(left);
-  console.log(left);
-}
-else if (left < 300) {
-  const posi = Math.abs(left);
-  console.log(posi);
-  setLeft(posi);
-}
+  }  
 if (nocxdd) {
-  console.log(top, left); 
-  nocxdd.style.opacity = 1;
+  const startTop = nocxdd.offsetTop; // Posición inicial (top) del elemento
+  const startLeft = nocxdd.offsetLeft; // Posición inicial (left) del elemento
+  const targetTop = 400; // Posición objetivo (top) del elemento
+  const targetLeft = (window.innerWidth - 400) / 2; // Posición objetivo (left) del elemento
+  
+  nocxdd.style.position = 'fixed'; // Asegúrate de que el elemento tenga una posición fija
+  
   const animation = nocxdd.animate(
     [
-      { transform: 'translate(0, 0)' },
-      { transform: `translate(${left}px, ${top}px)` }, // Desplazamiento utilizando los valores de top y left
+      { top: `${startTop}px`, left: `${startLeft}px` }, 
+      { top: '260px',left: 'calc((100vw - 648px) / 2)',right: 'calc((100vw - 170px) / 2)',position: 'fixed', width:" fit-content" },
+      
     ],
     {
-      duration: 1000, // Duración de la animación en milisegundos
-      easing: 'ease-in-out', // Tipo de aceleración de la animación
-      iterations: 1, // Número de veces que se repetirá la animación (1 para una sola vez)
+      duration: 800,
+      easing: 'ease-in-out',
+      iterations: 1,
       fill: 'forwards',
     }
   );
+  
   setTimeout(() => {
     const asdasd = document.getElementById('nosemequieromatar')
 if(asdasd){
     asdasd.style.viewTransitionName = 'mondongoss';
-function updateTheDOMSomehow(){  
-  router.push(`${link}`) 
-  setTimeout(() => {
-    asdasd.style.viewTransitionName = '';
-}, 1800); 
-}
-document.startViewTransition(()=>{   
-   
-    updateTheDOMSomehow()
+function updateTheDOMSomehow(){   
+        router.push(`${link}`)    
+      asdasd.style.viewTransitionName = '';   
+    }
+    document.startViewTransition(()=>{   
+      updateTheDOMSomehow()
 }) 
 } 
-  }, 1000);
+  }, 800);
 } 
 
 
@@ -457,9 +444,9 @@ document.startViewTransition(()=>{
                    <button className="oculto"  onClick={()=> Cancelmarketseller(nft.id)}>Cancel</button>
       </div>
     )) }
-    {filteredNFTs.map((nft) => (
+    {filteredNFTs.map((nft , id) => (
     <div key={nft.id}>
-      <div className="oculto"   onClick={()=> mondongo(`/user/inventario/${nft.id}`, nft.id)} id={`animasoooos${nft.id}`} >
+      <div className="oculto"   onClick={()=> mondongo(`/user/inventario/${nft.id}`, nft.id, id)} id={`animasoooos${nft.id}`} >
       <PropsNftcartas 
                    level={nft.metadata.level}
                    name={nft.metadata.name}

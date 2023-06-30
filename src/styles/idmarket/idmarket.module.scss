@@ -49,12 +49,53 @@
     .Character{
         border-radius: 3px;
         padding: 3rem 0;
-        width: 100%;
-        .card{
+        width: 100%; 
+        margin: 0 auto; 
+        display: flex;
+        flex-direction: column;    
+        .idnft{
+            background-color: $color_bg_morado_oscuro;
+            padding: 1rem ;
+            width: 180px; 
+            margin: -2rem auto 1rem auto;
+            border-radius: 40px;
+        } 
+        .nft{
+            position: relative;
             width: fit-content;
             margin: 0 auto;
+            .back{
+                position: absolute;
+                left: -220px;
+                top: -62px;
+            }
         }
         // background-color: $color_bg_morado_oscuro;
+        .sell{
+            display: flex;
+            align-items: center;
+            margin: .5rem auto; 
+            gap: .3rem;
+            padding: .4rem;
+            border-radius: 40px;
+            background-color: $color_bg_morado_oscuro;
+            width: fit-content;
+            .logoInno{
+                width:30px;
+                height: 40px;
+            }
+            .priceinput{
+                padding: .7rem 0; 
+                margin: 0;
+                width: 120px;
+                border-radius: 30px;
+            } 
+        }
+        .sellbutton{ 
+            padding: 1rem 6.1rem;
+            border-radius: 40px;
+
+        }
         img{
             height: 350px;
         }
@@ -136,17 +177,3 @@
     
 }
 
-.sell{
-    margin: .5rem auto;
-    display: flex;
-    width: 200px;
-    gap: 1rem;
-    .priceinput{
-        padding: .5rem 0;
-        margin: 0;
-    }
-    .sellbuttons{
-        display: flex;
-        justify-content: space-between;
-    }
-}

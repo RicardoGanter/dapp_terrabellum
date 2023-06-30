@@ -11,6 +11,7 @@ import ConnectInnomicNft from '../../../../components/funcion/connectinnomicnft'
 import ha from '../../../../public/borrar/HABILIDAD3.webp'
 import PropsNftcartas from 'components/props/propsnftcartas';
 import '../../../../styles/globals.scss' 
+import logotb from '../../../../public/img/TOKEN_1.png'
 function DestinationPage({params}) {
   // const { id } = router.query;
   const [Sales, setSales] = useState();
@@ -19,9 +20,31 @@ function DestinationPage({params}) {
   const { id } = params;
   const ID = id - 1;
 
+   const back = () =>{
+    console.log("lol  ")
+    const nocxdjojo = document.querySelector('.nocxdmequieromatar')
+        if(nocxdjojo){
+          // console.log(  nocxdjojo.offsetTop,
+          //   nocxdjojo.offsetLeft )
+            nocxdjojo.style.viewTransitionName = 'noseeeeeee';
+            function updateTheDOMSomehow(){  
+              router.push('/user/inventario') 
+              setTimeout(() => {
+                nocxdjojo.style.viewTransitionName = '';
+            }, 1600); 
+            }
+            document.startViewTransition(()=>{   
+              
+                updateTheDOMSomehow()
+            }) 
+
+
+        }
+  }
+
    useEffect(() => {
      async function fetchSales() {
-       try {
+       try {  
          const contract = await ConnectInnomicNft() // conectar a el smart contract Market
          const sales = await contract.fetchUnSoldMarketItems();
          setAddres(sales[id]);
@@ -34,6 +57,13 @@ function DestinationPage({params}) {
   useEffect(()=>{
     const fetchImageUrl = async () => {
       try {
+        const datanft = await JSON.parse(localStorage.getItem("nftdata"))
+        if(datanft){ 
+         const newdata =  datanft.filter(x => x.id == id)
+         const data = newdata[0]  
+          return setSales({ name: data.metadata.name, hability1: data.metadata.hability1, level: data.metadata.level, rarity : data.metadata.rarity,
+            hability2: data.metadata.hability2, hability3: data.metadata.hability3, image: data.metadata.image, id:data.metadata.id})
+        }
         const contract = await ConnectInnomicNft() // conectar a el smart contract innomic
         const response = await contract.tokenURI(id);
         const uritokenn = await fetch(response);
@@ -49,7 +79,7 @@ function DestinationPage({params}) {
   
     // fetchImageUrl()
   const venderNFT = async (Id) => {
-    try {
+    try { 
       // Llama a la función de venta del contrato Solidity
       const contract = await ConnectInnomicNft();
       // contract.aprobe("0x3B92E898442BEEf2ECB82746AaCC5a353933cb28", 5,{
@@ -69,11 +99,11 @@ function DestinationPage({params}) {
   return ( 
     <div   style={{display:"flex", flexDirection:"column", position:"relative"}}>
 
-      <div className={styles.typegame}>
+      {/* <div className={styles.typegame}>
           <h2>Type Game</h2>
           <select><option> Terrabellum</option></select>
           <h2>ID # {id}</h2>
-      </div>
+      </div> */}
       <div className={styles.owner}>
         { addres ? <p>{addres.seller.toString()}</p> :<p> { Sales && !addres && Sales.id}
         </p>  }
@@ -87,29 +117,37 @@ function DestinationPage({params}) {
           {/* { Sales && Sales.name == "Aifos" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/AIFOS_prot_a.png"}/> }
           { Sales && Sales.name == "Capitan Union" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/capitan_Tango_D.png"}/> }
           { Sales && Sales.name == "Red Spectre" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/Ejemplo1..png"}/> } */}
-         <div className={styles.card}>
-          <div> 
-      { Sales && 
-         <PropsNftcartas
+    
+        <h2 className={styles.idnft}>ID # {id}</h2>  
+        <div className={styles.nft}>
+          <button onClick={()=>back()} className={styles.back}>Back</button>
+        { Sales ? 
+         <PropsNftcartas 
          level={Sales.level}
          name={Sales.name}
          image={Sales.image} height={370}
          Rare={Sales.rarity}
          hability1={Sales.hability1}
          hability2={Sales.hability2}
-         hability3={Sales.hability3}/>}
-          <form className={styles.sell}>
-        <input type="number" className={styles.priceinput}/> 
-        <div className={styles.sellbuttons}>
-          <button onClick={()=>venderNFT(id)} >Sell</button>
-          {/* <button>Auction</button> */}
+         hability3={Sales.hability3}/>
+         : 
+         <PropsNftcartas />
+        } 
         </div>
-      </form> 
-          </div>
+      
         
+        
+        <div >
+            <form className={styles.sell}>
+            <Image className={styles.logoInno} src={logotb}  />
+                <p>INNO</p> <input type="number"  className={styles.priceinput}/> 
+              {/* <div className={styles.sellbuttons}> */}
+              {/* <button>Auction</button> */}
+            {/* </div> */}
+          </form> 
+          <button className={styles.sellbutton} onClick={()=>venderNFT(id)} >Sell</button>
+        </div>
          
-         </div>
-            
         </div>
 
         <div className={styles.containhabilitys}>

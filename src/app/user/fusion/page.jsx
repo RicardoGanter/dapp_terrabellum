@@ -36,6 +36,11 @@ const Fusion = () => {
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
+        const datanft = JSON.parse(localStorage.getItem("nftdata")) 
+        if(datanft){ 
+          setNfts(datanft)  
+          return  setLoading(false);
+        } 
         const signer = await NetworkGoerliEth();
         const address = await signer.getAddress();
         const contract = await ConnectInnomicNft();
