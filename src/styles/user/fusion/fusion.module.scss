@@ -289,8 +289,30 @@ height: 100%;
     }
 } 
 .noseee{
-    z-index: 5;
-    background-color: rgb(157, 84, 0);
+    z-index: 5; 
     padding: 1px 0; 
-    border-radius: 3px;
+    border-radius: 10px;
+    animation: 2s infinite  focuscard;
+}
+
+@keyframes focuscard {
+    0%{
+        background-color: rgba(157, 0, 0, 0.6 );
+    }
+    20%{
+        background-color: rgb(157, 154, 0, 0.6);
+    }
+    40%{
+        background-color: rgb(0, 157, 71, 0.6);
+    }
+    60%{
+        background-color: rgb(0, 107, 157, 0.6);
+    }
+    80%{
+        background-color: rgb(152, 0, 157, 0.6);
+    }
+
+    100%{
+        background-color: rgb(157, 0, 0, 0.6);
+    }
 }

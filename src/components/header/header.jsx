@@ -192,8 +192,8 @@ const Header = () => {
           <nav className={styles.navbarcontain}>
           <div className={styles.logotb} >
             <Image src={logo} width={70}/> 
-            <Image src={search} className={styles.imagesearch}/>
-            <input placeholder="Search" className={styles.search} /> 
+            {/* <Image src={search} className={styles.imagesearch}/> */}
+            {/* <input placeholder="Search" className={styles.search} />  */}
           </div>  
             
           <div className={styles.btnsrigth}> 

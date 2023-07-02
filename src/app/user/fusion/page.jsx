@@ -269,8 +269,7 @@ const removeItem = (index) => {
     }
   }   
 
-  if(nfttomerge.length === 1 && !lal){
-    console.log(nfttomerge[0])
+  if(nfttomerge.length === 1 && !lal){ 
     setFilterlevel(nfttomerge[0][0].level)
     setlal(true)
   }

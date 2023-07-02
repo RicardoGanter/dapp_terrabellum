@@ -39,7 +39,7 @@ const NFTContainer = () => {
   const [nftsellers, setNftseller] = useState([])
   const [topp, setTop] = useState(false)
   const [leftt, setLeft] = useState()
-
+  const [ reload, setReload ] = useState()
    const filteredNFTs = nfts.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&
     // filteredItemsdefusion
@@ -131,7 +131,8 @@ const NFTContainer = () => {
         return setTextdeleted(false)
       } 
   } 
-  useEffect(() => {
+ 
+  useEffect(() => { 
     const fetchNFTs = async () => {
       try {  
         const datanft = JSON.parse(localStorage.getItem("nftdata"))
@@ -165,8 +166,8 @@ const NFTContainer = () => {
             });
         }
       }
-
-
+  
+  
         for (let i = 0; i < tokenCount; i++) {
           const tokenId = await contract.tokenOfOwnerByIndex(getaddres, i); 
           const tokenURI = await contract.tokenURI(tokenId);
@@ -194,9 +195,74 @@ const NFTContainer = () => {
         setLoading(false);
       }
     };
-    
     fetchNFTs();
     }, []);
+    useEffect(() => {  
+      localStorage.removeItem('nftdata')
+      localStorage.removeItem('nftdataseller') 
+      const fetchNFTs = async () => {
+        try {  
+          const datanft = JSON.parse(localStorage.getItem("nftdata"))
+          const datanftseller = JSON.parse(localStorage.getItem("nftdataseller"))
+          if(datanft && datanftseller){ 
+            console.log(datanft,"asdasdasd")
+            setNfts(datanft) 
+            setNftseller(datanftseller) 
+            return  setLoading(false);
+          } 
+          const wallet = Cookies.get('userdata') 
+          const getaddres = JSON.parse(wallet).address_metamask 
+          const signer = await NetworkGoerliEth();
+          const address = await signer.getAddress();   
+          const contract = await ConnectInnomicNft();
+           // Obtiene el número total de tokens del usuario
+          const tokenCount = await contract.balanceOf(getaddres);
+          setCountnft(tokenCount.toString())
+          // Crea un arreglo con los NFTs del usuario
+          const nftPromises = [];
+          const nftsellerPromises = [];
+          const lolsitofeo= await  contract.fetchMyUnSoldMarketItems()   
+          for (let i = 0; i < lolsitofeo.length; i++) { 
+            const tokenid = lolsitofeo[i].tokenId 
+            const itemid = lolsitofeo[i].itemId 
+            const tokenURI = await contract.tokenURI(tokenid);  
+            if (tokenid) {
+              const metadata = await fetch(tokenURI).then((res) => res.json());
+              nftsellerPromises.push({
+                id: itemid.toNumber(),
+                metadata
+              });
+          }
+        } 
+          for (let i = 0; i < tokenCount; i++) {
+            const tokenId = await contract.tokenOfOwnerByIndex(getaddres, i); 
+            const tokenURI = await contract.tokenURI(tokenId);
+            if (tokenId) {
+              const metadata = await fetch(tokenURI).then((res) => res.json());
+              nftPromises.push({
+                id: tokenId.toNumber(),
+                metadata
+              });
+          }
+        }
+        if(!getaddres){ 
+          return console.error("no tienes wallet conectada")
+        } 
+        if(address !=getaddres){ 
+          setnoOwner(true)
+        }
+          setNfts(nftPromises);
+          localStorage.setItem('nftdata', JSON.stringify(nftPromises)); 
+          setNftseller(nftsellerPromises)
+          localStorage.setItem('nftdataseller', JSON.stringify(nftsellerPromises)); 
+          setLoading(false);
+        } catch (error) {
+          console.error(error);
+          setLoading(false);
+        }
+      };
+      fetchNFTs();
+      }, [reload]);
 
 // Función para vender un NFT 
 const venderNFT = async (Id) => {
@@ -224,6 +290,8 @@ const Cancelmarketseller =async (itemid)=>{
   })
   console.log("mondongo")
 }
+
+
 
 const mondongo = ( link, id, array )=>{
   const elements = document.querySelectorAll('.oculto');
@@ -294,6 +362,7 @@ function updateTheDOMSomehow(){
       <div   className={`${styles.container} oculto` }>
       <div  className={styles.subContainer}>
         <div className={styles.filtros}>
+          <h2 onClick={()=>setReload(reload + 1)}>mongo</h2>
         <h2>Type NFT</h2>
           <select>
               <option>Character</option>

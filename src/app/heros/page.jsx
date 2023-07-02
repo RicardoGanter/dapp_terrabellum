@@ -26,14 +26,13 @@ const Heros = ()=>{
             const URI = await axios.get( "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/Mintt" )
             // const URI = await axios.get( "http://localhost:8000/usuarios/Mintt" );
             const propability = URI.data.message
-            if(propability){
-
-
-
+            if(propability){ 
                 const mint = await contract._mintTokenAllowedToEarn(address,propability,{
                     value: BigInt(10000000000000000),
-                    gasLimit: 5000000
+                    gasLimit: 1000000
                   });
+                  localStorage.removeItem('nftdata')
+                  localStorage.removeItem('nftdataseller') 
                 return mint
             }
         }
