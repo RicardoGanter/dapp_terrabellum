@@ -1,8 +1,8 @@
 "use client"
 import Image from "next/image";
 import styles from "../../../styles/user/estadistic.module.scss";
-import imagen from "../../../public/img/lal.webp";
-import fondoperfil from '../../../public/img/Rectangle.webp'
+// import imagen from "../../../public/img/lal.webp";
+// import fondoperfil from '../../../public/img/Rectangle.webp'
 import stars from '../../../public/img/Star.png'
 import { useState,useEffect } from "react";
 import { getSession } from "next-auth/react";
@@ -29,26 +29,26 @@ const Estadistics = () => {
           {user?
           <div className={styles.containestruct}>
             <div className={styles.group1}>
-              <Image 
+              {/* <Image 
               src={imagen} 
               className={styles.img} 
               style={{left: 5}}
               alt="Image icon perfil"
-              />
-              <Image 
+              /> */}
+              {/* <Image 
               src={fondoperfil}
               className={styles.fondo}
-              alt="Fondo perfil"/>
+              alt="Fondo perfil"/> */}
                 <div className={styles.fondo}> 
                   <Image src={stars} alt="start" />
                   <Image src={stars} alt="start" />
                   <Image src={stars} alt="start" />
                   <Image src={stars} alt="start" />
                 </div>
-              <Image src={imagen} 
-              className={styles.img} 
+              {/* <Image src={imagen}  */}
+              {/* className={styles.img} 
               style={{right: 5}}
-              alt="icon lvl"/>
+              alt="icon lvl"/> */}
             </div>
 
             <div className={styles.group2}>
@@ -77,14 +77,14 @@ const Estadistics = () => {
               <div className={styles.subgroup2_1}>
                 <div>
                   <p>Personaje Top</p>
-                  <Image src={imagen} 
+                  {/* <Image src={imagen} 
                   className={styles.imgfrecuente}
-                  alt="img personaje frecuente"/>
+                  alt="img personaje frecuente"/> */}
                 </div>
                 <div>
                   <p>Arma Top</p>
-                  <Image src={imagen} className={styles.imgfrecuente}
-                  alt="img arma frecuente"/>
+                  {/* <Image src={imagen} className={styles.imgfrecuente}
+                  alt="img arma frecuente"/> */}
                 </div>
               </div>
             </div>
