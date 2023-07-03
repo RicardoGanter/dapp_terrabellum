@@ -39,10 +39,7 @@ const Estadistics = () => {
               src={fondoperfil}
               className={styles.fondo}
               alt="Fondo perfil"/> */}
-                <div className={styles.fondo}> 
-                  <Image src={stars} alt="start" />
-                  <Image src={stars} alt="start" />
-                  <Image src={stars} alt="start" />
+                <div className={styles.fondo}>  
                   <Image src={stars} alt="start" />
                 </div>
               {/* <Image src={imagen}  */}
