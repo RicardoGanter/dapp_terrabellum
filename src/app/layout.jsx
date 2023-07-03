@@ -5,8 +5,8 @@ import Option from '../components/navbar/opcion'
 import Loading from './loading'
 import { Suspense } from 'react'
 import { SessionProvider } from 'next-auth/react'
-import { createContext, useState } from 'react'; 
-
+import { createContext, useState } from 'react';
+import logo from '../public/img/logo.webp' 
 export  const MyContext = createContext();
 export  const User_data = createContext();
 export default function RootLayout({
@@ -30,6 +30,10 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+       <head>
+         <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp"/>
+        <title>Terrabellum</title>
+      </head>
       <MyContext.Provider value={{ sharedVariable, updateSharedVariable }}>
         <User_data.Provider value={{userdataglobal ,updateuserdataglobal }} > 
         <SessionProvider >

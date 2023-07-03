@@ -5,6 +5,11 @@ import { getSession } from "next-auth/react" //desde el front-end
 import { useSession } from 'next-auth/react'
 import { useRouter } from "next/navigation"
 import { ClipLoader } from 'react-spinners'
+import Head from "next/head"
+export const metadata = {
+  title: 'Título de mi página',
+}
+
 export default function Home() {
   const router = useRouter()
   //si no esta auntenticado entonces.
@@ -34,7 +39,9 @@ export default function Home() {
   return (
     <>
     { user ? <div style={{position:"absolute", right:40, bottom:30}} >
-                      
+    <Head>
+        <title>hola</title>
+      </Head>          
         <ClipLoader
           color="#f200ff"
           cssOverride={{}}
