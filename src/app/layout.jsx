@@ -5,8 +5,7 @@ import Option from '../components/navbar/opcion'
 import Loading from './loading'
 import { Suspense } from 'react'
 import { SessionProvider } from 'next-auth/react'
-import { createContext, useState } from 'react';
-import logo from '../public/img/logo.webp' 
+import { createContext, useState } from 'react'; 
 export  const MyContext = createContext();
 export  const User_data = createContext();
 export default function RootLayout({

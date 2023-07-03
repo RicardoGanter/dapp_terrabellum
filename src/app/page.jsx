@@ -4,11 +4,7 @@ import { getSession } from "next-auth/react" //desde el front-end
 // import { GetServerSideProps } from "next" desde el back-end
 import { useSession } from 'next-auth/react'
 import { useRouter } from "next/navigation"
-import { ClipLoader } from 'react-spinners'
-import Head from "next/head"
-export const metadata = {
-  title: 'Título de mi página',
-}
+import { ClipLoader } from 'react-spinners' 
 
 export default function Home() {
   const router = useRouter()
@@ -38,10 +34,7 @@ export default function Home() {
    },[])
   return (
     <>
-    { user ? <div style={{position:"absolute", right:40, bottom:30}} >
-    <Head>
-        <title>hola</title>
-      </Head>          
+    { user ? <div style={{position:"absolute", right:40, bottom:30}} > 
         <ClipLoader
           color="#f200ff"
           cssOverride={{}}
