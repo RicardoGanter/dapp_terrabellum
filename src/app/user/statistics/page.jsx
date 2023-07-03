@@ -3,32 +3,32 @@ import Image from "next/image";
 import styles from "../../../styles/user/estadistic.module.scss";
 // import imagen from "../../../public/img/lal.webp";
 // import fondoperfil from '../../../public/img/Rectangle.webp'
-import stars from '../../../public/img/Star.png'
+// import stars from '../../../public/img/Star.png'
 import { useState,useEffect } from "react";
 import { getSession } from "next-auth/react";
-import { useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 // import { getSession } from "next-auth/react";
 const Estadistics = () => {
-  const [user, setUser] = useState(null)
-  const router = useRouter();
-  useEffect(()=>{
-    (async()=>{
-      const session = await getSession()
-      if(!session){
-        router.push('./signin')
-      }
-      setUser(session)
-    })()
-  },[])
+  // const [user, setUser] = useState(null)
+  // const router = useRouter();
+  // useEffect(()=>{
+  //   (async()=>{
+  //     const session = await getSession()
+  //     if(!session){
+  //       router.push('./signin')
+  //     }
+  //     setUser(session)
+  //   })()
+  // },[])
   // seguridad de usuario
   // const session = await getSession()
 
   // if (!session) return res.status(403).send('No Authenticathe')
   return (
         <div className={styles.contain}>
-          {user?
-          <div className={styles.containestruct}>
-            <div className={styles.group1}>
+          {/* {user? */}
+          {/* <div className={styles.containestruct}>
+            <div className={styles.group1}> */}
               {/* <Image 
               src={imagen} 
               className={styles.img} 
@@ -39,14 +39,14 @@ const Estadistics = () => {
               src={fondoperfil}
               className={styles.fondo}
               alt="Fondo perfil"/> */}
-                <div className={styles.fondo}>  
-                  <Image src={stars} alt="start" />
-                </div>
+                {/* <div className={styles.fondo}>  
+                  <Image src={stars} alt="start" /> */}
+                {/* </div> */}
               {/* <Image src={imagen}  */}
               {/* className={styles.img} 
               style={{right: 5}}
               alt="icon lvl"/> */}
-            </div>
+            {/* </div>
 
             <div className={styles.group2}>
               <div className={styles.subgroup2}>
@@ -71,18 +71,18 @@ const Estadistics = () => {
                 <p className={styles.backgrouninfo1}>Muertes</p>
                 <p className={styles.backgrouninfo2}>999.999.999.999</p>
               </div>
-              <div className={styles.subgroup2_1}>
-                <div>
-                  <p>Personaje Top</p>
+              <div className={styles.subgroup2_1}> */}
+                {/* <div>
+                  <p>Personaje Top</p> */}
                   {/* <Image src={imagen} 
                   className={styles.imgfrecuente}
                   alt="img personaje frecuente"/> */}
-                </div>
+                {/* </div>
                 <div>
-                  <p>Arma Top</p>
+                  <p>Arma Top</p> */}
                   {/* <Image src={imagen} className={styles.imgfrecuente}
                   alt="img arma frecuente"/> */}
-                </div>
+                {/* </div>
               </div>
             </div>
 
@@ -94,12 +94,12 @@ const Estadistics = () => {
                 margin: "2rem 0",
                 borderRadius: "0 0 4rem 4rem",
               }}
-            >
+            > */}
               {/* <div></div>
               <div></div> */}
-            </div>
-          </div>
-          : null }
+            {/* </div>
+          </div> */}
+          {/* : null } */}
         </div>
   );
 };

@@ -11,8 +11,8 @@ import ConnectButton from "../../components/header/loginmetamask/loginmetamask.j
 const Admin_mint_temporal = () => { 
   const router = useRouter(); 
   const [user, setuset] = useState(true)
-const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
-// const URI = 'http://localhost:8000/usuarios/'
+  const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+  // const URI = 'http://localhost:8000/usuarios/'
   useEffect(() => {
     const cookies =  Cookies.get('token_admin_mint')
     if (cookies) {

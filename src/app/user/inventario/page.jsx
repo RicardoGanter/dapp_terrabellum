@@ -287,11 +287,8 @@ const Cancelmarketseller =async (itemid)=>{
   const contract = await ConnectInnomicNft()  
   const cancel = await contract.unListMarketItem(itemid,{ 
     gasLimit: 120001 
-  })
-  console.log("mondongo")
-}
-
-
+  }) 
+} 
 
 const mondongo = ( link, id, array )=>{
   const elements = document.querySelectorAll('.oculto');
@@ -350,8 +347,7 @@ function updateTheDOMSomehow(){
 } 
 
 
-}
-
+} 
 
   return (
     <div>
@@ -410,20 +406,15 @@ function updateTheDOMSomehow(){
         <div className={styles.filtros}>
         <h2>Rarity</h2>
         <form style={{ display: "grid", gridTemplateColumns: "1fr 4fr", gap: "10px", placeItems: "start" }}>
-        <input type="checkbox" name="a" value={"1"} onChange={handleCheckboxChange} checked={selectedRarities.includes("1")} />
-        <label style={{ color: "white" }}>Common</label>
-        <input type="checkbox" name="a" value={"2"} onChange={handleCheckboxChange} checked={selectedRarities.includes("2")} />
-        <label style={{ color: "white" }}>Rare</label>
-        <input type="checkbox" name="a" value={"3"} onChange={handleCheckboxChange} checked={selectedRarities.includes("3")} />
-        <label style={{ color: "white" }} htmlFor="a">Legendary</label>
-      </form>
+          <input type="checkbox" name="a" value={"1"} onChange={handleCheckboxChange} checked={selectedRarities.includes("1")} />
+          <label style={{ color: "white" }}>Common</label>
+          <input type="checkbox" name="a" value={"2"} onChange={handleCheckboxChange} checked={selectedRarities.includes("2")} />
+          <label style={{ color: "white" }}>Rare</label>
+          <input type="checkbox" name="a" value={"3"} onChange={handleCheckboxChange} checked={selectedRarities.includes("3")} />
+          <label style={{ color: "white" }} htmlFor="a">Legendary</label>
+        </form> 
 
-      </div>
-        {/* <select value={selectedCharacter} onChange={(e) => setSelectedCharacter(e.target.value)}>
-            <option>Red Spectre</option>
-            <option>Agente</option>
-            <option>Aifos</option>
-        </select> */}
+      </div> 
         <div className={styles.filtros}>
           <h2>unmerge</h2>
           <ReactSlider
@@ -465,37 +456,7 @@ function updateTheDOMSomehow(){
           </div>
         </div>}
 {loading ? (
-  <div className={styles2.grid} style={{display:"flex"}}>
-  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />
-                  <Instagram
-                    gradientRatio={4}
-                    backgroundColor={'#333'}
-                    foregroundColor={'#999'}
-                    width={300}
-                  />  
+  <div className={styles2.grid} style={{display:"flex"}}> 
   </div>
 ) : nfts ? (
   <div className={styles2.grid} style={{display:"flex"}}>
