@@ -5,13 +5,12 @@ import PropsNftcartas from "../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
 import NetworkGoerliEth from "../../../components/funcion/network";
 import { getSession } from "next-auth/react";
-import { useRouter } from "next/navigation"
-import ContentLoader, { Instagram } from "react-content-loader";
+import { useRouter } from "next/navigation" 
 import Cookies from 'js-cookie'; 
 import { SaveUrl } from "../../../components/header/header";
 import Image from "next/image";
 import arrowiconleft from '../../../public/🦆 icon _fast arrow left_.svg'
-import borrar from '../../../public/Group 268 (1).svg'
+import borrar from '../../../public/Group 268 (1).svg' 
 
 const Fusion = () => {
   // const [merge, setMerge] = useState(false)
@@ -66,41 +65,7 @@ const Fusion = () => {
     };
     
     fetchNFTs();
-    }, []); 
-
-
-    //-------------------------------------------------------Authenticate-----------------------------------
-   useEffect(()=>{
-    const getdata = async()=> { 
-        const token = Cookies.get('token');  
-        const session = await getSession()
-        if(!token && !session){
-          console.error("no tienes una sesion iniciada")
-          return router.push('./signin')
-        }
-        if(session){
-          return setUser(session)
-        } 
-        const userdata = Cookies.get('userdata') 
-        if(!userdata){ 
-          const response = await axios.post(`${URI}getuser`,{id : token});
-          if(response.data){
-          const datauser = await Cookies.set('userdata', JSON.stringify(response.data))   
-          return setUserInno(response.data)
-          }
-        }
-        if(userdata){ 
-          const data = JSON.parse(userdata)  
-          return setUserInno(data)
-        } 
-    };
-    // setTimeout(() => {
-    //   getdata()
-      
-    // }, 2000);
-   },[]) 
- //-------------------------------------------------------Authenticate-----------------------------------END
-
+    }, []);  
 
    //-----------------------------------------------Filter-----------------------------------------------
   function norepeatlvl(value){

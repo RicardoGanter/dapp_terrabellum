@@ -1,12 +1,9 @@
 "use client"
-import styles from '../../styles/heros/heros.module.scss'
-import Image from 'next/image'
-import vault from '../../public/img/cofre.png'
+import styles from '../../styles/heros/heros.module.scss' 
 import NetworkGoerliEth from '../../components/funcion/network'
-import ConnectInnomicNft from '../../components/funcion/connectinnomicnft'
-import axios from 'axios'
-import PropsNftcartas from '../../components/props/propsnftcartas'
+import ConnectInnomicNft from '../../components/funcion/connectinnomicnft' 
 import { useState,useEffect } from 'react' 
+import { Fetch } from 'utils/fetch/fetch'
 const Heros = ()=>{
     const [arraynftmint, setArraynftmint] = useState([])
     const [Legendary, setLegendary] = useState([])
@@ -22,11 +19,10 @@ const Heros = ()=>{
         try{
             const signer = await NetworkGoerliEth();
             const address = await signer.getAddress();
-            const contract = await ConnectInnomicNft();
-            const URI = await axios.get( "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/Mintt" )
-            // const URI = await axios.get( "http://localhost:8000/usuarios/Mintt" );
-            const propability = URI.data.message
-            if(propability){ 
+            const contract = await ConnectInnomicNft(); 
+            const URI = await Fetch('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/Mintt', 'GET')
+            const propability = URI.message
+            if(propability){  
                 const mint = await contract._mintTokenAllowedToEarn(address,propability,{
                     value: BigInt(10000000000000000),
                     gasLimit: 1000000
@@ -56,10 +52,12 @@ const Heros = ()=>{
       },[Legendary && Rare && Common])
 
       useEffect(()=>{
-       const getdatamint =async ()=>{
-         const response = await axios.get('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/getdatamint')
-        if(response){
-            setArraynftmint(response.data.usuario.nft_mint_users)
+       const getdatamint =async ()=>{   
+        const response = await Fetch('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/getdatamint', 'GET')
+        if(response){ 
+            const data = await response.json()
+            console.log(data)
+            setArraynftmint(data.usuario.nft_mint_users)
         }
        }
        getdatamint()
@@ -79,7 +77,7 @@ const Heros = ()=>{
                 <div className={styles.rectangle_absolute_h} style={{bottom:8}}/>
 
                 <div className={styles.boxhero}>
-                    <Image src={vault} alt="vault" className={styles.vault} />
+                    <img src='https://terrabellum.s3.sa-east-1.amazonaws.com/cofre.webp' alt="vault" className={styles.vault} />
                     <div className={styles.contain_pricebuy}>
                         <div className={styles.price}>Price</div>
                         <div className={styles.valor}>100 USDT</div>

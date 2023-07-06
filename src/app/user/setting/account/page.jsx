@@ -7,11 +7,11 @@ import { User_data } from '../../../layout.jsx'
 import lock from '../../../../public/icon/lock-solid.svg'  
 import Image from "next/image.js" 
 import exit from '../../../../public/icon/xmark-solid.svg'  
-import Cookies from 'js-cookie'
-import axios from "axios"
+import Cookies from 'js-cookie' 
 import eye from '../../../../public/img/eye-solid.svg'
 import noeye from '../../../../public/img/eye-slash-solid.svg'
 import Completed from "../../../../utils/competed/completed.jsx"
+import { Fetch } from "utils/fetch/fetch.js"
 const Account = ()=>{
     const { userdataglobal, updateuserdataglobal } = useContext(User_data);   
     const [changepassword, setChangepassword] = useState(false)
@@ -56,7 +56,7 @@ const Account = ()=>{
           return console.error('contraseña erronea o menor a 8 caracteres')
          }
          const token = Cookies.get('token');   
-         const response = await axios.put(`${URI}switchpassword`,{ id : token, contraseña: contraActual , newcontraseña: newcontraseña  }); 
+         const response = await Fetch(`${URI}switchpassword`, 'PUT' , { id : token, contraseña: contraActual , newcontraseña: newcontraseña  }); 
          if( response.status === 204 ){ 
            return  setInvalidpassword(true)
          }
@@ -71,8 +71,8 @@ const Account = ()=>{
            return console.error('los emails no coinciden')
          }
          const token = Cookies.get('token');   
-         const response = await axios.put(`${URI}switchname`,{ id : token, newnombre: newname });  
-  
+         const response = await Fetch(`${URI}switchname`, 'PUT' ,{ id : token, newnombre: newname });  
+         const data = await response.json()
          if( response.status === 202 ){  
            return  setInvalidpassword(true)
          }
@@ -82,8 +82,8 @@ const Account = ()=>{
          }
          if( response.status == 200){ 
            const newaddresdata = {...userdataglobal}
-           newaddresdata.nombre = response.data.newnombre 
-           newaddresdata.cont_change_name = response.data.newcont 
+           newaddresdata.nombre = data.newnombre 
+           newaddresdata.cont_change_name = data.newcont 
            Cookies.set('userdata', JSON.stringify(newaddresdata))
            updateuserdataglobal(newaddresdata)
            fregistercompleted()
@@ -98,13 +98,12 @@ const Account = ()=>{
         }
         const token = Cookies.get('token');  
         if(token && newemail)  {
-          const response = await axios.put(`${URI}switch_email`,{ id : token, newemail: newemail });     
+          const response = await Fetch(`${URI}switch_email`, 'PUT' ,{ id : token, newemail: newemail });     
           if( response.status == 200){  
             setEnvioemail(true) 
             return clearname()
           }
-        }
-
+        } 
       } 
       const clearname = ()=>{
          setNewname(null)
@@ -144,9 +143,10 @@ const Account = ()=>{
            return setValidationpassword(true) 
          }
        },[newcontraseña, repetnewcontraseña])
+
        const changeimage = async (index)=>{  
          const token = Cookies.get('token'); 
-         const response = await axios.put(`${URI}switch_image`, { id: token, newimage: index })
+         const response = await Fetch(`${URI}switch_image`, 'PUT' ,{ id: token, newimage: index })
          if(response.status === 400){
            console.error('url incorrecta')
          }
@@ -161,20 +161,22 @@ const Account = ()=>{
            // return  window.location.reload()
          } 
         } 
+
         const handleImageClick = (index) => {
          setActiveImage(index);
          setSwitchimageperfil(urlimageperfil[index])  
        }
+
        useEffect(() => {
          const fetchData = async () => {
            try {
              const data = [];
              let i = 3;  
              const fetchImage = async () => {
-               const response = await fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/${i}.webp`); 
+               const response = await Fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/Imagen_perfil/${i}.webp`, 'GET'); 
                if (response && response.status === 403) {
                  return false;
-               } 
+               }  
                data.push(response.url);
                i++;
                return true;
@@ -189,7 +191,7 @@ const Account = ()=>{
            }
          }; 
          fetchData();
-       }, [editimage]); 
+       }, []); 
        const reenviaremail =  ()=>{
          if(!timereenviar){ 
            console.log("a")
@@ -199,7 +201,7 @@ const Account = ()=>{
            }
            const token = Cookies.get('token');  
            if(token && newemail)  {
-             const response = await axios.put(`${URI}switch_email`,{ id : token, newemail: newemail });   
+             const response = await Fetch(`${URI}switch_email`, 'PUT' ,{ id : token, newemail: newemail });   
              return setTimereenviar(true)
             }
          }, 1*1000*60*3);
@@ -213,7 +215,7 @@ const Account = ()=>{
             <SaveUrl name='Account' url="/user/setting/account" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/1.svg"/>
             <div className={styles.contain}>
                 <Title title={"Public account"} />
-            </div>
+            </div> 
             <div className={styles.containinfo}>
                 { editimage &&
                  <div className={styles.containselectimage}>
@@ -287,17 +289,17 @@ const Account = ()=>{
                             <div style={{display:"flex"}}>
                               <p>Current password</p> { invalidpassword && <p className={styles.errortext}>Your password does not match</p> } 
                             </div>
-                              <input required type={eye1 ? "text" : "password"} value={contraActual} onChange={req => setContraActual(req.target.value)}/><Image width={20} style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye1(!eye1)}} src={eye1? eye : noeye}/>
+                              <input required type={eye1 ? "text" : "password"} value={contraActual} onChange={req => setContraActual(req.target.value)}/><Image width={20} alt="Closed eye" style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye1(!eye1)}} src={eye1? eye : noeye}/>
                           </div>
                           <div style={{position:"relative"}}>
                             <p>New password</p>
-                            <input required type={eye2 ? "text" : "password"} value={newcontraseña} onChange={req=> setNewcontraseña(req.target.value)}/><Image width={20} style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye2(!eye2)}} src={eye2? eye : noeye}/>
+                            <input required type={eye2 ? "text" : "password"} value={newcontraseña} onChange={req=> setNewcontraseña(req.target.value)}/><Image width={20} alt="Closed eye" style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye2(!eye2)}} src={eye2? eye : noeye}/>
                           </div>
                          <div style={{position:"relative"}}>
                          <div style={{display:"flex"}}>
                             <p>Repeat the new password</p> {!validationpassword && repetnewcontraseña && repetnewcontraseña.length > 0 && <p className={styles.errortext}>Passwords do not match</p>} 
                          </div>
-                          <input required type={eye3 ? "text" : "password"} value={repetnewcontraseña} onChange={req=> setRepetnewcontraseña(req.target.value)}/> <Image width={20} style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye3(!eye3)}} src={eye3? eye : noeye}/>
+                          <input required type={eye3 ? "text" : "password"} value={repetnewcontraseña} onChange={req=> setRepetnewcontraseña(req.target.value)}/> <Image width={20} alt="Closed eye" style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye3(!eye3)}} src={eye3? eye : noeye}/>
                          </div>
                         
                           <div className={styles.option}>

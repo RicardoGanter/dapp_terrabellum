@@ -3,15 +3,15 @@ import Cookies from "js-cookie";
 import styles from '../../styles/signin/signin.module.scss'
 import Image from 'next/image'
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation';
-import axios from "axios"
-import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation'; 
+// import { useSession } from 'next-auth/react';
 import { signIn } from "next-auth/react"
 import back from '../../public/icon/circle-arrow-left-solid.svg'
 import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx"
 import googleauth from '../../public/google-authenticator-logo-1.webp'
+import { Fetch } from "utils/fetch/fetch";
 const Signin = () => {
-  const {data: session, status} = useSession()
+  // const {data: session, status} = useSession()
   const router = useRouter(); 
   const [user, setuset] = useState(true)
    const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
@@ -36,21 +36,17 @@ const Signin = () => {
 
   const sendauthgoogle = async()=>{
     try { 
-      const response = await axios.post(`${URI}signinauth`,{
+      const response = await Fetch(`${URI}signinauth`,  'POST' ,{
         nombre: Nombre,
         contraseña: Contraseña,
         token: tokengoogle
-      }); 
-      if(response){
-        const a = await response.data
-        console.log(a)
-      }
-      console.log("lol")
-      if (response.status === 204) { 
+      });  
+      const data = await response.json()
+      if (response && response.status === 204) { 
           setErrorlogin(true)
       }
-      if(response.status === 200 && response.data.token){
-        const cookie = await response.data.token  
+      if( response && response.status === 200 && data.token){
+        const cookie = await data.token  
         Cookies.set('token', cookie)
         setErrorlogin(false)  
         return  window.location.reload()
@@ -66,32 +62,30 @@ const Signin = () => {
   const iniciarSesion = async (req) => {
     req.preventDefault()
     try {
-      const response = await axios.post(`${URI}signin`,{
+      const response = await Fetch(`${URI}signin`, 'POST' ,{
         nombre: Nombre,
         contraseña: Contraseña
       }); 
+      const data = await response.json() 
       if (response.status === 204) { 
-          setErrorlogin(true)
+        return setErrorlogin(true)
       }
-      if(response.status === 200 && response.data.token){
-        const cookie = await response.data.token  
+      if(response.status === 200){ 
+        const cookie = await data.token 
         Cookies.set('token', cookie)
         setErrorlogin(false)  
         return  window.location.reload()
       }
-      if(response.status === 200 && response.data.twofactor){
-        console.log(response.data.twofactor)
-        setTwofactor(response.data.twofactor)
+      if(response.status === 200 && data.twofactor){ 
+        return setTwofactor(data.twofactor)
       }
-    } catch (error) {
-        // router.push('/');
-      console.error(error);
-      alert('Error al iniciar sesión, Nombre o contraseña incorrectos');
+    } catch (error) { 
+      console.error(error); 
     }
   };
   return (
     <div>
-      { status==='unauthenticated' && !user && !twofactor ? <div className={styles.contain}>
+      { !user && !twofactor ? <div className={styles.contain}>
           <div className={styles.subcontainer}>
             <h2 className={styles.login}>account access</h2>
           <Image onClick={()=>{router.push('/')}} className={styles.back} src={back} width={30} height={30} alt="back" />

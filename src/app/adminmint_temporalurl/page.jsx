@@ -3,11 +3,11 @@ import Cookies from "js-cookie";
 import styles from '../../styles/signin/signin.module.scss'
 import Image from 'next/image'
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation';
-import axios from "axios" 
+import { useRouter } from 'next/navigation';  
 import { signIn } from "next-auth/react"
 import back from '../../public/icon/circle-arrow-left-solid.svg'
 import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx" 
+import { Fetch } from "utils/fetch/fetch";
 const Admin_mint_temporal = () => { 
   const router = useRouter(); 
   const [user, setuset] = useState(true)
@@ -31,22 +31,13 @@ const Admin_mint_temporal = () => {
   const [twofactor, setTwofactor] = useState(false)
   const [tokengoogle, setTokengoogle] = useState(false) 
   const sendauthgoogle = async()=>{
-    try {
-      console.log(Nombre,Contraseña,tokengoogle)
-      const response = await axios.post(`${URI}iniciarSesion_admin`,{
-        nombre: Nombre,
-        contraseña: Contraseña 
-      }); 
-      if(response){
-        const a = await response.data
-        console.log(a)
-      }
-      console.log("lol")
+    try { 
+      const response = await Fetch(`${URI}iniciarSesion_admin`, 'POST', { nombre: Nombre,contraseña: Contraseña }) 
       if (response.status === 204) { 
           setErrorlogin(true)
       }
-      if(response.status === 200 && response.data.token){
-        const cookie = await response.data.token  
+      if(response.status === 200 && response.token){
+        const cookie = await response.token  
         Cookies.set('token_admin_mint', cookie)
         setErrorlogin(false)  
         return  window.location.reload()
@@ -61,23 +52,21 @@ const Admin_mint_temporal = () => {
   
   const iniciarSesion = async (req) => {
     req.preventDefault()
-    try {
-      const response = await axios.post(`${URI}iniciarSesion_admin`,{
-        nombre: Nombre,
-        contraseña: Contraseña
-      }); 
+    try { 
+      const response = await Fetch(`${URI}iniciarSesion_admin`, 'POST' ,{nombre: Nombre,contraseña: Contraseña})
+
       if (response.status === 204) { 
-          setErrorlogin(true)
+        setErrorlogin(true)
       }
-      if(response.status === 200 && response.data.token){
-        const cookie = await response.data.token  
+      if(response.status === 200 && response.token){
+        const cookie = await response.token  
         Cookies.set('token_admin_mint', cookie)
         setErrorlogin(false)  
         return  window.location.reload()
       }
-      if(response.status === 200 && response.data.twofactor){
-        console.log(response.data.twofactor)
-        setTwofactor(response.data.twofactor)
+      if(response.status === 200 && response.twofactor){
+        console.log(response.twofactor)
+        setTwofactor(response.twofactor)
       }
     } catch (error) {
         // router.push('/');

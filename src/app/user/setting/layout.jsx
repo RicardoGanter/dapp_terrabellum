@@ -1,6 +1,5 @@
 "use client"
-import styles from '../../../styles/user/setting/setting.module.scss'
-import Link from 'next/link'  
+import styles from '../../../styles/user/setting/setting.module.scss'  
 import User from '../layout'
 import { useRouter } from 'next/navigation'
 import '../../../styles/globals.scss'

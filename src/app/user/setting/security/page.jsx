@@ -4,11 +4,11 @@ import styles from '../../../../styles/user/setting/security/security.module.scs
 import QRCode from 'qrcode.react';
 import { useState,useContext } from "react";
 import Cookies from 'js-cookie'
-import { User_data } from '../../../layout.jsx'
-import axios from "axios";
+import { User_data } from '../../../layout.jsx' 
 import googleauth from '../../../../public/google-authenticator-logo-1.webp'
 import Image from "next/image";
 import { SaveUrl } from "../../../../components/header/header";
+import { Fetch } from "utils/fetch/fetch";
 const Security = ()=>{
     const [secreturl, setSecreturl] = useState(null)
     const [qrurl, setQrurl] = useState(null)
@@ -19,9 +19,10 @@ const Security = ()=>{
     const sos = async()=>{
         const token = Cookies.get('token');  
         const URIr  = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/"
-        const response = await axios.post(`${URIr}verifytwo`,{secret: secreturl.toString(), token : twofactorrandom.toString(), id: token.toString()})
+        const response = await Fetch(`${URIr}verifytwo`, 'POST' ,{secret: secreturl.toString(), token : twofactorrandom.toString(), id: token.toString()})
+        const data = await response.json()
         if(response.status == 200){ 
-            const newdata = response.data
+            const newdata = data
             const newimage = {...userdataglobal}
             newimage.two_factor_google = newdata.secret
             updateuserdataglobal(newimage)
@@ -31,18 +32,19 @@ const Security = ()=>{
         const sas = async()=>{
         const userdata = Cookies.get('userdata') 
         const a = JSON.parse(userdata) 
-                const URIr  = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/twofactor" 
-                const response = await axios.post( URIr, { email: a.email})
-                if(response){   
-                setSecreturl(response.data.secret) 
-            return  setQrurl(response.data.otpAuthUrl)
-            }
+            const URIr  = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/twofactor" 
+            const response = await Fetch( URIr, 'POST' , { email: a.email})
+            const data = await response.json()
+            if(response){   
+            setSecreturl(data.secret) 
+            return setQrurl(data.otpAuthUrl)
+            }   
         }
         
     const deletedgoogleauth = async ()=>{
         const token = Cookies.get('token');   
         const URIr  = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/"
-        const response = await axios.put(`${URIr}deletetwofactor`,{ id: token })
+        const response = await Fetch(`${URIr}deletetwofactor`, 'PUT' ,{ id: token })
         if(response.status == 200){ 
             const newimage = {...userdataglobal}
             newimage.two_factor_google = null

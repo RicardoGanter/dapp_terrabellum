@@ -1,9 +1,9 @@
 "use client" 
 import styles from '../../../styles/admin_mint/mint.module.scss'
-import { useState,useEffect } from 'react'
-import axios from 'axios'
+import { useState,useEffect } from 'react' 
 import Cookies from 'js-cookie' 
 import Completed from 'utils/competed/completed' 
+import { Fetch } from 'utils/fetch/fetch'
 const Createnextmint = ()=>{
     const [Nftdataventa, setNftdataventa] = useState([])
     const [dataname, setDataname] = useState([]) 
@@ -13,12 +13,12 @@ const Createnextmint = ()=>{
             try {
               const data = []; 
               let i = 1;  
-              const fetchImage = async () => {
-                const response = await axios.get(`https://terrabellum.s3.sa-east-1.amazonaws.com/Jsoncharacters/${i}.json`); 
+              const fetchImage = async () => {  
+                const response = await Fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Jsoncharacters/${i}.json`, 'GET')
                 if (response.status === 403) {
                   return false;
                 }  
-                 data.push( { name :response.data.name , idnft : i });
+                 data.push( { name :response.name , idnft : i });
                  
                 i++;
                 return true;
@@ -55,10 +55,9 @@ const Createnextmint = ()=>{
       setNftdataventa(newdata)
     } 
     const mintnft =async ()=>{ 
-            const token = Cookies.get('token_admin_mint')  
-            const response =await axios.post('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/insertnfttanda', { id: token, data: Nftdataventa })
-            if(response.status == 200){ 
-                console.log(response)
+            const token = Cookies.get('token_admin_mint')   
+            const response = await Fetch('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/insertnfttanda', 'POST' , { id: token, data: Nftdataventa }) 
+            if(response.status == 200){  
                 setNftdataventa([])
                 setCompleted(true)
             } 

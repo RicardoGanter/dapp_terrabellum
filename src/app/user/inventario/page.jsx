@@ -9,8 +9,7 @@ import Barrafiltros from "../../../components/navbar/market/opcion_market";
 import Link from 'next/link'
 import ReactSlider from 'react-slider'
 import { getSession } from "next-auth/react";
-import { useRouter } from "next/navigation"
-import ContentLoader, { Instagram } from "react-content-loader";
+import { useRouter } from "next/navigation" 
 import Cookies from 'js-cookie';
 const { ethers } = require('ethers');
 import { SaveUrl } from "../../../components/header/header";

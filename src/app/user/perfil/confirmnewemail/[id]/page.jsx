@@ -1,31 +1,21 @@
 "use client"
-import { useEffect,useState } from "react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
+import { useEffect,useState } from "react";  
 import Cookies from 'js-cookie'
+import { Fetch } from "utils/fetch/fetch";
 const Confirmnewemail = ({params})=>{
     const [user, setuset] = useState(true)
     const { id } = params; 
-    const URI = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/"
-    const router = useRouter()
-    // useEffect(() => {
-    //     const cookies =  Cookies.get('token')
-    //     if (!cookies) {
-    //       setuset(cookies)
-    //       router.push('/');
-    //     }
-    //     setuset(false)
-    //   }, []);
+    const URI = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/" 
     useEffect(()=>{ 
     const createuser = async () =>{ 
         try { 
-        const response = await axios.get(`${URI}confirmnewemail?token=${id}`) 
+        const response = await Fetch(`${URI}confirmnewemail?token=${id}`, 'GET') 
+        const data = await response.json()
         if(response && response.status == 500){  
+            console.error("error")
         }
-        if(response && esponse.status == 200){  
-            console.log(response)
-            console.log(response.data)
-            const cookie = await response.data.newemail    
+        if(response && response.status == 200){   
+            const cookie = await data.newemail    
             if(cookie){
               const login = Cookies.set('token', cookie) 
               if(login){       // const newaddresdata = {...userInno}

@@ -2,9 +2,9 @@
 import '../styles/globals.scss'
 import Header from '../components/header/header'
 import Option from '../components/navbar/opcion'
-import Loading from './loading'
-import { Suspense } from 'react'
-import { SessionProvider } from 'next-auth/react'
+// import Loading from './loading'
+// import { Suspense } from 'react'
+// import { SessionProvider } from 'next-auth/react'
 import { createContext, useState } from 'react'; 
 export  const MyContext = createContext();
 export  const User_data = createContext();
@@ -15,7 +15,7 @@ export default function RootLayout({
 //   children: React.ReactNode
 // }
 ) { 
-  const [sharedVariable, setSharedVariable] = useState('Hola, soy una variable compartida');
+  const [sharedVariable, setSharedVariable] = useState();
   const updateSharedVariable = (newValue ) => {
     setSharedVariable(newValue);
   }; 
@@ -35,17 +35,17 @@ export default function RootLayout({
       </head>
       <MyContext.Provider value={{ sharedVariable, updateSharedVariable }}>
         <User_data.Provider value={{userdataglobal ,updateuserdataglobal }} > 
-        <SessionProvider >
+        {/* <SessionProvider > */}
           <body> 
           <Header/>
           <div style={{margin:'120px 0 0 170px'}}>
-            { <Suspense fallback={<Loading/>}>
+            {/* { <Suspense fallback={<Loading/>}> */}
               {children}
-            </Suspense>}
+            {/* </Suspense>} */}
           </div>
           <Option/>
           </body>
-        </SessionProvider> 
+        {/* </SessionProvider>  */}
         </User_data.Provider>
       </MyContext.Provider>
     </html>

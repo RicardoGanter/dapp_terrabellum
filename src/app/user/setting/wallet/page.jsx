@@ -6,10 +6,10 @@ import styles from '../../../../styles/user/setting/wallet/wallet.module.scss'
 import Image from 'next/image.js'
 import metamaskimage from '../../../../public/img/full-metamask-logo.png'
 import NetworkGoerliEth from '../../../../components/funcion/network.js'
-import Cookies from 'js-cookie'
-import axios from 'axios' 
+import Cookies from 'js-cookie'  
 import Completed from '../../../../utils/competed/completed.jsx'
 import { SaveUrl } from '../../../../components/header/header.jsx'
+import { Fetch } from 'utils/fetch/fetch.js'
 const Wallet = () =>{
     const { userdataglobal, updateuserdataglobal } = useContext(User_data); 
     const [confirmdeleted, setConfirmdeleted] = useState(null)
@@ -25,7 +25,7 @@ const Wallet = () =>{
     }
     const DeleteAddressMetamask = async()=>{  
         const token = Cookies.get('token');  
-        const response = await axios.put(`${URI}deleteaddress`,{id : token });
+        const response = await Fetch(`${URI}deleteaddress`, 'PUT' ,{id : token });
         if(response.status === 200){
           const newaddresdata = {...userdataglobal}
           newaddresdata.address_metamask = null 
@@ -39,7 +39,7 @@ const Wallet = () =>{
           const signer = await NetworkGoerliEth();
           const addresss = await signer.getAddress();
           const token = Cookies.get('token');  
-          const response = await axios.post(`${URI}sendaddres`,{id : token, address_metamask: addresss});
+          const response = await Fetch(`${URI}sendaddres`, 'POST' ,{id : token, address_metamask: addresss});
           if(response.status===200){ 
             const newaddresdata = {...userdataglobal}
             newaddresdata.address_metamask = addresss  

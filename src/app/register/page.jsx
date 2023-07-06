@@ -1,15 +1,15 @@
 "use client"
 import styles from '../../styles/signin/signin.module.scss'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react' 
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import { signIn } from "next-auth/react";
+// import { useSession } from 'next-auth/react';
+// import { signIn } from "next-auth/react";
 import ConnectButton from '../../components/header/loginmetamask/loginmetamask';
 import back from '../../public/icon/circle-arrow-left-solid.svg'
 import Image from 'next/image';
 import NetworkGoerliEth from '../../components/funcion/network';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
+import { Fetch } from 'utils/fetch/fetch'; 
 const Register = ()=>{
     const [Nombre, setNombre] = useState('')
     const [Email,setEmail] = useState('');
@@ -19,9 +19,8 @@ const Register = ()=>{
     const [user, setuset] = useState(true)
     const [registersemicompleted, setRegistersemicompleted] = useState(false)
    const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
-    const router = useRouter();
-    // const URI = 'http://localhost:8000/usuarios/'
-    const {data: session, status} = useSession()
+    const router = useRouter(); 
+    // const {data: session, status} = useSession()
 
     useEffect(() => {
     const cookies =  Cookies.get('token')
@@ -32,39 +31,32 @@ const Register = ()=>{
     setuset(false)
   }, []);
 
-    const Login = ()=>{
-        return router.push('/signin')
-      }
+    // const Login = ()=>{
+    //     return router.push('/signin')
+    //   }
     const GuardarUsuario = async(req)=>{
-        req.preventDefault()
-        const response = await axios.post(`${URI}register`,
-        {nombre : Nombre,  contraseña : Contraseña, email : Email},
-        // {withCredentials: true,credentials: 'include'}
-        )
+        req.preventDefault()  
+        const response = await Fetch(`${URI}register`, 'POST' , {nombre : Nombre,  contraseña : Contraseña, email : Email})  
+        if(!response){ return console.error("f")}
         if(response.status == 205){
-            setErroremail(true)
-            setErrornombre(false)
-            }
-        if(response.status == 204){
-            setErrornombre(true) 
-            setErroremail(false)
-            }
-        if(response.status == 203){
-            setErroremail(true)
-            setErrornombre(true)
-        }
-        if(response.status == 200){  
-            return setRegistersemicompleted(true)
-            // const cookie = await response.data.token    
-            // if(cookie){
-            //   Cookies.set('token', cookie) 
-            //   return  window.location.reload();  
-            // } 
-        }
+          setErroremail(true)
+          setErrornombre(false)
+          }
+      if(response.status == 204){
+          setErrornombre(true) 
+          setErroremail(false)
+          }
+      if(response.status == 203){
+          setErroremail(true)
+          setErrornombre(true)
+      }
+      if(response.status == 200){  
+          return setRegistersemicompleted(true) 
+      }
     }
     return(
         <div>
-        { status==='unauthenticated' && !user && <div className={styles.contain}> 
+        { !user && <div className={styles.contain}> 
            
           { !registersemicompleted ? 
            <div className={styles.subcontainer}>
