@@ -10,10 +10,7 @@ export  const MyContext = createContext();
 export  const User_data = createContext();
 export default function RootLayout({
   children,
-}
-// : {
-//   children: React.ReactNode
-// }
+} 
 ) { 
   const [sharedVariable, setSharedVariable] = useState();
   const updateSharedVariable = (newValue ) => {
