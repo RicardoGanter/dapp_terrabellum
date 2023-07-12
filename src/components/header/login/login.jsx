@@ -41,8 +41,7 @@ const Login = ()=>{
             },
             body: JSON.stringify({ id: token })
           }) ).json()
-          if(response ){
-            console.log(response)
+          if(response ){ 
             const data = await response 
             const datauser = Cookies.set('userdata', JSON.stringify(data)) 
               const a = await data

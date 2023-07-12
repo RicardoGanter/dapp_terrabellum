@@ -12,6 +12,17 @@ import eye from '../../../../public/img/eye-solid.svg'
 import noeye from '../../../../public/img/eye-slash-solid.svg'
 import Completed from "../../../../utils/competed/completed.jsx"
 import { Fetch } from "utils/fetch/fetch.js"
+
+//Feching
+
+import { getImagesProfile } from "./services/getImagesProfile.js"
+import { changeImageProfile } from "./services/changeImageProfile.js"
+import { changePassword } from "./services/changePassword.js"
+import { changeEmail } from "./services/changeEmail.js"
+import { changeName } from "./services/changeName.js"
+
+
+
 const Account = ()=>{
     const { userdataglobal, updateuserdataglobal } = useContext(User_data);   
     const [changepassword, setChangepassword] = useState(false)
@@ -46,65 +57,54 @@ const Account = ()=>{
             }, 3000);
         }
     }
-     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/' 
-       // const URI = 'http://localhost:8000/usuarios/'  
+     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'  
        
      //PASSWORD
-     const switchpassword = async (req)=>{
-         req.preventDefault() 
-         if( newcontraseña.lenght< 8 || repetnewcontraseña.lenght< 8 || newcontraseña !=repetnewcontraseña){
-          return console.error('contraseña erronea o menor a 8 caracteres')
-         }
-         const token = Cookies.get('token');   
-         const response = await Fetch(`${URI}switchpassword`, 'PUT' , { id : token, contraseña: contraActual , newcontraseña: newcontraseña  }); 
-         if( response.status === 204 ){ 
-           return  setInvalidpassword(true)
-         }
-         if( response.status===200){ 
-           return  clearformpassword()
-         } 
-       } 
+    const switchpassword = async (req)=>{ 
+      req.preventDefault()  
+        if( newcontraseña.lenght< 8 || repetnewcontraseña.lenght< 8 || newcontraseña !=repetnewcontraseña){
+        return console.error('contraseña erronea o menor a 8 caracteres')
+        } 
+      const { response } = await changePassword( contraActual, newcontraseña) 
+      if( response == 204 ){
+        return setInvalidpassword(true)
+      }
+      if( response == 200 ){ 
+        return  clearformpassword()
+      } 
+    }  
        //NAME 
        const switch_name = async (req)=>{
          req.preventDefault() 
          if( newname != repetnewname && !validationname){
            return console.error('los emails no coinciden')
          }
-         const token = Cookies.get('token');   
-         const response = await Fetch(`${URI}switchname`, 'PUT' ,{ id : token, newnombre: newname });  
-         const data = await response.json()
-         if( response.status === 202 ){  
+         const { status, newUser } = await changeName( newname )
+         if( status === 202 ){  
            return  setInvalidpassword(true)
          }
-         if( response.status === 204 ){  
+         if( status === 204 ){  
            console.log("ya cambiaste el nombre del usuario :(") 
            return  setInvalidpassword(true)
          }
-         if( response.status == 200){ 
-           const newaddresdata = {...userdataglobal}
-           newaddresdata.nombre = data.newnombre 
-           newaddresdata.cont_change_name = data.newcont 
-           Cookies.set('userdata', JSON.stringify(newaddresdata))
-           updateuserdataglobal(newaddresdata)
+         if( status == 200){  
+           updateuserdataglobal(newUser)
            fregistercompleted()
            return clearname()
          }
        }
        // EMAIL
-       const switch_email = async (req)=>{
-         req.preventDefault()  
-        if( newemail != repeatnewemail && !validationemail){
-          return console.error('los emails no coinciden')
-        }
-        const token = Cookies.get('token');  
-        if(token && newemail)  {
-          const response = await Fetch(`${URI}switch_email`, 'PUT' ,{ id : token, newemail: newemail });     
-          if( response.status == 200){  
+        const switch_email = async (req )=>{
+           req.preventDefault()
+          if( newemail != repeatnewemail && !validationemail){
+            return console.error('los emails no coinciden')
+          } 
+          const { response } = await changeEmail(newemail) 
+          if( response == 200){   
             setEnvioemail(true) 
             return clearname()
           }
-        } 
-      } 
+        }   
       const clearname = ()=>{
          setNewname(null)
          setRepetnewname(null)
@@ -144,23 +144,17 @@ const Account = ()=>{
          }
        },[newcontraseña, repetnewcontraseña])
 
-       const changeimage = async (index)=>{  
-         const token = Cookies.get('token'); 
-         const response = await Fetch(`${URI}switch_image`, 'PUT' ,{ id: token, newimage: index })
-         if(response.status === 400){
-           console.error('url incorrecta')
-         }
-         if(response.status ===200){
-           const newimage = {...userdataglobal}
-           newimage.image = index
-           updateuserdataglobal(newimage)
-           Cookies.set('userdata', JSON.stringify(newimage))
-           setEditimage(false)
-           const imagen = document.getElementById("lol");
-           imagen.src = index;
-           // return  window.location.reload()
-         } 
-        } 
+        const changeimage = async (index)=>{   
+          const { newimage } = await changeImageProfile(index)
+          if(newimage){
+            updateuserdataglobal(newimage) 
+            //CORREGIR
+            const imagen = document.getElementById("lol"); 
+            imagen.src = index; 
+            //CORREGIR
+            setEditimage(false) 
+          } 
+         }  
 
         const handleImageClick = (index) => {
          setActiveImage(index);
@@ -168,45 +162,12 @@ const Account = ()=>{
        }
 
        useEffect(() => {
-         const fetchData = async () => {
-           try {
-             const data = [];
-             let i = 3;  
-             const fetchImage = async () => {
-               const response = await Fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/Imagen_perfil/${i}.webp`, 'GET'); 
-               if (response && response.status === 403) {
-                 return false;
-               }  
-               data.push(response.url);
-               i++;
-               return true;
-             }; 
-             let shouldContinue = await fetchImage(); 
-             while (shouldContinue) {
-               shouldContinue = await fetchImage(); 
-              } 
-              setUrlimageperfil(data);  
-           } catch (error) {
-             console.error('Error al obtener los datos:', error);
-           }
-         }; 
-         fetchData();
-       }, []); 
-       const reenviaremail =  ()=>{
-         if(!timereenviar){ 
-           console.log("a")
-         setTimeout(async() => {
-           if( newemail != repeatnewemail && !validationemail){
-             return console.error('los emails no coinciden')
-           }
-           const token = Cookies.get('token');  
-           if(token && newemail)  {
-             const response = await Fetch(`${URI}switch_email`, 'PUT' ,{ id : token, newemail: newemail });   
-             return setTimereenviar(true)
-            }
-         }, 1*1000*60*3);
-       }
-       }
+        const getImages = async () => {
+          const { data } = await getImagesProfile() 
+            setUrlimageperfil(data);  
+        }
+        getImages()
+      }, []);  
     return (
         <div>
             { registercompleted &&
@@ -279,7 +240,7 @@ const Account = ()=>{
                 {envioemail &&
                 <div className={styles.containswitchpassword}>
                   <h2>se a enviado un correo electronico de verificacion a {userdataglobal && userdataglobal.email }</h2>
-                  <p>si no te a llegado el correo pincha aqui</p> <p style={{cursor:"pointer", color:"blueviolet", width:"fint-content"}} onClick={()=>reenviaremail()}> Reenviar </p> {timereenviar && <p>tienes que espera 3 min para reenviar el correo</p>}
+                  <p>si no te a llegado el correo pincha aqui</p> <p style={{cursor:"pointer", color:"blueviolet", width:"fint-content"}} onClick={()=>changeEmail(newemail)}> Reenviar </p> {timereenviar && <p>tienes que espera 3 min para reenviar el correo</p>}
                   </div>}
                 { changepassword &&
                   <div className={styles.containswitchpassword}> 

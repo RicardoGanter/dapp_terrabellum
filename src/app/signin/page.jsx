@@ -62,6 +62,7 @@ const Signin = () => {
   const iniciarSesion = async (req) => {
     req.preventDefault()
     try {
+      console.log(URI)
       const response = await Fetch(`${URI}signin`, 'POST' ,{
         nombre: Nombre,
         contraseña: Contraseña
@@ -70,7 +71,8 @@ const Signin = () => {
       if (response.status === 204) { 
         return setErrorlogin(true)
       }
-      if(response.status === 200){ 
+      if(response.status === 200 &&  data.token ){ 
+        console.log(response, data)
         const cookie = await data.token 
         Cookies.set('token', cookie)
         setErrorlogin(false)  

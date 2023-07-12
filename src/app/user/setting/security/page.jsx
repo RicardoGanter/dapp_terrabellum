@@ -1,14 +1,18 @@
 "use client"
-import {Title} from "../layout"
+import { Title } from "../layout"
 import styles from '../../../../styles/user/setting/security/security.module.scss'
-import QRCode from 'qrcode.react';
-import { useState,useContext } from "react";
-import Cookies from 'js-cookie'
+import QRCode from 'qrcode.react' 
+import { useState,useContext } from "react" 
 import { User_data } from '../../../layout.jsx' 
 import googleauth from '../../../../public/google-authenticator-logo-1.webp'
-import Image from "next/image";
-import { SaveUrl } from "../../../../components/header/header";
-import { Fetch } from "utils/fetch/fetch";
+import Image from "next/image" 
+import { SaveUrl } from "../../../../components/header/header" 
+
+//Fetch data
+import NewTwoFactor from "./services/newTwoFactor"; 
+import DeletedTwoFactor from "./services/deletedTwoFactor";
+import VerifyTwoFactor from "./services/verifyTwoFactor";
+
 const Security = ()=>{
     const [secreturl, setSecreturl] = useState(null)
     const [qrurl, setQrurl] = useState(null)
@@ -16,42 +20,24 @@ const Security = ()=>{
     const [activateauth, setActivateauth] = useState(null)
     const [confirmdeletedgoogleauth, setConfirmdeletedgoogleauth] = useState(false)
     const { userdataglobal, updateuserdataglobal } = useContext(User_data);  
-    const sos = async()=>{
-        const token = Cookies.get('token');  
-        const URIr  = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/"
-        const response = await Fetch(`${URIr}verifytwo`, 'POST' ,{secret: secreturl.toString(), token : twofactorrandom.toString(), id: token.toString()})
-        const data = await response.json()
-        if(response.status == 200){ 
-            const newdata = data
-            const newimage = {...userdataglobal}
-            newimage.two_factor_google = newdata.secret
-            updateuserdataglobal(newimage)
-            Cookies.set('userdata', JSON.stringify(newimage))
-        }
+    const sos = async()=>{  
+        const { getUser } = await VerifyTwoFactor( secreturl, twofactorrandom )  
+        updateuserdataglobal(getUser)
     }   
-        const sas = async()=>{
-        const userdata = Cookies.get('userdata') 
-        const a = JSON.parse(userdata) 
-            const URIr  = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/twofactor" 
-            const response = await Fetch( URIr, 'POST' , { email: a.email})
-            const data = await response.json()
-            if(response){   
-            setSecreturl(data.secret) 
-            return setQrurl(data.otpAuthUrl)
-            }   
-        }
+
+    const sas = async()=>{
+        const {secret, auth} = await NewTwoFactor()   
+        if(secret && auth ){   
+            setSecreturl(secret) 
+            return setQrurl(auth)
+        }   
+    }
         
     const deletedgoogleauth = async ()=>{
-        const token = Cookies.get('token');   
-        const URIr  = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/"
-        const response = await Fetch(`${URIr}deletetwofactor`, 'PUT' ,{ id: token })
-        if(response.status == 200){ 
-            const newimage = {...userdataglobal}
-            newimage.two_factor_google = null
-            updateuserdataglobal(newimage)
-            Cookies.set('userdata', JSON.stringify(newimage))
-        } 
+        const response = await DeletedTwoFactor() 
+        updateuserdataglobal(response)
     }
+
     return(
         <div>
             <SaveUrl name='Security' url="/user/setting/security" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/9.svg"/>
