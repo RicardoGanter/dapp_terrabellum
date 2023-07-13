@@ -1,120 +1,119 @@
-"use client"
-import Image from "next/image";
+"use client";
+// import Image from "next/image";
 import styles from "../../../styles/user/estadistic.module.scss";
-// import imagen from "../../../public/img/lal.webp";
-// import fondoperfil from '../../../public/img/Rectangle.webp'
-// import stars from '../../../public/img/Star.png'
-import { useState,useEffect } from "react";
-import { getSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-// import { getSession } from "next-auth/react";
+// import { useState, useEffect } from "react";
+// import { useRouter } from "next/navigation";
 const Estadistics = () => {
-  // const [user, setUser] = useState(null)
-  // const router = useRouter();
-  // useEffect(()=>{
-  //   (async()=>{
-  //     const session = await getSession()
-  //     if(!session){
-  //       router.push('./signin')
-  //     }
-  //     setUser(session)
-  //   })()
-  // },[])
-  // seguridad de usuario
-  // const session = await getSession()
-
-  // if (!session) return res.status(403).send('No Authenticathe')
   return (
-        <div className={styles.contain}>
-          {/* {user? */}
-          {/* <div className={styles.containestruct}>
-            <div className={styles.group1}> */}
-              {/* <Image 
-              src={imagen} 
-              className={styles.img} 
-              style={{left: 5}}
-              alt="Image icon perfil"
-              /> */}
-              {/* <Image 
-              src={fondoperfil}
-              className={styles.fondo}
-              alt="Fondo perfil"/> */}
-                {/* <div className={styles.fondo}>  
-                  <Image src={stars} alt="start" /> */}
-                {/* </div> */}
-              {/* <Image src={imagen}  */}
-              {/* className={styles.img} 
-              style={{right: 5}}
-              alt="icon lvl"/> */}
-            {/* </div>
-
-            <div className={styles.group2}>
-              <div className={styles.subgroup2}>
-                <p
-                  className={styles.backgrouninfo1}
-                  style={{ borderRadius: ".5rem .5rem 0 0" }}
-                >
-                  Tiempo jugado
-                </p>
-                <p className={styles.backgrouninfo2}>9999999H99M</p>
-                <p className={styles.backgrouninfo1}>Puntaje Total</p>
-                <p className={styles.backgrouninfo2}>999.999.999.999</p>
-              </div>
-              <div className={styles.subgroup2}>
-                <p
-                  className={styles.backgrouninfo1}
-                  style={{ borderRadius: ".5rem .5rem 0 0" }}
-                >
-                  Asesinatos
-                </p>
-                <p className={styles.backgrouninfo2}>999.999.999.999</p>
-                <p className={styles.backgrouninfo1}>Muertes</p>
-                <p className={styles.backgrouninfo2}>999.999.999.999</p>
-              </div>
-              <div className={styles.subgroup2_1}> */}
-                {/* <div>
-                  <p>Personaje Top</p> */}
-                  {/* <Image src={imagen} 
-                  className={styles.imgfrecuente}
-                  alt="img personaje frecuente"/> */}
-                {/* </div>
-                <div>
-                  <p>Arma Top</p> */}
-                  {/* <Image src={imagen} className={styles.imgfrecuente}
-                  alt="img arma frecuente"/> */}
-                {/* </div>
-              </div>
-            </div>
-
-            <div
-              style={{
-                backgroundColor: "#461739",
-                padding: "1rem",
-                height: "auto",
-                margin: "2rem 0",
-                borderRadius: "0 0 4rem 4rem",
-              }}
-            > */}
-              {/* <div></div>
-              <div></div> */}
-            {/* </div>
-          </div> */}
-          {/* : null } */}
+    <>
+      <div className={styles.contain}>
+        <div className={styles.contain_left}>
+          <p className={styles.contain_int_left}>Enzo</p>
+          <p className={styles.contain_down_left}>General</p>
+          <p className={styles.contain_down_left}>More Frequency</p>
+          <p className={styles.contain_down_left}>Bla?</p>
         </div>
+        <div className={styles.contain_right}>
+          <p className={styles.contain_int_right}>Wallet</p>
+          <div className={styles.contain_down_right}>
+            <div className={styles.order}>
+              <p className={styles.contain_down_right_inside}>Appraisement</p>
+              <p className={styles.contain_stars}>
+                4.5
+                <svg
+                  width="35"
+                  height="25"
+                  viewBox="0 0 17 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.1029 5.30198L8.1092 1.37782C8.36671 0.87406 9.11083 0.87406 9.36834 1.37782L11.3746 5.30198L15.8613 5.93512C16.437 6.01636 16.6664 6.69955 16.2497 7.09142L13.0037 10.1438L13.7697 14.456C13.8681 15.0098 13.266 15.4321 12.7509 15.1706L8.73877 13.1335L4.72658 15.1706C4.2115 15.4321 3.60941 15.0098 3.70779 14.456L4.47384 10.1438L1.22788 7.09142C0.811115 6.69955 1.04055 6.01636 1.61621 5.93512L6.1029 5.30198Z"
+                    stroke="yellow"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  width="35"
+                  height="25"
+                  viewBox="0 0 17 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.1029 5.30198L8.1092 1.37782C8.36671 0.87406 9.11083 0.87406 9.36834 1.37782L11.3746 5.30198L15.8613 5.93512C16.437 6.01636 16.6664 6.69955 16.2497 7.09142L13.0037 10.1438L13.7697 14.456C13.8681 15.0098 13.266 15.4321 12.7509 15.1706L8.73877 13.1335L4.72658 15.1706C4.2115 15.4321 3.60941 15.0098 3.70779 14.456L4.47384 10.1438L1.22788 7.09142C0.811115 6.69955 1.04055 6.01636 1.61621 5.93512L6.1029 5.30198Z"
+                    stroke="yellow"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  width="35"
+                  height="25"
+                  viewBox="0 0 17 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.1029 5.30198L8.1092 1.37782C8.36671 0.87406 9.11083 0.87406 9.36834 1.37782L11.3746 5.30198L15.8613 5.93512C16.437 6.01636 16.6664 6.69955 16.2497 7.09142L13.0037 10.1438L13.7697 14.456C13.8681 15.0098 13.266 15.4321 12.7509 15.1706L8.73877 13.1335L4.72658 15.1706C4.2115 15.4321 3.60941 15.0098 3.70779 14.456L4.47384 10.1438L1.22788 7.09142C0.811115 6.69955 1.04055 6.01636 1.61621 5.93512L6.1029 5.30198Z"
+                    stroke="yellow"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  width="35"
+                  height="25"
+                  viewBox="0 0 17 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.1029 5.30198L8.1092 1.37782C8.36671 0.87406 9.11083 0.87406 9.36834 1.37782L11.3746 5.30198L15.8613 5.93512C16.437 6.01636 16.6664 6.69955 16.2497 7.09142L13.0037 10.1438L13.7697 14.456C13.8681 15.0098 13.266 15.4321 12.7509 15.1706L8.73877 13.1335L4.72658 15.1706C4.2115 15.4321 3.60941 15.0098 3.70779 14.456L4.47384 10.1438L1.22788 7.09142C0.811115 6.69955 1.04055 6.01636 1.61621 5.93512L6.1029 5.30198Z"
+                    stroke="yellow"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  width="35"
+                  height="25"
+                  viewBox="0 0 17 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.1029 5.30198L8.1092 1.37782C8.36671 0.87406 9.11083 0.87406 9.36834 1.37782L11.3746 5.30198L15.8613 5.93512C16.437 6.01636 16.6664 6.69955 16.2497 7.09142L13.0037 10.1438L13.7697 14.456C13.8681 15.0098 13.266 15.4321 12.7509 15.1706L8.73877 13.1335L4.72658 15.1706C4.2115 15.4321 3.60941 15.0098 3.70779 14.456L4.47384 10.1438L1.22788 7.09142C0.811115 6.69955 1.04055 6.01636 1.61621 5.93512L6.1029 5.30198Z"
+                    stroke="yellow"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </p>
+            </div>
+            <div className={styles.order}>
+              <p className={styles.contain_down_right_inside}>Time</p>
+              <p className={styles.contain_stars}>12h</p>
+            </div>
+            <div className={styles.order}>
+              <p className={styles.contain_down_right_inside}>Winrate</p>
+              <p className={styles.contain_stars}>60%</p>
+            </div>
+            <div className={styles.order}>
+              <p className={styles.contain_down_right_inside}>Party</p>
+              <p className={styles.contain_stars}>60</p>
+            </div>
+            <div className={styles.order}>
+              <p className={styles.contain_down_right_inside}>Create Account</p>
+              <p className={styles.contain_stars}>24/04/2022</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      ;
+    </>
   );
 };
+
 export default Estadistics;
-// export const getServerSideProps = async(context)=>{
-//     const session = await getSession(context)
-//     if (!session) return{
-//       redirect:{
-//         destination: '/login',
-//         permanent: false
-//       }
-//     }
-//     return{
-//       props:{
-//         session
-//       }
-//     }
-//   }
