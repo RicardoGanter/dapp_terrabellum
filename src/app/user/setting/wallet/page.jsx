@@ -6,7 +6,7 @@ import styles from '../../../../styles/user/setting/wallet/wallet.module.scss'
 import Image from 'next/image.js'
 import metamaskimage from '../../../../public/img/full-metamask-logo.png'   
 import Completed from '../../../../utils/competed/completed.jsx'
-import { SaveUrl } from '../../../../components/header/header.jsx' 
+import { SaveUrl } from '../../../../components/header/header.jsx'  
 
 // Feching
 import { DeleteAddress } from './services/deletedAddress.js'

@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 let validator = true
 
-export const changeEmail = async ( newEmail ) => {
+const changeEmail = async ( newEmail ) => {
   if( validator == true ){
     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'  
   const token = Cookies.get('token');  
@@ -19,3 +19,4 @@ export const changeEmail = async ( newEmail ) => {
     }, 1000 * 25);
   }
 }
+export default changeEmail

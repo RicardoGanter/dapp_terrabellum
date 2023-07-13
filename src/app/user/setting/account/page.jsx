@@ -5,45 +5,26 @@ import {SaveUrl} from '../../../../components/header/header.jsx'
 import { useState, useEffect, useContext } from "react"
 import { User_data } from '../../../layout.jsx'
 import lock from '../../../../public/icon/lock-solid.svg'  
-import Image from "next/image.js" 
-import exit from '../../../../public/icon/xmark-solid.svg'  
-import Cookies from 'js-cookie' 
-import eye from '../../../../public/img/eye-solid.svg'
-import noeye from '../../../../public/img/eye-slash-solid.svg'
-import Completed from "../../../../utils/competed/completed.jsx"
-import { Fetch } from "utils/fetch/fetch.js"
-
-//Feching
-
-import { getImagesProfile } from "./services/getImagesProfile.js"
-import { changeImageProfile } from "./services/changeImageProfile.js"
-import { changePassword } from "./services/changePassword.js"
-import { changeEmail } from "./services/changeEmail.js"
-import { changeName } from "./services/changeName.js"
-
+import Image from "next/image.js"  
+import Completed from "../../../../utils/competed/completed.jsx"   
+import dynamic from "next/dynamic.js"
+const ImagesComponents = dynamic(() => import("./components/images.component.jsx"));
+const ChangePasswordComponent = dynamic(() => import("./components/changePassword.component.jsx")); 
+const ChangeNameComponent = dynamic(() => import("./components/changeName.component.jsx"));  
+import  changeEmail  from "./services/changeEmail.js" 
 
 
 const Account = ()=>{
     const { userdataglobal, updateuserdataglobal } = useContext(User_data);   
-    const [changepassword, setChangepassword] = useState(false)
-    const [contraActual, setContraActual] = useState(null)
-    const [newcontraseña, setNewcontraseña] = useState(null)
-    const [repetnewcontraseña, setRepetnewcontraseña ] = useState(null)
-    const [validationpassword, setValidationpassword] = useState(false)
+    const [changepassword, setChangepassword] = useState(false)   
     const [validationemail, setValidationemail] = useState(false)
-    const [validationname, setValidationname] = useState(false)
+    // const [validationname, setValidationname] = useState(false)
     const [switchname ,setSwitchname] = useState(false)
-    const [newname ,setNewname] = useState(null)
-    const [repetnewname,setRepetnewname] = useState(null)
-    const [invalidpassword, setInvalidpassword] = useState(null)
-    const [eye1, setEye1] = useState(false)
-    const [eye2, setEye2] = useState(false)
-    const [eye3, setEye3] = useState(false)
+    // const [newname ,setNewname] = useState(null)
+    // const [repetnewname,setRepetnewname] = useState(null)
+    // const [invalidpassword, setInvalidpassword] = useState(null) 
     const [ registercompleted , setRegistercompleted] = useState(null)
-    const [editimage, setEditimage] = useState(false)
-    const [activeImage, setActiveImage] = useState(false);
-    const [urlimageperfil, setUrlimageperfil] = useState([])
-    const [switchimageperfil, setSwitchimageperfil]= useState([]) 
+    const [editimage, setEditimage] = useState(false) 
     const [emailnew, setemailnew] = useState(false)
     const [newemail,setNewemail] = useState(null)
     const [repeatnewemail,setRepeatewemail] = useState(null)
@@ -56,43 +37,8 @@ const Account = ()=>{
                 setRegistercompleted(false)
             }, 3000);
         }
-    }
-     const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'  
-       
-     //PASSWORD
-    const switchpassword = async (req)=>{ 
-      req.preventDefault()  
-        if( newcontraseña.lenght< 8 || repetnewcontraseña.lenght< 8 || newcontraseña !=repetnewcontraseña){
-        return console.error('contraseña erronea o menor a 8 caracteres')
-        } 
-      const { response } = await changePassword( contraActual, newcontraseña) 
-      if( response == 204 ){
-        return setInvalidpassword(true)
-      }
-      if( response == 200 ){ 
-        return  clearformpassword()
-      } 
-    }  
-       //NAME 
-       const switch_name = async (req)=>{
-         req.preventDefault() 
-         if( newname != repetnewname && !validationname){
-           return console.error('los emails no coinciden')
-         }
-         const { status, newUser } = await changeName( newname )
-         if( status === 202 ){  
-           return  setInvalidpassword(true)
-         }
-         if( status === 204 ){  
-           console.log("ya cambiaste el nombre del usuario :(") 
-           return  setInvalidpassword(true)
-         }
-         if( status == 200){  
-           updateuserdataglobal(newUser)
-           fregistercompleted()
-           return clearname()
-         }
-       }
+    } 
+         
        // EMAIL
         const switch_email = async (req )=>{
            req.preventDefault()
@@ -110,23 +56,15 @@ const Account = ()=>{
          setRepetnewname(null)
          setSwitchname(null)
          setemailnew(false)
-       }
-       const clearformpassword = ()=>{
-         setChangepassword(false)
-         setRepetnewcontraseña(null)
-         setNewcontraseña(null)
-         setContraActual(null)
-         setInvalidpassword(false)
-       }
-
-       useEffect(()=>{
-         if(repetnewname && repetnewname.length > 0){
-           if( newname != repetnewname ){
-             return setValidationname(false)
-            } 
-             return setValidationname(true)
-         }
-       },[newname, repetnewname])
+       } 
+      //  useEffect(()=>{
+      //    if(repetnewname && repetnewname.length > 0){
+      //      if( newname != repetnewname ){
+      //        return setValidationname(false)
+      //       } 
+      //        return setValidationname(true)
+      //    }
+      //  },[newname, repetnewname])
        useEffect(()=>{ 
          if(repeatnewemail && repeatnewemail.length>0){
            if(newemail!=repeatnewemail){ 
@@ -134,40 +72,7 @@ const Account = ()=>{
          }
            return setValidationemail(true) 
          }
-       },[newemail, repeatnewemail])
-       useEffect(()=>{ 
-         if(repetnewcontraseña && repetnewcontraseña.length>0){
-           if(newcontraseña!=repetnewcontraseña){ 
-           return setValidationpassword(false)
-         }
-           return setValidationpassword(true) 
-         }
-       },[newcontraseña, repetnewcontraseña])
-
-        const changeimage = async (index)=>{   
-          const { newimage } = await changeImageProfile(index)
-          if(newimage){
-            updateuserdataglobal(newimage) 
-            //CORREGIR
-            const imagen = document.getElementById("lol"); 
-            imagen.src = index; 
-            //CORREGIR
-            setEditimage(false) 
-          } 
-         }  
-
-        const handleImageClick = (index) => {
-         setActiveImage(index);
-         setSwitchimageperfil(urlimageperfil[index])  
-       }
-
-       useEffect(() => {
-        const getImages = async () => {
-          const { data } = await getImagesProfile() 
-            setUrlimageperfil(data);  
-        }
-        getImages()
-      }, []);  
+       },[newemail, repeatnewemail])   
     return (
         <div>
             { registercompleted &&
@@ -179,24 +84,8 @@ const Account = ()=>{
             </div> 
             <div className={styles.containinfo}>
                 { editimage &&
-                 <div className={styles.containselectimage}>
-                     <Image src={exit} className={styles.scape}  alt="button exit" onClick={()=>setEditimage(false)}/>
-                     <div className={styles.images}> 
-                       {urlimageperfil && urlimageperfil.map((image, index) => (
-                        <div>
-                            <img
-                          key={index}
-                          className={`${styles.image} ${activeImage === index ? styles.active : ''}`}
-                          src={image}
-                          onClick={() => handleImageClick(index)}
-                          alt="ssssa"
-                        />
-                     { activeImage >=0 && switchimageperfil ? <button onClick={()=>{ changeimage(switchimageperfil) }} className={styles.confirmimage}>Confirm</button> : <button style={{backgroundColor:"gray"}} className={styles.confirmimage}>Confirm</button> }
-                     
-                        </div>
-                        ))} 
-                     </div> 
-                 </div>}
+                <ImagesComponents/>
+                 }
                   <img src={ userdataglobal.image } 
                   className={styles.img} width={200} height={200}  
                   alt='perfil_usuario' onClick={()=> setEditimage(true)}/>
@@ -242,51 +131,11 @@ const Account = ()=>{
                   <h2>se a enviado un correo electronico de verificacion a {userdataglobal && userdataglobal.email }</h2>
                   <p>si no te a llegado el correo pincha aqui</p> <p style={{cursor:"pointer", color:"blueviolet", width:"fint-content"}} onClick={()=>changeEmail(newemail)}> Reenviar </p> {timereenviar && <p>tienes que espera 3 min para reenviar el correo</p>}
                   </div>}
-                { changepassword &&
-                  <div className={styles.containswitchpassword}> 
-                    <form onSubmit={switchpassword}> 
-                        <div className={styles.switchpassword}>
-                          <div style={{position:"relative"}}> 
-                            <div style={{display:"flex"}}>
-                              <p>Current password</p> { invalidpassword && <p className={styles.errortext}>Your password does not match</p> } 
-                            </div>
-                              <input required type={eye1 ? "text" : "password"} value={contraActual} onChange={req => setContraActual(req.target.value)}/><Image width={20} alt="Closed eye" style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye1(!eye1)}} src={eye1? eye : noeye}/>
-                          </div>
-                          <div style={{position:"relative"}}>
-                            <p>New password</p>
-                            <input required type={eye2 ? "text" : "password"} value={newcontraseña} onChange={req=> setNewcontraseña(req.target.value)}/><Image width={20} alt="Closed eye" style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye2(!eye2)}} src={eye2? eye : noeye}/>
-                          </div>
-                         <div style={{position:"relative"}}>
-                         <div style={{display:"flex"}}>
-                            <p>Repeat the new password</p> {!validationpassword && repetnewcontraseña && repetnewcontraseña.length > 0 && <p className={styles.errortext}>Passwords do not match</p>} 
-                         </div>
-                          <input required type={eye3 ? "text" : "password"} value={repetnewcontraseña} onChange={req=> setRepetnewcontraseña(req.target.value)}/> <Image width={20} alt="Closed eye" style={{position:"absolute", bottom:"12px", right:"20px", cursor:"pointer"}} onClick={()=>{setEye3(!eye3)}} src={eye3? eye : noeye}/>
-                         </div>
-                        
-                          <div className={styles.option}>
-                            {validationpassword ? <button type="submit">Acceptar</button>: <button style={{backgroundColor:"gray"}}>accept</button>}   <button onClick={()=>{setChangepassword(false); clearformpassword()}}>Cancel</button>
-                          </div>
-                        </div> 
-                    </form>
-                  </div> }
+                { changepassword && 
+                  <ChangePasswordComponent/>
+                   }
                   {switchname && 
-                  <form className={styles.contain_switchname} onSubmit={switch_name}>
-                    <div> 
-                      <p>Seguro que quieres cambiar el nombre?</p><p>solo puedes hacerlo una vez de manera gratuita!</p>
-                    </div>
-                    <p>New name</p>
-                    <input type="text" value={newname} onChange={req=> setNewname(req.target.value)}/>
-                    <div style={{display:"flex"}}>
-                      <p>Repeat the new name</p> { !validationname && repetnewname && <p className={styles.errortext}>Your name does not match</p> }    
-                    </div>
-                    <input type="text" value={repetnewname}  onChange={req=> setRepetnewname(req.target.value)}/> 
-                    <div style={{display:"flex", justifyContent:"space-around", gap:"1rem"}}>
-                      { validationname && repetnewname ? <button type="submit">Accept</button> : <button style={{backgroundColor:"gray"}}>Accept</button> }
-                      
-                      <button onClick={()=>clearname()}>Cancel</button>
-                      
-                    </div>  
-                  </form>
+                   <ChangeNameComponent/>
                   }
         </div>
     )

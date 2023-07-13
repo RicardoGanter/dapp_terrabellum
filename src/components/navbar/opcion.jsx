@@ -1,14 +1,10 @@
 import Link from 'next/link';
 import styles from '../../styles/navbar/opcion.module.scss'
 import Image from 'next/image';
-import market from '../../public/icon/shop-solid.svg'
-import home from '../../public/icon/house-solid.svg'
 import homefacha from '../../public/icon/Vector (5).svg'
-import scolarship from '../../public/icon/file-signature-solid.svg'
 import scfacha from '../../public/icon/Vector (8).svg'
 import news from '../../public/icon/bullhorn-solid.svg'
 import newsfacha from '../../public/icon/bullhorn-solid 1.svg'
-import glob from '../../public/icon/globe.svg'
 import shield from '../../public/icon/WARRIOR.png'
 import { useState } from 'react';
 import marketfacha from '../../public/icon/Vector (7).svg'

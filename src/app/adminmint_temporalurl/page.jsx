@@ -54,19 +54,20 @@ const Admin_mint_temporal = () => {
     req.preventDefault()
     try { 
       const response = await Fetch(`${URI}iniciarSesion_admin`, 'POST' ,{nombre: Nombre,contraseña: Contraseña})
-
+      const userAdmin = await response.json()
       if (response.status === 204) { 
         setErrorlogin(true)
       }
-      if(response.status === 200 && response.token){
-        const cookie = await response.token  
+      if(response.status === 200 && userAdmin.token){
+        const cookie = await userAdmin.token  
         Cookies.set('token_admin_mint', cookie)
         setErrorlogin(false)  
+        console.log("lol")
         return  window.location.reload()
       }
-      if(response.status === 200 && response.twofactor){
-        console.log(response.twofactor)
-        setTwofactor(response.twofactor)
+      if(response.status === 200 && userAdmin.twofactor){
+        console.log(userAdmin.twofactor)
+        setTwofactor(userAdmin.twofactor)
       }
     } catch (error) {
         // router.push('/');

@@ -5,9 +5,11 @@ import Cookies from "js-cookie";
 
 const URI = 'http://localhost:8000/usuarios/' 
 
-export const changePassword = async ( currentPassword , newPassword )=>{
+ const changePassword = async ( currentPassword , newPassword )=>{
     // preventDefault()   
     const token = Cookies.get('token');   
     const response = await Fetch(`${URI}switchpassword`, 'PUT' , { id : token, contraseña: currentPassword , newcontraseña: newPassword  });  
     return { response : response.status }
   } 
+
+  export default changePassword

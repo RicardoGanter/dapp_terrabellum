@@ -15,12 +15,12 @@ const Createnextmint = ()=>{
               let i = 1;  
               const fetchImage = async () => {  
                 const response = await Fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Jsoncharacters/${i}.json`, 'GET')
+                const containName = await response.json() 
                 if (response.status === 403) {
                   return false;
                 }  
-                 data.push( { name :response.name , idnft : i });
-                 
-                i++;
+                 data.push( { name : containName.name , idnft : i }); 
+                i++; 
                 return true;
             };   
               let shouldContinue = await fetchImage(); 
@@ -56,7 +56,9 @@ const Createnextmint = ()=>{
     } 
     const mintnft =async ()=>{ 
             const token = Cookies.get('token_admin_mint')   
-            const response = await Fetch('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/insertnfttanda', 'POST' , { id: token, data: Nftdataventa }) 
+            const response = await Fetch('http://localhost:8000/usuarios/insertnfttanda', 'POST' , { id: token, data: Nftdataventa }) 
+            const a = await response.json()
+            console.log(a)
             if(response.status == 200){  
                 setNftdataventa([])
                 setCompleted(true)
@@ -71,11 +73,11 @@ const Createnextmint = ()=>{
                 { dataname && dataname.length > 0 && dataname.map( (data, index) =>
                     <div className={styles.containnftdata} onClick={()=>arraydatanft(data)}> 
                         <p>{data.name}</p> 
-                        {/* <div className={styles.containtanda}>
+                        <div className={styles.containtanda}>
                             { data.tanda <= 3 && <p className={`${styles.tanda} ${styles.tandalegendary}`}>{data.tanda}</p> }
                             { data.tanda <= 6 && <p className={`${styles.tanda} ${styles.tandarare}`}>{data.tanda}</p>}
                             <p className={`${styles.tanda} ${styles.tandacommon}`}>{data.tanda}</p>
-                        </div>  */}
+                        </div> 
                     </div>
                 ) }
             </div>

@@ -4,8 +4,9 @@ import Cookies from "js-cookie";
 
 const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'  
 
-export const changeImageProfile = async (index) => {  
+const changeImageProfile = async (index) => {  
     const token = Cookies.get('token'); 
+    console.log("lol")
     const userdata = Cookies.get('userdata') 
     const data = JSON.parse( userdata )  
     const response = await Fetch(`${URI}switch_image`, 'PUT' ,{ id: token, newimage: index })
@@ -16,9 +17,8 @@ export const changeImageProfile = async (index) => {
      
       const newimage = {...data}
       newimage.image = index 
-      Cookies.set('userdata', JSON.stringify(newimage)) 
-      
-      return { newimage }
-      // return  window.location.reload()
+      Cookies.set('userdata', JSON.stringify(newimage))  
+      return { newimage } 
     } 
    } 
+   export default changeImageProfile

@@ -5,7 +5,7 @@ import Option from '../components/navbar/opcion'
 // import Loading from './loading'
 // import { Suspense } from 'react'
 // import { SessionProvider } from 'next-auth/react'
-import { createContext, useState } from 'react'; 
+import { createContext, useState, useEffect } from 'react'; 
 export  const MyContext = createContext();
 export  const User_data = createContext();
 export default function RootLayout({
@@ -17,7 +17,39 @@ export default function RootLayout({
     setSharedVariable(newValue);
   }; 
 
-
+  useEffect(()=>{
+    if(window.caches){   
+      const currentUrl = window.location.href; 
+      const deletedText = "http://localhost:3000"
+      const nuevoString = currentUrl.replace(deletedText, ''); 
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register("/")
+          .then((registration) => console.log('scope is: ', registration.scope));
+      }
+      const installEvent = () => {
+        self.addEventListener('install', () => {
+          console.log('service worker installed');
+        });
+      };
+      installEvent(); 
+      const activateEvent = () => {
+        self.addEventListener('activate', () => {
+          console.log('service worker activated');
+        });
+      };
+      activateEvent();
+      const Cache = async ()=>{ 
+          const cachestest = await caches.open("v2") 
+          if(cachestest){ 
+            cachestest.addAll([
+              nuevoString, 
+            ])
+          }
+      } 
+      Cache()
+      }
+},[])
   const [userdataglobal, setUserdataglobal] = useState('asdasdasd');
   const updateuserdataglobal = (newValue ) => {
     setUserdataglobal(newValue);

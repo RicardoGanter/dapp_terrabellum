@@ -1,6 +1,5 @@
 import { Fetch } from "utils/fetch/fetch";
- 
-export const getImagesProfile = async () => {
+const getImagesProfile = async () => {
     try {
       const data = [];
       //ARREGLAR EL i , puede ser problema de CORS o WAF DE aws
@@ -26,3 +25,5 @@ export const getImagesProfile = async () => {
       console.error('Error al obtener los datos:', error);
     }
   }; 
+   
+export default getImagesProfile

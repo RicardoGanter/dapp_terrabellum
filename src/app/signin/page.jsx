@@ -62,11 +62,11 @@ const Signin = () => {
   const iniciarSesion = async (req) => {
     req.preventDefault()
     try {
-      console.log(URI)
       const response = await Fetch(`${URI}signin`, 'POST' ,{
         nombre: Nombre,
         contraseña: Contraseña
       }); 
+      console.log(response)
       const data = await response.json() 
       if (response.status === 204) { 
         return setErrorlogin(true)

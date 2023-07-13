@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'  
 
-export const changeName = async ( newname ) => {
+const changeName = async ( newname ) => {
   const token = Cookies.get('token');   
   const userdata = Cookies.get('userdata') 
   const newUser = JSON.parse( userdata )  
@@ -17,3 +17,5 @@ export const changeName = async ( newname ) => {
     return { status : response.status , newUser }
   }
 }
+
+export default changeName
