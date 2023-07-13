@@ -5,8 +5,7 @@ import Cookies from "js-cookie";
 const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'  
 
 const changeImageProfile = async (index) => {  
-    const token = Cookies.get('token'); 
-    console.log("lol")
+    const token = Cookies.get('token');  
     const userdata = Cookies.get('userdata') 
     const data = JSON.parse( userdata )  
     const response = await Fetch(`${URI}switch_image`, 'PUT' ,{ id: token, newimage: index })

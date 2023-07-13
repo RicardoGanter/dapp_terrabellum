@@ -59,8 +59,9 @@ export default function RootLayout({
   return (
     <html lang="en">
        <head>
-         <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp"/>
+        <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp"/>
         <title>Terrabellum</title>
+        <meta name = "description" content = "Learning about Meta Tags." />
       </head>
       <MyContext.Provider value={{ sharedVariable, updateSharedVariable }}>
         <User_data.Provider value={{userdataglobal ,updateuserdataglobal }} > 

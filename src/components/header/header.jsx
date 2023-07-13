@@ -185,7 +185,7 @@ const Header = () => {
         <div className={styles.lal}> 
           <nav className={styles.navbarcontain}>
           <div className={styles.logotb} >
-            <Image src={logo} width={70}/> 
+            <Image src={logo} alt="Terra Bellum abbreviated icon" width={70}/> 
             {/* <Image src={search} className={styles.imagesearch}/> */}
             {/* <input placeholder="Search" className={styles.search} />  */}
           </div>  

@@ -5,13 +5,12 @@ import { GetUserData } from 'utils/GetLocalStorage/getUserData';
 import { useRouter } from 'next/navigation'; 
 
 const User = ( {children}) => { 
-  const router = useRouter()
-    // const [user, setUser] = useState(null) 
+  const router = useRouter() 
     const { userdataglobal, updateuserdataglobal } = useContext(User_data); 
     
     useEffect(()=>{  
-    const getUserStorage = async () => {
-    const { data } = await GetUserData()
+    const getUserStorage = async () => { 
+    const { data } = await GetUserData() 
     if( !data ){
       return router.push('/')
     }
