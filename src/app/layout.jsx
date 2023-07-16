@@ -59,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en">
        <head>
-        <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp"/>
+        <link rel="shortcut icon" href="https://d2qjuqjpn9e4f.cloudfront.net/logo.webp"/>
         <title>Terrabellum</title>
         <meta name = "description" content = "Learning about Meta Tags." />
       </head>

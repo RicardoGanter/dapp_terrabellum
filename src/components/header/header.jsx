@@ -216,4 +216,4 @@ export default Header;
 
 
 
-// target="blank" href={"https://terrabellum.s3.sa-east-1.amazonaws.com/TBOF.zip"}
+// target="blank" href={"https://d2qjuqjpn9e4f.cloudfront.net/TBOF.zip"}

@@ -113,11 +113,7 @@ function DestinationPage({params}) {
       </div>
 
       <div   className={styles.containcharacterinfo} >
-        <div className={styles.Character}>
-          {/* { Sales && Sales.name == "Aifos" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/AIFOS_prot_a.png"}/> }
-          { Sales && Sales.name == "Capitan Union" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/capitan_Tango_D.png"}/> }
-          { Sales && Sales.name == "Red Spectre" && <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/personajestb/Ejemplo1..png"}/> } */}
-    
+        <div className={styles.Character}>  
         <h2 className={styles.idnft}>ID # {id}</h2>  
         <div className={styles.nft}>
           <button onClick={()=>back()} className={styles.back}>Back</button>

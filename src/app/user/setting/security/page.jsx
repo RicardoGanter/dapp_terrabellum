@@ -40,7 +40,7 @@ const Security = ()=>{
 
     return(
         <div>
-            <SaveUrl name='Security' url="/user/setting/security" imagen="https://terrabellum.s3.sa-east-1.amazonaws.com/Iconurl/9.svg"/>
+            <SaveUrl name='Security' url="/user/setting/security" imagen="https://d2qjuqjpn9e4f.cloudfront.net/Iconurl/9.svg"/>
             <Title title={"Security account"}/>
             <div className={styles.containsecurityoption}> 
             <h2>Two factor</h2>

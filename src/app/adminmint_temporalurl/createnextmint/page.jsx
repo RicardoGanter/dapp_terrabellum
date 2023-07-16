@@ -14,7 +14,7 @@ const Createnextmint = ()=>{
               const data = []; 
               let i = 1;  
               const fetchImage = async () => {  
-                const response = await Fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Jsoncharacters/${i}.json`, 'GET')
+                const response = await Fetch(`https://d2qjuqjpn9e4f.cloudfront.net/Jsoncharacters/${i}.json`, 'GET')
                 const containName = await response.json() 
                 if (response.status === 403) {
                   return false;

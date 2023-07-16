@@ -5,7 +5,7 @@ const getImagesProfile = async () => {
       //ARREGLAR EL i , puede ser problema de CORS o WAF DE aws
       let i = 6;  
       const fetchImage = async () => {
-        const response = await Fetch(`https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/Imagen_perfil/${i}.webp`, 'GET'); 
+        const response = await Fetch(`https://d2qjuqjpn9e4f.cloudfront.net/Imagen_perfil/Imagen_perfil/${i}.webp`, 'GET'); 
         if (response && response.status === 403) {
           return false;
         }  

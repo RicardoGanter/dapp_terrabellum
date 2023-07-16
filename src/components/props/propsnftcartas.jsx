@@ -31,7 +31,7 @@ const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, habi
         <div className={styles.contain}>
           { image ? <img src={image}  alt={`image from ${name}`} className={styles.nft}/>     
                   : <div style={{backgroundColor:"black", opacity:"90%"}}> 
-                      <img src={"https://terrabellum.s3.sa-east-1.amazonaws.com/imagencharacter/unknow.jpg"}
+                      <img src={"https://d2qjuqjpn9e4f.cloudfront.net/imagencharacter/unknow.jpg"}
                       style={{opacity:"50%"}} alt={`image from ${name}`} className={styles.nft}/> 
                     </div>    
           }
