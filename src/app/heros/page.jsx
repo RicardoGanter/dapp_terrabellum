@@ -2,7 +2,8 @@
 import styles from '../../styles/heros/heros.module.scss'  
 import { useState,useEffect } from 'react' 
 import { Fetch } from 'utils/fetch/fetch'
-
+import cofre from './cofre (1).webp'
+import Image from 'next/image'
 // Fetching
 import  mintNft  from './services/mintNft'
 // Functions
@@ -56,7 +57,7 @@ const Heros = ()=>{
               <div className={styles.rectangle_absolute_h} style={{bottom:8}}/>
 
               <div className={styles.boxhero}>
-                  <img src='https://d2qjuqjpn9e4f.cloudfront.net/cofre.webp' alt="vault" className={styles.vault} />
+                  <Image src={cofre} alt="vault" className={styles.vault} />
                   <div className={styles.contain_pricebuy}>
                       <div className={styles.price}>Price</div>
                       <div className={styles.valor}>100 USDT</div>
