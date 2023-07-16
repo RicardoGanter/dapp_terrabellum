@@ -56,7 +56,7 @@ const Heros = ()=>{
               <div className={styles.rectangle_absolute_h} style={{bottom:8}}/>
 
               <div className={styles.boxhero}>
-                  <img src='https://terrabellum.s3.sa-east-1.amazonaws.com/cofre.webp' alt="vault" className={styles.vault} />
+                  <img src='https://d2qjuqjpn9e4f.cloudfront.net/cofre.webp' alt="vault" className={styles.vault} />
                   <div className={styles.contain_pricebuy}>
                       <div className={styles.price}>Price</div>
                       <div className={styles.valor}>100 USDT</div>
