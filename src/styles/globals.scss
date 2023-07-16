@@ -40,11 +40,11 @@ body{
 }
 
 ::view-transition-new(mondongoss) {   
-  animation: tobottomm 1.6s normal;  
+  animation: tobottomm 1.3s normal;  
   position: fixed !important;   
 }
 ::view-transition-old(mondongoss){  
-  animation: lolsito  1.6s normal;  
+  animation: lolsito  1.3s normal;  
   position: fixed !important;  
 } 
 @keyframes lolsito {
@@ -52,7 +52,7 @@ body{
     opacity: 1; 
     position: fixed !important;  
   } 
- 50%{
+ 20%{
     opacity: 1;
   }
  100% {   
@@ -64,7 +64,7 @@ body{
     opacity: 0; 
     position: fixed !important;  
   }
-  50%{
+  80%{
     opacity: 0;
   }
   100%{ 

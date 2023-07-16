@@ -1,5 +1,5 @@
 import { useState , useEffect } from "react"
-import styles from '../../../../../styles/user/setting/account/account.module.scss' 
+import styles from '../../../../../styles/user/setting/account/components/changeName.module.scss' 
 import changeName from "../services/changeName"
 
 const ChangeNameComponent = () => {

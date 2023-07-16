@@ -30,22 +30,26 @@
     height: 60px;
     box-sizing: border-box; 
     align-items: center;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.19);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.40);
   }
   .containsavedata{
     display: flex; 
     justify-content: flex-start; 
-    box-shadow: 0px 3px 3px #5757578c;
-    padding: .2rem; 
+    box-shadow: 0px 3px 5px #5757578c;
+    padding: 0 0 .2rem 0; 
+    gap: 1rem;
     .urlsaveimage{
       display: flex;
       align-items: center;
       justify-content: center;  
       text-decoration: none;  
+      padding: .1rem 1rem; 
+      background-color: $color_bg; 
+      border-radius: 0 0 10px 10px;
       img{
-        margin: 0 1rem;
+        margin: 0 .3rem 0 0;
       }
-     
+      
     }
     .urlsaveimage:hover{
       background-color: rgb(41, 41, 41);

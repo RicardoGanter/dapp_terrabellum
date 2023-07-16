@@ -30,13 +30,13 @@ const Opcion = ()=>{
                     <Image className={styles.test} src={ homee ? homefacha : homefacha} width={30} style={{margin: " 0 1rem"}} alt='Home'/>
                         <p className={styles.rutes}> Home </p>  </Link>
 
-                    <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/noticias'} className={styles.option}> 
+                    {/* <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/noticias'} className={styles.option}> 
                     <Image className={styles.test} src={news ? newsfacha : newsfacha} width={30} style={{margin: " 0 1rem"}} alt='News'/>
                         <p className={styles.rutes}> News </p> </Link>
                     <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null}  href={'/cambiame'} className={styles.option}>
                     <Image className={styles.test} src={newss ? scfacha : scfacha} width={30} style={{margin: " 0 1rem"}} alt='scolarships'/> 
                         <p className={styles.rutes}>Clan</p>
-                        </Link>
+                        </Link> */}
                     <Link onClick={()=>{clearstyles(); setMarket(true)}} style={markets ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/market'}className={styles.option}> 
                     <Image className={styles.test} src={markets ? marketfacha : marketfacha} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p className={styles.rutes}>Market</p></Link>

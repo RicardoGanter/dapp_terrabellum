@@ -33,23 +33,23 @@ const Wallet = () =>{
       } 
     }
      
-      const connectMetamask = async ()=>{  
-          const { newAddress } = await connectWallet()
-          if(newAddress){  
-            fregistercompleted() 
-            return updateuserdataglobal(newAddress) 
-          }  
-      }   
-      const Wallets = ()=>{
-        return( 
-            <div className={styles.wallet}>
-                <Image alt="Image_wallet" src={metamaskimage}  height={40}/> 
-                <div>
-                    { userdataglobal.address_metamask ?<div className={styles.wallet}><h2>{userdataglobal.address_metamask.toString()}</h2> <button onClick={()=>setConfirmdeleted(true)} >Deleted </button> </div>  
-                    : <button onClick={()=>{connectMetamask()}}> Connect Wallet</button> }
-                </div>  
-            </div> 
-        )} 
+    const connectMetamask = async ()=>{  
+        const { newAddress } = await connectWallet()
+        if(newAddress){  
+          fregistercompleted() 
+          return updateuserdataglobal(newAddress) 
+        }  
+    }   
+    const Wallets = ()=>{
+      return( 
+          <div className={styles.wallet}>
+              <Image alt="Image_wallet" src={metamaskimage}  height={40}/> 
+              <div>
+                  { userdataglobal.address_metamask ?<div className={styles.wallet}><h2>{userdataglobal.address_metamask.toString()}</h2> <button onClick={()=>setConfirmdeleted(true)} >Deleted </button> </div>  
+                  : <button onClick={()=>{connectMetamask()}}> Connect Wallet</button> }
+              </div>  
+          </div> 
+      )} 
         
     return( 
         <div>
@@ -64,18 +64,18 @@ const Wallet = () =>{
                 <div className={styles.wallets}>
                     <Wallets/>
                     {/* <Wallets/>  */}
-                    {confirmdeleted ? 
-                  <div className={styles.containconfirmdelete}> 
-                    <div>
-                      <h2>Realmente quiere eliminar el address ?</h2>
-                      <h2>Recuerda que no podras utilizar tus nfts en el metaverso de Terrabellum una vez eliminado el address</h2>
-                    </div> 
-                    <div style={{display:"flex", justifyContent:"center", gap:"1rem"}}>
-                      <button onClick={()=> DeleteAddressMetamask()}>Accept</button>
-                      <button onClick={()=>{setConfirmdeleted(false)}}>Cancel</button>
-                    </div> 
-                  </div> 
-                : null}
+                    {confirmdeleted && 
+                      <div className={styles.containconfirmdelete}> 
+                        <div>
+                          <h2>Realmente quiere eliminar el address ? </h2>
+                          <h2>Recuerda que no podras utilizar tus nfts en el metaverso de Terrabellum una vez eliminado el address</h2>
+                        </div> 
+                        <div style={{display:"flex", justifyContent:"center", gap:"1rem"}}>
+                          <button onClick={()=> DeleteAddressMetamask()}>Accept</button>
+                          <button onClick={()=>{setConfirmdeleted(false)}}>Cancel</button>
+                        </div> 
+                      </div> 
+                    }
                 </div>
             </div>
         </div>

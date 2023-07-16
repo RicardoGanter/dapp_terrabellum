@@ -1,17 +1,15 @@
-import NetworkGoerliEth from "components/funcion/network";
 import ConnectInnomicNft from "components/funcion/connectinnomicnft";
 import { Fetch } from "utils/fetch/fetch";
 
-export const mintNft = async ()=>{
+const mintNft = async ()=>{
     try{
-        const signer = await NetworkGoerliEth();
-        const address = await signer.getAddress();
+        const getAddress = window.ethereum.selectedAddress 
         const contract = await ConnectInnomicNft(); 
         const URI = await Fetch('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/Mintt', 'GET')
         const numberNft = await URI.json() 
         const propability = numberNft.message
         if(propability){  
-            const mint = await contract._mintTokenAllowedToEarn(address,propability,{
+            const mint = await contract._mintTokenAllowedToEarn(getAddress,propability,{
                 value: BigInt(10000000000000000),
                 gasLimit: 1000000
               });
@@ -24,3 +22,5 @@ export const mintNft = async ()=>{
         console.log(error);
     }
   }
+
+  export default mintNft

@@ -1,5 +1,5 @@
 import { useState , useEffect } from "react"
-import styles from '../../../../../styles/user/setting/account/account.module.scss' 
+import styles from '../../../../../styles/user/setting/account/components/changePassword.module.scss' 
 import changePassword from "../services/changePassword"
 import eye from '../../../../../public/img/eye-solid.svg'
 import noeye from '../../../../../public/img/eye-slash-solid.svg'

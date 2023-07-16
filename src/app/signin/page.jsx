@@ -4,7 +4,6 @@ import styles from '../../styles/signin/signin.module.scss'
 import Image from 'next/image'
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation'; 
-// import { useSession } from 'next-auth/react';
 import { signIn } from "next-auth/react"
 import back from '../../public/icon/circle-arrow-left-solid.svg'
 import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx"

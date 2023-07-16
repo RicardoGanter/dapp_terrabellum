@@ -1,0 +1,28 @@
+@import '../../../../var.module';
+
+.contain_switchname{
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: $color_bg;
+    padding: 3rem 2rem;
+    gap: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), inset 0px 0px 55px 10px rgba(0, 0, 0, 0.1);
+    p{
+        text-align: start; 
+    }
+    button{
+        width: 100%
+    }
+    input{
+        padding: .7rem 1rem;
+        box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.errortext{
+    color: rgb(233, 23, 23);
+}

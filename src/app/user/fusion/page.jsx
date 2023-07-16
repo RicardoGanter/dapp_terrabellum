@@ -3,33 +3,23 @@ import styles from "../../../styles/user/fusion/fusion.module.scss";
 import { useEffect,useState } from "react";
 import PropsNftcartas from "../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
-import NetworkGoerliEth from "../../../components/funcion/network";
-import { getSession } from "next-auth/react";
-import { useRouter } from "next/navigation" 
-import Cookies from 'js-cookie'; 
+import NetworkGoerliEth from "../../../components/funcion/network";    
 import { SaveUrl } from "../../../components/header/header";
 import Image from "next/image";
 import arrowiconleft from '../../../public/🦆 icon _fast arrow left_.svg'
-import borrar from '../../../public/Group 268 (1).svg' 
+import borrar from '../../../public/Group 268 (1).svg'  
+import upgradeNft from "./services/upgradeNft";
+import downgradeNft from "./services/downgradeNft";
 
-const Fusion = () => {
-  // const [merge, setMerge] = useState(false)
-  const [nfts, setNfts] = useState([]);
-  const [characteristics, setCharacteristics] = useState(null);
-  const [unmerge, setUnmerge] = useState(null)
+const Fusion = () => { 
+  const [nfts, setNfts] = useState([]); 
   const [nfttomerge, setNfttomerge] = useState([]);
-  const [unmergechildrens, setUnmergechildrens] = useState([])
-  const [aw, setaw] = useState(null)
+  const [unmergechildrens, setUnmergechildrens] = useState([]) 
   const [probability, setProbability] = useState(null)
   const [filterlevel, setFilterlevel] = useState(null)
   const [filtercharacters, setFiltercharacters] = useState("")
-  const [filterRarity, setFilterRarity] = useState(null)
-  const [showUnmergeData, setShowUnmergeData] = useState(false);
-  const [user, setUser] = useState(null)
-  const router = useRouter();
-  const [userInno, setUserInno] = useState(null) 
-  const [lal,setlal]= useState()
-  const [verificadorselector,setverificadorselector] = useState([])
+  const [filterRarity, setFilterRarity] = useState(null)  
+  const [lal,setlal]= useState() 
 
 
   useEffect(() => {
@@ -81,30 +71,18 @@ const Fusion = () => {
   ( filterRarity > 0 ? nft.metadata.rarity == filterRarity : true )
     
   )
-   //-----------------------------------------------Filter-----------------------------------------------
-  // if(unmerge){
-  //   if(nfttomerge.length > 1){
-  //     console.log("aaaaaaaaa", unmerge.length)
-  //     setNfttomerge([])
+   //-----------------------------------------------Filter-----------------------------------------------  
+  // useEffect(()=>{
+  //   if(nfttomerge.length===3){
+  //     seleccionarNumeroConProbabilidad(nfttomerge[0][0].hability1 ,nfttomerge[1][0].hability1,nfttomerge[2][0].hability1)
+  //     if(probability){  
+  //       const arrayOrdenado = probability.sort((a, b) => b - a);
+  //       const dosNumerosMasAltos = arrayOrdenado.slice(0, 2);
+  //       // console.log(dosNumerosMasAltos)
+  //       // setProbability()
+  //     }
   //   }
-  // }
-  // if( nfttomerge.length > 0 ){
-  //   if(unmerge ){
-  //     console.log("aaaaaaaaavvvvvvvvvvvvvvvv", nfttomerge.length)
-  //     setUnmerge(null)
-  //   }
-  // }
-  useEffect(()=>{
-    if(nfttomerge.length===3){
-      seleccionarNumeroConProbabilidad(nfttomerge[0][0].hability1 ,nfttomerge[1][0].hability1,nfttomerge[2][0].hability1)
-      if(probability){  
-        const arrayOrdenado = probability.sort((a, b) => b - a);
-        const dosNumerosMasAltos = arrayOrdenado.slice(0, 2);
-        // console.log(dosNumerosMasAltos)
-        // setProbability()
-      }
-    }
-  },[nfttomerge])
+  // },[nfttomerge])
   
   // useEffect(()=>{
   //   setaw(unmergechildrens)
@@ -181,58 +159,7 @@ const removeItem = (index) => {
   updatedData.splice(index, 1);
   setNfttomerge(updatedData);
   return setlal(false)
-};
-
-  const downgradenft = async ( id ) =>{
-  const contract = await ConnectInnomicNft()
-  await contract.downgrade(id)
-  setNfttomerge([]) 
-  }
-
-  const upgradenft = async ( id ) =>{ 
-    const data = []
-    if (id.length === 3){
-      id.map((a)=>{
-        data.push(a[1]) 
-      })
-    }
-    // const array = []
-    if(data.length>2){ 
-      const probabilidad = (seleccionarNumeroConProbabilidad(id[0][0].hability1,id[1][0].hability1,id[2][0].hability1)) 
-      if(probabilidad){
-        const randomNumber = Math.floor(Math.random() * 3); 
-        const contract = await ConnectInnomicNft()
-        await  contract.upgrade(data[0],data[1],data[2], randomNumber ) 
-        setNfttomerge([]) 
-      } 
-    }
-  }
-  function seleccionarNumeroConProbabilidad(...valores) {
-    const total = valores.length; // Obtener el total de valores
-  
-    // Calcular la probabilidad de cada valor
-    const probabilidades = valores.reduce((prob, valor) => {
-      prob[valor] = (prob[valor] || 0) + 1;
-      return prob;
-    }, {});
-  
-    for (const valor in probabilidades) {
-      probabilidades[valor] = ((probabilidades[valor] / total) * 100).toFixed(2) + "%";
-    }
-  
-    setProbability(Object.values(probabilidades)); // Actualizar el estado con las probabilidades
-  
-    const valoresProbabilidad = Object.values(probabilidades); // Obtener los valores del objeto
-    const totalProbabilidad = valoresProbabilidad.reduce((sum, prob) => sum + parseFloat(prob), 0); // Utilizar parseFloat para convertir los porcentajes en números
-    let acumulativo = 0;
-    const rand = Math.random() * totalProbabilidad;
-    for (let i = 0; i < valoresProbabilidad.length; i++) {
-      acumulativo += parseFloat(valoresProbabilidad[i]); // Utilizar parseFloat para convertir los porcentajes en números
-      if (rand <= acumulativo) {
-        return Object.keys(probabilidades)[i]; // Retorna la clave seleccionada
-      }
-    }
-  }   
+};  
 
   if(nfttomerge.length === 1 && !lal){ 
     setFilterlevel(nfttomerge[0][0].level)
@@ -316,7 +243,7 @@ const removeItem = (index) => {
               <div className={styles.containfusionnft}  > 
                 {/* <h1>From</h1> */}
                 <div style={{display:"flex"}}> 
-                { nfttomerge &&  nfttomerge.length>0 && nfttomerge.length < 4 ? nfttomerge.map((nfttomerge,index) => 
+                { nfttomerge &&  nfttomerge.length>0 && nfttomerge.length < 4 && nfttomerge.map((nfttomerge,index) => 
                   <div className={styles.blabla} onClick={ ()=> removeItem(index)}> 
                     <PropsNftcartas  
                       level={nfttomerge[0].level}
@@ -329,19 +256,7 @@ const removeItem = (index) => {
                   
 
                   </div> 
-                )
-                
-                 :showUnmergeData && aw && aw.length == 3 ? aw.map((a) => 
-                 <PropsNftcartas 
-                      level={a.metadata.level}
-                      name={a.metadata.name}
-                      image={a.metadata.image}
-                      Rare={a.metadata.rarity}
-                      hability1={a.metadata.hability1}
-                      hability2={a.metadata.hability2}
-                      hability3={a.metadata.hability3}/> 
-                  )
-                  : null
+                )  
                  }
                  {nfttomerge.length == 0 ?  
                  <div style={{display:"flex"}}>
@@ -359,25 +274,10 @@ const removeItem = (index) => {
                  <PropsNftcartas height={370} Rare="normal" name={"null"}/> 
                 </div> 
                  : null }
-</div>
+              </div>
               </div>
 
              {  nfttomerge.length ===3 ||  nfttomerge.length ===1 && nfttomerge[0][0].level >= 2? <Image src={arrowiconleft} height={70} className={`${styles.fusionreadyarrow} ${styles.activefusionarrow}`} /> :  <Image className={styles.fusionreadyarrow} src={arrowiconleft} height={70} />  }
-              {/* { nfttomerge.length ===1 && nfttomerge[0][0].level >= 2 &&
-                <div className={styles.containdefusionnft}> 
-                <div className={styles.containinfo} >
-                  { unmergechildrens && unmergechildrens.map((a) => 
-                 <PropsNftcartas 
-                      level={a.metadata.level}
-                      name={a.metadata.name}
-                      image={a.metadata.image}
-                      Rare={a.metadata.rarity}
-                      hability1={a.metadata.hability1}
-                      hability2={a.metadata.hability2}
-                      hability3={a.metadata.hability3}/> )}
-                </div> 
-                <button onClick={()=> downgradenft(nfttomerge[0][1])}>Defusion</button>
-              </div>} */}
               { nfttomerge.length === 3 ?  
                   <div className={styles.containprobabilidadfusion} > 
                   {/* <h1>To</h1> */}
@@ -398,7 +298,7 @@ const removeItem = (index) => {
                       </div> 
                     </div>
                     
-                     <button onClick={()=> upgradenft(nfttomerge)}>Fusion</button>
+                     <button onClick={()=> {upgradeNft(nfttomerge); setNfttomerge([]) }}>Fusion</button>
                   </div>
                   : nfttomerge.length ===1 && nfttomerge[0][0].level >= 2 ?
                   <div className={styles.containdefusionnft}> 
@@ -413,7 +313,7 @@ const removeItem = (index) => {
                         hability2={a.metadata.hability2}
                         hability3={a.metadata.hability3}/> )}
                   </div> 
-                  <button onClick={()=> downgradenft(nfttomerge[0][1])}>Defusion</button>
+                  <button onClick={()=> {downgradeNft(nfttomerge[0][1]); setNfttomerge([]) }}>Defusion</button>
                 </div> :  
                    <div className={styles.nonfts}>
                   <div className={styles.containnonft}></div>
@@ -423,15 +323,6 @@ const removeItem = (index) => {
                     </div>
                 </div>
                   }
-                  {/* {nfttomerge.length === 0 || nfttomerge.length && 
-                  <div className={styles.nonfts}>
-                    <div className={styles.containnonft}></div>
-                      <div> 
-                        <button>Defusion</button>
-                        <button>Fusion</button>
-                      </div>
-                  </div>
-                  } */}
             </div> 
             </div>
             {/* TOP */} 

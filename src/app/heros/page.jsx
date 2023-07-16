@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react'
 import { Fetch } from 'utils/fetch/fetch'
 
 // Fetching
-import { mintNft } from './services/mintNft'
+import  mintNft  from './services/mintNft'
 // Functions
 import { calculateProbability } from './utils/probability'
 

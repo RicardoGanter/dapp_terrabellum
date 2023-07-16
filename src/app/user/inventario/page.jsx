@@ -5,10 +5,8 @@ import styles from '../../../styles/navbar/market/opcmarket.module.scss'
 import PropsNftcartas from "../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
 import NetworkGoerliEth from "../../../components/funcion/network";
-import Barrafiltros from "../../../components/navbar/market/opcion_market";
-import Link from 'next/link'
-import ReactSlider from 'react-slider'
-import { getSession } from "next-auth/react";
+// import Barrafiltros from "../../../components/navbar/market/opcion_market"; 
+import ReactSlider from 'react-slider' 
 import { useRouter } from "next/navigation" 
 import Cookies from 'js-cookie';
 const { ethers } = require('ethers');
@@ -299,7 +297,7 @@ const mondongo = ( link, id, array )=>{
    nocxdd.style.opacity = 1;
       const animation = element.animate(
         { opacity: [1, 0] },
-        { duration: 300 }
+        { duration: 200 }
       );
   
       animation.addEventListener('finish', () => {
@@ -308,6 +306,7 @@ const mondongo = ( link, id, array )=>{
       });
     });
   }  
+
 if (nocxdd) {
   const startTop = nocxdd.offsetTop; // Posición inicial (top) del elemento
   const startLeft = nocxdd.offsetLeft; // Posición inicial (left) del elemento
@@ -323,28 +322,27 @@ if (nocxdd) {
       
     ],
     {
-      duration: 800,
+      duration: 1000,
       easing: 'ease-in-out',
       iterations: 1,
       fill: 'forwards',
     }
   );
   
-  setTimeout(() => {
-    const asdasd = document.getElementById('nosemequieromatar')
+setTimeout(() => {
+const asdasd = document.getElementById('nosemequieromatar')
 if(asdasd){
     asdasd.style.viewTransitionName = 'mondongoss';
 function updateTheDOMSomehow(){   
-        router.push(`${link}`)    
+      router.push(`${link}`)    
       asdasd.style.viewTransitionName = '';   
     }
     document.startViewTransition(()=>{   
       updateTheDOMSomehow()
 }) 
 } 
-  }, 800);
+  }, 1000);
 } 
-
 
 } 
 

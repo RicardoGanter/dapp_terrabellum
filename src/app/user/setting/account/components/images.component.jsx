@@ -1,6 +1,6 @@
 import { useState , useEffect } from "react"
 import getImagesProfile from "../services/getImagesProfile";
-import styles from '../../../../../styles/user/setting/account/account.module.scss' 
+import styles from '../../../../../styles/user/setting/account/components/images.module.scss' 
 import exit from '../../../../../public/icon/xmark-solid.svg'   
 import changeImageProfile from "../services/changeImageProfile";
 import Image from "next/image";
