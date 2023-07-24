@@ -103,13 +103,14 @@ function DestinationPage({params}) {
           <select><option> Terrabellum</option></select>
           <h2>ID # {id}</h2>
       </div> */}
-      <div className={styles.owner}>
+
+
+      {/* <div className={styles.owner}>
         { addres ? <p>{addres.seller.toString()}</p> :<p> { Sales && !addres && Sales.id}
-        </p>  }
-        
+        </p>  } */}
         {/* borrar */}
        {/* { Sales &&  id&& <p>Owner : {Sales[id-1].seller}  </p>} */}
-      </div>
+      {/* </div> */}
 
       <div   className={styles.containcharacterinfo} >
         <div className={styles.Character}>  

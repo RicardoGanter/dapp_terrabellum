@@ -291,7 +291,7 @@ const Marketcompra = ()=>{
         Price: {(data.id.price/10**18).toString()} <Image src={iconeth} width={40} height={40} alt='Icon ETH' />
       </div>
       <button onClick={() => compra(data.id.itemId, data.id.price)} className={styles.btnbuy}>
-        Comprar
+        Buy
       </button>
     </div> 
       ))

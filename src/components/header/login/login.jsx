@@ -74,7 +74,7 @@ const Login = ()=>{
                       <div className={styles.contain_perfil}>
                           <div  > 
                           <Link className={styles.containtext} href={'/user/statistics'}> <p>Stats</p></Link>
-                          <Link className={styles.containtext} href={'/user/inventario'}> <p>Inventory</p></Link>
+                          <Link className={styles.containtext} href={'/user/inventory'}> <p>Inventory</p></Link>
                           <Link className={styles.containtext} href={'/user/fusion'}> <p>Fusion</p></Link>
                           <Link className={styles.containtext} href={'/user/setting/account'}> <p>Setting</p> </Link>
                            {

@@ -162,18 +162,19 @@
                 color: $color_text_white;
             }
         }
-        .description{ 
-            width: 470px;
-            height: 200px;
-            border-radius: 5px;
-            .descriptiontext{
-                font-size: 1.5rem;
-                color: $color_text_white;
-                text-align:  flex-start;
-                word-wrap: break-word;
-            }
-        }
+       
     }
     
 }
-
+.descriptiontext{
+    font-size: 1.2rem; 
+    color: $color_text_white;
+    // text-align:  flex-start;
+    // word-wrap: break-word; 
+}
+.description{ 
+    width: 470px;
+    height: 200px;
+    border-radius: 5px;
+    
+}

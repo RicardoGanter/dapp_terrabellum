@@ -355,7 +355,7 @@ function updateTheDOMSomehow(){
       <div   className={`${styles.container} oculto` }>
       <div  className={styles.subContainer}>
         <div className={styles.filtros}>
-          <h2 onClick={()=>setReload(reload + 1)}>mongo</h2>
+          <h2 onClick={()=>setReload(reload + 1)}>Reset</h2>
         <h2>Type NFT</h2>
           <select> 
               <option>Character</option>
@@ -440,7 +440,7 @@ function updateTheDOMSomehow(){
       {/* <PropsNftcartas name="a"  /> */} 
 
       <h2   className={`${styles2.Title} oculto`}>Inventory</h2>
-      { !noOwner &&
+      {/* { !noOwner &&
         <div className={styles2.contain_warning_addres}> 
           <p>Propietario de billetera no coincide con el inventario.</p> 
           <div className={styles2.hoverquestionicon}>
@@ -451,7 +451,7 @@ function updateTheDOMSomehow(){
                   Sin una billetera compatible, no podrás realizar estas acciones en tu inventario actual.</p> 
             </div>
           </div>
-        </div>}
+        </div>} */}
 {loading ? (
   <div className={styles2.grid} style={{display:"flex"}}> 
   </div>
@@ -467,13 +467,13 @@ function updateTheDOMSomehow(){
                    hability1={nft.metadata.hability1}
                    hability2={nft.metadata.hability2}
                    hability3={nft.metadata.hability3}/>
-                   {nft.id}
+                   {/* {nft.id} */}
                    <button className="oculto"  onClick={()=> Cancelmarketseller(nft.id)}>Cancel</button>
       </div>
     )) }
     {filteredNFTs.map((nft , id) => (
     <div key={nft.id}>
-      <div className="oculto"   onClick={()=> mondongo(`/user/inventario/${nft.id}`, nft.id, id)} id={`animasoooos${nft.id}`} >
+      <div className="oculto"   onClick={()=> mondongo(`/user/inventory/${nft.id}`, nft.id, id)} id={`animasoooos${nft.id}`} >
       <PropsNftcartas 
                    level={nft.metadata.level}
                    name={nft.metadata.name}
@@ -501,16 +501,16 @@ function updateTheDOMSomehow(){
         />  
          <div>
           <button className={`${styles2.sell} oculto` } type="submit">
-            vender
+            Sell
           </button> 
-          <button className={`${styles2.deleted} oculto`} onClick={()=>setConfirmdeletednft(nft.id)} >Deleted  </button>
+          <button className={`${styles2.deleted} oculto`} onClick={()=>setConfirmdeletednft(nft.id)} >Delete  </button>
           { confirmdeletednft && 
-          <div className={styles2.confirmdeleted}>
-            Realmente quieres eliminar el nft {confirmdeletednft} ?
-            <p>para confirmar escribe quiero eliminar el nft</p>
-            <input placeholder="quiero eliminar el nft" onChange={e=>setTextdeleted(e.target.value)} />
+          <div className={styles2.confirmdeleted}> 
+            Do you really want to remove the nft {confirmdeletednft} ?
+            <p>to confirm write I want to delete the nft</p>
+            <input placeholder="I want to remove the nft" onChange={e=>setTextdeleted(e.target.value)} />
             <div>
-            {textdeleted == "quiero eliminar el nft" ? <button onClick={()=> deletednft()}>Deleted</button> : <button style={{backgroundColor:"gray"}}>Deleted</button>} <button onClick={()=>{setTextdeleted(null); setConfirmdeletednft(false)}}>Cancel</button>
+            {textdeleted == "I want to remove the nft" ? <button onClick={()=> deletednft()}>Delete</button> : <button style={{backgroundColor:"gray"}}>Delete</button>} <button onClick={()=>{setTextdeleted(null); setConfirmdeletednft(false)}}>Cancel</button>
 
             </div>
           </div>}
