@@ -1,6 +1,6 @@
 "use client" 
 import { useState, useEffect, useContext } from "react";
-import styles2 from "../../../styles/user//inventario.module.scss";
+import styles2 from "../../../styles/user/inventario/inventario.module.scss";
 import styles from '../../../styles/navbar/market/opcmarket.module.scss'
 import PropsNftcartas from "../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
@@ -503,8 +503,8 @@ function updateTheDOMSomehow(){
           <button className={`${styles2.sell} oculto` } type="submit">
             Sell
           </button> 
-          <button className={`${styles2.deleted} oculto`} onClick={()=>setConfirmdeletednft(nft.id)} >Delete  </button>
-          { confirmdeletednft && 
+          <button className={`${styles2.deleted} oculto`} onClick={()=>deletednft()} >Delete  </button>
+          {/* { confirmdeletednft && 
           <div className={styles2.confirmdeleted}> 
             Do you really want to remove the nft {confirmdeletednft} ?
             <p>to confirm write I want to delete the nft</p>
@@ -513,7 +513,7 @@ function updateTheDOMSomehow(){
             {textdeleted == "I want to remove the nft" ? <button onClick={()=> deletednft()}>Delete</button> : <button style={{backgroundColor:"gray"}}>Delete</button>} <button onClick={()=>{setTextdeleted(null); setConfirmdeletednft(false)}}>Cancel</button>
 
             </div>
-          </div>}
+          </div>} */}
          </div>
       </form> }
     </div>
