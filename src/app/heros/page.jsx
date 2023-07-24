@@ -57,16 +57,16 @@ const Heros = ()=>{
               <div className={styles.rectangle_absolute_h} style={{top:8}}/>
               <div className={styles.rectangle_absolute_h} style={{bottom:8}}/>
 
-              <div className={styles.boxhero}>
+              <div className={styles.boxhero}>  
                   <Image src={cofre} alt="vault" className={styles.vault} />
                   <div className={styles.contain_pricebuy}>
                       <div className={styles.price}>Price</div>
                       <div className={styles.valor}>100 </div>
-                      <select>
-                        <option><Image height={20} src={usdticon} /> USDT</option>
-                        <option><Image height={20} src={usdticon} /> BUSD</option>
-                        <option><Image height={20} src={usdticon} /> DAI</option>
-                      </select>
+                      {/* <select>
+                        <option><Image alt='icon money USDT'  height={20} src={usdticon} /> USDT</option>
+                        <option><Image alt='icon money BUSD' height={20} src={usdticon} /> BUSD</option>
+                        <option><Image alt='icon money DAI' height={20} src={usdticon} /> DAI</option>
+                      </select> */}
                       <div className={styles.btnbuy} onClick={ async ()=> await mintNft()}> Buy </div>
                   </div> 
               </div> 
@@ -80,12 +80,14 @@ const Heros = ()=>{
                           <div className={styles.characters}>
                           <h2>Characters</h2>
                           <div className={styles.containcharact}>
-                                  { arraynftmint && arraynftmint.map(data => 
-                                  <div> 
-                                  {  data.tanda >6  && <div className={styles.character}> {data.nombre} </div>   } 
-                                  </div> 
-                                      )}
-                              </div> 
+                        {arraynftmint && arraynftmint.map((data, index) => (
+                            <div key={index}> {/* Agrega la propiedad 'key' con el valor 'index' */}
+                            {data.tanda > 6 && <div className={styles.character}>{data.nombre}</div>}
+                            </div>
+  ))}
+</div>
+
+
                           </div>
                       </div>
                       <div>
@@ -93,8 +95,8 @@ const Heros = ()=>{
                               <div className={styles.characters} style={{backgroundColor:"#5B014E"}}>
                               <h2>Characters</h2>
                               <div className={styles.containcharact}>
-                                      { arraynftmint && arraynftmint.map(data => 
-                                      <div> 
+                                      { arraynftmint && arraynftmint.map((data, index) => 
+                                     <div key={index}> 
                                       {  data.tanda >3 && data.tanda <=6 && <div className={styles.character}> {data.nombre} </div>   } 
                                       </div> 
                                           )}
@@ -107,8 +109,8 @@ const Heros = ()=>{
                           <div className={styles.characters} style={{backgroundColor:"#BA9C00"}}>
                               <h2>Characters</h2>
                               <div className={styles.containcharact}>
-                                  { arraynftmint && arraynftmint.map(data => 
-                                  <div> 
+                                  { arraynftmint && arraynftmint.map((data, index) => 
+                                  <div key={index}> 
                                   {  data.tanda <=3  && <div className={styles.character}> {data.nombre} </div>   } 
                                   </div> 
                                       )}

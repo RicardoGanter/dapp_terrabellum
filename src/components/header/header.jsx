@@ -12,8 +12,7 @@ import styles2 from '../../styles/utils/saveurl/saveurl.module.scss'
 import starsolid from  '../../public/star-solid 1.svg'     
 import { useState,useEffect, useContext } from "react"; 
 import { MyContext } from "../../app/layout"; 
-import { Fetch } from "../../utils/fetch/fetch";
-
+import { Fetch } from "../../utils/fetch/fetch"; 
 export  const SaveUrl = ({name, url, imagen})=>{ 
   const { sharedVariable, updateSharedVariable } = useContext(MyContext); 
   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
