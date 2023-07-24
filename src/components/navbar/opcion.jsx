@@ -4,8 +4,8 @@ import Image from 'next/image';
 import homefacha from '../../public/icon/Vector (5).svg'
 // import scfacha from '../../public/icon/Vector (8).svg'
 // import news from '../../public/icon/bullhorn-solid.svg'
-import newsfacha from '../../public/icon/bullhorn-solid 1.svg'
-// import shield from '../../public/icon/WARRIOR.png'
+// import newsfacha from '../../public/icon/bullhorn-solid 1.svg'
+import shield from '../../public/icon/WARRIOR.png'
 import { useState } from 'react';
 import marketfacha from '../../public/icon/Vector (7).svg'
 
@@ -41,7 +41,7 @@ const Opcion = ()=>{
                     <Image className={styles.test} src={markets ? marketfacha : marketfacha} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p className={styles.rutes}>Market</p></Link>
                     <Link onClick={()=>{clearstyles(); setHeros(true)}} style={heross ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/heros'}className={styles.option}> 
-                    <Image className={styles.test} src={newsfacha} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
+                    <Image className={styles.test} src={shield} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p className={styles.rutes}>Heros</p></Link> 
                 </div>
                 {/* potencial actualizacion */}

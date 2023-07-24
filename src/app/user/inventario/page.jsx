@@ -357,7 +357,7 @@ function updateTheDOMSomehow(){
         <div className={styles.filtros}>
           <h2 onClick={()=>setReload(reload + 1)}>mongo</h2>
         <h2>Type NFT</h2>
-          <select>
+          <select> 
               <option>Character</option>
               <option>Items</option>
               <option>Weapon</option>
@@ -440,7 +440,7 @@ function updateTheDOMSomehow(){
       {/* <PropsNftcartas name="a"  /> */} 
 
       <h2   className={`${styles2.Title} oculto`}>Inventory</h2>
-      {noOwner &&
+      { !noOwner &&
         <div className={styles2.contain_warning_addres}> 
           <p>Propietario de billetera no coincide con el inventario.</p> 
           <div className={styles2.hoverquestionicon}>
@@ -483,7 +483,7 @@ function updateTheDOMSomehow(){
                    hability2={nft.metadata.hability2}
                    hability3={nft.metadata.hability3}/></div>
                    
-                   { !noOwner && 
+                   { noOwner && 
       <form
         className={styles2.form}
         onSubmit={(e) => {

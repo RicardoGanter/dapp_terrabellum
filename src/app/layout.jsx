@@ -1,7 +1,7 @@
 "use client"
 import '../styles/globals.scss'
 import Header from '../components/header/header'
-import Option from '../components/navbar/opcion'
+import Option from '../components/navbar/opcion' 
 // import Loading from './loading'
 // import { Suspense } from 'react'
 // import { SessionProvider } from 'next-auth/react'
@@ -62,6 +62,8 @@ export default function RootLayout({
         <meta charset="UTF-8" />
         <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp"/>
         <title>Terrabellum</title>
+        <meta name='robots' content='TerraBellum' />
+        <meta name="googlebot" content="23123123"/>
         <meta name ="description" content ="Learning about Meta Tags." />
         <meta property="og:image" content="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp" />
         <meta property="og:description" content="Discover an ever-evolving digital universe with blockchain, dApps, and the metaverse. Immerse yourself in an exciting video game with infinite possibilities. Explore, create and connect like never before!" />
