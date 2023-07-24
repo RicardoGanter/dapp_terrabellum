@@ -120,13 +120,15 @@ const NFTContainer = () => {
     }
   };
 
-  const deletednft = async()=>{  
+  const deletednft = async(id)=>{  
       const contract = await ConnectInnomicNft()
-      const deletednft = await contract.repay(confirmdeletednft)
-      if(deletednft){
-        setConfirmdeletednft(false)
-        return setTextdeleted(false)
-      } 
+      console.log(contract)
+      const deletednft = await contract.repay(id)
+      // if(deletednft){
+      //   console.log(deletednft)
+      //   setConfirmdeletednft(false)
+      //   return setTextdeleted(false)
+      // } 
   } 
  
   useEffect(() => { 
@@ -503,14 +505,14 @@ function updateTheDOMSomehow(){
           <button className={`${styles2.sell} oculto` } type="submit">
             Sell
           </button> 
-          <button className={`${styles2.deleted} oculto`} onClick={()=>deletednft()} >Delete  </button>
+          <button className={`${styles2.deleted} oculto`} onClick={()=>deletednft(nft.id)} >Delete  </button>
           {/* { confirmdeletednft && 
           <div className={styles2.confirmdeleted}> 
             Do you really want to remove the nft {confirmdeletednft} ?
             <p>to confirm write I want to delete the nft</p>
             <input placeholder="I want to remove the nft" onChange={e=>setTextdeleted(e.target.value)} />
             <div>
-            {textdeleted == "I want to remove the nft" ? <button onClick={()=> deletednft()}>Delete</button> : <button style={{backgroundColor:"gray"}}>Delete</button>} <button onClick={()=>{setTextdeleted(null); setConfirmdeletednft(false)}}>Cancel</button>
+            {textdeleted == "I want to remove the nft" ? <button onClick={()=> deletednft(nft.id)}>Delete</button> : <button style={{backgroundColor:"gray"}}>Delete</button>} <button onClick={()=>{setTextdeleted(null); setConfirmdeletednft(false)}}>Cancel</button>
 
             </div>
           </div>} */}
