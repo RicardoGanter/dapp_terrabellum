@@ -1,17 +1,27 @@
-import { Fetch } from "utils/fetch/fetch";
+import { Fetch } from "../../../../../utils/fetch/fetch";
+import Cookies from "js-cookie";
+
+const userdata = Cookies.get('userdata')
+
+
 const getImagesProfile = async () => {
     try {
       const data = [];
       //ARREGLAR EL i , puede ser problema de CORS o WAF DE aws
-      let i = 6;  
-      const fetchImage = async () => {
-        const response = await Fetch(`https://d2qjuqjpn9e4f.cloudfront.net/Imagen_perfil/Imagen_perfil/${i}.webp`, 'GET'); 
+      let i = 3  
+      const image = JSON.parse(userdata)  
+      const fetchImage = async () => { 
+        let url = `https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/Imagen_perfil/${i}.webp` 
+        if( image.image != url){  
+        const response = await Fetch(`${url}`, 'GET'); 
         if (response && response.status === 403) {
           return false;
         }  
         data.push(response.url);
+      }
         i++;
         return true;
+     
       }; 
       let shouldContinue = await fetchImage(); 
       while (shouldContinue) { 

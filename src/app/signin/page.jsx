@@ -8,7 +8,7 @@ import { signIn } from "next-auth/react"
 import back from '../../public/icon/circle-arrow-left-solid.svg'
 import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx"
 import googleauth from '../../public/google-authenticator-logo-1.webp'
-import { Fetch } from "utils/fetch/fetch";
+import { Fetch } from "../../utils/fetch/fetch";
 const Signin = () => {
   // const {data: session, status} = useSession()
   const router = useRouter(); 

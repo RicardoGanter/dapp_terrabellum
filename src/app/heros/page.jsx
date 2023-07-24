@@ -1,9 +1,10 @@
 "use client"
 import styles from '../../styles/heros/heros.module.scss'  
 import { useState,useEffect } from 'react' 
-import { Fetch } from 'utils/fetch/fetch'
+import { Fetch } from '../../utils/fetch/fetch'
 import cofre from './cofre (1).webp'
 import Image from 'next/image'
+import usdticon from '../../public/usdt.webp'
 // Fetching
 import  mintNft  from './services/mintNft'
 // Functions
@@ -60,7 +61,12 @@ const Heros = ()=>{
                   <Image src={cofre} alt="vault" className={styles.vault} />
                   <div className={styles.contain_pricebuy}>
                       <div className={styles.price}>Price</div>
-                      <div className={styles.valor}>100 USDT</div>
+                      <div className={styles.valor}>100 </div>
+                      <select>
+                        <option><Image height={20} src={usdticon} /> USDT</option>
+                        <option><Image height={20} src={usdticon} /> BUSD</option>
+                        <option><Image height={20} src={usdticon} /> DAI</option>
+                      </select>
                       <div className={styles.btnbuy} onClick={ async ()=> await mintNft()}> Buy </div>
                   </div> 
               </div> 

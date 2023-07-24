@@ -1,5 +1,5 @@
-import ConnectInnomicNft from "components/funcion/connectinnomicnft";
-import { Fetch } from "utils/fetch/fetch";
+import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
+import { Fetch } from "../../../utils/fetch/fetch";
 
 const mintNft = async ()=>{
     try{

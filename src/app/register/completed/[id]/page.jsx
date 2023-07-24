@@ -2,7 +2,7 @@
 import { useEffect,useState } from "react";
 import { useRouter } from "next/navigation"; 
 import Cookies from 'js-cookie'
-import { Fetch } from "utils/fetch/fetch";
+import { Fetch } from "../../../../utils/fetch/fetch";
 const Completedregister = ({params})=>{
     const [user, setuset] = useState(true)
     const { id } = params; 

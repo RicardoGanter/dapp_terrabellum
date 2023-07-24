@@ -1,4 +1,4 @@
-import ConnectInnomicNft from "components/funcion/connectinnomicnft" 
+import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft" 
 
 const downgradeNft = async ( id ) =>{
     const contract = await ConnectInnomicNft()

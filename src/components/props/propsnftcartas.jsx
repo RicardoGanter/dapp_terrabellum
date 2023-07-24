@@ -1,5 +1,4 @@
-import styles from "../../styles/props/propsnftcartas.module.scss";
-import Link from "next/link";
+import styles from "../../styles/props/propsnftcartas.module.scss"; 
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import ha from '../../public/borrar/HABILIDAD3.webp' 

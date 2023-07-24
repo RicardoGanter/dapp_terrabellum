@@ -25,7 +25,10 @@
     "sass": "^1.62.1"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
+    "@types/node": "20.4.2",
     "@types/react": "18.2.13",
-    "ethers": "^5.7.2"
+    "ethers": "^5.7.2",
+    "typescript": "5.1.6"
   }
 }

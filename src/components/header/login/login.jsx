@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import notification from '../../../public/bell-solid 6.svg'
 import Cookies from 'js-cookie'; 
 import glob from '../../../public/Vector 13.svg'
-import tokenicon from '../../../public/img/TOKEN_1.png'  
+import tokenicon from '../../../public/img/TOKEN_1.webp'  
 
 const Login = ()=>{
     const router = useRouter(); 

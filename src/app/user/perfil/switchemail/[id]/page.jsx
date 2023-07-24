@@ -1,5 +1,5 @@
 "use client"
-import { Fetch } from "utils/fetch/fetch";
+import { Fetch } from "../../../../../utils/GetLocalStorage/getUserData";
 const Switchemail = ({params})=>{ 
     const { id } = params; 
     const URI = "https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/" 

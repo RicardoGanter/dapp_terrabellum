@@ -1,4 +1,4 @@
-import { Fetch } from "utils/fetch/fetch";
+import { Fetch } from "../../../../../utils/fetch/fetch";
 import Cookies from "js-cookie";
 
 const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'  

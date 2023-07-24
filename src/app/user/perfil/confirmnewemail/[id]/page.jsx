@@ -1,7 +1,7 @@
 "use client"
 import { useEffect,useState } from "react";  
 import Cookies from 'js-cookie'
-import { Fetch } from "utils/fetch/fetch";
+import { Fetch } from "../../../../../utils/GetLocalStorage/getUserData";
 const Confirmnewemail = ({params})=>{
     const [user, setuset] = useState(true)
     const { id } = params; 

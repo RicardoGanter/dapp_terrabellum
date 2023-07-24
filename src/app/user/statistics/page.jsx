@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../../../styles/user/estadistic.module.scss";
 // import imagen from "../../../public/img/lal.webp";
 // import fondoperfil from '../../../public/img/Rectangle.webp'
-// import stars from '../../../public/img/Star.png'
+// import stars from '../../../public/img/Star.webp'
 import { useState,useEffect } from "react";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";

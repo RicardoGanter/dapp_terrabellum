@@ -2,16 +2,15 @@
 import { React } from 'react';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../../../../styles/idmarket/idmarket.module.scss'
-import personaje from '../../../../public/borrar/Ejemplo1..png'
+import styles from '../../../../styles/idmarket/idmarket.module.scss' 
 import habilidad1 from '../../../../public/borrar/HABILIDAD1.webp'
 import tb from '../../../../public/img/logo.webp'
 import Image from 'next/image'
 import ConnectInnomicNft from '../../../../components/funcion/connectinnomicnft';
 import ha from '../../../../public/borrar/HABILIDAD3.webp'
-import PropsNftcartas from 'components/props/propsnftcartas';
+import PropsNftcartas from '../../../../components/props/propsnftcartas';
 import '../../../../styles/globals.scss' 
-import logotb from '../../../../public/img/TOKEN_1.png'
+import logotb from '../../../../public/img/TOKEN_1.webp'
 function DestinationPage({params}) {
   // const { id } = router.query;
   const [Sales, setSales] = useState();

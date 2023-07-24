@@ -1,7 +1,7 @@
 "use client"   
 import { useEffect,useContext } from 'react'; 
 import { User_data } from '../layout' 
-import { GetUserData } from 'utils/GetLocalStorage/getUserData';
+import { GetUserData } from '../../utils/GetLocalStorage/getUserData';
 import { useRouter } from 'next/navigation'; 
 
 const User = ( {children}) => { 

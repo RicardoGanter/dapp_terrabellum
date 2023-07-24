@@ -9,7 +9,7 @@ import back from '../../public/icon/circle-arrow-left-solid.svg'
 import Image from 'next/image';
 import NetworkGoerliEth from '../../components/funcion/network';
 import Cookies from 'js-cookie';
-import { Fetch } from 'utils/fetch/fetch'; 
+import { Fetch } from '../../utils/fetch/fetch'; 
 const Register = ()=>{
     const [Nombre, setNombre] = useState('')
     const [Email,setEmail] = useState('');

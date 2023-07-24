@@ -1,4 +1,4 @@
-import ConnectInnomicNft from "components/funcion/connectinnomicnft"
+import ConnectInnomicNft from "../../../../components/funcion/connectinnomicnft"
 
 const upgradeNft = async ( id ) =>{ 
     const data = []

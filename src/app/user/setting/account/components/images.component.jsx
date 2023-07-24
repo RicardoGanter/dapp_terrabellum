@@ -26,7 +26,7 @@ const ImagesComponents = ()=>{
   }
 
   useEffect(() => {
-    const getImages = async () => {
+    const getImages = async () => { 
       const { data } = await getImagesProfile() 
         setUrlimageperfil(data);  
     }

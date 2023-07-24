@@ -1,4 +1,4 @@
-import { Fetch } from "utils/fetch/fetch"
+import { Fetch } from "../../../../../utils/fetch/fetch"
 import Cookies from 'js-cookie'
 // import { useState, useContext } from "react";
 // import { User_data } from "app/layout";  

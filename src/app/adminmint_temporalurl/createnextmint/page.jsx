@@ -2,8 +2,8 @@
 import styles from '../../../styles/admin_mint/mint.module.scss'
 import { useState,useEffect } from 'react' 
 import Cookies from 'js-cookie' 
-import Completed from 'utils/competed/completed' 
-import { Fetch } from 'utils/fetch/fetch'
+import Completed from '../../../utils/competed/completed' 
+import { Fetch } from '../../../utils/fetch/fetch'
 const Createnextmint = ()=>{
     const [Nftdataventa, setNftdataventa] = useState([])
     const [dataname, setDataname] = useState([]) 
