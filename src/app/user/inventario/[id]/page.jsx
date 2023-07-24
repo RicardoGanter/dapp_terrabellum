@@ -168,7 +168,7 @@ function DestinationPage({params}) {
             </div>
             <div className={styles.description}>
               <p className={styles.descriptiontext}> 
-               Description: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+               Description: Born from ruins, powered by speed. A fearless speedster with unmatched agility, Red Spectre dashes through the battlefield, leaving foes in awe. Harnessing the power of an otherworldly material, they defy physics and navigate obstacles with ease.
               </p>
             </div>
           </div>
