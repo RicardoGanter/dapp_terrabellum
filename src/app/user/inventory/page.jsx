@@ -1,6 +1,6 @@
 "use client" 
 import { useState, useEffect, useContext } from "react";
-import styles2 from "../../../styles/user/inventario/inventario.module.scss";
+import styles2 from "../../../styles/user//inventario.module.scss";
 import styles from '../../../styles/navbar/market/opcmarket.module.scss'
 import PropsNftcartas from "../../../components/props/propsnftcartas";
 import ConnectInnomicNft from "../../../components/funcion/connectinnomicnft";
@@ -350,7 +350,7 @@ function updateTheDOMSomehow(){
     <div>
     { user &&
     <div style={{display:"flex", gap: "1rem"}}>
-      <SaveUrl  name='Inventory' url='/user/inventario' imagen="https://d2qjuqjpn9e4f.cloudfront.net/Iconurl/2.png"/>
+      <SaveUrl  name='Inventory' url='/user/inventory' imagen="https://d2qjuqjpn9e4f.cloudfront.net/Iconurl/2.png"/>
       {/* <Barrafiltros/> */}
       <div   className={`${styles.container} oculto` }>
       <div  className={styles.subContainer}>
