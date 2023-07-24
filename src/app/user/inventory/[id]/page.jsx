@@ -27,7 +27,7 @@ function DestinationPage({params}) {
           //   nocxdjojo.offsetLeft )
             nocxdjojo.style.viewTransitionName = 'noseeeeeee';
             function updateTheDOMSomehow(){  
-              router.push('/user/inventario') 
+              router.push('/user/inventory') 
               setTimeout(() => {
                 nocxdjojo.style.viewTransitionName = '';
             }, 1600); 
