@@ -2,7 +2,7 @@
 .contain{
     background-color: $color_bg_options;
     position: fixed;
-    top: 108px;
+    top: 60px;
     left: 0;
     height: 100%;
     width: 190px;
@@ -16,7 +16,7 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        margin: 1.5rem 0;
+        margin: 3.5rem 0;
         gap: 2rem;
         width: 100%;
         .option{ 

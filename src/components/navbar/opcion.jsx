@@ -40,9 +40,9 @@ const Opcion = ()=>{
                     <Link onClick={()=>{clearstyles(); setMarket(true)}} style={markets ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/market'}className={styles.option}> 
                     <Image className={styles.test} src={markets ? marketfacha : marketfacha} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
                         <p className={styles.rutes}>Market</p></Link>
-                    <Link onClick={()=>{clearstyles(); setHeros(true)}} style={heross ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/heros'}className={styles.option}> 
+                    <Link onClick={()=>{clearstyles(); setHeros(true)}} style={heross ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/heroes'}className={styles.option}> 
                     <Image className={styles.test} src={shield} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
-                        <p className={styles.rutes}>Heros</p></Link> 
+                        <p className={styles.rutes}>Heroes</p></Link> 
                 </div>
                 {/* potencial actualizacion */}
                 {/* <div style={{ position:"absolute", bottom: 60, left:20}}> 

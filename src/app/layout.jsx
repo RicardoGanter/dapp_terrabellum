@@ -5,6 +5,7 @@ import Option from '../components/navbar/opcion'
 // import Loading from './loading'
 // import { Suspense } from 'react'
 // import { SessionProvider } from 'next-auth/react'
+import logo from '../public/img/logo/logo_28.webp'
 import { createContext, useState, useEffect } from 'react'; 
 export  const MyContext = createContext();
 export  const User_data = createContext();
@@ -59,11 +60,11 @@ export default function RootLayout({
   return (
     <html lang="en">
        <head>
-        <meta charset="UTF-8" />
-        <meta name="author" content="Ricardo Rosales" />
+        <meta charSet="UTF-8" />
+        <meta name="author" content="Ricardo Rosales Ganter" />
         <meta name="keywords" content="blockchain, dapp, crypto, nfts, terrabellum" />
         <meta name="google-site-verification" content="WPyVYMUabFyf_Kq40ZcPNiYX9w42U-PR2fbnB0h2DHw" />
-        <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp"/>
+        <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo_28.webp"/>
         <title>Terrabellum</title>
         <meta name='robots' content='TerraBellum' />
         <meta name="googlebot" content="23123123"/>

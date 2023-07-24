@@ -1,4 +1,7 @@
 @import '../var.module';
+$habilityPadding : 1.2rem 0;
+$positionAbsoluteBottom: 95px;
+
 .link{
     margin: .3rem;
     text-decoration: none;  
@@ -20,19 +23,20 @@
         }
         .absotule{
             position: absolute;
-            bottom: 90px;
+            bottom: $positionAbsoluteBottom;
             width: 100%;
             height: 46px;
             background: rgba(133, 17, 135, 0.7);
             box-shadow: 0px 1px 2px rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
-            .containlvlnft{
+            .containlvlnft{ 
                 width: 100%;
                 top: -10px;
                 position: absolute;
                 display: flex;
                 justify-content: space-around;
+               
                 .energi{
                     position: absolute;
                     height: 3px;
@@ -43,11 +47,17 @@
                     box-shadow: 0px 0px 6px 3px #9C26B0;
                 }
                 .lvlnft{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     z-index: 1;
-                    width: 20px;
-                    height: 20px;
+                    width: 25px;
+                    height: 25px;
                     border-radius: 50%;
                     background-color: rgb(41, 14, 14);
+                    .thunder{
+                        height: 25px;
+                    }
                 }
             }
 
@@ -64,7 +74,7 @@
             justify-content: center;
             gap: 1rem;
             // border-radius: 3px;
-            padding: 1rem 0;
+            padding: $habilityPadding;
             .hability{
                 border-radius: 50%;
                 width: 60px;

@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/img/logo.webp";
+import logo from "../../public/img/logo/logo_28.webp"
 import styles from "../../styles/header/header.module.scss" 
 import Login from "./login/login.jsx";
 // import search from '../../public/icon/magnifying-glass-solid.svg'
@@ -183,25 +183,21 @@ const Header = () => {
         <div className={styles.lal}> 
           <nav className={styles.navbarcontain}>
           <div className={styles.logotb} >
-            <Image src={logo} alt="Terra Bellum abbreviated icon" width={70}/>  
+            <Image src={logo} alt="Terra Bellum abbreviated icon" height={35}/>  
+            <div className={styles.containsavedata}>   
+          { userinno && userinno.urlMarkets.map((data) => (
+            <Link href={data.url} className={styles.urlsaveimage} key={data.id}>
+              <img src={data.imagen} height={20}/> 
+              <p>{data.nombre}</p> 
+            </Link>
+          ))} 
+        </div>  
           </div>  
             
           <div className={styles.btnsrigth}> 
           </div>
         </nav> 
-        <div className={styles.containsavedata}> 
-        {/* <div style={{display:"flex"}}> 
-          <p style={{margin:".4rem 1rem"}}>Download</p>
-          <div className={styles.separador}/>
-        </div> */}
-          { userinno && userinno.urlMarkets.map((data) => (
-            <Link href={data.url} className={styles.urlsaveimage} key={data.id}>
-              <img src={data.imagen} height={20}/> 
-              <p>{data.nombre}</p>
-              {/* <div className={styles.separador}/> */}
-            </Link>
-          ))} 
-        </div>  
+       
         </div> 
       </header>
     </>

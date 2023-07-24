@@ -2,13 +2,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import styles from '../../../styles/header/login/login.module.scss'
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 // import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 // import { signOut } from "next-auth/react" 
 import notification from '../../../public/bell-solid 6.svg'
-import Cookies from 'js-cookie'; 
-import glob from '../../../public/Vector 13.svg'
+import Cookies from 'js-cookie';  
 import tokenicon from '../../../public/img/TOKEN_1.webp'  
 
 const Login = ()=>{
@@ -69,8 +68,8 @@ const Login = ()=>{
     //   } 
         return(
             <div>
-                { !userinno ? <div className={styles.contain}><Image className={styles.globimage} alt="glob icon" src={glob}/> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
-                    : userinno? <div className={styles.contain}> <Image className={styles.globimage} src={glob} alt="glob icon"/><Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={35} style={{margin:"0 .4rem"}} src={tokenicon} alt="Token Innomic GameChanger"/> INNO <p> 10000 </p></div>  <div  className={styles.containdatauser}   id="lol" onMouseEnter={()=>setPerfil(true)} onMouseLeave={()=>setPerfil(false)} > {userinno && <p>{userinno.nombre}</p>}  <img className={styles.imgheader} src={userinno ? userinno.image : null}  alt='img perfil'/>  { token && perfil?
+                { !userinno ? <div className={styles.contain}> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
+                    : userinno? <div className={styles.contain}> <Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={35} style={{margin:"0 .4rem"}} src={tokenicon} alt="Token Innomic GameChanger"/> INNO <p> 10000 </p></div>  <div  className={styles.containdatauser}   id="lol" onMouseEnter={()=>setPerfil(true)} onMouseLeave={()=>setPerfil(false)} > {userinno && <p>{userinno.nombre}</p>}  <img className={styles.imgheader} src={userinno ? userinno.image : null}  alt='img perfil'/>  { token && perfil?
                       <div className={styles.contain_perfil}>
                           <div  > 
                           <Link className={styles.containtext} href={'/user/statistics'}> <p>Stats</p></Link>

@@ -15,8 +15,7 @@ const Setting = ({children})=>{
                 nocxd.style.viewTransitionName = '';
             }, 1600); 
         }
-        document.startViewTransition(()=>{   
-           
+        document.startViewTransition(()=>{    
             updateTheDOMSomehow()
         }) 
       }

@@ -2,6 +2,7 @@ import styles from "../../styles/props/propsnftcartas.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import ha from '../../public/borrar/HABILIDAD3.webp' 
+import thunder from '../../public/icon/lvl.svg'
 const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, hability2, hability3 }) => {
   const width = height * 0.7
   const [size_pre , setsize_pre] = useState();
@@ -56,7 +57,7 @@ const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, habi
               style={ Rare == 1 ? {backgroundColor:"#45C7FF", boxShadow:"0px 0px 6px 5px #1594CA"}  
                     : Rare == 2 ? {backgroundColor:"#e015ff", boxShadow:"0px 0px 6px 5px #9C26B0"}
                     : Rare == 3 ? {backgroundColor:"#FFE145", boxShadow:"0px 0px 6px 5px #E0C11F"}
-                    : null}/>
+                    : null}> <Image className={styles.thunder} src={thunder} /> </div>
               :  <div  style={{opacity:"70%", backgroundColor:"grey"}} className={styles.lvlnft}/>
               }
 
@@ -64,7 +65,8 @@ const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, habi
                 <div style={ 
                   Rare == 1 ? {backgroundColor:"#45C7FF", boxShadow:"0px 0px 6px 5px #1594CA"}
                   :  Rare == 2 ? {backgroundColor:"#e015ff", boxShadow:"0px 0px 6px 5px #9C26B0"}
-                  :  Rare == 3 ? {backgroundColor:"#FFE145", boxShadow:"0px 0px 6px 5px #E0C11F"}: null} className={styles.lvlnft}/>
+                  :  Rare == 3 ? {backgroundColor:"#FFE145", boxShadow:"0px 0px 6px 5px #E0C11F"}: 
+                  null} className={styles.lvlnft}> <Image className={styles.thunder} src={thunder} /> </div>
               : <div  style={{opacity:"70%", backgroundColor:"grey"}} className={styles.lvlnft}/>
               }
 
@@ -72,7 +74,8 @@ const PropsNftcartas = ({ Href,name, Rare, level, height, image, hability1, habi
                 level === 3 ? <div style={ 
                   Rare == 1 ? {backgroundColor:"#45C7FF", boxShadow:"0px 0px 6px 5px #1594CA"}
                 : Rare == 2 ? {backgroundColor:"#e015ff", boxShadow:"0px 0px 6px 5px #9C26B0"}
-                : Rare == 3 ? {backgroundColor:"#FFE145", boxShadow:"0px 0px 6px 5px #E0C11F"}: null} className={styles.lvlnft}/>
+                : Rare == 3 ? {backgroundColor:"#FFE145", boxShadow:"0px 0px 6px 5px #E0C11F"}
+                : null} className={styles.lvlnft}> <Image className={styles.thunder} src={thunder} /> </div>
               :  <div  style={{opacity:"70%", backgroundColor:"grey"}} className={styles.lvlnft}/>
               }
 
