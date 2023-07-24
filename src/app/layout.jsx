@@ -60,6 +60,9 @@ export default function RootLayout({
     <html lang="en">
        <head>
         <meta charset="UTF-8" />
+        <meta name="author" content="Ricardo Rosales" />
+        <meta name="keywords" content="blockchain, dapp, crypto, nfts, terrabellum" />
+        <meta name="google-site-verification" content="WPyVYMUabFyf_Kq40ZcPNiYX9w42U-PR2fbnB0h2DHw" />
         <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp"/>
         <title>Terrabellum</title>
         <meta name='robots' content='TerraBellum' />
