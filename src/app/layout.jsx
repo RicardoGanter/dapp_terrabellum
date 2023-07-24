@@ -59,9 +59,13 @@ export default function RootLayout({
   return (
     <html lang="en">
        <head>
+        <meta charset="UTF-8" />
         <link rel="shortcut icon" href="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp"/>
         <title>Terrabellum</title>
-        <meta name = "description" content = "Learning about Meta Tags." />
+        <meta name ="description" content ="Learning about Meta Tags." />
+        <meta property="og:image" content="https://terrabellum.s3.sa-east-1.amazonaws.com/logo.webp" />
+        <meta property="og:description" content="Discover an ever-evolving digital universe with blockchain, dApps, and the metaverse. Immerse yourself in an exciting video game with infinite possibilities. Explore, create and connect like never before!" />
+        <meta property="og:title" content="Terrabellum Dapp" />
       </head>
       <MyContext.Provider value={{ sharedVariable, updateSharedVariable }}>
         <User_data.Provider value={{userdataglobal ,updateuserdataglobal }} > 
