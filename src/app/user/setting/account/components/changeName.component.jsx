@@ -6,6 +6,10 @@ const ChangeNameComponent = () => {
     const [newname ,setNewname] = useState(null)
     const [repetnewname,setRepetnewname] = useState(null)
     const [validationname, setValidationname] = useState(false)
+    const closeTab = () => { 
+      const elemento = document.getElementById('containEmailProfile');
+      return  elemento.style.display = "none";
+    } 
     useEffect(()=>{
         if(repetnewname && repetnewname.length > 0){
           if( newname != repetnewname ){
@@ -47,7 +51,7 @@ const ChangeNameComponent = () => {
             <div style={{display:"flex", justifyContent:"space-around", gap:"1rem"}}>
                 { validationname && repetnewname ? <button type="submit">Accept</button> : <button style={{backgroundColor:"gray"}}>Accept</button> }
                 
-                <button onClick={()=>clearname()}>Cancel</button>
+                <button onClick={()=> closeTab()}>Cancel</button>
                 
             </div>  
         </form>

@@ -19,7 +19,10 @@ const ChangeEmailComponent = () => {
          return clearname()
        }
      }   
-   
+     const closeTab = () => { 
+      const elemento = document.getElementById('containEmailProfile');
+      return  elemento.style.display = "none";
+    } 
     useEffect(()=>{ 
       if(repeatnewemail && repeatnewemail.length>0){
         if(newemail!=repeatnewemail){ 
@@ -30,7 +33,7 @@ const ChangeEmailComponent = () => {
     },[newemail, repeatnewemail])   
 
     return(<>
-        <form className={styles.contain_switchname} onSubmit={switch_email}> 
+        <form id="containEmailProfile" className={styles.contain_switchname} onSubmit={switch_email}> 
         <p>New email</p>
         <input type="email" value={newemail} onChange={req=> setNewemail(req.target.value)}/>
         <div style={{display:"flex"}}>
@@ -40,7 +43,7 @@ const ChangeEmailComponent = () => {
         <div style={{display:"flex", justifyContent:"space-around", gap:"1rem"}}>
           { validationemail && repeatnewemail ? <button type="submit">Accept</button> : <button style={{backgroundColor:"gray"}}>Accept</button> }
           
-          <button onClick={()=>clearname()}>Cancel</button> 
+          <button onClick={()=> closeTab()}>Cancel</button> 
         </div>  
         </form> 
         {envioemail &&

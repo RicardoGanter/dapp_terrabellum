@@ -70,15 +70,14 @@ const Login = ()=>{
         return(
             <div>
                 { !userinno ? <div className={styles.contain}> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
-                    : userinno? <div className={styles.contain}> <Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={35} style={{margin:"0 .4rem"}} src={tokenicon} alt="Token Innomic GameChanger"/> INNO <p> 10000 </p></div>  <div  className={styles.containdatauser}   id="lol" onMouseEnter={()=>setPerfil(true)} onMouseLeave={()=>setPerfil(false)} > {userinno && <p>{userinno.nombre}</p>}  <img className={styles.imgheader} src={userinno ? userinno.image : null}  alt='img perfil'/>  { token && perfil?
+                    : userinno? <div className={styles.contain}> <Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={35} style={{margin:"0 .4rem"}} src={tokenicon} alt="Token Innomic GameChanger"/> INNO <p> 10000 </p></div>  <div  className={styles.containdatauser}   id="lol" onMouseEnter={()=>setPerfil(true)} onMouseLeave={()=>setPerfil(false)} > {userinno && <p>{userinno.nombre}</p>}  <img id="imageFromHeader" className={styles.imgheader} src={userinno ? userinno.image : null}  alt='img perfil'/>  { token && perfil?
                       <div className={styles.contain_perfil}>
                           <div  > 
                           <Link className={styles.containtext} href={'/user/statistics'}> <p>Stats</p></Link>
                           <Link className={styles.containtext} href={'/user/inventory'}> <p>Inventory</p></Link>
                           <Link className={styles.containtext} href={'/user/fusion'}> <p>Fusion</p></Link>
                           <Link className={styles.containtext} href={'/user/setting/account'}> <p>Setting</p> </Link>
-                           {
-                               
+                           { 
                           //  <Link href={'/'} className={styles.containtext} onClick={()=> signOut()}> <p>Sign out</p></Link>
                           userinno && <Link href={'/'} onClick={()=> deletcookie()} className={styles.containtext}> <p>Sign out</p></Link>  
                            }

@@ -2,16 +2,14 @@ import { Fetch } from "../../../../../utils/fetch/fetch";
 import Cookies from "js-cookie";
 
 const userdata = Cookies.get('userdata')
-
-
+ 
 const getImagesProfile = async () => {
     try {
-      const data = [];
-      //ARREGLAR EL i , puede ser problema de CORS o WAF DE aws
+      const data = []; 
       let i = 3  
       const image = JSON.parse(userdata)  
       const fetchImage = async () => { 
-        let url = `https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/Imagen_perfil/${i}.webp` 
+        let url = `https://terrabellum.s3.sa-east-1.amazonaws.com/Imagen_perfil/${i}.webp` 
         if( image.image != url){  
         const response = await Fetch(`${url}`, 'GET'); 
         if (response && response.status === 403) {
@@ -27,8 +25,7 @@ const getImagesProfile = async () => {
       while (shouldContinue) { 
         shouldContinue = await fetchImage();   
        } 
-       if(data.length > 5) {
-
+       if(data.length > 5) { 
          return { data } 
        }
     } catch (error) {

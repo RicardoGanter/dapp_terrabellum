@@ -3,8 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/img/logo/logo_28.webp"
 import styles from "../../styles/header/header.module.scss" 
-import Login from "./login/login.jsx";
-// import search from '../../public/icon/magnifying-glass-solid.svg'
+import Login from "./login/login.jsx"; 
 import Cookies from 'js-cookie'
 // import { getSession } from "next-auth/react";
 import star from '../../public/🦆 icon _star outline_.svg' 

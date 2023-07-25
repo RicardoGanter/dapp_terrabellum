@@ -53,7 +53,7 @@ const Wallet = () =>{
         
     return( 
         <div>
-          <SaveUrl name='Wallet' url="/user/assetting/wallet" imagen="https://d2qjuqjpn9e4f.cloudfront.net/Iconurl/5.svg"/>
+          <SaveUrl name='Wallet' url="/user/setting/wallet" imagen="https://d2qjuqjpn9e4f.cloudfront.net/Iconurl/5.svg"/>
             <Title title={"Wallets"}/> 
             <div className={styles.contain}>   
               { registercompleted &&

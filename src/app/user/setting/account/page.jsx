@@ -12,12 +12,35 @@ const ChangePasswordComponent = dynamic(() => import("./components/changePasswor
 const ChangeNameComponent = dynamic(() => import("./components/changeName.component.jsx"));  
 const ChangeEmailComponent = dynamic(() => import("./components/changeEmail.component.jsx"));   
 
+
 const Account = ()=>{
   const { userdataglobal } = useContext(User_data);   
   const [changepassword, setChangepassword] = useState(false)   
   const [switchname ,setSwitchname] = useState(false)  
   const [editimage, setEditimage] = useState(false)  
   const [emailnew, setemailnew] = useState(false)  
+
+  const openTabEmail = ()=>{ 
+    setemailnew(true)
+    const elemento = document.getElementById('containEmailProfile');
+    if(elemento){
+      elemento.style.display = "block"; 
+    }
+  }
+  const openTabPassword = ()=>{ 
+    setChangepassword(true)
+    const elemento = document.getElementById('containPasswordProfile');
+    if(elemento){
+      elemento.style.display = "block"; 
+    }
+  }
+  const openTabImages = ()=>{ 
+    setEditimage(true)
+    const elemento = document.getElementById('containImagesProfile');
+    if(elemento){
+      elemento.style.display = "block"; 
+    }
+  }
   return ( 
     <div> 
       <SaveUrl name='Account' url="/user/setting/account" imagen="https://d2qjuqjpn9e4f.cloudfront.net/Iconurl/1.svg"/>
@@ -26,10 +49,10 @@ const Account = ()=>{
       </div> 
       <div className={styles.containinfo}>
         { editimage && <ImagesComponents/>  }
-          <img src={ userdataglobal.image } 
+          <div className={styles.stylesOnImage}><img src={ userdataglobal.image } 
           className={styles.img} width={200} height={200}  
-          alt='perfil_usuario' onClick={()=> setEditimage(true)}/>
-          <div className={styles.editimage} onClick={()=>setEditimage(true)}>Edit</div>
+          alt='perfil_usuario' onClick={()=> openTabImages()}/></div> 
+          <div className={styles.editimage} onClick={()=>openTabImages()}>Edit</div>
           <div className={ styles.contain_datos }>
               <p>Name</p>
               <div>
@@ -39,10 +62,10 @@ const Account = ()=>{
               <p>Email</p>
               <div>
                   <input value={ userdataglobal.email } className={styles.datauser}/>
-                  <button  onClick={()=>setemailnew(true)}>Change Email</button>
+                  <button  onClick={()=>openTabEmail()}>Change Email</button>
               </div>
               <div style={{display:"flex", justifyContent:"start", alignItems:"center", gap:"1rem"}}>
-                <button onClick={()=>setChangepassword(true)} style={{ width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
+                <button onClick={()=>openTabPassword()} style={{ width:"210px", margin:"2rem 3.5rem 2rem 0"}}>Change Password</button> 
                 <Image alt="Shield_image" src={lock} width={25}/>
               </div>
           </div>  

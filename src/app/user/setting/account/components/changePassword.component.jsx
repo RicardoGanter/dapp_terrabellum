@@ -13,13 +13,21 @@ const ChangePasswordComponent = () =>{
     const [newcontraseña, setNewcontraseña] = useState(null)
     const [validationpassword, setValidationpassword] = useState(false)
     const [repetnewcontraseña, setRepetnewcontraseña ] = useState(null)
-    // const clearformpassword = ()=>{
-    //     setChangepassword(false)
-    //     setRepetnewcontraseña(null)
-    //     setNewcontraseña(null)
-    //     setContraActual(null)
-    //     setInvalidpassword(false)
-    //   }
+    const [invalidpassword, setInvalidpassword] = useState(null)
+    const [changepassword, setChangepassword] = useState(false)
+
+
+    const clearformpassword = ()=>{
+        setChangepassword(false)
+        setRepetnewcontraseña(null)
+        setNewcontraseña(null)
+        setContraActual(null)
+        setInvalidpassword(false)
+      }
+    const closeTab = () =>{
+      const elemento = document.getElementById('containPasswordProfile');
+      return  elemento.style.display = "none";
+    }
     useEffect(()=>{ 
         if(repetnewcontraseña && repetnewcontraseña.length>0){
           if(newcontraseña!=repetnewcontraseña){ 
@@ -27,9 +35,7 @@ const ChangePasswordComponent = () =>{
         }
           return setValidationpassword(true) 
         }
-      },[newcontraseña, repetnewcontraseña])
-    const [invalidpassword, setInvalidpassword] = useState(null)
-    const [changepassword, setChangepassword] = useState(false)
+      },[newcontraseña, repetnewcontraseña]) 
     const switchpassword = async (req)=>{ 
         req.preventDefault()  
           if( newcontraseña.lenght< 8 || repetnewcontraseña.lenght< 8 || newcontraseña !=repetnewcontraseña){
@@ -40,12 +46,12 @@ const ChangePasswordComponent = () =>{
           return setInvalidpassword(true)
         }
         if( response == 200 ){ 
+          closeTab()
           return  clearformpassword()
         } 
-      }  
-
+      }   
     return( 
-            <div className={styles.containswitchpassword}> 
+            <div id="containPasswordProfile" className={styles.containswitchpassword}> 
                     <form onSubmit={switchpassword}> 
                         <div className={styles.switchpassword}>
                           <div style={{position:"relative"}}> 
@@ -66,7 +72,7 @@ const ChangePasswordComponent = () =>{
                          </div>
                         
                           <div className={styles.option}>
-                            {validationpassword ? <button type="submit">Acceptar</button>: <button style={{backgroundColor:"gray"}}>accept</button>}   <button onClick={()=>{setChangepassword(false); clearformpassword()}}>Cancel</button>
+                            {validationpassword ? <button type="submit">Acceptar</button>: <button style={{backgroundColor:"gray"}}>accept</button>}   <button onClick={()=>{setChangepassword(false); closeTab(); clearformpassword()}}>Cancel</button>
                           </div>
                         </div> 
                     </form>
