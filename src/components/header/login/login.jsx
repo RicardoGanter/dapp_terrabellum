@@ -18,8 +18,9 @@ const Login = ()=>{
     // const [session, setSession] = useState(null)
     const Signin = ()=> router.push('/signin')
     const Register = ()=>router.push('/register')
-    // const { data: session, status } = useSession()  
-    const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+    // const { data: session, status } = useSession()  .
+    const [balance, setBalance] = useState('Loading...');
+    const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/' 
     useEffect( ()=>{
       const lol =async ()=>{
         const token = Cookies.get('token'); 
