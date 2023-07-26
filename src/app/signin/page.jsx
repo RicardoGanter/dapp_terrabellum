@@ -13,7 +13,7 @@ const Signin = () => {
   // const {data: session, status} = useSession()
   const router = useRouter(); 
   const [user, setuset] = useState(true)
-   const URI = 'http://localhost:8000/usuarios/'
+   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
   useEffect(() => {
     const cookies =  Cookies.get('token')
     if (cookies) {
