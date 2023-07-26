@@ -6,8 +6,7 @@ import { useRouter } from 'next/navigation';
 // import { signIn } from "next-auth/react";
 import ConnectButton from '../../components/header/loginmetamask/loginmetamask';
 import back from '../../public/icon/circle-arrow-left-solid.svg'
-import Image from 'next/image';
-import NetworkGoerliEth from '../../components/funcion/network';
+import Image from 'next/image'; 
 import Cookies from 'js-cookie';
 import { Fetch } from '../../utils/fetch/fetch'; 
 const Register = ()=>{

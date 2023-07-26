@@ -13,7 +13,7 @@ const Signin = () => {
   // const {data: session, status} = useSession()
   const router = useRouter(); 
   const [user, setuset] = useState(true)
-   const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
+   const URI = 'http://localhost:8000/usuarios/'
   useEffect(() => {
     const cookies =  Cookies.get('token')
     if (cookies) {
@@ -29,19 +29,21 @@ const Signin = () => {
   const [Contraseña,setContraseña] = useState('');
   const [sigin,setSigin] = useState(false)
   const [errorlogin, setErrorlogin] = useState(false) 
+  const [errorloginAuth, setErrorloginAuth] = useState(false) 
   const [twofactor, setTwofactor] = useState(false)
   const [tokengoogle, setTokengoogle] = useState(false)
 
 
-  const sendauthgoogle = async()=>{
-    try { 
+  const sendauthgoogle = async () =>{
+    try {  
       const response = await Fetch(`${URI}signinauth`,  'POST' ,{
         nombre: Nombre,
         contraseña: Contraseña,
         token: tokengoogle
-      });  
-      const data = await response.json()
+      });   
+      const data = await response.json() 
       if (response && response.status === 204) { 
+        setErrorloginAuth(true)
           setErrorlogin(true)
       }
       if( response && response.status === 200 && data.token){
@@ -53,7 +55,7 @@ const Signin = () => {
     } catch (error) {
         // router.push('/');
       console.error(error);
-      alert('Error al iniciar sesión, Nombre o contraseña incorrectos');
+      // alert('Error al iniciar sesión, Nombre o contraseña incorrectos');
     }
   }
   // const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/'
@@ -64,14 +66,12 @@ const Signin = () => {
       const response = await Fetch(`${URI}signin`, 'POST' ,{
         nombre: Nombre,
         contraseña: Contraseña
-      }); 
-      console.log(response)
+      });  
       const data = await response.json() 
       if (response.status === 204) { 
         return setErrorlogin(true)
       }
-      if(response.status === 200 &&  data.token ){ 
-        console.log(response, data)
+      if(response.status === 200 &&  data.token ){  
         const cookie = await data.token 
         Cookies.set('token', cookie)
         setErrorlogin(false)  
@@ -124,7 +124,8 @@ const Signin = () => {
                 <Image src={googleauth} height={60} />
               <h2>Two Factor Google auth</h2>
             </div>
-              <p className={styles.errorauth}>Numero incorrecto!</p>
+            {errorloginAuth && <p className={styles.errorauth}>Numero incorrecto!</p> }
+             
             <div className={styles.sendauth}> 
               <input type="number" onChange={e => setTokengoogle(e.target.value)} />
               <button onClick={()=> sendauthgoogle()}>Send</button>
