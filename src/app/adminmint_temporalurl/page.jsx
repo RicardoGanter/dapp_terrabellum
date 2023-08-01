@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';  
 import { signIn } from "next-auth/react"
 import back from '../../public/icon/circle-arrow-left-solid.svg'
-import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx" 
+// import ConnectButton from "../../components/header/loginmetamask/loginmetamask.jsx" 
 import { Fetch } from "../../utils/fetch/fetch";
 const Admin_mint_temporal = () => { 
   const router = useRouter(); 

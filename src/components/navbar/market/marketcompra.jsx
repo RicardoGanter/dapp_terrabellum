@@ -184,8 +184,7 @@ const Marketcompra = ()=>{
         <h2>Type NFT</h2>
           <select>
               <option>Character</option>
-              <option>Items</option>
-              <option>Weapon</option>
+              <option>Items</option> 
           </select>
           <h2>Characters</h2>
           <input type="text" value={filtercharacters} onChange={(e)=> setFiltercharacters(e.target.value)} /> 

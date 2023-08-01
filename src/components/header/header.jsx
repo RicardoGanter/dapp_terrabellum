@@ -2,8 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/img/logo/logo_28.webp"
-import styles from "../../styles/header/header.module.scss" 
-import Login from "./login/login.jsx"; 
+import styles from "../../styles/header/header.module.scss"  
 import Cookies from 'js-cookie'
 // import { getSession } from "next-auth/react";
 import star from '../../public/🦆 icon _star outline_.svg' 
@@ -175,9 +174,7 @@ const Header = () => {
         {/* </div> */} 
 
         {/* resolucion 1080px       */}
-        <div className={styles.blabla}>
-
-        <Login/>
+        <div className={styles.blabla}> 
         </div>
         <div className={styles.lal}> 
           <nav className={styles.navbarcontain}>
@@ -203,11 +200,3 @@ const Header = () => {
   );
 };
 export default Header;
-
-
-
-
-
-
-
-// target="blank" href={"https://d2qjuqjpn9e4f.cloudfront.net/TBOF.zip"}

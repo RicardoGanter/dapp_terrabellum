@@ -48,7 +48,7 @@ export default function Home() {
             />
           ))}
         </div>
-        <button className={styles.button}>Download</button>
+        {/* <button className={styles.button}>Download</button> */}
       </div>
     </div>
   );

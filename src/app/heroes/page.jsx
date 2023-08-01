@@ -6,7 +6,7 @@ import cofre from './cofre (1).webp'
 import Image from 'next/image'
 import usdticon from '../../public/usdt.webp'
 // Fetching
-import  mintNft  from './services/mintNft'
+// import  mintNft  from './services/mintNft'
 // Functions
 import { calculateProbability } from './utils/probability'
 
@@ -26,22 +26,22 @@ const Heros = ()=>{
     setCommon(common)
   },[arraynftmint])
 
-  useEffect(()=>{ 
-    const data = [Common.length, Rare.length, Legendary.length]
-    const calculated = calculateProbability(data) 
-    setProbabilitynft(calculated)
-  },[Legendary && Rare && Common])
+//   useEffect(()=>{ 
+//     const data = [Common.length, Rare.length, Legendary.length]
+//     const calculated = calculateProbability(data) 
+//     setProbabilitynft(calculated)
+//   },[Legendary && Rare && Common])
 
-  useEffect(()=>{
-    const getdatamint =async ()=>{   
-    const response = await Fetch('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/getdatamint', 'GET')
-    if(response){ 
-        const data = await response.json() 
-        setArraynftmint(data.usuario.nft_mint_users)
-    }
-    }
-    getdatamint()
-  },[]) 
+//   useEffect(()=>{
+//     const getdatamint =async ()=>{   
+//     const response = await Fetch('https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/getdatamint', 'GET')
+//     if(response){ 
+//         const data = await response.json() 
+//         setArraynftmint(data.usuario.nft_mint_users)
+//     }
+//     }
+//     getdatamint()
+//   },[]) 
 
   return(
       <>
@@ -67,7 +67,7 @@ const Heros = ()=>{
                         <option><Image alt='icon money BUSD' height={20} src={usdticon} /> BUSD</option>
                         <option><Image alt='icon money DAI' height={20} src={usdticon} /> DAI</option>
                       </select> */}
-                      <div className={styles.btnbuy} onClick={ async ()=> await mintNft()}> Buy </div>
+                      <div className={styles.btnbuy}> Buy </div>
                   </div> 
               </div> 
               <div className={styles.contain_infodrop}>
