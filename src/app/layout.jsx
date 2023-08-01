@@ -78,7 +78,7 @@ export default function RootLayout({
         {/* <SessionProvider > */}
           <body> 
           <Header/>
-          <div style={{margin:'120px 0 0 170px'}}>
+          <div style={{margin:'50px 0 0 65px'}}>
             {/* { <Suspense fallback={<Loading/>}> */}
               {children}
             {/* </Suspense>} */}

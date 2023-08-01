@@ -2,7 +2,7 @@ import '../../../styles/globals.scss'
 
 const Layoutinv = ({children})=>{ 
     return(
-        <div style={{ margin:"180px 120px 0 20px" }} id='nosemequieromatar' className='nocxdmequieromatar'>  
+        <div style={{ margin:"80px 0 0 0" }} id='nosemequieromatar' className='nocxdmequieromatar'>  
             { children }
         </div>
     ) 

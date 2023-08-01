@@ -10,13 +10,11 @@ export const GetUserData = async () => {
     const userdata = Cookies.get('userdata')
     if( !userdata ){  
       const response = await Fetch(
-        `${URI}getuser` ,
-        'POST' ,
-        {id : token}
-        );
-        
+        `${URI}getuser/${token}` ,
+        'Get'  
+        ); 
         if(response){
-          const data = await response.json()
+          const data = await response.json() 
           if( data ){
             Cookies.set('userdata', JSON.stringify(data))   
             return { data }

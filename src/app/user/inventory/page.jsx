@@ -31,11 +31,8 @@ const NFTContainer = () => {
   const [countnft, setCountnft] =useState(null)
   const [noOwner, setnoOwner] = useState(null)
   const { userdataglobal, updateSharedVariable } = useContext(User_data);  
-  const [confirmdeletednft, setConfirmdeletednft ] = useState(false)
-  const [textdeleted , setTextdeleted] = useState("")
-  const [nftsellers, setNftseller] = useState([])
-  const [topp, setTop] = useState(false)
-  const [leftt, setLeft] = useState()
+  const [confirmdeletednft, setConfirmdeletednft ] = useState(false) 
+  const [nftsellers, setNftseller] = useState([]) 
   const [ reload, setReload ] = useState()
    const filteredNFTs = nfts.filter((nft) => 
    filteredItems.includes(nft.metadata.level) &&

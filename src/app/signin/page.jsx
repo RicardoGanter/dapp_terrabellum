@@ -105,14 +105,14 @@ const Signin = () => {
             <button type={"submit"}>Sign In</button>
             </form>
             <p className={styles.color}>Forgot password?</p>
-            <p>OR</p>
-            <div className={styles.optionsignin}>
+            {/* <p>OR</p> */}
+            {/* <div className={styles.optionsignin}>
               <button onClick={() => {signIn('github',{callbackUrl: '/api/auth/callback/github'}) }} >sign in with Github</button>
               <button onClick={() => {signIn('google'),{callbackUrl: '/api/auth/callback/google'}}} >sign in with Google</button>
               <ConnectButton/>
-            </div>
+            </div> */}
             <p>Don't have an account? <span onClick={()=>{ Register() }}>Register</span></p>
-            <p onClick={()=> router.push('/adminmint_temporalurl')}>Admin auth</p>
+            {/* <p onClick={()=> router.push('/adminmint_temporalurl')}>Admin auth</p> */}
           </div>
         </div> 
         

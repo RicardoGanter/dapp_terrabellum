@@ -1,42 +1,59 @@
-// "use client"
-// import { useEffect, useState } from "react"
-// import { getSession } from "next-auth/react" //desde el front-end 
-// // import { GetServerSideProps } from "next" desde el back-end
-// import { useSession } from 'next-auth/react'
-// import { useRouter } from "next/navigation"
-// import { ClipLoader } from 'react-spinners' 
+"use client"
+import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
+import styles from "../styles/home/home.module.scss";
+import mainImage from "../public/icon/lienzo 1 (1).png";
+import twoImage from "../public/img/games/terrabellum/Captura_de_pantalla_582.png";
+import threeImage from "../public/img/games/terrabellum/Captura_de_pantalla_583.png";
+import arrowLeft from "../public/icon/🦆 icon _nav arrow left_.svg";
 
 export default function Home() {
-  // const router = useRouter()
-  //si no esta auntenticado entonces.
-  // if (status==='unauthenticated'){
-    // router.push('./login')
-  // }
-  // datos desde el front-end
-  // const [user, setUser] = useState(null)
-  // useEffect(() => {
-  //   const elemento = document.querySelector('#home');
-  //   if (elemento) {
-  //     elemento.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'; 
-  //     elemento.style.backgroundClip = 'content-box';
-  //     elemento.style.width = '100%'
-  //     // Puedes cambiar otros estilos según tus necesidades
-  //   }
-  // },[]);
-  // useEffect(()=>{
-  //    (async()=>{
-  //      const session = await getSession()
-  //      setUser(session)
-  //      if(!session){
-  //        router.push('/')
-  //      }
-  //    })()
-  //  },[])
+  const [contador, setContador] = useState(0);
+  const [image, setImage] = useState(mainImage);
+  const [arrayImages] = useState([mainImage, twoImage, threeImage]);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setContador((prevContador) => (prevContador + 1) % arrayImages.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, [arrayImages.length]);
+
+  useEffect(() => {
+    setImage(arrayImages[contador]);
+  }, [contador, arrayImages]);
+
   return (
-    <> 
-    </>
-  )
+    <div className={styles.contain}>
+      <h2> All Games</h2>
+      <div className={styles.containimages}>
+        <Image className={styles.imageGame} src={image} />
+        <Image className={`${styles.arrow} ${styles.arrowLeft}`} src={arrowLeft} />
+        <Image className={`${styles.arrow} ${styles.arrowRight}`} src={arrowLeft} />
+      </div>
+      <div className={styles.containCircleButton}>
+        <div className={styles.containSubImages}>
+          {arrayImages.map((x, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                setContador(index);
+              }}
+              style={Number(index) === contador ? { backgroundColor: "#3C0071" } : null}
+              className={styles.circle}
+            />
+          ))}
+        </div>
+        <button className={styles.button}>Download</button>
+      </div>
+    </div>
+  );
 }
+
 
 // export const getServerSideProps = async(context)=>{
 //   const session = await getSession(context)

@@ -1,7 +1,5 @@
 
-import { Fetch } from "utils/fetch/fetch";
-
-
+import { Fetch } from "utils/fetch/fetch"; 
 
 
 const logIn = async ( name, password ) => { 

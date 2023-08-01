@@ -9,44 +9,24 @@ import { useRouter } from 'next/navigation';
 import notification from '../../../public/bell-solid 6.svg'
 import Cookies from 'js-cookie';  
 import tokenicon from '../../../public/img/TOKEN_1.webp'  
+import { GetUserData } from "../../../utils/GetLocalStorage/getUserData"
 
 const Login = ()=>{
     const router = useRouter(); 
     const [perfil, setPerfil] = useState(false)
     const [token,setToken] = useState(null)  
-    const [userinno, setUserinno] = useState(false)
+    const [userinno, setUserinno] = useState(false) 
     // const [session, setSession] = useState(null)
     const Signin = ()=> router.push('/signin')
     const Register = ()=>router.push('/register')
     // const { data: session, status } = useSession()  .
-    const [balance, setBalance] = useState('Loading...');
-    const URI = 'https://qnxztdkz3l.execute-api.sa-east-1.amazonaws.com/1/usuarios/' 
+    const [balance, setBalance] = useState('Loading...'); 
     useEffect( ()=>{
       const lol =async ()=>{
-        const token = Cookies.get('token'); 
-        const user = Cookies.get('userdata') 
-        if(token){ 
-          setToken(token)
-        } 
-        if(user){ 
-            const imageuser = JSON.parse(user)
-            const a = imageuser 
-            setUserinno(a) 
-        }  
-        if(!user && token){   
-          const response = await ( await fetch(`${URI}getuser`, {
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id: token })
-          }) ).json()
-          if(response ){ 
-            const data = await response 
-            const datauser = Cookies.set('userdata', JSON.stringify(data)) 
-              const a = await data
-              return setUserinno(a) 
-          } }  
+          const resultUser = await GetUserData()
+          if(resultUser){
+            return setUserinno(resultUser)  
+          } 
         } 
         lol()
     },[] )   
@@ -70,7 +50,7 @@ const Login = ()=>{
         return(
             <div>
                 { !userinno ? <div className={styles.contain}> <button className={styles.btnopc} onClick={()=>Signin()}>Login</button> <button className={styles.btnopc} onClick={()=>Register()}>Register</button> </div>
-                    : userinno? <div className={styles.contain}> <Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={35} style={{margin:"0 .4rem"}} src={tokenicon} alt="Token Innomic GameChanger"/> INNO <p> 10000 </p></div>  <div  className={styles.containdatauser}   id="lol" onMouseEnter={()=>setPerfil(true)} onMouseLeave={()=>setPerfil(false)} > {userinno && <p>{userinno.nombre}</p>}  <img id="imageFromHeader" className={styles.imgheader} src={userinno ? userinno.image : null}  alt='img perfil'/>  { token && perfil?
+                    : userinno? <div className={styles.contain}> <Image src={notification} alt="notificacion" height={35} style={{margin:"0 1rem"}}/> <div className={styles.moneyinno}> <Image height={35} style={{margin:"0 .4rem"}} src={tokenicon} alt="Token Innomic GameChanger"/> INNO <p> 10000 </p></div>  <div  className={styles.containdatauser}   id="lol" onMouseEnter={()=>setPerfil(true)} onMouseLeave={()=>setPerfil(false)} > {userinno && <p>{userinno.data.nombre}</p>}  <img id="imageFromHeader" className={styles.imgheader} src={userinno && userinno.data.image}  alt='img perfil'/>  {  perfil?
                       <div className={styles.contain_perfil}>
                           <div  > 
                           <Link className={styles.containtext} href={'/user/statistics'}> <p>Stats</p></Link>

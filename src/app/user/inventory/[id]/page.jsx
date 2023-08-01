@@ -19,8 +19,7 @@ function DestinationPage({params}) {
   const { id } = params;
   const ID = id - 1;
 
-   const back = () =>{
-    console.log("lol  ")
+   const back = () =>{ 
     const nocxdjojo = document.querySelector('.nocxdmequieromatar')
         if(nocxdjojo){
           // console.log(  nocxdjojo.offsetTop,
