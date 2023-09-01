@@ -177,10 +177,10 @@ const Header = () => {
         {/* resolucion 1080px       */}
         <div className={styles.blabla}>
 
-        <Login/>
         </div>
         <div className={styles.lal}> 
           <nav className={styles.navbarcontain}>
+            <Login/>
           <div className={styles.logotb} >
             <Image src={logo} alt="Terra Bellum abbreviated icon" height={35}/>  
             <div className={styles.containsavedata}>   

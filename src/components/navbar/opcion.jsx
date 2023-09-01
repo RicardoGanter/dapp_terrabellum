@@ -28,8 +28,7 @@ const Opcion = ()=>{
                 <div>
                     <Link onClick={()=>{clearstyles(); setHome(true)}} style={homee ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null}  className={styles.option} href={'/'}>
                     <Image className={styles.test} src={ homee ? homefacha : homefacha} width={30} style={{margin: " 0 1rem"}} alt='Home'/>
-                        <p className={styles.rutes}> Home </p>  </Link>
-
+                        <p className={styles.rutes}> Home </p>  </Link> 
                     {/* <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/noticias'} className={styles.option}> 
                     <Image className={styles.test} src={news ? newsfacha : newsfacha} width={30} style={{margin: " 0 1rem"}} alt='News'/>
                         <p className={styles.rutes}> News </p> </Link>

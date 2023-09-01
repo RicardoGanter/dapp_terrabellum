@@ -94,34 +94,35 @@ body{
   }
 } 
 button{
-    width: fit-content;
+  text-decoration: none;
+//     width: fit-content;
     background-color: $color_bg_morado_oscuro;
-    border-radius: 5px;
-    padding: .7rem 1.3rem;
-    font-size: $size_16;
-    cursor: pointer; 
-    color: $color_text_white;
-    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.562), inset 0px 0px 10px rgba(255, 255, 255, 0.02), inset 0px 0px 10px rgba(255, 255, 255, 0.02);
+//     border-radius: 5px;
+//     padding: .7rem 1.3rem;
+//     font-size: $size_16;
+//     cursor: pointer; 
+//     color: $color_text_white;
+//     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.562), inset 0px 0px 10px rgba(255, 255, 255, 0.02), inset 0px 0px 10px rgba(255, 255, 255, 0.02);
 
-/* text-button-12px */
-    font-family: 'Crimson Pro';
-    // font-style: normal;
-    font-weight: 400;
-    line-height: 16px;
-    /* identical to box height */
-    text-align: center;
-    letter-spacing: -0.03em;
+// /* text-button-12px */
+//     font-family: 'Crimson Pro';
+//     // font-style: normal;
+//     font-weight: 400;
+//     line-height: 16px;
+//     /* identical to box height */
+//     text-align: center;
+//     letter-spacing: -0.03em;
     color: rgba(255, 255, 255, 0.75);
-    box-shadow: inset 2px -2px 6px rgba(0, 0, 0, 0.05);
-filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.15));
+//     box-shadow: inset 2px -2px 6px rgba(0, 0, 0, 0.05);
+// filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.15));
 }
 
-button:hover{
-  opacity: 65%;
-}
-button:active{
-  opacity: 80%;
-}
+// button:hover{
+//   opacity: 65%;
+// }
+// button:active{
+//   opacity: 80%;
+// }
 
 input{
   background-color: $color_bg;
