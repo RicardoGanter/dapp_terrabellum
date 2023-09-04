@@ -21,14 +21,32 @@ const Opcion = ()=>{
         setMarket(false)
         setHeros(false)
     } 
+//     const tooltip = document.getElementById('miTooltip');
+
+// // Escuchar el evento 'mouseenter' en el elemento desencadenante
+// document.getElementById('elemento-desencadenante').addEventListener('mouseenter', (e) => {
+//     // Obtener la posición actual del mouse
+//     const x = e.clientX;
+//     const y = e.clientY;
+
+//     // Mostrar y ajustar la posición del tooltip
+//     tooltip.style.left = x + 'px';
+//     tooltip.style.top = y + 'px';
+//     tooltip.style.display = 'block';
+// });
+
+// // Ocultar el tooltip cuando el mouse sale del elemento desencadenante
+// document.getElementById('elemento-desencadenante').addEventListener('mouseleave', () => {
+//     tooltip.style.display = 'none';
+// });
 
     return(
         <>
-            <div className={styles.contain}>
+            <div className={styles.contain}> 
                 <div>
                     <Link onClick={()=>{clearstyles(); setHome(true)}} style={homee ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null}  className={styles.option} href={'/'}>
                     <Image className={styles.test} src={ homee ? homefacha : homefacha} width={30} style={{margin: " 0 1rem"}} alt='Home'/>
-                        <p className={styles.rutes}> Home </p>  </Link> 
+                         </Link> 
                     {/* <Link onClick={()=>{clearstyles(); setNews(true)}} style={newss ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/noticias'} className={styles.option}> 
                     <Image className={styles.test} src={news ? newsfacha : newsfacha} width={30} style={{margin: " 0 1rem"}} alt='News'/>
                         <p className={styles.rutes}> News </p> </Link>
@@ -38,11 +56,11 @@ const Opcion = ()=>{
                         </Link> */}
                     <Link onClick={()=>{clearstyles(); setMarket(true)}} style={markets ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/market'}className={styles.option}> 
                     <Image className={styles.test} src={markets ? marketfacha : marketfacha} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
-                        <p className={styles.rutes}>Market</p></Link>
+                      </Link>
                     <Link onClick={()=>{clearstyles(); setHeros(true)}} style={heross ? {backgroundColor:'rgba(255, 255, 255, 0.08)'} : null} href={'/heroes'}className={styles.option}> 
                     <Image className={styles.test} src={shield} width={30} style={{margin: " 0 1rem"}} alt='Market'/> 
-                        <p className={styles.rutes}>Heroes</p></Link> 
-                </div>
+                      </Link> 
+                </div> 
                 {/* potencial actualizacion */}
                 {/* <div style={{ position:"absolute", bottom: 60, left:20}}> 
                 <div style={{display:"flex",flexDirection:"row", margin:"1rem"}}>

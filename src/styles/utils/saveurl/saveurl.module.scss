@@ -1,8 +1,7 @@
 @import '../../var.module.scss';
 .contain{
     display: flex;
-    position: fixed;
-    z-index: 5;
+    position: fixed; 
     align-items: center;
     justify-content: center;
     gap: .4rem;

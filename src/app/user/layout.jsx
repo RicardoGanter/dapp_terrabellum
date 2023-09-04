@@ -1,26 +1,26 @@
 "use client"   
-import { useEffect,useContext } from 'react'; 
-import { User_data } from '../layout' 
+import { useEffect,useState } from 'react'; 
 import { GetUserData } from '../../utils/GetLocalStorage/getUserData';
 import { useRouter } from 'next/navigation'; 
 
 const User = ( {children}) => { 
-  const router = useRouter() 
-    const { userdataglobal, updateuserdataglobal } = useContext(User_data); 
-    
+  const router = useRouter()  
+  const [wallet, setWallet]  = useState(false)
     useEffect(()=>{  
     const getUserStorage = async () => { 
     const { data } = await GetUserData() 
-    if( !data ){
+    const getAddress = localStorage.getItem("Addresstemp"); 
+    if( !data && !getAddress ){
       return router.push('/')
-    }
-    updateuserdataglobal(data) 
+    } 
+    const newWallet = data ? data : getAddress ? getAddress : null
+    setWallet(newWallet)
     } 
     getUserStorage()
   },[]) 
     return(
         <>
-        { userdataglobal &&  
+        { wallet &&  
              children  
         } 
         </>

@@ -139,7 +139,8 @@ const NFTContainer = () => {
           return  setLoading(false);
         } 
         const wallet = Cookies.get('userdata') 
-        const getaddres = JSON.parse(wallet).address_metamask 
+        const getAddress = localStorage.getItem("Addresstemp")
+        const getaddres = wallet ? JSON.parse(wallet).address_metamask  : getAddress ? getAddress : null ;  
         const signer = await NetworkGoerliEth();
         const address = await signer.getAddress();   
         const contract = await ConnectInnomicNft();
